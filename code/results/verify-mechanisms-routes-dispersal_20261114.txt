@@ -1,0 +1,389 @@
+verify_mechanisms_routes_dispersal.py   started 2026-11-14 12:49:45   python 3.13.5, numpy 2.3.3
+Tolerances (fixed before the first run): closed form against general coefficient 1e-08 relative (of the larger value, or of 1e-3 of the sum of the magnitudes of the terms where the terms nearly cancel; absolute floor 1e-12); quoted numbers 1e-09 relative (see the header for the two exceptions); exact periodic loss at small amplitude 1e-03 relative; small-noise products: 4 SE + 5%; searches: wrong side by more than 4 SE after a tenfold rerun.
+
+====================================================================================================
+H. The tools against known answers (before they are used on the notes)
+====================================================================================================
+  PASS  H1: lag sum = resolvent form of the general coefficient, 200 random dense matrices with 1 to 3 correlated AR(1) drivers of different memory: largest relative difference 8.22e-14
+  PASS  H2: general coefficient (lag sum with the periodic covariance, cross terms between drivers included) = exact loss/amplitude^2 of a periodic environment, 60 random dense matrices, periods 2 to 7, amplitudes 4e-3 and 2e-3 extrapolated: largest relative difference 2.54e-05
+  PASS  H3: trapezoid rule against Gauss-Hermite (300 nodes) on E log[0.3 + 0.7 e^(1.3 Z - 0.845)]: -0.3288132887611 against -0.3288132887611; E Z^4 = 3.0000000000001
+  [section time 0.2 s]
+
+====================================================================================================
+HS. The simulator against known answers
+====================================================================================================
+  PASS  HS.scalar_sigma1.0: one stage, stay 0.75, lognormal sigma 1.0, memory 0.5: simulated loss 0.149352 (SE 0.000431), quadrature 0.149179
+  PASS  HS.scalar_sigma0.3: one stage, stay 0.50, lognormal sigma 0.3, memory -0.6: simulated loss 0.022670 (SE 0.000039), quadrature 0.022623
+  PASS  HS.markov: one stage, two-state Markov multiplier (values 0.6 and 2.6, memory 0.7): simulated loss 0.110187 (SE 0.000171), exact 0.110445
+  PASS  HS.ring_small: gain-only ring (3,2,4), memory 0.6, sigma 0.05: simulated loss 4.547e-04 (SE 5.7e-07), manuscript's second-order value 4.542e-04
+  [section time 6.9 s]
+
+====================================================================================================
+B (2), (3), (4): contact-limited transfer, its ratio to gain-only, parking
+====================================================================================================
+  PASS  B2.i: (2) K_c = d^2 K_g + d(1-d) L_k against the general coefficient, 300 random rings (1 to 5 stages, stays 1 to 12, d in (0,1), memory -0.9 to 0.95, random gauge of the transfers): largest relative difference 2.13e-13 (lag sum against resolvent on 40 of them: 1.1e-13)
+  PASS  B2.C1: (2) is the same function as (C1) of notes/contact-limited-transfer.md, 100 random rings: largest relative difference 4.36e-14
+  PASS  B2.phi0: without memory K_c = d^2/(2G) (general coefficient, 100 random rings): 4.19e-14
+  PASS  B3.ratio: (3) K_c/K_g = d^2 + d(1-d) L_k/K_g with K_c and K_g from the general coefficient, 400 random rings: largest relative difference 5.53e-13; L_k recovered from the general coefficient at another d: 1.7e-13
+  PASS  B3.ineq: K_c > K_g exactly when d L_k > (1+d) K_g: the two sides disagree in 0 of 400 random rings (K_c > K_g in 40 of them)
+      example with K_c > K_g: stays [10.572  1.138  2.052  9.032  1.456], contact stage 2, d = 0.9131, memory 0.4732: K_c = 0.071913, K_g = 0.057300
+      example with K_c < K_g: stays [ 7.479 15.148], contact stage 0, d = 0.8425, memory 0.0112: K_c = 0.016239, K_g = 0.022597
+  PASS  B3.limits: stays (5,3,2), memory 0.7: K_c/K_g = 1.300e-07 at d = 1e-7 and 0.999999930 at d = 1 - 1e-7; K_c/d at d = 1e-7 is 0.262934081 = L_k = 0.262934089 (the small-d term is linear in d)
+  PASS  B3.sign: for memory in [0, 0.99], 2,000 random rings (general coefficient): K_g >= 1/(2G) (smallest 2 G K_g = 1.000000), L_k >= 0 (smallest -2.37e-15), K_c > 0 (smallest K_c/d = 2.159e-04); exceptions 0
+  PASS  B.Kg2: two equal stays a: K_g = (1/4a)(1+phi(1+2/a))/(1-phi(1-2/a)), 100 random (a, phi): 3.31e-15; stays (2,2): K_g(-0.8) = -0.075000000000 (note -0.075), K_g(0) = 0.125000000000 (note 0.125), zero of my general coefficient at phi = -0.500000000000 (note -0.5)
+  PASS  B.alt1: gain-only stays (2,2), multiplier alternating 1 +- 0.6, exact: D = -0.0420311234843 (note -0.0420311234843); noise on the other transfer: -0.0420311234843
+  PASS  B.alt2: contact stays (5,2), d = 0.1, same multiplier, exact: D = -0.00487832384055 (note -0.00487832384055); birth on the contact transfer and the other phase: -0.00487832384055
+      second-order values at memory -1 (the alternating environment): gain-only 0.36 K_g(-1) = -0.045000, contact 0.36 K_c(-1) = -0.005123
+  PASS  B4.i: (4) dK_c/db against the derivative of the general coefficient (complex step), 200 random rings with the parking stage at a random position, memory 0.02 to 0.95: largest relative difference 1.65e-12 (complex step against a five-point real difference on 30 of them: 5.5e-08)
+  PASS  B4.phi0: without memory dK_c/db = -d^2/[2(b+S)^2], 50 random rings: 1.35e-14
+  PASS  B4.b: contact stay 5, d = 0.8, memory 0.8: zero of the derivative of my general coefficient at b = 3.43717648559 (note 3.43717648559); derivative one unit below 0.00761825473637 (note 0.00761825473637), one unit above -0.00311841081797 (note -0.00311841081797)
+  PASS  B4.d01: same ring with d = 0.1: derivative positive at b = 1.5 ... 1e6 (smallest value times b^2: 0.01493); leading coefficient U(1-alpha) - d(theta+1/2) = 0.616667 > 0, and b^2 dK/db at b = 1e6 is 0.061667 = d times it = 0.061667
+  PASS  B4.limit: long parking: K_c -> d(1-d) t_k (parking stay 1e9, 100 random rings): largest absolute difference 1.5e-08
+  PASS  B4.gain: gain-only (d = 1), memory in [0, 0.97]: derivative negative at long parking (b from 1e3 to 1e6) in all of 1,000 random rings; exceptions 0
+  PASS  B4.period100: contact stays (5,b), 50 steps at 1.6 then 50 at 0.4, exact: D(b=40) = D(b=20) at d = 0.436417797969 (note 0.436417797968); D40 - D20 at d - 0.03: +0.000734413962778 (note +0.000734413962806); at d + 0.03: -0.000814303130155 (note -0.000814303130121)
+      the losses themselves at the boundary: D20 = 0.0828214514, D40 = 0.0828214514; stay rate of the contact stage ranges 0.7324 to 0.8676 (a probability)
+  [section time 0.7 s]
+
+====================================================================================================
+B (5): curved encounter functions (elasticity eta, curvature chi, the table, the one-stage benchmark)
+====================================================================================================
+  PASS  B5.table.II: type II: eta and chi of the table against numerical derivatives of F, 120 random cases: largest relative difference 7.22e-12; the table's benefit condition against the sign of chi/2 - eta^2 K_g (K_g random): 0 disagreements (benefit in 0 cases)
+  PASS  B5.table.III: type III: eta and chi of the table against numerical derivatives of F, 120 random cases: largest relative difference 2.40e-11; the table's benefit condition against the sign of chi/2 - eta^2 K_g (K_g random): 0 disagreements (benefit in 30 cases)
+  PASS  B5.table.power: type power: eta and chi of the table against numerical derivatives of F, 120 random cases: largest relative difference 5.45e-11; the table's benefit condition against the sign of chi/2 - eta^2 K_g (K_g random): 0 disagreements (benefit in 84 cases)
+  PASS  B5.table.inverse: type inverse: eta and chi of the table against numerical derivatives of F, 120 random cases: largest relative difference 1.21e-11; the table's benefit condition against the sign of chi/2 - eta^2 K_g (K_g random): 0 disagreements (benefit in 93 cases)
+      type II      x = 0.7000: exact shift/sigma^2 -> +0.0432526 (ii), +0.2854671 (i); (5) gives +0.0432526, +0.2854671
+      type II      x = 3.0000: exact shift/sigma^2 -> +0.0078125 (ii), +0.1953125 (i); (5) gives +0.0078125, +0.1953125
+      type III     x = 0.2500: exact shift/sigma^2 -> +0.4429072 (ii), -0.2768162 (i); (5) gives +0.4429066, -0.2768166
+      type III     x = 0.4082: exact shift/sigma^2 -> +0.3673472 (ii), +0.0000007 (i); (5) gives +0.3673469, +0.0000000
+      type III     x = 1.5000: exact shift/sigma^2 -> +0.0473374 (ii), +0.5917159 (i); (5) gives +0.0473373, +0.5917160
+      type power   x = 1.0000 power 2.5: exact shift/sigma^2 -> +0.7812510 (ii), -1.0937490 (i); (5) gives +0.7812500, -1.0937500
+      type power   x = 1.0000 power 0.5: exact shift/sigma^2 -> +0.0312500 (ii), +0.1562500 (i); (5) gives +0.0312500, +0.1562500
+      type power   x = 1.0000 power -0.7: exact shift/sigma^2 -> +0.0612500 (ii), -0.5337500 (i); (5) gives +0.0612500, -0.5337500
+      type power   x = 1.0000 power 3.0: exact shift/sigma^2 -> +1.1250029 (ii), -1.8749971 (i); (5) gives +1.1250000, -1.8750000
+      type inverse x = 1.0000: exact shift/sigma^2 -> +0.1250000 (ii), -0.8750000 (i); (5) gives +0.1250000, -0.8750000
+  PASS  B5.small: (5) against the exact one-stage shift at sigma = 0.04 and 0.02 (extrapolated), 10 responses: largest relative difference 3.27e-06 for D(ii) = eta^2 K_g sigma^2 and 6.90e-04 for the shift against baseline (i), -(chi/2 - eta^2 K_g) sigma^2
+  PASS  B5.i: D(ii) coefficient eta^2 K_g against the general coefficient with the first-order perturbation eta * transfer, 100 random rings: 1.15e-14
+  PASS  B5.x_local: type III, K_g = 1/8: local boundary x = 0.408248290464 (note 0.408248290464); chi/2 - eta^2 K_g there = 5.0e-14; one side each: x = 0.3: +0.193586 (benefit), x = 0.5: -0.160000 (cost)
+  PASS  B5.x_sigma0.3: type III, stay 3/4, sigma = 0.3, exact one-stage: the shift against baseline (i) is zero at x = 0.382645737133 (note 0.382645737133; Gauss-Hermite 300 nodes gives 0.382645737133); shift at x = 0.306116589707: -0.0118416347362 (note -0.0118416347363); at x = 0.459174884560: +0.0113768991662 (note +0.0113768991662)
+  PASS  B5.x_sigma1.0: type III, stay 3/4, sigma = 1.0, exact one-stage: the shift against baseline (i) is zero at x = 0.229888315533 (note 0.229888315533; Gauss-Hermite 300 nodes gives 0.229888315533); shift at x = 0.183910652426: -0.0586006893331 (note -0.0586006893330); at x = 0.275865978639: +0.0559916666031 (note +0.0559916666033)
+      (stay 1/2 gives K_g = 1/4 and 1 - 4 K_g = 0: no local type III boundary, as the note's protocol records)
+  PASS  B.eta3: power 3, one stage without staying: exact loss by quadrature 0.405000000000 at host sigma 0.3 (note 0.405; host-only bound 0.045) and 4.500000000000 at sigma 1 (note 4.5; host-only bound 0.5)
+      power 0.9 at host sigma 0.5: loss 0.101250, host-only bound 0.125000 (within)
+      power 1.1 at host sigma 0.5: loss 0.151250, host-only bound 0.125000 (exceeds it)
+  [section time 0.1 s]
+
+====================================================================================================
+B (6), (7): one host driving two or more transfers
+====================================================================================================
+  PASS  B6.i: (6) against the general coefficient, 300 random rings of 2 to 5 stages with a common driver on a random set of transfers, signed elasticities in (-2,2), memory -0.9 to 0.95: largest relative difference 2.23e-13
+  PASS  B6.alt: (6) continued to memory -1 against the exact loss of a strictly alternating environment (amplitudes 0.02, 0.01), 40 of those rings: largest relative difference 5.51e-05
+  PASS  B7.i: (7) K_+- = (2 phi/a)/(1 - phi(1-2/a)) and K_++ = 1/a against the general coefficient, 150 random (a, phi): 8.03e-15; stays (2,2): K_+- = -0.300000 at memory -0.3, 0.0e+00 at 0, 0.300000 at +0.3 (the local boundary is zero memory)
+  PASS  B6.phi0: without memory K = (sum a)^2/(2G), 100 random rings: 3.01e-15
+  PASS  B7.Dpp_periodic: D_++ = 2 d_s exactly: 500 random periodic environments (period 2 to 12, log-amplitude 0.3 to 2.5, equal stays 1.05 to 12), full-period products against the one-stage root: largest absolute difference 2.2e-15
+  [section time 0.5 s]
+
+====================================================================================================
+B (8) to (11): parallel alternative hosts
+====================================================================================================
+  PASS  B8.i: (8) K = V/(2G) without memory against the general coefficient, 300 random networks (1 to 4 hosts, random shares, stays, log-sd multipliers and correlation matrix): 1.75e-14
+  PASS  B9.i: (9) common memory -0.9 to 0.95, same networks: largest relative difference 4.44e-14
+  PASS  B10.i: (10) a different memory for each host, correlation matrices that componentwise AR(1) drivers can have (rho_ij(l) = phi_i^l R_ij, i the later use), same networks: 1.37e-13
+  PASS  B9.alt: (9) continued to memory -1 with correlations +-1 against the exact loss of a strictly alternating environment, 30 networks: 9.83e-08
+      stay 2, hosts (8,1), shares (0.6,0.4), memories (0.2,0.8), correlation 0.4: (10) = 0.040852341, general coefficient with rho_ij(l) = phi_i^l R_ij: 0.040852341; with the earlier driver's memory instead: -0.003031879; smallest eigenvalue of the innovation covariance 0.2096 (admissible)
+  PASS  B11.i: (11): 'the newcomer lowers the loss' from the general coefficient of the old and new networks (no memory) against the inequality f G (V - 2C + U) < 2G(V - C) + V dtau, 400 random cases (old aggregate of 1 to 3 hosts): 0 disagreements; the newcomer lowers the loss in 261
+  PASS  B11.f065: central stay 2, old host stay 8 (K = 0.050000): independent equal-variance newcomer of stay 1: K_new = K_old at f = 0.650000000000 (note 0.65); K_new(0.4) = 0.036111 (lower), K_new(0.8) = 0.077273 (higher)
+  PASS  B11.f02: independent newcomer with three times the elasticity, stay 8: boundary f = 0.200000000000 (note 0.2); K_new(0.1) = 0.045000, K_new(0.3) = 0.065000
+  PASS  B11.rho08: same newcomer with correlation 0.8: K_new - K_old > 0 at 400 shares from 0.001 to 1 (smallest 1.403e-04, at the smallest share); formal root of (11): f = -0.538462 (negative, as the note says)
+  PASS  B11.scalar0.3: one stage, stay 3/4, independent newcomer with elasticity 3, sigma = 0.3, exact (two-dimensional quadrature): D(f) = D(0) at f = 0.146102538428 (note 0.146102538428; residual on a finer, wider grid -1.0e-17); D(f) - D(0) at f = 0.116882030742: -0.000498405189042 (note -0.000498405189041); at f = 0.175323046113: +0.000726781891129 (note +0.000726781891139); D(0) = 0.011482791
+  PASS  B11.scalar1.0: one stage, stay 3/4, independent newcomer with elasticity 3, sigma = 1.0, exact (two-dimensional quadrature): D(f) = D(0) at f = 0.006939193740 (note 0.006939193724; residual on a finer, wider grid 5.6e-17); D(f) - D(0) at f = 0.005551354979: -0.000133848201917 (note -0.000133848202874); at f = 0.008327032468: +0.000171102413663 (note +0.000171102416373); D(0) = 0.149179333
+      the sigma = 1 boundary with tensor Gauss-Hermite quadrature instead of the trapezoid rule: 80 nodes: 0.006939193519, 160 nodes: 0.006939193740, 240 nodes: 0.006939193740 (the note's 0.006939193724 lies between the 80- and 160-node values; the converged value is 0.006939193740)
+  [section time 1.5 s]
+
+====================================================================================================
+B (12), (13), (14): an optional steady host and a bypass of the fluctuating host
+====================================================================================================
+  PASS  B12.i: (12) against the general coefficient, 300 random (stays, f, q, memory -0.9 to 0.95), returns divided by Y so that the mean matrix is at threshold: 8.62e-14
+  PASS  B14.i: (14) against the general coefficient, 300 random cases: 1.94e-14; without memory alpha^2/[2(tau0 + alpha tau1)]: 1.17e-15
+  PASS  B12.alt: (12) and (14) continued to memory -1 against the exact loss in a strictly alternating environment, 30 cases each: 1.75e-06 and 2.57e-06
+  PASS  B13.identity: (13): the threshold at fixed other rates is the equal-R0 loss minus log Y, optional and bypass networks, 100 random periodic environments: largest difference 4.1e-15
+  PASS  B13.q: ten steps at 1.6 then ten at 0.4, base stays (2,2), f = 1/2, extra stay 8, exact: (13) is zero at q = 0.859387632729 (note 0.859387632729); at q - 0.01: -0.00556253815020 (note -0.00556253815021); at q + 0.01: +0.00552874654846 (note +0.00552874654846)
+  PASS  B13.alt: strict alternation of 1.6 and 0.4, q = 1: (13) = -0.022920059653 (note -0.022920059653); D_base = -0.0420311235, D_optional = -0.0191110638 (the optional host with perfect survival raises the loss here)
+  PASS  B13.monotone: (13) increases with q on 36 values from 0.3 to 1 in the period-20 environment (from -0.38216 to 0.07483)
+  PASS  B14.f1: complete bypass (f = 1): the exact loss is zero in 50 random periodic environments (largest |D| 6.2e-16)
+  PASS  B14.scalar0.3: one stage, stay 1/2, allocation 1/2, sigma = 0.3, exact: the bypass breaks even at relative yield q = 0.966801568423 (note 0.966801568423); advantage at q - 0.01: -0.00515708684832 (note -0.00515708684824); at q + 0.01: +0.00513033594797 (note +0.00513033594805); D_base = 0.022623394
+  PASS  B14.scalar1.0: one stage, stay 1/2, allocation 1/2, sigma = 1.0, exact: the bypass breaks even at relative yield q = 0.687697785698 (note 0.687697785698); advantage at q - 0.01: -0.00697579753729 (note -0.00697579753729); at q + 0.01: +0.00692252295029 (note +0.00692252295029); D_base = 0.262541892
+  [section time 0.6 s]
+
+====================================================================================================
+B (15): independent hosts in sequence
+====================================================================================================
+  PASS  B15.i: (15) D = sum_j sigma_j^2 K_g(stays, phi_j) against the general coefficient with one independent driver per transfer, 300 random rings (1 to 5 stages, different variances and memories): largest relative difference 2.57e-14
+  PASS  B15.a: generation time 20, memory 0.9, three independent hosts with stays (a, (20-a)/2, (20-a)/2) against two with (10,10): equal coefficients at a = 17.3757414756 (note 17.3757414756); new minus old at a - 0.3: +0.0244677150771 (note +0.0244677150771); at a + 0.3: -0.0260160842042 (note -0.0260160842042); two-host coefficient 0.371429
+  PASS  B15.phi: stays (18,1,1) against (10,10): equal coefficients at memory 0.816984251337 (note 0.816984251337); difference at memory - 0.03: +0.0129879581011 (note +0.0129879581011); at + 0.03: -0.0163098249777 (note -0.0163098249777)
+  PASS  B15.phi0: no memory, equal stays, generation time 20: coefficient n/(2G) = 0.025000 (n=1), 0.050000 (n=2), 0.075000 (n=3), 0.100000 (n=4)
+  [section time 0.0 s]
+
+====================================================================================================
+B (16), (17): the bound D <= sum of visit-weighted log penalties, searched in exact periodic environments; contact limitation with no waiting mortality
+====================================================================================================
+  PASS  B17.weights: the weights of (17) from the Perron vectors: ring transfers 1 each, parallel entrances w_j, optional host's entrance 1, bypassed entrance alpha (100 random cases each): 2.3e-14
+  PASS  B16.periodic: (16)-(17) in 3000 random exact periodic environments (765 bypass, 707 optional, 749 parallel, 779 ring; period 2 to 12; log-amplitude 0.3 to 2.5; independent, or one driver with signed powers): growth at the bound is non-negative in all; smallest log multiplier over a period -5.66e-15; violations 0; largest D/bound among 500 solved cases 1.000000
+  PASS  B16.contact: contact version D <= l_transfer + (tau_k - 1) l_stay in 3000 random exact periodic environments (rings of 1 to 4 stages, any d, amplitude up to 98% of the largest valid one): violations 0; smallest log multiplier at the bound 6.89e-04
+      the transfer-only bound D <= l_transfer (which the note says it has neither proved nor refuted for contact limitation) is violated in 0 of these 3000 cases.
+  PASS  B.mu0: contact limitation with no waiting mortality (d = 0): w^T A(h) = w^T for the left vector w of the mean matrix, 2000 random rings x 6 random valid multipliers each: largest relative defect 8.2e-15; exact periodic loss in 400 of them at up to the full valid amplitude: largest |D| 1.5e-14
+  [section time 2.1 s]
+
+====================================================================================================
+S-A. Second-order values against products of the actual random matrices at small noise, part 1 (criterion: 4 SE + 5%)
+====================================================================================================
+  PASS  S2.21: (2) contact stays [5.0, 2.0], contact stage 0, d = 0.5, two-state host 1 +- 0.06 with memory 0.8: simulated D = 3.8947e-04 (SE 1.1e-07), second-order value 3.8910e-04, ratio 1.0010
+  PASS  S2.22: (2) contact stays [3.0, 4.0, 2.0], contact stage 1, d = 0.3, two-state host 1 +- 0.06 with memory 0.6: simulated D = 2.4291e-04 (SE 1.6e-07), second-order value 2.4276e-04, ratio 1.0006
+  PASS  S2.23: (2) contact stays [5.0, 20.0], contact stage 0, d = 0.1, two-state host 1 +- 0.06 with memory 0.8: simulated D = 1.3344e-04 (SE 8.1e-08), second-order value 1.3320e-04, ratio 1.0018
+  PASS  S5.31: (5) type III at x = 0.6 on ring [2.0, 3.0], memory 0.5, host sigma 0.05, rate normalised to its mean (baseline ii), eta = 1.4706: simulated D = 1.1284e-03 (SE 1.1e-06), second-order value 1.1305e-03, ratio 0.9981
+  PASS  S5.32: (5) type power 2.5 at x = 1.0 on ring [3.0, 2.0], memory 0.7, host sigma 0.05, rate normalised to its mean (baseline ii), eta = 2.5000: simulated D = 4.0365e-03 (SE 4.5e-06), second-order value 4.0389e-03, ratio 0.9994
+  PASS  S5.33: (5) type II at x = 1.5 on ring [2.0, 2.0], memory -0.3, host sigma 0.05, rate normalised to its mean (baseline ii), eta = 0.4000: simulated D = 2.0022e-05 (SE 3.6e-08), second-order value 2.0000e-05, ratio 1.0011
+  PASS  S6.41: (6)/(7) ring [2.0, 3.0, 4.0], one host with elasticities [1.0, -0.7, 0.0], memory 0.6, sigma 0.05: simulated D = 7.1859e-04 (SE 1.2e-06), second-order value 7.1881e-04, ratio 0.9997
+  PASS  S6.42: (6)/(7) ring [2.0, 3.0, 4.0], one host with elasticities [1.0, 0.0, 0.5], memory 0.6, sigma 0.05: simulated D = 4.4737e-04 (SE 4.6e-07), second-order value 4.4764e-04, ratio 0.9994
+  PASS  S6.43: (6)/(7) ring [2.0, 2.0], one host with elasticities [1.0, -1.0], memory 0.8, sigma 0.05: simulated D = 1.9992e-03 (SE 2.7e-06), second-order value 2.0000e-03, ratio 0.9996
+  PASS  S6.44: (6)/(7) ring [2.0, 2.0], one host with elasticities [1.0, -1.0], memory -0.5, sigma 0.05: simulated D = -1.2402e-03 (SE 1.5e-06), second-order value -1.2500e-03, ratio 0.9922
+  PASS  S6.45: (6)/(7) ring [3.0, 3.0], one host with elasticities [1.0, 1.0], memory 0.7, sigma 0.05: simulated D = 8.3536e-04 (SE 7.3e-07), second-order value 8.3333e-04, ratio 1.0024
+  [section time 55.6 s]
+
+====================================================================================================
+S-B. Second-order values against products of the actual random matrices at small noise, part 2 (criterion: 4 SE + 5%)
+====================================================================================================
+  PASS  S9.51: (8) parallel hosts, central stay 2, host stays (8,1), shares (0.6,0.4), log-sd multipliers (1,1.5), correlation 0.4, memory 0.0: simulated D = 1.7496e-04 (SE 2.2e-07), second-order value 1.7500e-04, ratio 0.9998
+  PASS  S9.52: (9) parallel hosts, central stay 2, host stays (8,1), shares (0.6,0.4), log-sd multipliers (1,1.5), correlation 0.4, memory 0.7: simulated D = 1.8286e-04 (SE 4.1e-07), second-order value 1.8252e-04, ratio 1.0019
+  PASS  S10.53: (10) the same network with unit multipliers and memories (0.2, 0.8), correlation 0.4: simulated D = 1.0240e-04 (SE 2.4e-07), second-order value 1.0213e-04, ratio 1.0026
+  PASS  S12.61: (12) optional host: stays (2,2), f = 1/2, extra stay 8, q = 0.8, memory 0.8: simulated D = 3.5175e-04 (SE 3.6e-07), second-order value 3.5125e-04, ratio 1.0014
+  PASS  S14.62: (14) bypass: central stay 2, host stay 4, f = 1/2, q = 1/2, memory 0.8: simulated D = 4.0485e-04 (SE 7.0e-07), second-order value 4.0476e-04, ratio 1.0002
+  PASS  S15.71: (15) ring (3,5,2), three independent hosts with memories (0.5,0.8,-0.4) and log-sd multipliers (1,0.7,1.2): simulated D = 7.2274e-04 (SE 7.7e-07), second-order value 7.2232e-04, ratio 1.0006
+  [section time 32.5 s]
+
+====================================================================================================
+S-spot 1. Note B: the log cosh identity (7a), D_++ = 2 d_s, and a spot check of the note's simulation tables for stays (2,2) (criterion: 4 SE; against a simulated number of the note, 4 combined SE)
+====================================================================================================
+  PASS  B7a.81: (7a) stays (2,2), transfers H and 1/H, sigma 0.3, memory 0.0: growth per step 0.022040 (SE 0.000023); E log cosh[sigma sqrt((1-phi)/2) Z] = 0.022022
+  PASS  B7a.82: (7a) stays (2,2), transfers H and 1/H, sigma 1.0, memory 0.0: growth per step 0.209699 (SE 0.000227); E log cosh[sigma sqrt((1-phi)/2) Z] = 0.209515
+  PASS  B7a.83: (7a) stays (2,2), transfers H and 1/H, sigma 0.3, memory 0.8: growth per step 0.004487 (SE 0.000004); E log cosh[sigma sqrt((1-phi)/2) Z] = 0.004480
+  PASS  B7a.84: (7a) stays (2,2), transfers H and 1/H, sigma 1.0, memory 0.8: growth per step 0.047775 (SE 0.000054); E log cosh[sigma sqrt((1-phi)/2) Z] = 0.047778
+  PASS  B7.Dpp_sim85: same-sign pair, equal stays 2, sigma 1.0, memory 0.8: simulated D = 0.52641 (SE 0.00133); 2 d_s by quadrature = 0.52508 (note's table at this case: 0.52301 (0.0017))
+  PASS  B7.Dpp_sim86: same-sign pair, equal stays 5, sigma 1.5, memory -0.5: simulated D = 0.65806 (SE 0.00269); 2 d_s by quadrature = 0.65911
+  PASS  B.table.single.phi-0.8.sigma0.3: single transfer(s), stays (2,2), memory -0.8, sigma 0.3: my D = -0.00495 (SE 0.00001); note -0.00520 (SE 0.00023); second-order value -0.00675
+  PASS  B.table.single.phi-0.8.sigma1.0: single transfer(s), stays (2,2), memory -0.8, sigma 1.0: my D = +0.05174 (SE 0.00027); note +0.04950 (SE 0.00170); second-order value -0.07500
+  PASS  B.table.single.phi0.8.sigma1.0: single transfer(s), stays (2,2), memory 0.8, sigma 1.0: my D = +0.32731 (SE 0.00080); note +0.32698 (SE 0.00045); second-order value +0.32500
+  PASS  B.table.opposite.phi0.0.sigma0.3: opposite transfer(s), stays (2,2), memory 0.0, sigma 0.3: my D = +0.00282 (SE 0.00005); note +0.00266 (SE 0.00022); second-order value +0.00000
+  PASS  B.table.opposite.phi0.0.sigma1.0: opposite transfer(s), stays (2,2), memory 0.0, sigma 1.0: my D = +0.19793 (SE 0.00054); note +0.19693 (SE 0.00170); second-order value +0.00000
+  PASS  B.table.opposite.phi-0.8.sigma0.3: opposite transfer(s), stays (2,2), memory -0.8, sigma 0.3: my D = -0.05965 (SE 0.00008); note -0.05967 (SE 0.00069); second-order value -0.07200
+  PASS  B.table.opposite.phi-0.8.sigma1.0: opposite transfer(s), stays (2,2), memory -0.8, sigma 1.0: my D = -0.15789 (SE 0.00046); note -0.15839 (SE 0.00420); second-order value -0.80000
+  PASS  B.table.opposite.phi0.8.sigma0.3: opposite transfer(s), stays (2,2), memory 0.8, sigma 0.3: my D = +0.07193 (SE 0.00015); note +0.07204 (SE 0.00003); second-order value +0.07200
+  PASS  B.table.opposite.phi0.8.sigma1.0: opposite transfer(s), stays (2,2), memory 0.8, sigma 1.0: my D = +0.80737 (SE 0.00260); note +0.80579 (SE 0.00034); second-order value +0.80000
+  [section time 30.7 s]
+
+====================================================================================================
+S-spot 2. Note B: parking under contact limitation at finite noise, and the repartition (18,1,1) against (10,10) (criterion against the note's simulated numbers: 4 combined SE)
+====================================================================================================
+  PASS  B4.sim.sigma0.3: contact stays (5,b), d = 0.1, the note's bounded two-state host (values 0.847 and 1.614, memory 0.8), sigma 0.3: D(b=20) = 0.003066 (SE 0.000004; note 0.003002), D(b=40) = 0.003176 (SE 0.000004; note 0.003112); D40 - D20 in the same environments = +0.0001099 (SE 0.0000002; note +0.0001102 (1.1e-06)); second-order values 0.003484 and 0.003623
+  PASS  B4.sim.sigma1.0: contact stays (5,b), d = 0.1, the note's bounded two-state host (values 0.345 and 3.622, memory 0.8), sigma 1.0: D(b=20) = 0.056965 (SE 0.000044; note 0.056670), D(b=40) = 0.058853 (SE 0.000045; note 0.058577); D40 - D20 in the same environments = +0.0018888 (SE 0.0000083; note +0.0019075 (1.7e-05)); second-order values 0.063576 and 0.066109
+  PASS  B15.sim.sigma0.3: memory 0.9, every transfer its own independent host, sigma 0.3: D(10,10) = 0.03343 (SE 0.00007; note 0.03350), D(18,1,1) = 0.02971 (SE 0.00016; note 0.02977); three hosts minus two = -0.00372 (SE 0.00018): lower with three; second-order values 0.03343 and 0.02839
+  PASS  B15.sim.sigma1.0: memory 0.9, every transfer its own independent host, sigma 1.0: D(10,10) = 0.38994 (SE 0.00085; note 0.38902), D(18,1,1) = 0.44867 (SE 0.00261; note 0.44931); three hosts minus two = +0.05872 (SE 0.00275): higher with three; second-order values 0.37143 and 0.31541
+  [section time 33.6 s]
+
+====================================================================================================
+X1. Searches at large noise, environments independent in time: is the loss ever negative? (growth at the threshold of the mean matrix must be <= 0); two opposite lognormal transfers
+====================================================================================================
+  PASS  X.iid.lognormal: independent in time, lognormal multipliers with sigma 0.3 to 2.5 on rings (1 to 5 stages, several noisy transfers, independent, common with signs, or mixed) and on parallel, optional and bypass networks: growth at the mean threshold <= 0: 1750 cases; first pass: on the claimed side by more than 4 SE in 1729, within 4 SE of zero in 21, on the wrong side by more than 4 SE in 0 (most adverse z = -0.06)
+  PASS  X.iid.contact: independent in time, contact-limited rings (1 to 4 stages, any d) with a two-state multiplier at 30% to 98% of the largest valid amplitude: growth at the mean threshold <= 0: 500 cases; first pass: on the claimed side by more than 4 SE in 239, within 4 SE of zero in 261, on the wrong side by more than 4 SE in 0 (most adverse z = -2.32)
+  PASS  X.opposite: two opposite lognormal transfers exp(+-sigma z - sigma^2/2), no memory, sigma 0.5 to 2.5, random rings of 2 to 5 stages: growth at the mean threshold < 0 (largest mean growth in the first pass 0.00005): 2000 cases; first pass: on the claimed side by more than 4 SE in 1944, within 4 SE of zero in 56, on the wrong side by more than 4 SE in 0 (most adverse z = -0.53); of the 56 cases within 4 SE of zero, a ten times longer rerun puts 55 on the claimed side by 4 SE, 0 on the wrong side, 1 still within (most adverse z there 3.74)
+  [section time 82.6 s]
+
+====================================================================================================
+X2. Searches at large noise with memory: the bound (16)-(17) and its contact version; D_++ = 2 d_s and the conserved vector along random paths
+====================================================================================================
+  PASS  X.bound.lognormal: the bound (16)-(17) with lognormal multipliers, sigma 0.3 to 2.5, memories -0.95 to 0.98, correlated or signed across transfers, rings and the three route networks: growth with the births multiplied by exp(bound) >= 0: 2100 cases; first pass: on the claimed side by more than 4 SE in 2008, within 4 SE of zero in 92, on the wrong side by more than 4 SE in 0 (most adverse z = -3.43)
+  PASS  X.bound.contact: contact version D <= l_transfer + (tau_k - 1) l_stay, two-state multiplier with memory 0 to 0.98 at 30% to 98% of the largest valid amplitude, rings of 1 to 4 stages: growth with the births multiplied by exp(bound) >= 0: 700 cases; first pass: on the claimed side by more than 4 SE in 698, within 4 SE of zero in 2, on the wrong side by more than 4 SE in 0 (most adverse z = 1.97)
+      extra (not claimed by the note): the transfer-only bound D <= l_transfer in the same 700 contact cases: growth at exp(l_transfer) is below zero by more than 2 SE in 1 of the first pass (most adverse z = -3.21); their z in a ten times longer rerun: 1.6; below -4 SE after the rerun: 0
+  PASS  X.mu0.path: contact limitation with d = 0, two-state host with memory at the LARGEST valid amplitude (the staying rate reaches zero), 2,000 random rings x 4 paths x 1,500 steps: the weighted total w^T x never moves from its starting value by more than 1.4e-13 (relative), so the growth rate is exactly zero
+  PASS  X.Dpp.path: D_++ = 2 d_s along 2,000 random lognormal AR(1) paths (sigma 0.3 to 2.5, memory -0.95 to 0.98, stay 0.05 to 0.95, 3,000 steps): with the birth multiplied by exp(2 d_s), d_s the one-stage root ON THE SAME PATH, the two-stage product started on the tilted vector grows at rate 3.7e-16 per step (zero to rounding); started on (1,1) its total log growth over the whole path is at most 0.14 x (|2 d_s| + 5), a boundary term
+  [section time 67.0 s]
+
+====================================================================================================
+C (i). F = q S - (1 - q) H for identical island patches against the general coefficient on the FULL spatial matrix (patches x stages)
+====================================================================================================
+  PASS  C.F.i: F against the general coefficient on the full matrix, 240 random cases (2 to 6 patches, 2 to 4 stages, stays 1 to 12, m 0.02 to 1, transit loss 0 to 0.9, spatial correlation 0, 1 or random, memory -0.9 to 0.95; mobile stage: before (stage 0) 90, after (stage 1) 85, a third, steady stage 65): largest relative difference 1.81e-13; the elasticity of the whole transfer is 1/T and the calibrated growth factor is one within 6.2e-15
+  PASS  C.F.any_transfer: 80 random cases: the same F when the noisy transfer is any transfer k (and the loss is counted on any transfer): 2.10e-14; every transfer with its own independent host of different variance and memory: coefficient = sum sigma_k^2 F(phi_k): 2.21e-14
+  PASS  C.F.special: 60 random cases, full matrix: without memory F = q/(2T) at any m > 0: 3.67e-15; complete mixing (m = 1): F = q S: 5.93e-15; amount removed relative to one patch with the effective staying rates = (1 - rho_s)(1 - 1/P)(S + H): 1.47e-14
+  [section time 0.4 s]
+
+====================================================================================================
+C (ii). The long-stay coefficient K and the quoted second-order boundaries, each from the general coefficient on the full matrix
+====================================================================================================
+  PASS  C.K: K against L F(L), 60 random conservative cases (the long stage at any position, mobile or not, memory 0.05 to 0.9): from the full matrix at L = 4000 and 8000 (extrapolated; the remainder of my extrapolation is of order L^-2, about 1e-5): largest relative difference 1.49e-05; from the closed F (which C (i) ties to the full matrix) at L = 1e6 and 2e6: 4.33e-10
+  PASS  C.phi_star: stays (2,2), P = 4, mobile stage one, m = 0.15, rho_s = 0: the full-matrix coefficient is zero at memory 0.4644635334 (note 0.4644635334); at 0.3 it is +0.030147 (loss), at 0.6 -0.060183 (gain); at the note's example memory 0.8 it is -0.311058
+  PASS  C.m_star: same, memory 0.8: zero at m = 0.6803278689 (note 0.6803278689; the note's formula for m_* gives 0.6803278689); at m = 0.5: -0.068750 (gain), at m = 0.85: +0.047917 (loss)
+  PASS  C.rho_star: same, memory 0.8, m = 0.15: zero at spatial correlation 0.4890400605 (note 0.4890400605; the note's formula for rho_* gives 0.4890400605); at 0.3: -0.120240 (gain), at 0.7: +0.134183 (loss)
+      second-order coefficient at small m (memory 0.8): m = 1e-06: -0.51875, m = 0.0001: -0.51857, m = 0.01: -0.50110, m = 0.05: -0.43693; at m -> 0 the closed form tends to q S - (1 - q) R_a/(1 - R_a) = -0.51875, not to the single-patch S = +0.32500
+      quality (0.4,0.8,1.2,1.6) on the noisy transfer (0 -> 1): zero(s) of the full-matrix coefficient at memory 0.9732283441; value at 0.5: +0.193983, at 0.99: -0.058598
+      quality (0.4,0.8,1.2,1.6) on the other transfer (1 -> 0): zero(s) of the full-matrix coefficient at memory 0.9732283441; value at 0.5: +0.193983, at 0.99: -0.058598
+      quality (0.4,0.8,1.2,1.6) on both transfers: zero(s) of the full-matrix coefficient at memory none in (0.02, 0.995); value at 0.5: +0.241721, at 0.99: +0.303266
+  PASS  C.hetero: heterogeneous quality: the note's crossing 0.9732283441 is reproduced with the multipliers on the noisy transfer (0 -> 1) and on the other transfer (1 -> 0)
+  PASS  C.K_boundary: stays (2,2,L), P = 4, m = 0.2, mobile stage one, rho_s = 0: K = 0 at memory 0.7563100600 from the closed K (note 0.7563100600) and 0.7563100 from the full matrix at L = 4000, 8000; F(2000) - F(1000) from the full matrix at memory - 0.03: -5.262e-05 (longer stay lowers the loss), at + 0.03: +8.171e-05 (raises it)
+  PASS  C.L10_40: same: F(L=40) = F(L=10) at memory 0.7127169883 (note 0.7127169883); F(40) - F(10) at 0.65: -0.007136 (helps), at 0.78: +0.015549 (harms); F(10), F(40) at the crossing: +0.002583, +0.002583
+  PASS  C.H3: generation time 12, P = 4, m = 0.2, rho_s = 0, final stage mobile, every transfer its own independent host: the full-matrix coefficients of four and of two hosts are equal at memory 0.8550757674 (note 0.8550757674; there 2 F_2 = -0.12336291, 4 F_4 = -0.12336291); four minus two at 0.8: +0.090509 (more hosts cost more), at 0.9: -0.181879 (less); without memory: +0.020833
+  [section time 0.2 s]
+
+====================================================================================================
+C (iv), (v). Exact invariance at full synchrony; the R0 ratios with transit loss and on the open downwind line
+====================================================================================================
+  PASS  C.R0.transit: identical patches, island, circle and downwind circle with transit loss: R0(m)/R0(0) = a(1 - s_d)/(1 - a s_d), a = 1 - m ell; 300 random cases x 3 topologies (R0 from the product of next-generation operators; R0(0) = 1): largest difference 2.7e-15
+  PASS  C.R0.open: open downwind line: R0/R0(0) = (1 - m)(1 - s_d)/[1 - (1 - m) s_d], whatever the transit loss and the number of patches; same 300 cases (m = 1 in 30 of them, where R0 = 0): largest difference 6.7e-16
+      (open line with movement to both neighbours, stays (2,3), 5 patches, m = 0.3, no transit loss: R0 = 0.888394; the downwind formula would give 0.437500; the note gives no formula for this case)
+  PASS  C.R0.def: 300 random cases with patch quality differing between patches (all five topologies, with and without transit loss): the growth factor of the full mean matrix exceeds one exactly when the note's R0 does (disagreements 0); after dividing transfer 0 by R0 the growth factor is one within 5.9e-11
+  PASS  C.sync: full synchrony (rho_s = 1), sigma 1.5, memory 0.8, 20 random systems x 300 steps each, patches started unequal: largest relative difference between the stage totals of the spatial system and the one-patch ring on the same path (mobile row multiplied by a = 1 - m ell): island, transit loss 0.0: 1.6e-14; island, transit loss 0.4: 3.5e-14; circle, transit loss 0.0: 7.9e-15; circle, transit loss 0.4: 2.2e-14; downwind circle, transit loss 0.0: 5.0e-15; downwind circle, transit loss 0.4: 1.9e-14; line, transit loss 0.0: 1.0e+00; line, transit loss 0.4: 1.0e+00; downwind line, transit loss 0.0: 1.0e+00; downwind line, transit loss 0.4: 1.0e+00 (the open lines are not expected to agree)
+  [section time 1.7 s]
+
+====================================================================================================
+C (iii). Two patches, complete mixing, no staying: D = sigma^2/2 - E log cosh[sigma sqrt((1 - rho_s)/2) Z] against products of random matrices (criterion: 4 SE)
+====================================================================================================
+  PASS  C.cosh.201: 2 stages without staying, 2 patches, complete island mixing of stage one, sigma 0.5, rho_s 0.0, memory 0.6: simulated D = 0.06578 (SE 0.00010); formula by quadrature 0.06588; one patch alone would lose 0.12500
+  PASS  C.cosh.202: 2 stages without staying, 2 patches, complete island mixing of stage one, sigma 1.5, rho_s 0.0, memory 0.6: simulated D = 0.71307 (SE 0.00074); formula by quadrature 0.71326; one patch alone would lose 1.12500
+  PASS  C.cosh.203: 2 stages without staying, 2 patches, complete island mixing of stage one, sigma 0.5, rho_s 0.5, memory 0.0: simulated D = 0.09487 (SE 0.00009); formula by quadrature 0.09465; one patch alone would lose 0.12500
+  PASS  C.cosh.204: 3 stages without staying, 2 patches, complete island mixing of stage one, sigma 1.5, rho_s 0.5, memory 0.9: simulated D = 0.89485 (SE 0.00223); formula by quadrature 0.89310; one patch alone would lose 1.12500
+      for contrast, stays (2,2), same mixing, sigma 1.5, no memory: D = 0.25745 (SE 0.00061); the log cosh expression is for the ring without staying only (it would give 0.71326)
+  [section time 26.8 s]
+
+====================================================================================================
+C (vi) a. Negative loss under dispersal at FINITE noise: the note's example
+====================================================================================================
+  note's example: stays [2.0, 2.0], 4 patches, mobile stage 1, m = 0.15, rho_s = 0.00, memory 0.80, identical patches, island movement, no transit loss
+      second-order coefficient: closed form F = -0.311058, full matrix -0.311058 (S = 0.32500, H = 0.52308, q = 0.2500, generation time 4.0)
+      sigma = 0.10  D = -0.003033 (SE 0.000007)  [second order: -0.003111; D/sigma^2 = -0.3033]   growth at the mean threshold +7.594e-04 (SE 1.7e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note.sigma0.1: note's example, sigma = 0.1: D = -0.003033 (SE 0.000007), negative by 440 SE; growth at the mean threshold +7.594e-04 (SE 1.7e-06), positive by 439 SE
+  PASS  C.neg.note.small: note's example, sigma = 0.1 against the second-order value (4 SE + 5%): D = -3.0333e-03 (SE 6.9e-06), sigma^2 F = -3.1106e-03, ratio 0.9752
+      sigma = 0.20  D = -0.011508 (SE 0.000037)  [second order: -0.012442; D/sigma^2 = -0.2877]   growth at the mean threshold +2.892e-03 (SE 9.3e-06) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.30  D = -0.023309 (SE 0.000077)  [second order: -0.027995; D/sigma^2 = -0.2590]   growth at the mean threshold +5.887e-03 (SE 2.0e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note.sigma0.3: note's example, sigma = 0.3: D = -0.023309 (SE 0.000077), negative by 301 SE; growth at the mean threshold +5.887e-03 (SE 2.0e-05), positive by 299 SE
+      sigma = 0.50  D = -0.049009 (SE 0.000195)  [second order: -0.077764; D/sigma^2 = -0.1960]   growth at the mean threshold +1.249e-02 (SE 5.0e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.70  D = -0.066586 (SE 0.000258)  [second order: -0.152418; D/sigma^2 = -0.1359]   growth at the mean threshold +1.704e-02 (SE 6.7e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.00  D = -0.061708 (SE 0.000230)  [second order: -0.311058; D/sigma^2 = -0.0617]   growth at the mean threshold +1.572e-02 (SE 6.0e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note.sigma1.0: note's example, sigma = 1.0: D = -0.061708 (SE 0.000230), negative by 268 SE; growth at the mean threshold +1.572e-02 (SE 6.0e-05), positive by 263 SE
+      sigma = 1.20  D = -0.032394 (SE 0.000466)  [second order: -0.447923; D/sigma^2 = -0.0225]   growth at the mean threshold +8.173e-03 (SE 1.2e-04) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.40  D = +0.023516 (SE 0.000503)  [second order: -0.609673; D/sigma^2 = +0.0120]   growth at the mean threshold -5.840e-03 (SE 1.2e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 1.70  D = +0.156667 (SE 0.000844)  [second order: -0.898957; D/sigma^2 = +0.0542]   growth at the mean threshold -3.765e-02 (SE 2.1e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 2.00  D = +0.348768 (SE 0.001868)  [second order: -1.244231; D/sigma^2 = +0.0872]   growth at the mean threshold -8.013e-02 (SE 4.5e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 3.00  D = +1.527888 (SE 0.024390)  [second order: -2.799519; D/sigma^2 = +0.1698]   growth at the mean threshold -2.827e-01 (SE 5.6e-03) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      the loss changes sign between sigma = 1.20 and 1.40 (linear interpolation: about 1.32)
+      most negative loss among the sigmas tried: D = -0.06659 at sigma = 0.70
+  PASS  C.neg.cross.sigma0.3: note's example at sigma = 0.3 through the general 8 x 8 matrix simulator with four independent drivers: D = -0.023352 (SE 0.000075); the structured spatial simulator gave -0.023309 (SE 0.000077)
+  PASS  C.neg.cross.sigma1.0: note's example at sigma = 1.0 through the general 8 x 8 matrix simulator with four independent drivers: D = -0.062038 (SE 0.000343); the structured spatial simulator gave -0.061708 (SE 0.000230)
+      exact periodic environments (full-period product of the 8 x 8 matrices, no simulation): each patch's host is 1 + a for half the period and 1 - a for the other half; patches shifted by a quarter period (asynchronous) or not at all (synchronous)
+        period  8, asynchronous: second-order coefficient from the general formula on the full matrix +0.210262; exact loss/a^2 at a = 0.02, 0.01 (extrapolated) +0.210262
+  FINDING   period  8, a = 0.3: asynchronous D = +0.019433 (a loss, smaller than one patch's); synchronous D = +0.023194 (one patch alone: +0.023194)
+  FINDING   period  8, a = 0.6: asynchronous D = +0.084953 (a loss, smaller than one patch's); synchronous D = +0.102851 (one patch alone: +0.102851)
+  FINDING   period  8, a = 0.9: asynchronous D = +0.232470 (a loss, smaller than one patch's); synchronous D = +0.294102 (one patch alone: +0.294102)
+        period 20, asynchronous: second-order coefficient from the general formula on the full matrix +0.152699; exact loss/a^2 at a = 0.02, 0.01 (extrapolated) +0.152699
+  FINDING   period 20, a = 0.3: asynchronous D = +0.013820 (a loss, smaller than one patch's); synchronous D = +0.030386 (one patch alone: +0.030386)
+  FINDING   period 20, a = 0.6: asynchronous D = +0.055763 (a loss, smaller than one patch's); synchronous D = +0.138969 (one patch alone: +0.138969)
+  FINDING   period 20, a = 0.9: asynchronous D = +0.120909 (a loss, smaller than one patch's); synchronous D = +0.449710 (one patch alone: +0.449710)
+        period 40, asynchronous: second-order coefficient from the general formula on the full matrix -0.191499; exact loss/a^2 at a = 0.02, 0.01 (extrapolated) -0.191499
+  FINDING   period 40, a = 0.3: asynchronous D = -0.018367 (a gain, exact); synchronous D = +0.032781 (one patch alone: +0.032781)
+  FINDING   period 40, a = 0.6: asynchronous D = -0.079498 (a gain, exact); synchronous D = +0.150975 (one patch alone: +0.150975)
+  FINDING   period 40, a = 0.9: asynchronous D = -0.173645 (a gain, exact); synchronous D = +0.503771 (one patch alone: +0.503771)
+  PASS  C.periodic.small: the general second-order coefficient on the full spatial matrix, with the covariance between patches of the periodic environment, against the exact loss at small amplitude, periods 8, 20, 40: largest relative difference 5.12e-08
+  PASS  C.periodic.sync: with the patches in phase the exact loss of the spatial system equals that of one patch (nine environments, within 1e-10)
+  [section time 97.2 s]
+
+====================================================================================================
+C (vi) b. Negative loss under dispersal at FINITE noise: a case of my own (three stages, six patches, the stage before the noisy transfer moves, patches partly synchronised)
+====================================================================================================
+  own case 1: stays [3.0, 1.5, 4.0], 6 patches, mobile stage 0, m = 0.10, rho_s = 0.20, memory 0.90, identical patches, island movement, no transit loss
+      second-order coefficient: closed form F = -0.251083, full matrix -0.251083 (S = 0.31567, H = 0.53446, q = 0.3333, generation time 8.5)
+      sigma = 0.10  D = -0.002495 (SE 0.000010)  [second order: -0.002511; D/sigma^2 = -0.2495]   growth at the mean threshold +2.939e-04 (SE 1.2e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 1, sigma = 0.1: D = -0.002495 (SE 0.000010): NEGATIVE loss (gain) (249 SE from zero); growth at the mean threshold +2.939e-04 (SE 1.2e-06)
+  PASS  C.neg.own1.small: own case 1, sigma = 0.1 against the second-order value (4 SE + 5%): D = -2.4946e-03 (SE 1.0e-05), sigma^2 F = -2.5108e-03, ratio 0.9935
+      sigma = 0.20  D = -0.009617 (SE 0.000047)  [second order: -0.010043; D/sigma^2 = -0.2404]   growth at the mean threshold +1.137e-03 (SE 5.6e-06) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.30  D = -0.020301 (SE 0.000070)  [second order: -0.022597; D/sigma^2 = -0.2256]   growth at the mean threshold +2.413e-03 (SE 8.4e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 1, sigma = 0.3: D = -0.020301 (SE 0.000070): NEGATIVE loss (gain) (290 SE from zero); growth at the mean threshold +2.413e-03 (SE 8.4e-06)
+      sigma = 0.50  D = -0.045570 (SE 0.000223)  [second order: -0.062771; D/sigma^2 = -0.1823]   growth at the mean threshold +5.478e-03 (SE 2.7e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.70  D = -0.066229 (SE 0.000315)  [second order: -0.123031; D/sigma^2 = -0.1352]   growth at the mean threshold +8.026e-03 (SE 3.9e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.00  D = -0.073614 (SE 0.000381)  [second order: -0.251083; D/sigma^2 = -0.0736]   growth at the mean threshold +8.939e-03 (SE 4.7e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 1, sigma = 1.0: D = -0.073614 (SE 0.000381): NEGATIVE loss (gain) (193 SE from zero); growth at the mean threshold +8.939e-03 (SE 4.7e-05)
+      sigma = 1.20  D = -0.054606 (SE 0.000751)  [second order: -0.361559; D/sigma^2 = -0.0379]   growth at the mean threshold +6.594e-03 (SE 9.1e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.40  D = -0.013782 (SE 0.000860)  [second order: -0.492122; D/sigma^2 = -0.0070]   growth at the mean threshold +1.646e-03 (SE 1.0e-04) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.70  D = +0.090784 (SE 0.001638)  [second order: -0.725629; D/sigma^2 = +0.0314]   growth at the mean threshold -1.055e-02 (SE 1.9e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 2.00  D = +0.252771 (SE 0.001830)  [second order: -1.004331; D/sigma^2 = +0.0632]   growth at the mean threshold -2.826e-02 (SE 2.1e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 3.00  D = +1.262751 (SE 0.015226)  [second order: -2.259744; D/sigma^2 = +0.1403]   growth at the mean threshold -1.144e-01 (SE 1.6e-03) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      the loss changes sign between sigma = 1.40 and 1.70 (linear interpolation: about 1.44)
+      most negative loss among the sigmas tried: D = -0.07361 at sigma = 1.00
+  [section time 100.4 s]
+
+====================================================================================================
+C (vi) c. Negative loss under dispersal at FINITE noise: a second case of my own (unequal stays, three patches, weaker memory, more movement)
+====================================================================================================
+  own case 2: stays [1.5, 5.0], 3 patches, mobile stage 1, m = 0.30, rho_s = 0.00, memory 0.70, identical patches, island movement, no transit loss
+      second-order coefficient: closed form F = -0.007290, full matrix -0.007290 (S = 0.19570, H = 0.10879, q = 0.3333, generation time 6.5)
+      sigma = 0.10  D = -0.000069 (SE 0.000002)  [second order: -0.000073; D/sigma^2 = -0.0069]   growth at the mean threshold +1.062e-05 (SE 3.0e-07) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 2, sigma = 0.1: D = -0.000069 (SE 0.000002): NEGATIVE loss (gain) (36 SE from zero); growth at the mean threshold +1.062e-05 (SE 3.0e-07)
+  PASS  C.neg.own2.small: own case 2, sigma = 0.1 against the second-order value (4 SE + 5%): D = -6.9039e-05 (SE 1.9e-06), sigma^2 F = -7.2897e-05, ratio 0.9471
+      sigma = 0.20  D = -0.000231 (SE 0.000009)  [second order: -0.000292; D/sigma^2 = -0.0058]   growth at the mean threshold +3.560e-05 (SE 1.4e-06) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.30  D = -0.000308 (SE 0.000012)  [second order: -0.000656; D/sigma^2 = -0.0034]   growth at the mean threshold +4.742e-05 (SE 1.8e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 2, sigma = 0.3: D = -0.000308 (SE 0.000012): NEGATIVE loss (gain) (26 SE from zero); growth at the mean threshold +4.742e-05 (SE 1.8e-06)
+      sigma = 0.50  D = +0.000764 (SE 0.000045)  [second order: -0.001822; D/sigma^2 = +0.0031]   growth at the mean threshold -1.178e-04 (SE 6.9e-06) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 0.70  D = +0.006397 (SE 0.000091)  [second order: -0.003572; D/sigma^2 = +0.0131]   growth at the mean threshold -9.826e-04 (SE 1.4e-05) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 1.00  D = +0.031012 (SE 0.000086)  [second order: -0.007290; D/sigma^2 = +0.0310]   growth at the mean threshold -4.686e-03 (SE 1.3e-05) per step   -> positive loss   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 2, sigma = 1.0: D = +0.031012 (SE 0.000086): positive loss (360 SE from zero); growth at the mean threshold -4.686e-03 (SE 1.3e-05)
+      sigma = 1.20  D = +0.063674 (SE 0.000319)  [second order: -0.010497; D/sigma^2 = +0.0442]   growth at the mean threshold -9.422e-03 (SE 4.7e-05) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 1.40  D = +0.113709 (SE 0.000502)  [second order: -0.014288; D/sigma^2 = +0.0580]   growth at the mean threshold -1.635e-02 (SE 7.5e-05) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 1.70  D = +0.223282 (SE 0.000884)  [second order: -0.021067; D/sigma^2 = +0.0773]   growth at the mean threshold -3.030e-02 (SE 1.3e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 2.00  D = +0.382948 (SE 0.001337)  [second order: -0.029159; D/sigma^2 = +0.0957]   growth at the mean threshold -4.825e-02 (SE 1.9e-04) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      sigma = 3.00  D = +1.327674 (SE 0.011674)  [second order: -0.065608; D/sigma^2 = +0.1475]   growth at the mean threshold -1.185e-01 (SE 1.4e-03) per step   -> positive loss   (100000 steps x 32 antithetic pairs)
+      the loss changes sign between sigma = 0.30 and 0.50 (linear interpolation: about 0.36)
+      most negative loss among the sigmas tried: D = -0.00031 at sigma = 0.30
+  [section time 82.4 s]
+
+====================================================================================================
+C (vi) d. The note's example with a hundredth of the movement (m = 0.01), where the second-order gain is largest and the note says the expansion is least trustworthy
+====================================================================================================
+  own case 3 (small m): stays [2.0, 2.0], 4 patches, mobile stage 1, m = 0.01, rho_s = 0.00, memory 0.80, identical patches, island movement, no transit loss
+      second-order coefficient: closed form F = -0.501103, full matrix -0.501103 (S = 0.32500, H = 0.77647, q = 0.2500, generation time 4.0)
+      sigma = 0.02  D = -0.000195 (SE 0.000002)  [second order: -0.000200; D/sigma^2 = -0.4882]   growth at the mean threshold +4.882e-05 (SE 4.4e-07) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+  PASS  C.neg.own3.small: own case 3 (small m), sigma = 0.02 against the second-order value (4 SE + 5%): D = -1.9526e-04 (SE 1.8e-06), sigma^2 F = -2.0044e-04, ratio 0.9742
+      sigma = 0.05  D = -0.001183 (SE 0.000015)  [second order: -0.001253; D/sigma^2 = -0.4733]   growth at the mean threshold +2.960e-04 (SE 3.8e-06) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 0.10  D = -0.004099 (SE 0.000029)  [second order: -0.005011; D/sigma^2 = -0.4099]   growth at the mean threshold +1.026e-03 (SE 7.4e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 3 (small m), sigma = 0.1: D = -0.004099 (SE 0.000029): NEGATIVE loss (gain) (139 SE from zero); growth at the mean threshold +1.026e-03 (SE 7.4e-06)
+      sigma = 0.30  D = -0.019484 (SE 0.000127)  [second order: -0.045099; D/sigma^2 = -0.2165]   growth at the mean threshold +4.903e-03 (SE 3.2e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 3 (small m), sigma = 0.3: D = -0.019484 (SE 0.000127): NEGATIVE loss (gain) (154 SE from zero); growth at the mean threshold +4.903e-03 (SE 3.2e-05)
+      sigma = 0.50  D = -0.028582 (SE 0.000282)  [second order: -0.125276; D/sigma^2 = -0.1143]   growth at the mean threshold +7.213e-03 (SE 7.1e-05) per step   -> NEGATIVE loss (gain)   (100000 steps x 32 antithetic pairs)
+      sigma = 1.00  D = +0.014053 (SE 0.000337)  [second order: -0.501103; D/sigma^2 = +0.0141]   growth at the mean threshold -3.510e-03 (SE 8.4e-05) per step   -> positive loss   (200000 steps x 32 antithetic pairs)
+  FINDING  own case 3 (small m), sigma = 1.0: D = +0.014053 (SE 0.000337): positive loss (42 SE from zero); growth at the mean threshold -3.510e-03 (SE 8.4e-05)
+      the loss changes sign between sigma = 0.50 and 1.00 (linear interpolation: about 0.84)
+      most negative loss among the sigmas tried: D = -0.02858 at sigma = 0.50
+  FINDING  with m = 0.01 the ratio of the simulated loss to sigma^2 F is 0.974 at sigma = 0.02, 0.945 at sigma = 0.05, 0.818 at sigma = 0.1, 0.432 at sigma = 0.3, 0.228 at sigma = 0.5, -0.028 at sigma = 1: the second-order value is the small-noise limit, but it is within 5 per cent only when sigma^2 is small against m
+  [section time 52.3 s]
+
+====================================================================================================
+C (vi) e. The note's example read the other way: 'mobile stage one' taken as the FIRST stage (stage 0, the source of the noisy transfer) instead of stage 1.  The second-order coefficient is the same; is the finite-noise loss?
+====================================================================================================
+  note's example with stage 0 mobile: stays [2.0, 2.0], 4 patches, mobile stage 0, m = 0.15, rho_s = 0.00, memory 0.80, identical patches, island movement, no transit loss
+      second-order coefficient: closed form F = -0.311058, full matrix -0.311058 (S = 0.32500, H = 0.52308, q = 0.2500, generation time 4.0)
+      sigma = 0.10  D = -0.003039 (SE 0.000008)  [second order: -0.003111; D/sigma^2 = -0.3039]   growth at the mean threshold +7.609e-04 (SE 2.0e-06) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note_d0.sigma0.1: note's example with stage 0 mobile, sigma = 0.1: D = -0.003039 (SE 0.000008), negative by 377 SE; growth at the mean threshold +7.609e-04 (SE 2.0e-06), positive by 377 SE
+  PASS  C.neg.note_d0.small: note's example with stage 0 mobile, sigma = 0.1 against the second-order value (4 SE + 5%): D = -3.0392e-03 (SE 8.1e-06), sigma^2 F = -3.1106e-03, ratio 0.9771
+      sigma = 0.30  D = -0.023337 (SE 0.000060)  [second order: -0.027995; D/sigma^2 = -0.2593]   growth at the mean threshold +5.894e-03 (SE 1.5e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note_d0.sigma0.3: note's example with stage 0 mobile, sigma = 0.3: D = -0.023337 (SE 0.000060), negative by 392 SE; growth at the mean threshold +5.894e-03 (SE 1.5e-05), positive by 388 SE
+      sigma = 1.00  D = -0.062274 (SE 0.000254)  [second order: -0.311058; D/sigma^2 = -0.0623]   growth at the mean threshold +1.587e-02 (SE 6.6e-05) per step   -> NEGATIVE loss (gain)   (200000 steps x 32 antithetic pairs)
+  PASS  C.neg.note_d0.sigma1.0: note's example with stage 0 mobile, sigma = 1.0: D = -0.062274 (SE 0.000254), negative by 245 SE; growth at the mean threshold +1.587e-02 (SE 6.6e-05), positive by 241 SE
+      the loss is negative by more than 4 SE at every sigma tried, up to 1.0: the gain does not disappear in this range
+      most negative loss among the sigmas tried: D = -0.06227 at sigma = 1.00
+  [section time 39.2 s]
+
+====================================================================================================
+C (vii). The bound D <= sum sigma_k^2/2 at sigma = 1 in random spatial systems; and no gain when the environment is independent in time
+====================================================================================================
+  PASS  C.bound: D <= (number of noisy hosts)/2 at sigma = 1: 560 random spatial systems (2 to 6 patches, 2 to 4 stages; 104 island, 113 circle, 123 line, 113 downwind circle, 107 downwind line; patch quality equal or unequal; with and without transit loss; 1 to n noisy hosts with memories -0.9 to 0.98; spatial correlation 0, 1 or random; mean matrix calibrated to R0 = 1): growth with the transfer multiplied by exp(bound) is positive by more than 4 SE in 541, within 4 SE of zero in 19, negative by more than 4 SE in 0 of the first pass (most adverse z = -2.54) and in 0 after a ten times longer rerun
+  PASS  C.iid: the same 560 systems with environments independent in time: growth at the mean threshold is negative by more than 4 SE in 558, within 4 SE of zero in 2, positive by more than 4 SE in 0 of the first pass (most adverse z = -1.39) and in 0 after rerun (the note's sufficient condition for a non-negative loss)
+  [section time 40.7 s]
+
+====================================================================================================
+SUMMARY: 146 checks, 146 pass, 0 fail.   Wall time 259 s.
+====================================================================================================

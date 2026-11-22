@@ -1,0 +1,57 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+
+\IfFileExists{figures/data/ring-2.csv}{%
+  \def\ringtwocsv{figures/data/ring-2.csv}%
+}{%
+  \def\ringtwocsv{data/ring-2.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{axis}[
+  width=77mm,
+  height=54mm,
+  scale only axis=false,
+  xmode=log,
+  xmin=2,
+  xmax=60,
+  xtick={2, 3, 6, 12, 24, 48},
+  xticklabels={$2$, $3$, $6$, $12$, $24$, $48$},
+  ymin=-0.072,
+  ymax=0.048,
+  ytick={-0.06, -0.04, -0.02, 0, 0.02, 0.04},
+  yticklabels={$-0.06$, $-0.04$, $-0.02$, $0$, $0.02$, $0.04$},
+  scaled y ticks=false,
+  xlabel={Host period $2\pi/\omega$ (steps)},
+  ylabel={Periodic response $K(\omega)$},
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  legend style={
+    at={(0.03,0.04)},
+    anchor=south west,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    row sep=1pt,
+  },
+  clip=true,
+]
+\addplot[dashdotted, line width=0.5pt, darkgray, forget plot] table[col sep=comma, x=period, y=zero] {\ringtwocsv};
+\addplot[solid, line width=0.95pt, black] table[col sep=comma, x=period, y=k_8x15] {\ringtwocsv};
+\addlegendentry{$8 \times 1.5$}
+\addplot[dashed, line width=0.85pt, black] table[col sep=comma, x=period, y=k_4x3] {\ringtwocsv};
+\addlegendentry{$4 \times 3$}
+\addplot[dotted, line width=0.9pt, black] table[col sep=comma, x=period, y=k_1x12] {\ringtwocsv};
+\addlegendentry{$1 \times 12$}
+\end{axis}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

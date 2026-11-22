@@ -1,0 +1,61 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\renewcommand{\familydefault}{\sfdefault}
+\IfFileExists{figures/data/num-1.csv}{%
+  \def\numonecsv{figures/data/num-1.csv}%
+}{%
+  \def\numonecsv{data/num-1.csv}%
+}
+\begin{document}
+\begin{minipage}{84mm}
+\centering
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{axis}[
+  width=80mm, height=61mm,
+  scale only axis=false,
+  xmin=0, xmax=21, ymin=0, ymax=1.02,
+  xtick={1,5,20}, ytick={0,0.2,0.4,0.6,0.8,1},
+  xticklabels={1,5,20}, yticklabels={0,0.2,0.4,0.6,0.8,1},
+  xlabel={Steady mean stay (steps)},
+  ylabel={Extinction probability},
+  tick align=outside, tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt,black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  scaled ticks=false,
+  legend columns=3,
+  legend style={at={(0.5,1.05)},anchor=south,draw=none,fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},column sep=1.5mm},
+  every axis plot/.append style={black,line width=0.8pt,mark size=2pt},
+  clip=true,
+]
+\addplot+[black,solid,mark=*,mark options={solid,draw=black,fill=white,line width=0.6pt},
+  error bars/.cd,y dir=both,y explicit,
+  error bar style={solid,line width=0.5pt},error mark options={line width=0.5pt,mark size=2pt}]
+  table[col sep=comma,x=stay,y=p0,
+    y error minus expr=\thisrow{p0}-\thisrow{low0},
+    y error plus expr=\thisrow{high0}-\thisrow{p0}] {\numonecsv};
+\addlegendentry{$\sigma=$\,0}
+\addplot+[black,dashed,mark=square*,mark options={solid,draw=black,fill=white,line width=0.6pt},
+  error bars/.cd,y dir=both,y explicit,
+  error bar style={solid,line width=0.5pt},error mark options={line width=0.5pt,mark size=2pt}]
+  table[col sep=comma,x=stay,y=p03,
+    y error minus expr=\thisrow{p03}-\thisrow{low03},
+    y error plus expr=\thisrow{high03}-\thisrow{p03}] {\numonecsv};
+\addlegendentry{$\sigma=$\,0.3}
+\addplot+[black,dotted,mark=triangle*,mark options={solid,draw=black,fill=black,line width=0.6pt},
+  error bars/.cd,y dir=both,y explicit,
+  error bar style={solid,line width=0.5pt},error mark options={line width=0.5pt,mark size=2pt}]
+  table[col sep=comma,x=stay,y=p06,
+    y error minus expr=\thisrow{p06}-\thisrow{low06},
+    y error plus expr=\thisrow{high06}-\thisrow{p06}] {\numonecsv};
+\addlegendentry{$\sigma=$\,0.6}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+\pgfplotsset{every axis/.append style={width=80mm,height=62mm,
+font=\sffamily\fontsize{9}{11}\selectfont,tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+label style={font=\sffamily\fontsize{9}{11}\selectfont},
+line width=0.5pt,axis line style={line width=0.4pt},
+legend style={font=\sffamily\fontsize{8.5}{10}\selectfont,draw=none,fill=white},
+legend cell align=left,grid=major,grid style={line width=0.4pt,black!20},
+mark size=1.6pt}}
+\IfFileExists{figures/data/mech-1.csv}{\def\mechdata{figures/data/}}{\def\mechdata{data/}}
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}
+\begin{axis}[xlabel={Log-host noise $\sigma$},ylabel={Loss $D$},xmin=0,xmax=2,legend pos=north west]
+\addplot[black,solid,mark=*,error bars/.cd,y dir=both,y explicit]
+table[x=sigma,y=D0,y error=SE0,col sep=comma]{\mechdata mech-3.csv};\addlegendentry{Order 0 $\pm$ SE}
+\addplot[black,solid,mark=square*,error bars/.cd,y dir=both,y explicit]
+table[x=sigma,y=D1,y error=SE1,col sep=comma]{\mechdata mech-3.csv};\addlegendentry{Order 1 $\pm$ SE}
+\addplot[black,dashed] table[x=sigma,y=Q0,col sep=comma]{\mechdata mech-3-curve.csv};\addlegendentry{Second order}
+\addplot[black,dashed] table[x=sigma,y=Q1,col sep=comma]{\mechdata mech-3-curve.csv};
+\addplot[black,dotted,domain=0:2] {0};
+\end{axis}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

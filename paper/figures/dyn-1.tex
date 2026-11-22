@@ -1,0 +1,86 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+\IfFileExists{figures/data/dyn-1.csv}{%
+  \def\dynonecsv{figures/data/dyn-1.csv}%
+}{%
+  \def\dynonecsv{data/dyn-1.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{groupplot}[
+  group style={
+    group size=1 by 2,
+    vertical sep=11mm,
+  },
+  width=76mm,
+  height=55mm,
+  scale only axis=false,
+  xmode=log,
+  xmin=0.008,
+  xmax=4.0,
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  clip=true,
+]
+
+\nextgroupplot[
+  ymin=-0.072,
+  ymax=0.115,
+  ylabel={Margin $F(a_L)$ ($\mathrm{time}^{-3}$)},
+  ytick={-0.05, 0, 0.05, 0.10},
+  yticklabels={$-0.05$, $0$, $0.05$, $0.10$},
+  xticklabels={},
+]
+\addplot[dashed, line width=0.5pt, darkgray, domain=0.008:4.0, samples=2] {0};
+\draw[dotted, line width=0.6pt, black] (axis cs:0.0456087,-0.072) -- (axis cs:0.0456087,0.115);
+\draw[dotted, line width=0.6pt, black] (axis cs:1.9326281,-0.072) -- (axis cs:1.9326281,0.115);
+\addplot[solid, line width=0.9pt, black] table[col sep=comma, x=a_L, y=F] {\dynonecsv};
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{9}{11}\selectfont] at (rel axis cs:0.02,0.96) {(a)};
+\node[anchor=south, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:0.30,0.012) {unstable ($F<0$)};
+\node[anchor=south west, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:0.047,0.068) {$a_-$};
+\node[anchor=south east, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:1.88,0.068) {$a_+$};
+
+\nextgroupplot[
+  ymin=-0.0112,
+  ymax=0.0105,
+  xlabel={External stage exit rate $a_L$ ($\mathrm{time}^{-1}$)},
+  ylabel={Leading $\mathrm{Re}\,z_{\max}$ ($\mathrm{time}^{-1}$)},
+  ytick={-0.010, -0.005, 0, 0.005, 0.010},
+  yticklabels={$-0.010$, $-0.005$, $0$, $0.005$, $0.010$},
+  scaled y ticks=false,
+]
+\addplot[dashed, line width=0.5pt, darkgray, domain=0.008:4.0, samples=2] {0};
+\draw[dotted, line width=0.6pt, black] (axis cs:0.0456087,-0.0112) -- (axis cs:0.0456087,0.0105);
+\draw[dotted, line width=0.6pt, black] (axis cs:1.9326281,-0.0112) -- (axis cs:1.9326281,0.0105);
+\addplot[solid, line width=0.9pt, black] table[col sep=comma, x=a_L, y=re_max] {\dynonecsv};
+\addplot[
+  only marks,
+  mark=o,
+  mark size=2.1pt,
+  line width=0.75pt,
+  black,
+  unbounded coords=discard,
+] table[col sep=comma, x=ode_stable_a, y=ode_stable_re] {\dynonecsv};
+\addplot[
+  only marks,
+  mark=triangle*,
+  mark size=2.3pt,
+  line width=0.6pt,
+  black,
+  unbounded coords=discard,
+] table[col sep=comma, x=ode_unstable_a, y=ode_unstable_re] {\dynonecsv};
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{9}{11}\selectfont] at (rel axis cs:0.02,0.96) {(b)};
+
+\end{groupplot}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

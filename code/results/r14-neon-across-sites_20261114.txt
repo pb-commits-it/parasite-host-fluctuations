@@ -1,0 +1,335 @@
+R14: NEON across sites.  Is infection of I. scapularis nymphs lower where Peromyscus vary more?  Started 2026-11-14 10:19:24 CST.
+A pattern check across sites; nothing is fitted.  Protocol: protocols/R14-neon-across-sites.md
+Raw data read from: data/raw/neon/ (products DP1.10072.001, DP1.10093.001, DP1.10092.001; 13 sites)
+
+0. Code checks that do not touch the data
+  K1  sd 1.290994448736 (hand 1.290994448736); r1 0.327326835354 from 3 pairs (hand 0.327326835354)   [ok]
+  K2  Spearman 0.800000000000 (hand 0.8); with a tie 0.948683298051 (hand 0.948683298051)   [ok]
+  K3  six sites: rho -1.000, p 0.001389 (1/720 = 0.001389; exact, all 720 orderings); smallest |rho| with one-sided p < 0.05 is 0.8286 (table 0.829), p there 0.0292   [ok]
+  K4  within-site slope, synthetic: 0.346252760632 against least squares with dummies 0.346252760632   [ok]
+  K5  twelve hand-made trap rows: 8 trap-nights (hand 8), 3 tagged Peromyscus (hand 3)   [ok]
+  K6  six hand-made ticks: 2 nymphs tested, 1 positive, 1 left out by the DNA control (hand 2, 1, 1)   [ok]
+
+1. What was read
+  mam_pertrapnight        766 site-month files (0 older duplicates passed over)
+  tck_taxonomyProcessed   884 site-month files (0 older duplicates passed over)
+  tck_pathogen            566 site-month files (0 older duplicates passed over)
+  not read: mam_perplotnight (no count of traps in it) and tck_fielddata (no definition of the protocol uses drag counts)
+
+  Small-mammal rows by site (st.N = rows with trapStatus code N: 1 not set, 2 disturbed, 3 spoor, 4 several captures,
+  5 capture, 6 set and empty; 'no tag' = Peromyscus rows without a tagID; 'tag,no capt' = tagged Peromyscus on a row
+  whose status is not 4 or 5; 'rep.uid' = rows with a repeated uid, read once)
+  site       rows       st.1       st.2       st.3       st.4       st.5       st.6      blank       st.0  Pero rows     no tag tag,no capt    rep.uid  mammal plots
+  BLAN      47622      10000       3968       1935          4       3179      28536          0          0       2622          0          0          0  5
+  DELA      44800      15233       3526        360          0        904      24777          0          0        864          0          0          0  4
+  HARV      92781      11039       4272       6892         61      14543      55974          0          0       9850          0          0          0  9
+  KONZ      76625      15158       1980       4186         43       9341      45917          0          0       4823          0          0          0  8
+  MLBS      43909       8250       1677       4472         18       5723      23769          0          0       4492          0          0          0  6
+  ORNL      84106       9443       3841       1964         11       4642      64205          0          0       3978          0          0          0  8
+  OSBS      88304      16594       2435       1295          9       2684      65287          0          0        884          0          0          0  8
+  SCBI      83623      15285       8443       3869         24       6605      49397          0          0       5096          0          6          0  7
+  SERC      64106      13591       6143       1457          8       2587      40320          0          0       2360          0          0          0  8
+  STEI      56651      10877       3166       6534         82       8705      27287          0          0       6779          0          0          0  6
+  TALL     111902      20947       2887       1579          4       2903      83582          0          0       2375          0          0          0  8
+  TREE      55873       8700       3890       5186         39       5114      32944          0          0       3420          0          0          0  7
+  UKFS      55006       8370       3038       1741          8       3783      38066          0          0       1758          0          0          0  6
+
+  Tick pathogen table: test names and number of rows (all sites, all ticks)
+    Amblyomma americanum                 10399
+    Anaplasma phagocytophilum            25433
+    Babesia microti                       5402
+    Borrelia burgdorferi                     9
+    Borrelia burgdorferi sensu lato       5402
+    Borrelia lonestari                   20841
+    Borrelia mayonii                      5402
+    Borrelia miyamotoi                    5402
+    Borrelia sp.                         25433
+    Dermacentor variabilis               10399
+    Ehrlichia chaffeensis                20841
+    Ehrlichia ewingii                    20841
+    Ehrlichia muris-like                  5402
+    Francisella tularensis               20841
+    Haemaphysalis longicornis               58
+    HardTick DNA Quality                 25433
+    Ixodes pacificus                     25433
+    Ixodes scapularis                    10399
+    Rickettsia parkeri                    8503
+    Rickettsia philipii                   8503
+    Rickettsia rickettsii                20841
+  I. scapularis nymphs tested for Borrelia burgdorferi with no DNA-quality row (kept): 9
+  pathogen rows: 281217
+  ticks (distinct testingID): 25442
+  ticks with a result for 'Borrelia burgdorferi sensu lato', by taxonomy-table species and stage: HAELON Nymph 810, IXOSCA Nymph 4592
+  ticks with a result for 'Borrelia burgdorferi', by taxonomy-table species and stage: IXOSCA Nymph 9
+  I. scapularis nymphs left out because the DNA-quality control was not Positive, by site (Borrelia burgdorferi sensu lato): SERC 1
+
+2. Mouse index: distinct tagged Peromyscus per 100 trap-nights, by site and calendar year
+   each cell: individuals / trap-nights = index;  '*' = fewer than 500 trap-nights, no index
+  BLAN
+     2015    109 /   4026 =   2.707
+     2016     79 /   3476 =   2.273
+     2017     85 /   3956 =   2.149
+     2018    194 /   3321 =   5.842
+     2019    153 /   3973 =   3.851
+     2020     56 /    994 =   5.634
+     2021     89 /   3321 =   2.680
+     2022    110 /   2629 =   4.184
+     2023     52 /   2371 =   2.193
+     2024    131 /   3185 =   4.113
+     2025     71 /   3063 =   2.318
+     2026     59 /   3300 =   1.788
+  DELA
+     2015     55 /   3250 =   1.692
+     2016     60 /   3554 =   1.688
+     2017     56 /   2881 =   1.944
+     2018     60 /   3136 =   1.913
+     2019     14 /   3522 =   0.398
+     2021      9 /   1714 =   0.525
+     2022     24 /   3075 =   0.780
+     2023     31 /   2302 =   1.347
+     2024     33 /   3336 =   0.989
+     2025     24 /   2797 =   0.858
+  HARV
+     2013     99 /   6603 =   1.499
+     2014    422 /   9923 =   4.253
+     2015    365 /   6735 =   5.419
+     2016    532 /   7005 =   7.595
+     2017    275 /   7194 =   3.823
+     2018    203 /   6865 =   2.957
+     2019     40 /   6674 =   0.599
+     2020    233 /   5401 =   4.314
+     2021    517 /   5725 =   9.031
+     2022    574 /   3265 =  17.580
+     2023     31 /   4331 =   0.716
+     2024    336 /   3424 =   9.813
+     2025    427 /   4618 =   9.246
+     2026    261 /   3944 =   6.618
+  KONZ
+     2015    151 /   4147 =   3.641
+     2016    291 /   7898 =   3.684
+     2017    271 /   7095 =   3.820
+     2018    109 /   6997 =   1.558
+     2019    132 /   6787 =   1.945
+     2020    196 /   4188 =   4.680
+     2021     86 /   4486 =   1.917
+     2022    182 /   3491 =   5.213
+     2023    118 /   4491 =   2.627
+     2024    116 /   4778 =   2.428
+     2025    150 /   4140 =   3.623
+     2026    103 /   2946 =   3.496
+  MLBS
+     2017    109 /   1200 =   9.083
+     2018    181 /   3600 =   5.028
+     2019    153 /   4593 =   3.331
+     2020     46 /    796 =   5.779
+     2021    173 /   3815 =   4.535
+     2022    280 /   3711 =   7.545
+     2023    470 /   4420 =  10.633
+     2024    348 /   4215 =   8.256
+     2025     80 /   4500 =   1.778
+     2026    191 /   4800 =   3.979
+  ORNL
+     2014     45 /   8793 =   0.512
+     2015    153 /   7090 =   2.158
+     2016    150 /   7152 =   2.097
+     2017    154 /   7164 =   2.150
+     2018    136 /   7197 =   1.890
+     2019    116 /   7166 =   1.619
+     2020     39 /    798 =   4.887
+     2021     88 /   5528 =   1.592
+     2022     84 /   6112 =   1.374
+     2023     87 /   4688 =   1.856
+     2024    132 /   4678 =   2.822
+     2025     64 /   4752 =   1.347
+     2026     65 /   3540 =   1.836
+  OSBS
+     2013     20 /   4584 =   0.436
+     2014     12 /   8386 =   0.143
+     2015     16 /   6932 =   0.231
+     2016     23 /   7006 =   0.328
+     2017     16 /   7032 =   0.228
+     2018     15 /   4930 =   0.304
+     2019     19 /   4780 =   0.397
+     2020     18 /   1199 =   1.501
+     2021     41 /   5844 =   0.702
+     2022     48 /   3512 =   1.367
+     2023     42 /   3551 =   1.183
+     2024     31 /   4472 =   0.693
+     2025     25 /   4740 =   0.527
+     2026     46 /   4738 =   0.971
+  SCBI
+     2014     76 /   8153 =   0.932
+     2015    288 /   6905 =   4.171
+     2016    286 /   5700 =   5.018
+     2017    105 /   6156 =   1.706
+     2018    281 /   5218 =   5.385
+     2019    257 /   6354 =   4.045
+     2020    234 /   4382 =   5.340
+     2021    122 /   4910 =   2.485
+     2022    196 /   3146 =   6.230
+     2023    160 /   4446 =   3.599
+     2024    173 /   4364 =   3.964
+     2025     72 /   4062 =   1.773
+     2026    217 /   4530 =   4.790
+  SERC
+     2015     49 /   5902 =   0.830
+     2016    148 /   5095 =   2.905
+     2017     81 /   4764 =   1.700
+     2018    121 /   5420 =   2.232
+     2019     86 /   5542 =   1.552
+     2021    103 /   4547 =   2.265
+     2022     84 /   2738 =   3.068
+     2023     90 /   4670 =   1.927
+     2024    126 /   4765 =   2.644
+     2025     16 /   3090 =   0.518
+     2026    127 /   3978 =   3.193
+  STEI
+     2015    200 /   3957 =   5.054
+     2016    306 /   4750 =   6.442
+     2017    189 /   4155 =   4.549
+     2018    205 /   4090 =   5.012
+     2019    127 /   4568 =   2.780
+     2020    362 /   2598 =  13.934
+     2021    110 /   3990 =   2.757
+     2022    201 /   2452 =   8.197
+     2023    380 /   3381 =  11.239
+     2024    423 /   3922 =  10.785
+     2025    440 /   4281 =  10.278
+     2026    445 /   3589 =  12.399
+  TALL
+     2014     58 /  11996 =   0.483
+     2015    103 /   9082 =   1.134
+     2016    113 /   9205 =   1.228
+     2017    102 /   9451 =   1.079
+     2018     89 /   9578 =   0.929
+     2019     97 /   9538 =   1.017
+     2021     61 /   5655 =   1.079
+     2022     51 /   5024 =   1.015
+     2023     85 /   5859 =   1.451
+     2024     69 /   5478 =   1.260
+     2025     19 /   5155 =   0.369
+     2026     32 /   4932 =   0.649
+  TREE
+     2015     81 /   3393 =   2.387
+     2016    153 /   4263 =   3.589
+     2017    109 /   4288 =   2.542
+     2018    133 /   4727 =   2.814
+     2019     92 /   4784 =   1.923
+     2020    252 /   2761 =   9.127
+     2021    148 /   4527 =   3.269
+     2022    116 /   3166 =   3.664
+     2023    126 /   3962 =   3.180
+     2024    306 /   4165 =   7.347
+     2025    145 /   3922 =   3.697
+     2026    221 /   3195 =   6.917
+  UKFS
+     2015    134 /   3557 =   3.767
+     2016    165 /   4795 =   3.441
+     2017    141 /   4680 =   3.013
+     2018     28 /   4298 =   0.651
+     2019     35 /   4799 =   0.729
+     2020     43 /   3288 =   1.308
+     2021     58 /   3601 =   1.611
+     2022     62 /   2699 =   2.297
+     2023     77 /   4196 =   1.835
+     2024     68 /   3579 =   1.900
+     2025     31 /   3580 =   0.866
+     2026     39 /   3560 =   1.096
+
+3. Host variability (no hypothesis): sigma_site = sd of ln(index) across years; r1 = correlation with the next year
+  site  years with an index  zero years  years used   span        sigma_site     r1  (pairs)  mean index  latitude
+  BLAN          12               0          12   2015-2026        0.399  -0.041  (11)       3.311    39.086
+  DELA          10               0          10   2015-2025        0.558   0.200  (8)       1.213    32.534
+  HARV          14               0          14   2013-2026        0.989  -0.092  (13)       5.962    42.439
+  KONZ          12               0          12   2015-2026        0.379  -0.310  (11)       3.219    39.093
+  MLBS          10               0          10   2017-2026        0.540   0.120  (9)       5.995    37.400
+  ORNL          13               0          13   2014-2026        0.505  -0.245  (12)       2.011    35.937
+  OSBS          14               0          14   2013-2026        0.728   0.597  (13)       0.644    29.698
+  SCBI          13               0          13   2014-2026        0.564  -0.431  (12)       3.803    38.892
+  SERC          11               0          11   2015-2026        0.571  -0.526  (9)       2.076    38.890
+  STEI          12               0          12   2015-2026        0.565  -0.075  (11)       7.786    45.809
+  TALL          12               0          12   2014-2026        0.413   0.130  (10)       0.974    32.908
+  TREE          12               0          12   2015-2026        0.482  -0.212  (11)       4.205    45.490
+  UKFS          12               0          12   2015-2026        0.594   0.492  (11)       1.876    39.047
+  sites with a sigma_site: 13 of 13; least 0.379, median 0.558, most 0.989
+  r1 over 13 sites: least -0.526, median -0.075, most 0.597; negative at 8
+
+4. Infection: I. scapularis nymphs tested for B. burgdorferi, positives / tested by collection year
+  sensu lato ('Borrelia burgdorferi sensu lato'), used for the tests
+     site      2014      2015      2016      2017      2018      2019      2020      2021      2022      2023      2024      2025      total    share
+     BLAN     .         .       17/71     23/79      1/15      0/2       0/1       3/41      0/12      3/23      3/48     17/68       67/360    0.1861
+     DELA     .         .         .         .         .         .         .         .         .         .        0/1        .          0/1      0.0000
+     HARV     .       16/42     10/48     22/74     14/53     40/168     2/35     12/41      2/4      46/225     3/31     63/283     230/1004   0.2291
+     KONZ     .         .         .         .         .         .         .         .         .         .         .         .          0/0        -
+     MLBS     .         .         .         .        0/1        .        0/2       2/11      0/1       0/3       6/28      5/18       13/64     0.2031
+     ORNL    0/5        .        1/24      0/6       1/15      1/25      0/3       2/28      0/20      3/27      1/7       2/18       11/178    0.0618
+     OSBS     .         .         .         .         .         .         .         .         .         .         .         .          0/0        -
+     SCBI   12/184      .       18/98      6/34     15/62      3/27      1/4      15/84      7/48      5/38     14/102    29/163     125/844    0.1481
+     SERC     .         .       27/141    23/82     22/130    22/70       .       10/30     17/50      6/33      7/38     33/88      167/662    0.2523
+     STEI     .        1/1        .         .         .        0/2       0/1       0/2       1/5       1/2       1/12      1/6         5/31     0.1613
+     TALL     .         .         .         .         .         .         .         .         .         .         .         .          0/0        -
+     TREE     .        8/20     19/117    28/112    26/121    56/387     4/17     39/180    30/94     35/147    49/137    35/114     329/1446   0.2275
+     UKFS     .         .         .         .         .         .         .         .         .         .         .        0/1         0/1      0.0000
+  sensu stricto ('Borrelia burgdorferi'), reported only
+     site      2014      total    share
+     BLAN     .          0/0        -
+     DELA     .          0/0        -
+     HARV    0/9         0/9      0.0000
+     KONZ     .          0/0        -
+     MLBS     .          0/0        -
+     ORNL     .          0/0        -
+     OSBS     .          0/0        -
+     SCBI     .          0/0        -
+     SERC     .          0/0        -
+     STEI     .          0/0        -
+     TALL     .          0/0        -
+     TREE     .          0/0        -
+     UKFS     .          0/0        -
+
+5. One row per site
+  site  mouse years  sigma_site      r1   nymphs tested  positive  NIP_site  years tested  years with yearly NIP  latitude  included
+  BLAN       12         0.399  -0.041         360        67     0.1861        10              6           39.086   yes
+  DELA       10         0.558   0.200           1         0     0.0000         1              0           32.534   no: 1 nymphs tested (needs 100); 1 years with a tested nymph (needs 4)
+  HARV       14         0.989  -0.092        1004       230     0.2291        11             10           42.439   yes
+  KONZ       12         0.379  -0.310           0         0        -           0              0           39.093   no: 0 nymphs tested (needs 100); 0 years with a tested nymph (needs 4)
+  MLBS       10         0.540   0.120          64        13     0.2031         7              1           37.400   no: 64 nymphs tested (needs 100)
+  ORNL       13         0.505  -0.245         178        11     0.0618        11              5           35.937   yes
+  OSBS       14         0.728   0.597           0         0        -           0              0           29.698   no: 0 nymphs tested (needs 100); 0 years with a tested nymph (needs 4)
+  SCBI       13         0.564  -0.431         844       125     0.1481        11             10           38.892   yes
+  SERC       11         0.571  -0.526         662       167     0.2523         9              9           38.890   yes
+  STEI       12         0.565  -0.075          31         5     0.1613         8              0           45.809   no: 31 nymphs tested (needs 100)
+  TALL       12         0.413   0.130           0         0        -           0              0           32.908   no: 0 nymphs tested (needs 100); 0 years with a tested nymph (needs 4)
+  TREE       12         0.482  -0.212        1446       329     0.2275        11             10           45.490   yes
+  UKFS       12         0.594   0.492           1         0     0.0000         1              0           39.047   no: 1 nymphs tested (needs 100); 1 years with a tested nymph (needs 4)
+  included sites: 6 (BLAN, HARV, ORNL, SCBI, SERC, TREE)
+
+6. T1 (main): across the included sites, NIP_site falls as sigma_site rises (Spearman's rho negative)
+  sites: BLAN (sigma 0.399, NIP 0.1861), HARV (sigma 0.989, NIP 0.2291), ORNL (sigma 0.505, NIP 0.0618), SCBI (sigma 0.564, NIP 0.1481), SERC (sigma 0.571, NIP 0.2523), TREE (sigma 0.482, NIP 0.2275)
+  ranks of sigma_site: 1 6 3 4 5 2
+  ranks of NIP_site  : 3 5 1 2 6 4
+  n = 6; Spearman's rho = 0.4857; one-sided p (rho this low or lower) = 0.8514; p for the opposite side (this high or higher) = 0.1778; exact, all 720 orderings
+  Outcome by the protocol's rule: NOT DECIDED
+
+7. T2: at each included site with at least four yearly values, sd of ln(yearly NIP) < sd of ln(mouse index), same years
+  BLAN  years 2016,2017,2021,2023,2024,2025: sd ln NIP 0.666, sd ln index 0.247 -> VIOLATES   (yearly NIP values 6; zero NIP left out 0; no positive mouse index that year 0; years used 6)
+  HARV  years 2015,2016,2017,2018,2019,2020,2021,2023,2024,2025: sd ln NIP 0.571, sd ln index 1.018 -> holds   (yearly NIP values 10; zero NIP left out 0; no positive mouse index that year 0; years used 10)
+  ORNL  years 2016,2019,2021,2023: sd ln NIP 0.486, sd ln index 0.129 -> VIOLATES   (yearly NIP values 5; zero NIP left out 1; no positive mouse index that year 0; years used 4)
+  SCBI  years 2014,2016,2017,2018,2019,2021,2022,2023,2024,2025: sd ln NIP 0.359, sd ln index 0.609 -> holds   (yearly NIP values 10; zero NIP left out 0; no positive mouse index that year 0; years used 10)
+  SERC  years 2016,2017,2018,2019,2021,2022,2023,2024,2025: sd ln NIP 0.321, sd ln index 0.538 -> holds   (yearly NIP values 9; zero NIP left out 0; no positive mouse index that year 0; years used 9)
+  TREE  years 2015,2016,2017,2018,2019,2021,2022,2023,2024,2025: sd ln NIP 0.330, sd ln index 0.359 -> holds   (yearly NIP values 10; zero NIP left out 0; no positive mouse index that year 0; years used 10)
+  sites entered 6, violations 2 (a quarter of the sites = 1.50).  Outcome by the protocol's rule: FAILS
+
+8. T3: pooled within-site slope b of ln(NIP in year t) on ln(mouse index in year t - 1); 0 <= b <= 1 - pbar within two standard errors
+  pairs by site: BLAN 6 (NIP years 2016,2017,2021,2023,2024,2025); HARV 10 (NIP years 2015,2016,2017,2018,2019,2020,2021,2023,2024,2025); ORNL 4 (NIP years 2016,2019,2021,2023) [1 yearly NIP without a usable pair]; SCBI 9 (NIP years 2016,2017,2018,2019,2021,2022,2023,2024,2025) [1 yearly NIP without a usable pair]; SERC 8 (NIP years 2016,2017,2018,2019,2022,2023,2024,2025) [1 yearly NIP without a usable pair]; TREE 9 (NIP years 2016,2017,2018,2019,2021,2022,2023,2024,2025) [1 yearly NIP without a usable pair]
+  46 pairs at 6 sites; b = 0.2464; standard error 0.1495 from 2000 resamples within site (0 resamples had no spread in x and were skipped; mean of resampled b 0.2335; 2.5th to 97.5th percentile -0.1520 to 0.4705)
+  check of the code only: textbook least-squares standard error 0.1039 (39 residual degrees of freedom)
+  pbar = 0.2021 (mean of 50 yearly NIP values at the included sites), so 1 - pbar = 0.7979
+  b - 2 se = -0.0526, b + 2 se = 0.5455; allowed band 0 to 0.7979
+  Outcome by the protocol's rule: HOLDS
+
+9. Latitude (no hypothesis, no adjustment): Spearman rank correlations
+  latitude with sigma_site, all 13 sites with a sigma_site: rho = -0.0659
+  latitude with sigma_site, the 6 included sites: rho = -0.1429
+  latitude with NIP_site,   the 6 included sites: rho = 0.3714
+
+Finished in 10 s.

@@ -1,0 +1,6 @@
+[ok] D1 primary's blind function = tertiary's limit: 500 random cycles of 1 to 7 stages; largest relative difference 1.5e-11
+[ok] D2 discrete survival formula / step tends to it at first order: 300 random cycles: largest relative difference at step 0.0001 is 5.1e-03; median ratios of the differences between successive steps 9.9 and 10.0
+[ok] D3 zero for one stage; a gain for two or more: 2,000 one-stage cases, largest |cost| 2.0e-13; 20,000 cases of 2 to 7 stages, largest (least negative) cost -2.76e-03
+[ok] D4 fast limit: - p (1 - p) / alpha: 500 random cycles at alpha = 1000 times the largest rate: largest relative difference 2.0e-03
+
+ALL CHECKS PASSED

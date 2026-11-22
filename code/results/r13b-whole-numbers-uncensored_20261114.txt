@@ -1,0 +1,272 @@
+R13b: R13's cases with no replicate stopped early
+protocol file last modified 2026-11-14 11:47:08 CST; run started 2026-11-14 11:47:13 CST (both from the system clock); protocol older than the run: True
+numpy 2.3.3; 6 processes; N_big = 1e+09; overflow guard at 1e+200 by 1e+100; equal-steps horizon 1,020,000 steps
+R13's numbers read from r13-whole-numbers_20261114.txt: 20 cases
+
+== 1. Checks of the method (tolerance 4 standard errors unless equality is required) ==
+  W0 below the threshold (ln R0 = D - 0.03)    saved by R13: extinct  1996, stopped    4 | R13's function again:  1996,    4 | reference sampler:  1996,    4   same
+  W0 above the threshold (ln R0 = D + 0.03)    saved by R13: extinct  1001, stopped  999 | R13's function again:  1001,  999 | reference sampler:  1001,  999   same
+  W1 N1 steady stay none, start   100          saved by R13: extinct  1506, stopped  302 | R13's function again:  1506,  302 | reference sampler:  1506,  302   same
+  W1 N1 steady stay none, start  1000          saved by R13: extinct  1049, stopped  586 | R13's function again:  1049,  586 | reference sampler:  1049,  586   same
+  W1 N1 steady stay none, start 10000          saved by R13: extinct   718, stopped  827 | R13's function again:   718,  827 | reference sampler:   718,  827   same
+[PASS] H0 R13's own function, run again, and the reference sampler both give R13's saved counts exactly (five cases)
+  V1a (poisson; stays 10 and 40, ln R0 = 0.3): smallest fixed point q = (0.734993, 0.734993); q(3000) = (0.734993, 0.734993)
+    one founder in stage 0   N_big 1e+09, approximated in     0 replicates: T=300: 0.6759 vs 0.6686 (2.2 se); T=750: 0.7351 vs 0.7279 (2.3 se); T=1500: 0.7422 vs 0.7348 (2.4 se); T=3000: 0.7425 vs 0.7350 (2.4 se)
+    one founder in stage 0   N_big 1e+03, approximated in  5409 replicates: T=300: 0.6606 vs 0.6686 (2.4 se); T=750: 0.7230 vs 0.7279 (1.5 se); T=1500: 0.7291 vs 0.7348 (1.8 se); T=3000: 0.7296 vs 0.7350 (1.7 se)
+    one founder in stage 1   N_big 1e+09, approximated in     0 replicates: T=300: 0.6582 vs 0.6584 (0.1 se); T=750: 0.7271 vs 0.7270 (0.0 se); T=1500: 0.7356 vs 0.7347 (0.3 se); T=3000: 0.7359 vs 0.7350 (0.3 se)
+    one founder in stage 1   N_big 1e+03, approximated in  5235 replicates: T=300: 0.6620 vs 0.6584 (1.1 se); T=750: 0.7298 vs 0.7270 (0.9 se); T=1500: 0.7380 vs 0.7347 (1.1 se); T=3000: 0.7382 vs 0.7350 (1.0 se)
+    one founder in each      N_big 1e+09, approximated in     0 replicates: T=300: 0.4409 vs 0.4402 (0.2 se); T=750: 0.5310 vs 0.5292 (0.5 se); T=1500: 0.5413 vs 0.5399 (0.4 se); T=3000: 0.5416 vs 0.5402 (0.4 se)
+    one founder in each      N_big 1e+03, approximated in  9154 replicates: T=300: 0.4390 vs 0.4402 (0.3 se); T=750: 0.5314 vs 0.5292 (0.6 se); T=1500: 0.5416 vs 0.5399 (0.5 se); T=3000: 0.5423 vs 0.5402 (0.6 se)
+[PASS] V1a extinct fraction within 4 binomial standard errors of the generating-function value at every time (worst 2.4)
+  V1b (nb; stays 10 and 40, ln R0 = 0.3): smallest fixed point q = (0.953221, 0.947101); q(3000) = (0.953220, 0.947100)
+    one founder in stage 0   N_big 1e+09, approximated in    23 replicates: T=300: 0.9245 vs 0.9240 (0.3 se); T=750: 0.9503 vs 0.9499 (0.2 se); T=1500: 0.9539 vs 0.9531 (0.6 se); T=3000: 0.9540 vs 0.9532 (0.5 se)
+    one founder in stage 0   N_big 1e+03, approximated in   911 replicates: T=300: 0.9256 vs 0.9240 (0.9 se); T=750: 0.9510 vs 0.9499 (0.7 se); T=1500: 0.9544 vs 0.9531 (0.9 se); T=3000: 0.9545 vs 0.9532 (0.8 se)
+    one founder in stage 1   N_big 1e+09, approximated in    10 replicates: T=300: 0.9022 vs 0.8998 (1.2 se); T=750: 0.9444 vs 0.9423 (1.2 se); T=1500: 0.9494 vs 0.9469 (1.6 se); T=3000: 0.9496 vs 0.9471 (1.6 se)
+    one founder in stage 1   N_big 1e+03, approximated in  1096 replicates: T=300: 0.8981 vs 0.8998 (0.8 se); T=750: 0.9415 vs 0.9423 (0.5 se); T=1500: 0.9450 vs 0.9469 (1.2 se); T=3000: 0.9452 vs 0.9471 (1.2 se)
+    one founder in each      N_big 1e+09, approximated in    37 replicates: T=300: 0.8290 vs 0.8314 (0.9 se); T=750: 0.8931 vs 0.8951 (0.9 se); T=1500: 0.8999 vs 0.9025 (1.2 se); T=3000: 0.9002 vs 0.9028 (1.2 se)
+    one founder in each      N_big 1e+03, approximated in  1971 replicates: T=300: 0.8333 vs 0.8314 (0.7 se); T=750: 0.8942 vs 0.8951 (0.4 se); T=1500: 0.9010 vs 0.9025 (0.7 se); T=3000: 0.9014 vs 0.9028 (0.6 se)
+[PASS] V1b extinct fraction within 4 binomial standard errors of the generating-function value at every time (worst 1.6)
+  V1c (group; stays 10 and 40, ln R0 = 0.3): smallest fixed point q = (0.994601, 0.534047); q(3000) = (0.994601, 0.534047)
+    one free individual      N_big 1e+09, approximated in    12 replicates: T=300: 0.9935 vs 0.9934 (0.2 se); T=750: 0.9942 vs 0.9945 (0.4 se); T=1500: 0.9943 vs 0.9946 (0.5 se); T=3000: 0.9943 vs 0.9946 (0.5 se)
+    one free individual      N_big 1e+03, approximated in   117 replicates: T=300: 0.9928 vs 0.9934 (1.0 se); T=750: 0.9940 vs 0.9945 (1.0 se); T=1500: 0.9941 vs 0.9946 (0.9 se); T=3000: 0.9941 vs 0.9946 (0.9 se)
+    one group of 100         N_big 1e+09, approximated in  1142 replicates: T=300: 0.4444 vs 0.4350 (2.7 se); T=750: 0.5311 vs 0.5244 (1.9 se); T=1500: 0.5404 vs 0.5338 (1.9 se); T=3000: 0.5409 vs 0.5340 (1.9 se)
+    one group of 100         N_big 1e+03, approximated in  9248 replicates: T=300: 0.4374 vs 0.4350 (0.7 se); T=750: 0.5275 vs 0.5244 (0.9 se); T=1500: 0.5373 vs 0.5338 (1.0 se); T=3000: 0.5375 vs 0.5340 (1.0 se)
+    100 free individuals     N_big 1e+09, approximated in  1513 replicates: T=300: 0.5203 vs 0.5149 (1.6 se); T=750: 0.5803 vs 0.5751 (1.5 se); T=1500: 0.5870 vs 0.5818 (1.5 se); T=3000: 0.5873 vs 0.5820 (1.5 se)
+    100 free individuals     N_big 1e+03, approximated in  8273 replicates: T=300: 0.5169 vs 0.5149 (0.6 se); T=750: 0.5791 vs 0.5751 (1.1 se); T=1500: 0.5861 vs 0.5818 (1.2 se); T=3000: 0.5864 vs 0.5820 (1.3 se)
+[PASS] V1c extinct fraction within 4 binomial standard errors of the generating-function value at every time (worst 2.7)
+  V1d (poisson; ln R0 = -0.5; start 4.460e+09, 1.554e+10; approximated in 10000 of 10000 replicates): T=1879: 0.0935 vs 0.1024 (2.9 se); T=1934: 0.2984 vs 0.3036 (1.1 se); T=1981: 0.5034 vs 0.5039 (0.1 se); T=2037: 0.7046 vs 0.7017 (0.6 se); T=2140: 0.8993 vs 0.9001 (0.3 se)
+  V1d (nb; ln R0 = -0.5; start 4.460e+09, 1.554e+10; approximated in 10000 of 10000 replicates): T=1797: 0.1007 vs 0.1016 (0.3 se); T=1852: 0.3042 vs 0.3024 (0.4 se); T=1899: 0.5090 vs 0.5028 (1.2 se); T=1955: 0.7022 vs 0.7009 (0.3 se); T=2059: 0.8968 vs 0.9009 (1.4 se)
+[PASS] V1d a fall from 2e10 through the switch: within 4 binomial standard errors of the exact value at five times (worst 2.9)
+  V2a hybrid N_big 1e+09 (approximated in 10000 of 10000) vs exact: mean time to extinction 749.7 vs 746.8 (1.5 se); extinct by step 651 0.2529 vs 0.2523 (0.1 se); extinct by step 733 0.4990 vs 0.5060 (1.0 se); extinct by step 830 0.7451 vs 0.7577 (2.1 se); extinct at the end 1.0000 vs 1.0000 (0.0 se)
+  V2a hybrid N_big 1e+03 (approximated in 10000 of 10000) vs exact: mean time to extinction 748.4 vs 746.8 (0.9 se); extinct by step 650 0.2531 vs 0.2500 (0.5 se); extinct by step 732 0.4986 vs 0.5022 (0.5 se); extinct by step 830 0.7438 vs 0.7577 (2.3 se); extinct at the end 1.0000 vs 1.0000 (0.0 se)
+[PASS] V2a a fall from 2e10, the ring of W0: hybrid against exact sampling (worst 2.3 standard errors; exact arm flagged 0 replicates, must be 0)
+  V2b hybrid N_big 1e+09 (approximated in 40 of 10000) vs exact: extinct at the end 0.8210 vs 0.8143 (1.2 se); ever above 1e6 0.0664 vs 0.0681 (0.5 se); ever above 1e10 0.0017 vs 0.0017 (0.0 se)
+  V2b hybrid N_big 1e+03 (approximated in 4741 of 10000) vs exact: extinct at the end 0.8217 vs 0.8143 (1.4 se); ever above 1e6 0.0632 vs 0.0681 (1.4 se); ever above 1e10 0.0013 vs 0.0017 (0.7 se)
+[PASS] V2b rise and return from 200, W0 below the threshold, 1,500 steps: hybrid against exact sampling (worst 1.4 standard errors; exact arm flagged 0 replicates, must be 0)
+  V2c hybrid N_big 1e+09 (approximated in 10000 of 10000) vs exact: mean time to extinction 2596.9 vs 2597.6 (0.4 se); extinct by step 2499 0.2530 vs 0.2541 (0.2 se); extinct by step 2575 0.5043 vs 0.4973 (1.0 se); extinct by step 2671 0.7527 vs 0.7512 (0.2 se); extinct at the end 1.0000 vs 1.0000 (0.0 se)
+  V2c hybrid N_big 1e+03 (approximated in 10000 of 10000) vs exact: mean time to extinction 2595.1 vs 2597.6 (1.3 se); extinct by step 2499 0.2510 vs 0.2541 (0.5 se); extinct by step 2575 0.5056 vs 0.4973 (1.2 se); extinct by step 2669 0.7552 vs 0.7457 (1.6 se); extinct at the end 1.0000 vs 1.0000 (0.0 se)
+[PASS] V2c a fall from 2e10, stays 10 and 160: hybrid against exact sampling (worst 1.6 standard errors; exact arm flagged 0 replicates, must be 0)
+[PASS] V3 overflow guard: times of extinction identical: True; largest difference in the log of the final total 5.68e-14 (limit 1e-6); replicates scaled 0 (guard as in the main run) and 1000 (guard set to act early; at least 100 needed); largest log10 size reached 163.6
+  V4 poisson, two stages                  from 1e+06 per stage (exact draws): mean/(A x) - 1 = -2.39e-06, +1.24e-06 (0.8 se); variance/theory = 0.9843, 0.9861 (1.6 se)
+  V4 poisson, two stages                  from 4e+09 per stage (approximated draws): mean/(A x) - 1 = +2.74e-08, +3.60e-10 (0.6 se); variance/theory = 1.0066, 1.0143 (1.4 se)
+  V4 clumped (E-i), two stages            from 1e+06 per stage (exact draws): mean/(A x) - 1 = -3.34e-06, +2.52e-06 (1.2 se); variance/theory = 0.9960, 1.0013 (0.4 se)
+  V4 clumped (E-i), two stages            from 4e+09 per stage (approximated draws): mean/(A x) - 1 = +7.03e-08, +4.26e-08 (1.6 se); variance/theory = 0.9949, 1.0044 (0.5 se)
+  V4 shared host fate (E-ii), two stages  from 1e+06 per stage (exact draws): mean/(A x) - 1 = -1.05e-05, +1.16e-07 (0.3 se); variance/theory = 1.0054, 1.0034 (0.5 se)
+  V4 shared host fate (E-ii), two stages  from 4e+09 per stage (approximated draws): mean/(A x) - 1 = -6.60e-08, +1.63e-09 (0.1 se); variance/theory = 0.9922, 0.9947 (0.8 se)
+  V4 poisson, one stage                   from 1e+06 per stage (exact draws): mean/(A x) - 1 = -2.85e-06 (1.1 se); variance/theory = 1.0015 (0.1 se)
+  V4 poisson, one stage                   from 4e+09 per stage (approximated draws): mean/(A x) - 1 = -1.46e-08 (0.4 se); variance/theory = 0.9857 (1.4 se)
+[PASS] V4 one step: mean equal to R13's mean matrix times the start for all three laws (worst 1.6 se), variance equal to the hand formula (worst 1.6 se)
+
+== 2. Main cases: 48 runs, 2000 replicates each ==
+
+== B. R13 against R13b, every case (fraction extinct; +- is one binomial standard error) ==
+   'R13 bounds' = R13's extinct fraction to that plus the fraction R13 stopped above 1e15.
+   'equal generations' = within R13's own horizon; 'equal steps' = within 1,020,000 steps (W1 only).
+  W0 below the threshold (ln R0 = D - 0.03)    R13 0.9980 +- 0.0010, bounds [0.9980, 1.0000] | R13b equal generations 1.0000 +- 0.0000   n = 2000
+  W0 above the threshold (ln R0 = D + 0.03)    R13 0.5005 +- 0.0112, bounds [0.5005, 1.0000] | R13b equal generations 0.5195 +- 0.0112   n = 2000
+  W1 N1 steady stay none, start   100          R13 0.7530 +- 0.0096, bounds [0.7530, 0.9040] | R13b equal generations 0.7608 +- 0.0055   equal steps 0.7695 +- 0.0054   n = 6000   (first batch alone, R13's seed: 0.7540 +- 0.0096)
+  W1 N1 steady stay none, start  1000          R13 0.5245 +- 0.0112, bounds [0.5245, 0.8175] | R13b equal generations 0.5330 +- 0.0112   equal steps 0.5490 +- 0.0111   n = 2000
+  W1 N1 steady stay none, start 10000          R13 0.3590 +- 0.0107, bounds [0.3590, 0.7725] | R13b equal generations 0.3680 +- 0.0108   equal steps 0.3940 +- 0.0109   n = 2000
+  W1 N1 steady stay   10, start   100          R13 0.9340 +- 0.0056, bounds [0.9340, 0.9410] | R13b equal generations 0.9375 +- 0.0031   equal steps 0.9695 +- 0.0022   n = 6000   (first batch alone, R13's seed: 0.9375 +- 0.0054)
+  W1 N1 steady stay   10, start  1000          R13 0.7990 +- 0.0090, bounds [0.7990, 0.8155] | R13b equal generations 0.7980 +- 0.0090   equal steps 0.8965 +- 0.0068   n = 2000
+  W1 N1 steady stay   10, start 10000          R13 0.6310 +- 0.0108, bounds [0.6310, 0.6625] | R13b equal generations 0.6285 +- 0.0108   equal steps 0.8070 +- 0.0088   n = 2000
+  W1 N1 steady stay   40, start   100          R13 0.8260 +- 0.0085, bounds [0.8260, 0.8310] | R13b equal generations 0.8188 +- 0.0050   equal steps 0.8200 +- 0.0050   n = 6000   (first batch alone, R13's seed: 0.8280 +- 0.0084)
+  W1 N1 steady stay   40, start  1000          R13 0.3890 +- 0.0109, bounds [0.3890, 0.4245] | R13b equal generations 0.3970 +- 0.0109   equal steps 0.4015 +- 0.0110   n = 2000
+  W1 N1 steady stay   40, start 10000          R13 0.1210 +- 0.0073, bounds [0.1210, 0.1930] | R13b equal generations 0.1290 +- 0.0075   equal steps 0.1315 +- 0.0076   n = 2000
+  W1 N1 steady stay  160, start   100          R13 0.7085 +- 0.0102, bounds [0.7085, 0.7270] | R13b equal generations 0.7090 +- 0.0059   equal steps 0.7090 +- 0.0059   n = 6000   (first batch alone, R13's seed: 0.7080 +- 0.0102)
+  W1 N1 steady stay  160, start  1000          R13 0.0860 +- 0.0063, bounds [0.0860, 0.2015] | R13b equal generations 0.0860 +- 0.0063   equal steps 0.0860 +- 0.0063   n = 2000
+  W1 N1 steady stay  160, start 10000          R13 0.0010 +- 0.0007, bounds [0.0010, 0.2915] | R13b equal generations 0.0005 +- 0.0005   equal steps 0.0005 +- 0.0005   n = 2000
+  W1 N2 steady stay none, start   100          R13 0.9320 +- 0.0056, bounds [0.9320, 0.9320] | R13b equal generations 0.9287 +- 0.0033   equal steps 0.9630 +- 0.0024   n = 6000   (first batch alone, R13's seed: 0.9320 +- 0.0056)
+  W1 N2 steady stay none, start  1000          R13 0.6130 +- 0.0109, bounds [0.6130, 0.6130] | R13b equal generations 0.6130 +- 0.0109   equal steps 0.7790 +- 0.0093   n = 2000
+  W1 N2 steady stay none, start 10000          R13 0.2380 +- 0.0095, bounds [0.2380, 0.2380] | R13b equal generations 0.2290 +- 0.0094   equal steps 0.5170 +- 0.0112   n = 2000
+  W1 N2 steady stay   10, start   100          R13 0.9275 +- 0.0058, bounds [0.9275, 0.9275] | R13b equal generations 0.9252 +- 0.0034   equal steps 0.9283 +- 0.0033   n = 6000   (first batch alone, R13's seed: 0.9275 +- 0.0058)
+  W1 N2 steady stay   10, start  1000          R13 0.5325 +- 0.0112, bounds [0.5325, 0.5325] | R13b equal generations 0.5310 +- 0.0112   equal steps 0.5435 +- 0.0111   n = 2000
+  W1 N2 steady stay   10, start 10000          R13 0.0540 +- 0.0051, bounds [0.0540, 0.0540] | R13b equal generations 0.0530 +- 0.0050   equal steps 0.0595 +- 0.0053   n = 2000
+
+== B2. What R13's stopping rule hid, and what the sampler had to do ==
+   a: extinct within R13's horizon without ever passing 1e15 (what R13 could count);  b: passed 1e15 within R13's horizon (R13 stopped these);
+   c: of b, extinct within R13's horizon;  d: of b, extinct within the whole run;  e: passed 1e15 at any time in the run;  f: of e, extinct by the end.
+  W0 below the threshold (ln R0 = D - 0.03)    n  2000 | a  1999  b     1  c    1  d    1  e     1  f    1 | approximated in    40, scaled in     0 | largest size from which a replicate later died 1e15.4 | survivors at the end: log10 size min nan, median nan, max nan
+  W0 above the threshold (ln R0 = D + 0.03)    n  2000 | a  1039  b   959  c    0  d    0  e   959  f    0 | approximated in   976, scaled in     0 | largest size from which a replicate later died 1e13.7 | survivors at the end: log10 size min 10.7, median 43.3, max 86.7
+  W1 N1 steady stay none, start   100          n  6000 | a  4565  b   884  c    0  d    3  e  1388  f    5 | approximated in  1467, scaled in    88 | largest size from which a replicate later died 1e21.1 | survivors at the end: log10 size min 61.3, median 154.0, max 251.7
+  W1 N1 steady stay none, start  1000          n  2000 | a  1066  b   585  c    0  d    5  e   907  f    5 | approximated in   955, scaled in    52 | largest size from which a replicate later died 1e19.1 | survivors at the end: log10 size min 70.3, median 156.5, max 251.0
+  W1 N1 steady stay none, start 10000          n  2000 | a   736  b   799  c    0  d    5  e  1217  f    5 | approximated in  1309, scaled in    67 | largest size from which a replicate later died 1e20.0 | survivors at the end: log10 size min 73.4, median 157.9, max 241.6
+  W1 N1 steady stay   10, start   100          n  6000 | a  5625  b    18  c    0  d    3  e   210  f   33 | approximated in   317, scaled in     0 | largest size from which a replicate later died 1e26.1 | survivors at the end: log10 size min 2.5, median 23.2, max 56.6
+  W1 N1 steady stay   10, start  1000          n  2000 | a  1596  b    35  c    0  d    7  e   241  f   34 | approximated in   344, scaled in     0 | largest size from which a replicate later died 1e25.8 | survivors at the end: log10 size min 2.1, median 22.4, max 48.3
+  W1 N1 steady stay   10, start 10000          n  2000 | a  1257  b    73  c    0  d   16  e   451  f   65 | approximated in   672, scaled in     0 | largest size from which a replicate later died 1e27.3 | survivors at the end: log10 size min 3.8, median 22.5, max 56.4
+  W1 N1 steady stay   40, start   100          n  6000 | a  4913  b    52  c    0  d    0  e  1058  f    0 | approximated in  1078, scaled in     0 | largest size from which a replicate later died 1e6.7 | survivors at the end: log10 size min 4.0, median 24.5, max 44.2
+  W1 N1 steady stay   40, start  1000          n  2000 | a   794  b    65  c    0  d    0  e  1169  f    0 | approximated in  1197, scaled in     0 | largest size from which a replicate later died 1e9.3 | survivors at the end: log10 size min 7.5, median 24.6, max 40.7
+  W1 N1 steady stay   40, start 10000          n  2000 | a   258  b   155  c    0  d    0  e  1695  f    0 | approximated in  1736, scaled in     0 | largest size from which a replicate later died 1e8.6 | survivors at the end: log10 size min 7.6, median 25.4, max 44.3
+  W1 N1 steady stay  160, start   100          n  6000 | a  4254  b   128  c    0  d    0  e   128  f    0 | approximated in  1712, scaled in     0 | largest size from which a replicate later died 1e3.9 | survivors at the end: log10 size min 6.0, median 12.5, max 17.7
+  W1 N1 steady stay  160, start  1000          n  2000 | a   172  b   225  c    0  d    0  e   225  f    0 | approximated in  1807, scaled in     0 | largest size from which a replicate later died 1e3.8 | survivors at the end: log10 size min 7.4, median 12.9, max 18.3
+  W1 N1 steady stay  160, start 10000          n  2000 | a     1  b   569  c    0  d    0  e   569  f    0 | approximated in  1994, scaled in     0 | largest size from which a replicate later died 1e4.1 | survivors at the end: log10 size min 8.3, median 13.9, max 19.6
+  W1 N2 steady stay none, start   100          n  6000 | a  5572  b     0  c    0  d    0  e   155  f    0 | approximated in   234, scaled in     0 | largest size from which a replicate later died 1e10.8 | survivors at the end: log10 size min 3.0, median 15.5, max 32.4
+  W1 N2 steady stay none, start  1000          n  2000 | a  1226  b     0  c    0  d    0  e   316  f    0 | approximated in   452, scaled in     0 | largest size from which a replicate later died 1e11.7 | survivors at the end: log10 size min 1.3, median 15.8, max 33.8
+  W1 N2 steady stay none, start 10000          n  2000 | a   458  b     0  c    0  d    0  e   683  f    0 | approximated in  1005, scaled in     0 | largest size from which a replicate later died 1e13.6 | survivors at the end: log10 size min 3.0, median 16.4, max 38.9
+  W1 N2 steady stay   10, start   100          n  6000 | a  5551  b     0  c    0  d    0  e   420  f    0 | approximated in   430, scaled in     0 | largest size from which a replicate later died 1e5.4 | survivors at the end: log10 size min 12.7, median 20.9, max 29.7
+  W1 N2 steady stay   10, start  1000          n  2000 | a  1062  b     0  c    0  d    0  e   892  f    0 | approximated in   913, scaled in     0 | largest size from which a replicate later died 1e5.4 | survivors at the end: log10 size min 10.4, median 20.8, max 29.8
+  W1 N2 steady stay   10, start 10000          n  2000 | a   106  b     0  c    0  d    0  e  1853  f    0 | approximated in  1881, scaled in     0 | largest size from which a replicate later died 1e5.6 | survivors at the end: log10 size min 10.4, median 21.4, max 33.6
+
+== C. Extinction by time, W1 cases (fraction extinct by 10%, 25%, 50%, 100% of the equal-steps horizon) ==
+  W1 N1 steady stay none, start   100          by step   102,000: 0.7675 +- 0.0055 | by step   255,000: 0.7695 +- 0.0054 | by step   510,000: 0.7695 +- 0.0054 | by step 1,020,000: 0.7695 +- 0.0054 | median time of those extinct      1636 steps
+  W1 N1 steady stay none, start  1000          by step   102,000: 0.5425 +- 0.0111 | by step   255,000: 0.5490 +- 0.0111 | by step   510,000: 0.5490 +- 0.0111 | by step 1,020,000: 0.5490 +- 0.0111 | median time of those extinct      4971 steps
+  W1 N1 steady stay none, start 10000          by step   102,000: 0.3880 +- 0.0109 | by step   255,000: 0.3935 +- 0.0109 | by step   510,000: 0.3940 +- 0.0109 | by step 1,020,000: 0.3940 +- 0.0109 | median time of those extinct     10590 steps
+  W1 N1 steady stay   10, start   100          by step   102,000: 0.9325 +- 0.0032 | by step   255,000: 0.9523 +- 0.0028 | by step   510,000: 0.9632 +- 0.0024 | by step 1,020,000: 0.9695 +- 0.0022 | median time of those extinct      2512 steps
+  W1 N1 steady stay   10, start  1000          by step   102,000: 0.7855 +- 0.0092 | by step   255,000: 0.8470 +- 0.0080 | by step   510,000: 0.8795 +- 0.0073 | by step 1,020,000: 0.8965 +- 0.0068 | median time of those extinct     12810 steps
+  W1 N1 steady stay   10, start 10000          by step   102,000: 0.6080 +- 0.0109 | by step   255,000: 0.7135 +- 0.0101 | by step   510,000: 0.7730 +- 0.0094 | by step 1,020,000: 0.8070 +- 0.0088 | median time of those extinct     35342 steps
+  W1 N1 steady stay   40, start   100          by step   102,000: 0.8038 +- 0.0051 | by step   255,000: 0.8180 +- 0.0050 | by step   510,000: 0.8200 +- 0.0050 | by step 1,020,000: 0.8200 +- 0.0050 | median time of those extinct      6170 steps
+  W1 N1 steady stay   40, start  1000          by step   102,000: 0.3575 +- 0.0107 | by step   255,000: 0.3945 +- 0.0109 | by step   510,000: 0.4010 +- 0.0110 | by step 1,020,000: 0.4015 +- 0.0110 | median time of those extinct     30652 steps
+  W1 N1 steady stay   40, start 10000          by step   102,000: 0.0925 +- 0.0065 | by step   255,000: 0.1260 +- 0.0074 | by step   510,000: 0.1310 +- 0.0075 | by step 1,020,000: 0.1315 +- 0.0076 | median time of those extinct     66226 steps
+  W1 N1 steady stay  160, start   100          by step   102,000: 0.6663 +- 0.0061 | by step   255,000: 0.7068 +- 0.0059 | by step   510,000: 0.7090 +- 0.0059 | by step 1,020,000: 0.7090 +- 0.0059 | median time of those extinct     19566 steps
+  W1 N1 steady stay  160, start  1000          by step   102,000: 0.0560 +- 0.0051 | by step   255,000: 0.0825 +- 0.0062 | by step   510,000: 0.0860 +- 0.0063 | by step 1,020,000: 0.0860 +- 0.0063 | median time of those extinct     82359 steps
+  W1 N1 steady stay  160, start 10000          by step   102,000: 0.0000 +- 0.0000 | by step   255,000: 0.0005 +- 0.0005 | by step   510,000: 0.0005 +- 0.0005 | by step 1,020,000: 0.0005 +- 0.0005 | median time of those extinct    109901 steps
+  W1 N2 steady stay none, start   100          by step   102,000: 0.9413 +- 0.0030 | by step   255,000: 0.9563 +- 0.0026 | by step   510,000: 0.9603 +- 0.0025 | by step 1,020,000: 0.9630 +- 0.0024 | median time of those extinct      2716 steps
+  W1 N2 steady stay none, start  1000          by step   102,000: 0.6795 +- 0.0104 | by step   255,000: 0.7455 +- 0.0097 | by step   510,000: 0.7710 +- 0.0094 | by step 1,020,000: 0.7790 +- 0.0093 | median time of those extinct     19794 steps
+  W1 N2 steady stay none, start 10000          by step   102,000: 0.3215 +- 0.0104 | by step   255,000: 0.4425 +- 0.0111 | by step   510,000: 0.4955 +- 0.0112 | by step 1,020,000: 0.5170 +- 0.0112 | median time of those extinct     71932 steps
+  W1 N2 steady stay   10, start   100          by step   102,000: 0.9240 +- 0.0034 | by step   255,000: 0.9280 +- 0.0033 | by step   510,000: 0.9283 +- 0.0033 | by step 1,020,000: 0.9283 +- 0.0033 | median time of those extinct      2774 steps
+  W1 N2 steady stay   10, start  1000          by step   102,000: 0.5225 +- 0.0112 | by step   255,000: 0.5435 +- 0.0111 | by step   510,000: 0.5435 +- 0.0111 | by step 1,020,000: 0.5435 +- 0.0111 | median time of those extinct     20168 steps
+  W1 N2 steady stay   10, start 10000          by step   102,000: 0.0495 +- 0.0049 | by step   255,000: 0.0595 +- 0.0053 | by step   510,000: 0.0595 +- 0.0053 | by step 1,020,000: 0.0595 +- 0.0053 | median time of those extinct     58896 steps
+
+== Orderings stated by R13 ('first above second'), judged by the rule of the protocol (4 standard errors) ==
+  N1 from 10000: stay   10 above none | R13's own numbers: 0.631 against 0.359; lower bound less upper bound -0.1415 (-9.9 se): NOT established by R13
+        R13b equal generations: 0.6285 - 0.3680 = +0.2605 +- 0.0153 (+17.1 se)  SURVIVES
+        R13b equal steps:       0.8070 - 0.3940 = +0.4130 +- 0.0140 (+29.4 se)  SURVIVES
+  N1 from 10000: stay none above   40 | R13's own numbers: 0.359 against 0.121; lower bound less upper bound +0.1660 (+12.0 se): established by R13
+        R13b equal generations: 0.3680 - 0.1290 = +0.2390 +- 0.0131 (+18.2 se)  SURVIVES
+        R13b equal steps:       0.3940 - 0.1315 = +0.2625 +- 0.0133 (+19.8 se)  SURVIVES
+  N1 from 10000: stay   40 above  160 | R13's own numbers: 0.121 against 0.001; lower bound less upper bound -0.1705 (-13.6 se): NOT established by R13
+        R13b equal generations: 0.1290 - 0.0005 = +0.1285 +- 0.0075 (+17.1 se)  SURVIVES
+        R13b equal steps:       0.1315 - 0.0005 = +0.1310 +- 0.0076 (+17.3 se)  SURVIVES
+  N1 from 10000: stay none above  160 | R13's own numbers: 0.359 against 0.001; lower bound less upper bound +0.0675 (+4.6 se): established by R13
+        R13b equal generations: 0.3680 - 0.0005 = +0.3675 +- 0.0108 (+34.0 se)  SURVIVES
+        R13b equal steps:       0.3940 - 0.0005 = +0.3935 +- 0.0109 (+36.0 se)  SURVIVES
+  N1 from  1000: stay   10 above none | R13's own numbers: 0.799 against 0.524; lower bound less upper bound -0.0185 (-1.5 se): NOT established by R13
+        R13b equal generations: 0.7980 - 0.5330 = +0.2650 +- 0.0143 (+18.5 se)  SURVIVES
+        R13b equal steps:       0.8965 - 0.5490 = +0.3475 +- 0.0130 (+26.6 se)  SURVIVES
+  N1 from  1000: stay none above   40 | R13's own numbers: 0.524 against 0.389; lower bound less upper bound +0.1000 (+6.4 se): established by R13
+        R13b equal generations: 0.5330 - 0.3970 = +0.1360 +- 0.0156 (+8.7 se)  SURVIVES
+        R13b equal steps:       0.5490 - 0.4015 = +0.1475 +- 0.0156 (+9.4 se)  SURVIVES
+  N1 from  1000: stay   40 above  160 | R13's own numbers: 0.389 against 0.086; lower bound less upper bound +0.1875 (+13.3 se): established by R13
+        R13b equal generations: 0.3970 - 0.0860 = +0.3110 +- 0.0126 (+24.7 se)  SURVIVES
+        R13b equal steps:       0.4015 - 0.0860 = +0.3155 +- 0.0126 (+25.0 se)  SURVIVES
+  N1 from  1000: stay none above  160 | R13's own numbers: 0.524 against 0.086; lower bound less upper bound +0.3230 (+22.6 se): established by R13
+        R13b equal generations: 0.5330 - 0.0860 = +0.4470 +- 0.0128 (+34.9 se)  SURVIVES
+        R13b equal steps:       0.5490 - 0.0860 = +0.4630 +- 0.0128 (+36.3 se)  SURVIVES
+  N1 from   100: stay   10 above none | R13's own numbers: 0.934 against 0.753; lower bound less upper bound +0.0300 (+3.5 se): NOT established by R13
+        R13b equal generations: 0.9375 - 0.7608 = +0.1767 +- 0.0063 (+27.9 se)  SURVIVES
+        R13b equal steps:       0.9695 - 0.7695 = +0.2000 +- 0.0059 (+34.1 se)  SURVIVES
+  N1 from   100: stay   40 above none | R13's own numbers: 0.826 against 0.753; lower bound less upper bound -0.0780 (-7.3 se): NOT established by R13
+        R13b equal generations: 0.8188 - 0.7608 = +0.0580 +- 0.0074 (+7.8 se)  SURVIVES
+        R13b equal steps:       0.8200 - 0.7695 = +0.0505 +- 0.0074 (+6.9 se)  SURVIVES
+  N1 from   100: stay none above  160 | R13's own numbers: 0.753 against 0.709; lower bound less upper bound +0.0260 (+1.9 se): NOT established by R13
+        R13b equal generations: 0.7608 - 0.7090 = +0.0518 +- 0.0080 (+6.4 se)  SURVIVES
+        R13b equal steps:       0.7695 - 0.7090 = +0.0605 +- 0.0080 (+7.6 se)  SURVIVES
+  N1 from   100: stay   10 above   40 | R13's own numbers: 0.934 against 0.826; lower bound less upper bound +0.1030 (+10.2 se): established by R13
+        R13b equal generations: 0.9375 - 0.8188 = +0.1187 +- 0.0059 (+20.2 se)  SURVIVES
+        R13b equal steps:       0.9695 - 0.8200 = +0.1495 +- 0.0054 (+27.5 se)  SURVIVES
+  N2 from 10000: stay none above   10 | R13's own numbers: 0.238 against 0.054; lower bound less upper bound +0.1840 (+17.1 se): established by R13
+        R13b equal generations: 0.2290 - 0.0530 = +0.1760 +- 0.0106 (+16.5 se)  SURVIVES
+        R13b equal steps:       0.5170 - 0.0595 = +0.4575 +- 0.0124 (+37.0 se)  SURVIVES
+  N2 from  1000: stay none above   10 | R13's own numbers: 0.613 against 0.532; lower bound less upper bound +0.0805 (+5.2 se): established by R13
+        R13b equal generations: 0.6130 - 0.5310 = +0.0820 +- 0.0156 (+5.3 se)  SURVIVES
+        R13b equal steps:       0.7790 - 0.5435 = +0.2355 +- 0.0145 (+16.2 se)  SURVIVES
+  N2 from   100: stay none above   10 | R13's own numbers: 0.932 against 0.927; lower bound less upper bound +0.0045 (+0.6 se): NOT established by R13
+        R13b equal generations: 0.9287 - 0.9252 = +0.0035 +- 0.0048 (+0.7 se)  NOT ESTABLISHED (no difference detected)
+        R13b equal steps:       0.9630 - 0.9283 = +0.0347 +- 0.0041 (+8.4 se)  SURVIVES  [R13 said 'no effect' here]
+  'Numbers needed' (R13: about equal): N1 none from 10,000 against stay 40 from 1,000: equal generations 0.3680 +- 0.0108 against 0.3970 +- 0.0109; equal steps 0.3940 +- 0.0109 against 0.4015 +- 0.0110
+
+== D. Starting conditions, N1 from 10,000 (each cell: equal generations / equal steps) ==
+  stay   10: reproductive value u = (1, 1.000000); stable proportions v = (0.500000, 0.500000); growth factor per step 1.00022480; S2 = (10000, 0), S3 = (0, 10000), S4 = (5000, 5000), total 10000
+  stay   40: reproductive value u = (1, 0.998650); stable proportions v = (0.199784, 0.800216); growth factor per step 1.00008987; S2 = (10000, 0), S3 = (0, 10014), S4 = (2000, 8011), total 10011
+  stay  160: reproductive value u = (1, 0.998016); stable proportions v = (0.058714, 0.941286); growth factor per step 1.00002642; S2 = (10000, 0), S3 = (0, 10020), S4 = (588, 9430), total 10018
+  S1  R13's own start (stable proportions, 10,000)           stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.6285 +- 0.0108 / 0.8070 +- 0.0088 | stay   40: 0.1290 +- 0.0075 / 0.1315 +- 0.0076 | stay  160: 0.0005 +- 0.0005 / 0.0005 +- 0.0005
+  S2  all in the fluctuating stage, reproductive value 10,000 stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.6330 +- 0.0108 / 0.8140 +- 0.0087 | stay   40: 0.1160 +- 0.0072 / 0.1180 +- 0.0072 | stay  160: 0.0000 +- 0.0000 / 0.0000 +- 0.0000
+  S3  all in the steady stage, reproductive value 10,000     stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.6275 +- 0.0108 / 0.8160 +- 0.0087 | stay   40: 0.1115 +- 0.0070 / 0.1140 +- 0.0071 | stay  160: 0.0005 +- 0.0005 / 0.0005 +- 0.0005
+  S4  stable proportions, reproductive value 10,000          stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.6335 +- 0.0108 / 0.8275 +- 0.0084 | stay   40: 0.1140 +- 0.0071 / 0.1170 +- 0.0072 | stay  160: 0.0000 +- 0.0000 / 0.0000 +- 0.0000
+   (the ring with no steady stage has one stage; its row entry is the same run in all four lines)
+        S1: stay   10 above none: equal generations +0.2605 +- 0.0153 (+17.1 se) SURVIVES; equal steps +0.4130 +- 0.0140 (+29.4 se) SURVIVES
+        S1: stay none above   40: equal generations +0.2390 +- 0.0131 (+18.2 se) SURVIVES; equal steps +0.2625 +- 0.0133 (+19.8 se) SURVIVES
+        S1: stay   40 above  160: equal generations +0.1285 +- 0.0075 (+17.1 se) SURVIVES; equal steps +0.1310 +- 0.0076 (+17.3 se) SURVIVES
+        S1: stay none above  160: equal generations +0.3675 +- 0.0108 (+34.0 se) SURVIVES; equal steps +0.3935 +- 0.0109 (+36.0 se) SURVIVES
+        S2: stay   10 above none: equal generations +0.2650 +- 0.0152 (+17.4 se) SURVIVES; equal steps +0.4200 +- 0.0140 (+30.1 se) SURVIVES
+        S2: stay none above   40: equal generations +0.2520 +- 0.0129 (+19.5 se) SURVIVES; equal steps +0.2760 +- 0.0131 (+21.1 se) SURVIVES
+        S2: stay   40 above  160: equal generations +0.1160 +- 0.0072 (+16.2 se) SURVIVES; equal steps +0.1180 +- 0.0072 (+16.4 se) SURVIVES
+        S2: stay none above  160: equal generations +0.3680 +- 0.0108 (+34.1 se) SURVIVES; equal steps +0.3940 +- 0.0109 (+36.1 se) SURVIVES
+        S3: stay   10 above none: equal generations +0.2595 +- 0.0153 (+17.0 se) SURVIVES; equal steps +0.4220 +- 0.0139 (+30.3 se) SURVIVES
+        S3: stay none above   40: equal generations +0.2565 +- 0.0129 (+19.9 se) SURVIVES; equal steps +0.2800 +- 0.0130 (+21.5 se) SURVIVES
+        S3: stay   40 above  160: equal generations +0.1110 +- 0.0071 (+15.7 se) SURVIVES; equal steps +0.1135 +- 0.0071 (+15.9 se) SURVIVES
+        S3: stay none above  160: equal generations +0.3675 +- 0.0108 (+34.0 se) SURVIVES; equal steps +0.3935 +- 0.0109 (+36.0 se) SURVIVES
+        S4: stay   10 above none: equal generations +0.2655 +- 0.0152 (+17.4 se) SURVIVES; equal steps +0.4335 +- 0.0138 (+31.4 se) SURVIVES
+        S4: stay none above   40: equal generations +0.2540 +- 0.0129 (+19.7 se) SURVIVES; equal steps +0.2770 +- 0.0131 (+21.2 se) SURVIVES
+        S4: stay   40 above  160: equal generations +0.1140 +- 0.0071 (+16.0 se) SURVIVES; equal steps +0.1170 +- 0.0072 (+16.3 se) SURVIVES
+        S4: stay none above  160: equal generations +0.3680 +- 0.0108 (+34.1 se) SURVIVES; equal steps +0.3940 +- 0.0109 (+36.1 se) SURVIVES
+   differences from S1, same ring (equal generations / equal steps):
+        S2 - S1: stay   10: +0.0045 +- 0.0153 (no difference detected) / +0.0070 +- 0.0124 (no difference detected) | stay   40: -0.0130 +- 0.0104 (no difference detected) / -0.0135 +- 0.0104 (no difference detected) | stay  160: -0.0005 +- 0.0005 (no difference detected) / -0.0005 +- 0.0005 (no difference detected)
+        S3 - S1: stay   10: -0.0010 +- 0.0153 (no difference detected) / +0.0090 +- 0.0124 (no difference detected) | stay   40: -0.0175 +- 0.0103 (no difference detected) / -0.0175 +- 0.0104 (no difference detected) | stay  160: +0.0000 +- 0.0007 (no difference detected) / +0.0000 +- 0.0007 (no difference detected)
+        S4 - S1: stay   10: +0.0050 +- 0.0153 (no difference detected) / +0.0205 +- 0.0122 (no difference detected) | stay   40: -0.0150 +- 0.0103 (no difference detected) / -0.0145 +- 0.0104 (no difference detected) | stay  160: -0.0005 +- 0.0005 (no difference detected) / -0.0005 +- 0.0005 (no difference detected)
+
+== E. Offspring law, N1 from 10,000, start S1 (each cell: equal generations / equal steps) ==
+  Poisson offspring, independent individuals (R13's law)     stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.6285 +- 0.0108 / 0.8070 +- 0.0088 | stay   40: 0.1290 +- 0.0075 / 0.1315 +- 0.0076 | stay  160: 0.0005 +- 0.0005 / 0.0005 +- 0.0005
+  E-i  clumped: negative binomial, k = 0.1, fluctuating transfer stay none: 0.5240 +- 0.0112 / 0.5445 +- 0.0111 | stay   10: 0.7585 +- 0.0096 / 0.8815 +- 0.0072 | stay   40: 0.3030 +- 0.0103 / 0.3065 +- 0.0103 | stay  160: 0.0400 +- 0.0044 / 0.0400 +- 0.0044
+  E-ii shared host fate: groups of 100 in the steady stage   stay none: 0.3680 +- 0.0108 / 0.3940 +- 0.0109 | stay   10: 0.9120 +- 0.0063 / 0.9545 +- 0.0047 | stay   40: 0.7165 +- 0.0101 / 0.7195 +- 0.0100 | stay  160: 0.4990 +- 0.0112 / 0.4990 +- 0.0112
+   (E-ii does not change the ring with no steady stage; its entry there is the Poisson run)
+        Poisson: stay   10 above none: equal generations +0.2605 +- 0.0153 (+17.1 se) SURVIVES; equal steps +0.4130 +- 0.0140 (+29.4 se) SURVIVES
+        Poisson: stay none above   40: equal generations +0.2390 +- 0.0131 (+18.2 se) SURVIVES; equal steps +0.2625 +- 0.0133 (+19.8 se) SURVIVES
+        Poisson: stay   40 above  160: equal generations +0.1285 +- 0.0075 (+17.1 se) SURVIVES; equal steps +0.1310 +- 0.0076 (+17.3 se) SURVIVES
+        Poisson: stay none above  160: equal generations +0.3675 +- 0.0108 (+34.0 se) SURVIVES; equal steps +0.3935 +- 0.0109 (+36.0 se) SURVIVES
+        E-i   : stay   10 above none: equal generations +0.2345 +- 0.0147 (+15.9 se) SURVIVES; equal steps +0.3370 +- 0.0133 (+25.4 se) SURVIVES
+        E-i   : stay none above   40: equal generations +0.2210 +- 0.0152 (+14.6 se) SURVIVES; equal steps +0.2380 +- 0.0152 (+15.7 se) SURVIVES
+        E-i   : stay   40 above  160: equal generations +0.2630 +- 0.0112 (+23.5 se) SURVIVES; equal steps +0.2665 +- 0.0112 (+23.8 se) SURVIVES
+        E-i   : stay none above  160: equal generations +0.4840 +- 0.0120 (+40.3 se) SURVIVES; equal steps +0.5045 +- 0.0120 (+42.2 se) SURVIVES
+        E-ii  : stay   10 above none: equal generations +0.5440 +- 0.0125 (+43.5 se) SURVIVES; equal steps +0.5605 +- 0.0119 (+47.2 se) SURVIVES
+        E-ii  : stay none above   40: equal generations -0.3485 +- 0.0148 (-23.6 se) FAILS (reversed); equal steps -0.3255 +- 0.0148 (-21.9 se) FAILS (reversed)
+        E-ii  : stay   40 above  160: equal generations +0.2175 +- 0.0151 (+14.4 se) SURVIVES; equal steps +0.2205 +- 0.0150 (+14.7 se) SURVIVES
+        E-ii  : stay none above  160: equal generations -0.1310 +- 0.0155 (-8.4 se) FAILS (reversed); equal steps -0.1050 +- 0.0156 (-6.7 se) FAILS (reversed)
+   differences from the Poisson law, same ring (equal generations / equal steps):
+        E-i  - Poisson: stay none: +0.1560 +- 0.0155 (established) / +0.1505 +- 0.0156 (established) | stay   10: +0.1300 +- 0.0144 (established) / +0.0745 +- 0.0114 (established) | stay   40: +0.1740 +- 0.0127 (established) / +0.1750 +- 0.0128 (established) | stay  160: +0.0395 +- 0.0044 (established) / +0.0395 +- 0.0044 (established)
+        E-ii - Poisson: stay   10: +0.2835 +- 0.0125 (established) / +0.1475 +- 0.0100 (established) | stay   40: +0.5875 +- 0.0126 (established) / +0.5880 +- 0.0126 (established) | stay  160: +0.4985 +- 0.0112 (established) / +0.4985 +- 0.0112 (established)
+   D|10|S2        approximated in   655, scaled in     0, passed 1e15:   448, of which later extinct   78   [200 s]
+   D|10|S3        approximated in   668, scaled in     0, passed 1e15:   444, of which later extinct   79   [190 s]
+   D|10|S4        approximated in   638, scaled in     0, passed 1e15:   415, of which later extinct   72   [188 s]
+   D|160|S2       approximated in  1996, scaled in     0, passed 1e15:   563, of which later extinct    0   [956 s]
+   D|160|S3       approximated in  1995, scaled in     0, passed 1e15:   577, of which later extinct    0   [967 s]
+   D|160|S4       approximated in  1998, scaled in     0, passed 1e15:   568, of which later extinct    0   [962 s]
+   D|40|S2        approximated in  1764, scaled in     0, passed 1e15:  1733, of which later extinct    0   [628 s]
+   D|40|S3        approximated in  1772, scaled in     0, passed 1e15:  1738, of which later extinct    0   [601 s]
+   D|40|S4        approximated in  1766, scaled in     0, passed 1e15:  1733, of which later extinct    0   [545 s]
+   E|group|10     approximated in   190, scaled in     0, passed 1e15:   124, of which later extinct   33   [119 s]
+   E|group|160    approximated in   993, scaled in     0, passed 1e15:   356, of which later extinct    0   [550 s]
+   E|group|40     approximated in   560, scaled in     0, passed 1e15:   555, of which later extinct    0   [204 s]
+   E|nb|10        approximated in   461, scaled in     0, passed 1e15:   299, of which later extinct   62   [221 s]
+   E|nb|160       approximated in  1914, scaled in     0, passed 1e15:   561, of which later extinct    0   [1119 s]
+   E|nb|40        approximated in  1390, scaled in     0, passed 1e15:  1366, of which later extinct    0   [427 s]
+   E|nb|none      approximated in  1008, scaled in    52, passed 1e15:   919, of which later extinct    8   [227 s]
+
+== Checks on the main run ==
+[PASS] W0 the threshold is where R0* says (R13's criterion, no replicate stopped): extinct 1.0000 below, 0.5195 above (not extinct 0.4805)
+[PASS] C1 every R13b fraction at R13's horizon lies within R13's bounds (allowance 4 standard errors)
+[PASS] no scaled replicate ever had a stage below 1e30 (anomalies: 0)
+[PASS] every case finished within the budget (unfinished: 0)
+      H0c W0 below the threshold (ln R0 = D - 0.03)    first approximated draw at step 486 (R13's horizon 25500): not applicable
+      H0c W0 above the threshold (ln R0 = D + 0.03)    first approximated draw at step 377 (R13's horizon 25500): not applicable
+      H0c W1 N1 steady stay none, start   100          first approximated draw at step 3444 (R13's horizon 60000): not applicable
+      H0c W1 N1 steady stay none, start  1000          first approximated draw at step 3411 (R13's horizon 60000): not applicable
+      H0c W1 N1 steady stay none, start 10000          first approximated draw at step 1932 (R13's horizon 60000): not applicable
+      H0c W1 N1 steady stay   10, start   100          first approximated draw at step 20597 (R13's horizon 120000): not applicable
+      H0c W1 N1 steady stay   10, start  1000          first approximated draw at step 13545 (R13's horizon 120000): not applicable
+      H0c W1 N1 steady stay   10, start 10000          first approximated draw at step 11007 (R13's horizon 120000): not applicable
+      H0c W1 N1 steady stay   40, start   100          first approximated draw at step 90396 (R13's horizon 300000): not applicable
+      H0c W1 N1 steady stay   40, start  1000          first approximated draw at step 68090 (R13's horizon 300000): not applicable
+      H0c W1 N1 steady stay   40, start 10000          first approximated draw at step 25198 (R13's horizon 300000): not applicable
+      H0c W1 N1 steady stay  160, start   100          first approximated draw at step 361327 (R13's horizon 1020000): not applicable
+      H0c W1 N1 steady stay  160, start  1000          first approximated draw at step 309773 (R13's horizon 1020000): not applicable
+      H0c W1 N1 steady stay  160, start 10000          first approximated draw at step 193205 (R13's horizon 1020000): not applicable
+      H0c W1 N2 steady stay none, start   100          no draw reached N_big within R13's horizon: R13b extinct 1864, R13 extinct 1864  same
+      H0c W1 N2 steady stay none, start  1000          no draw reached N_big within R13's horizon: R13b extinct 1226, R13 extinct 1226  same
+      H0c W1 N2 steady stay none, start 10000          first approximated draw at step 40153 (R13's horizon 60000): not applicable
+      H0c W1 N2 steady stay   10, start   100          no draw reached N_big within R13's horizon: R13b extinct 1855, R13 extinct 1855  same
+      H0c W1 N2 steady stay   10, start  1000          first approximated draw at step 115429 (R13's horizon 120000): not applicable
+      H0c W1 N2 steady stay   10, start 10000          first approximated draw at step 87804 (R13's horizon 120000): not applicable
+[PASS] H0c where no draw reached N_big within R13's horizon, R13b's count equals R13's exactly (3 of 3 cases)
+   computing time summed over the main runs 16639 s; replicates that needed scaling against overflow: 259 of 96000
+total run time 2877 s

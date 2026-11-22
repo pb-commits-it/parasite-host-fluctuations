@@ -1,0 +1,28 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}
+\begin{axis}[width=79mm,height=68mm,xmode=log,ymode=log,
+ xlabel={$L=\ln(1/s)$},ylabel={Recovered fraction $1-D/\ell$},
+ xmin=12,xmax=125,ymin=0.008,ymax=0.22,
+ xtick={15,30,60,120},xticklabels={15,30,60,120},
+ tick label style={font=\fontsize{8.5}{10}\selectfont},
+ label style={font=\fontsize{9}{10}\selectfont},
+ legend style={font=\fontsize{8.5}{10}\selectfont,draw=none},legend pos=south west,
+ every axis plot/.append style={black,line width=0.6pt},
+ grid=major,grid style={black!20,line width=0.4pt}]
+\addplot[dashed] table[x=L,y=p025,col sep=comma]{data/exact-2-curves.csv};
+\addlegendentry{Variance $4$}
+\addplot[solid] table[x=L,y=p1,col sep=comma]{data/exact-2-curves.csv};
+\addlegendentry{Variance $1$}
+\addplot[dashdotted] table[x=L,y=p10,col sep=comma]{data/exact-2-curves.csv};
+\addlegendentry{Variance $0.1$}
+\addplot[only marks,mark=triangle*,mark size=2pt] table[x=L,y=p025,col sep=comma]{data/exact-2.csv};
+\addplot[only marks,mark=*,mark size=1.7pt] table[x=L,y=p1,col sep=comma]{data/exact-2.csv};
+\addplot[only marks,mark=square*,mark size=1.6pt] table[x=L,y=p10,col sep=comma]{data/exact-2.csv};
+\end{axis}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

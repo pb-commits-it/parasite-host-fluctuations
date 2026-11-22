@@ -1,0 +1,8 @@
+S. haematobium (snail 2, people 48): generation 50.0 months; fading memory 0.0071 (secondary 0.0071); cycle of 12 months 0.0066; very slow host 0.0133  [ok Y2]
+S. mansoni (snail 2, people 48): generation 50.0 months; fading memory 0.0373 (secondary 0.0373); cycle of 12 months 0.0364; very slow host 0.0731  [ok Y2]
+P. falciparum (mosquito 0.8, people 6): generation 6.8 months; fading memory 0.1623 (secondary 0.1623); cycle of 12 months 0.1790; very slow host 0.2035  [ok Y2]
+B. burgdorferi, oak forest (mouse 4.4, tick 10): generation 14.4 months; fading memory 0.0516 (secondary 0.0516); cycle of 12 months 0.0266; very slow host 0.0947  [ok Y2]
+B. burgdorferi, northern edge (mouse 4.4, tick 10): generation 14.4 months; fading memory 0.2028 (secondary 0.2028); cycle of 12 months 0.0844; very slow host 0.3005  [ok Y2]
+E. multilocularis (fox 2, egg 2.5, vole 4): generation 8.5 months; fading memory 0.3433 (secondary 0.3433); cycle of 36 months 0.4045; cycle of 48 months 0.4193; very slow host 0.4388  [ok Y2]
+[ok] Y1 secondary's continuous-time values reproduced: largest relative difference 1.6e-04
+ALL CHECKS PASSED

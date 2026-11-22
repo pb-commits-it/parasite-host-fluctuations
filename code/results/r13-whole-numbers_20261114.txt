@@ -1,0 +1,23 @@
+R13: 20 cases, 2000 replicates each, every replicate followed to the end of its horizon (or to 1e+15 individuals)
+  W0 below the threshold (ln R0 = D - 0.03)        extinct 0.9980 +- 0.0010   above 1e15 0.0020   alive at the end 0.0000   median time to extinction       506 steps   [2 s]
+  W0 above the threshold (ln R0 = D + 0.03)        extinct 0.5005 +- 0.0112   above 1e15 0.4995   alive at the end 0.0000   median time to extinction       475 steps   [3 s]
+  W1 N1 steady stay none, start   100              extinct 0.7530 +- 0.0096   above 1e15 0.1510   alive at the end 0.0960   median time to extinction      1615 steps   [9 s]
+  W1 N1 steady stay none, start  1000              extinct 0.5245 +- 0.0112   above 1e15 0.2930   alive at the end 0.1825   median time to extinction      4713 steps   [13 s]
+  W1 N1 steady stay none, start 10000              extinct 0.3590 +- 0.0107   above 1e15 0.4135   alive at the end 0.2275   median time to extinction      9533 steps   [15 s]
+  W1 N1 steady stay   10, start   100              extinct 0.9340 +- 0.0056   above 1e15 0.0070   alive at the end 0.0590   median time to extinction      2463 steps   [18 s]
+  W1 N1 steady stay   10, start  1000              extinct 0.7990 +- 0.0090   above 1e15 0.0165   alive at the end 0.1845   median time to extinction     10756 steps   [36 s]
+  W1 N1 steady stay   10, start 10000              extinct 0.6310 +- 0.0108   above 1e15 0.0315   alive at the end 0.3375   median time to extinction     23273 steps   [49 s]
+  W1 N1 steady stay   40, start   100              extinct 0.8260 +- 0.0085   above 1e15 0.0050   alive at the end 0.1690   median time to extinction      6253 steps   [62 s]
+  W1 N1 steady stay   40, start  1000              extinct 0.3890 +- 0.0109   above 1e15 0.0355   alive at the end 0.5755   median time to extinction     29742 steps   [169 s]
+  W1 N1 steady stay   40, start 10000              extinct 0.1210 +- 0.0073   above 1e15 0.0720   alive at the end 0.8070   median time to extinction     57085 steps   [200 s]
+  W1 N1 steady stay  160, start   100              extinct 0.7085 +- 0.0102   above 1e15 0.0185   alive at the end 0.2730   median time to extinction     20110 steps   [306 s]
+  W1 N1 steady stay  160, start  1000              extinct 0.0860 +- 0.0063   above 1e15 0.1155   alive at the end 0.7985   median time to extinction     82359 steps   [825 s]
+  W1 N1 steady stay  160, start 10000              extinct 0.0010 +- 0.0007   above 1e15 0.2905   alive at the end 0.7085   median time to extinction    232952 steps   [802 s]
+  W1 N2 steady stay none, start   100              extinct 0.9320 +- 0.0056   above 1e15 0.0000   alive at the end 0.0680   median time to extinction      2560 steps   [7 s]
+  W1 N2 steady stay none, start  1000              extinct 0.6130 +- 0.0109   above 1e15 0.0000   alive at the end 0.3870   median time to extinction     14510 steps   [21 s]
+  W1 N2 steady stay none, start 10000              extinct 0.2380 +- 0.0095   above 1e15 0.0000   alive at the end 0.7620   median time to extinction     33468 steps   [22 s]
+  W1 N2 steady stay   10, start   100              extinct 0.9275 +- 0.0058   above 1e15 0.0000   alive at the end 0.0725   median time to extinction      2824 steps   [19 s]
+  W1 N2 steady stay   10, start  1000              extinct 0.5325 +- 0.0112   above 1e15 0.0000   alive at the end 0.4675   median time to extinction     19602 steps   [70 s]
+  W1 N2 steady stay   10, start 10000              extinct 0.0540 +- 0.0051   above 1e15 0.0000   alive at the end 0.9460   median time to extinction     55809 steps   [78 s]
+[PASS] W0 the threshold is where R0* says: extinct 0.9980 below, 0.5005 above (not extinct 0.4995)
+wall time 863 s

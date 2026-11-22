@@ -1,0 +1,2055 @@
+%% Placeholder for appendices/D-exact.tex
+\section{Proofs for the exactly solved two-stage model}\label{sec:exact-app}
+
+We give the proofs underlying Section~\ref{sec:exact}. Throughout the transfer model, $p>0$, $0<s<1$, $c>0$, $\theta=c/p$, and $\kappa=s^2p/c$, except where an endpoint is explicitly taken. The host multipliers are independent with law $\operatorname{Gamma}(p,1/p)$. We write $\ell=\ln p-\psi(p)$. The invariant law and exact growth formula are those of \citet{roerdink1988}, with the invariant continued fraction traced to \citet{dyson1953} through the sources described in Section~\ref{sec:exact}. The proofs below include the probabilistic and asymptotic details needed for the threshold statements. The transfer-model results and the monotonicity proof have been refereed. The final subsection treats hosts with memory under separate hypotheses.
+
+\subsection{Further results for Section~\ref{sec:exact}}
+
+\subsubsection{Invariant law and growth formula}
+
+A two-step uniform minorization argument connects the invariant density to growth from the specified starting populations (proved below; refereed). One-step positivity fails because the matrix has a zero entry.
+
+\begin{proposition}\label{prop:exact-R1}
+Let $p > 0$, $s \in (0,1)$, and $c = g_0 g_1 > 0$ with $g_0, g_1 > 0$, and let $Y_t \sim \operatorname{Gamma}(p, \theta)$ be independent and identically distributed with $\theta = c/p$ and $\kappa = s^2 p/c$. The Markov chain $X_{t+1} = Y_{t+1}/(s + X_t)$ on $[0,\infty)$ admits the unique invariant probability density
+\begin{equation}
+f(x) = \frac{x^{p-1}(s+x)^{-p}\mathrm{e}^{-sx/\theta}}{Z}, \qquad
+Z = \Gamma(p) U(p, 1, \kappa), \qquad x > 0,
+\label{eq:exact-density}
+\end{equation}
+where $U(a,b,z) = \Gamma(a)^{-1}\int_0^\infty \mathrm{e}^{-zt} t^{a-1}(1+t)^{b-a-1}\,\mathrm{d}t$ denotes Tricomi's confluent hypergeometric function. For every finite initial state $X_0 = x \ge 0$ and every measurable, everywhere finite function $F$ satisfying $\int_0^\infty |F(x)| f(x)\,\mathrm{d}x < \infty$, the time average $n^{-1}\sum_{t=0}^{n-1} F(X_t)$ converges almost surely to $\int_0^\infty F(x) f(x)\,\mathrm{d}x$. Both $\ln(s+X)$ and $\ln X$ are absolutely integrable under $f$ for every $p > 0$ (omitting a possible initial zero for $\ln X$), and for every fixed nonzero nonnegative initial vector $\mathbf{x}(0)$, the almost-sure population growth exponent and top matrix Lyapunov exponent equal
+\begin{equation}
+r(s,c,p) = \int_0^\infty \ln(s+x) f(x)\,\mathrm{d}x.
+\label{eq:exact-r-integral}
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R1}]
+Let $g(y)=y^{p-1}\mathrm{e}^{-y/\theta}/[\Gamma(p)\theta^p]$ be the innovation density. Conditional on $X=z$, the change of variable $y=x(s+z)$ has Jacobian $s+z$, giving the transition density
+\begin{equation}
+ K(z,x)=(s+z)g(x(s+z)),\qquad z\geq0,\quad x>0.
+ \label{eq:exact-transition}
+\end{equation}
+The proposed unnormalized invariant density behaves as a constant times $x^{p-1}$ at zero and as $x^{-1}\mathrm{e}^{-sx/\theta}$ at infinity. Its integral $Z$ is therefore finite and positive. Substitution into the transition integral gives
+\begin{align}
+ \int_0^\infty f(z)K(z,x)\,\mathrm{d}z
+ &=\frac{x^{p-1}\mathrm{e}^{-sx/\theta}}{Z\Gamma(p)\theta^p}
+   \int_0^\infty z^{p-1}\mathrm{e}^{-z(s+x)/\theta}\,\mathrm{d}z\notag\\
+ &=\frac{x^{p-1}(s+x)^{-p}\mathrm{e}^{-sx/\theta}}{Z}=f(x).
+ \label{eq:exact-invariance}
+\end{align}
+Here the factors $(s+z)^{-p+1+p-1}$ cancel. The gamma integral in the first line is $\Gamma(p)[\theta/(s+x)]^p$. All integrands are nonnegative, so no conditional-convergence issue arises. Substitution $x=st$ gives $Z=\Gamma(p)U(p,1,\kappa)$.
+
+We state and justify the probabilistic fact used to pass from invariance to all initial states. On a standard Borel space, suppose a Markov kernel $P$ has invariant probability $\pi$ and, for an integer $j\geq1$, a probability $\nu$, and $0<\eta<1$, satisfies $P^j(x,A)\geq\eta\nu(A)$ for every state and measurable set. Write $P^j(x,\cdot)=\eta\nu+(1-\eta)Q_x$. Couple the chain sampled every $j$ steps to a stationary copy by a common $\nu$ draw with probability $\eta$ at each block, and use common transitions after they meet. The meeting time is bounded by a geometric number of blocks and is finite almost surely. Standard Borel conditional kernels fill in the intervening steps. The same decomposition contracts total variation by $1-\eta$ per block, giving uniqueness and
+\begin{equation}
+ \sup_A|P^n(x,A)-\pi(A)|\leq(1-\eta)^{\lfloor n/j\rfloor}.
+ \label{eq:exact-minorization-bound}
+\end{equation}
+It also gives mixing of the stationary path shift, first for cylinder events and then by approximation for its sigma-field. The shift is thus ergodic. Birkhoff's ergodic theorem gives the strong law for every measurable $F$ with $\pi|F|<\infty$ under stationarity. Coupling transfers it to every initial distribution when $F$ is everywhere finite, since only finitely many finite summands differ.
+
+For the present chain choose $M>0$ and $0<a<b<\infty$. On $Y_1\leq M$, the first iterate satisfies $X_1\leq M/s$, independently of $X_0\geq0$. The continuous positive kernel in \eqref{eq:exact-transition} has a positive minimum $d$ on $[0,M/s]\times[a,b]$. With $\alpha=\mathbb P(Y_1\leq M)>0$,
+\begin{equation}
+ P^2(x,A)\geq\alpha d\,\operatorname{Leb}(A\cap[a,b]).
+ \label{eq:exact-minorization}
+\end{equation}
+Take $\nu$ uniform on $[a,b]$ and $\eta=\alpha d(b-a)$, decreasing $\eta$ if needed to make it less than one. All hypotheses of the preceding argument hold on $[0,\infty)$.
+
+At zero, $\int_0^1x^{p-1}|\ln x|\,\mathrm{d}x=1/p^2$, while $\ln(s+x)$ is bounded. At infinity the exponential tail integrates every fixed power of either logarithm. Thus both logarithms are absolutely integrable for every $p>0$. Define $\ln X$ arbitrarily at zero for the strong law and omit the possible first zero term. Gamma innovations also have finite absolute logarithmic moments.
+
+After at most two steps, each fixed nonzero nonnegative population has both coordinates positive. The scalar ratios $u_n=x_1(n+1)/x_1(n)=s+X_n$ give a telescoping sum of logarithms, so the strong law identifies the exponent of $x_1$ with \eqref{eq:exact-r-integral}. Since $x_0(n)=g_1x_1(n-1)$ and $x_1(n)\geq s x_1(n-1)$,
+\begin{equation}
+ 1\leq\frac{x_0(n)+x_1(n)}{x_1(n)}\leq1+\frac{g_1}{s}.
+ \label{eq:exact-vector-bound}
+\end{equation}
+The total population has the same exponent. Each column of the matrix product has this exponent after its positive transient. Its induced $1$-norm, the maximum of its two column sums, therefore has the same exponent. This proves the assertion for fixed nonzero nonnegative starts, without asserting it for the zero vector or for arbitrary signed or future-dependent vectors.
+\end{proof}
+
+Differentiating the integral representation of $U(p,b,\kappa)$ in its second parameter gives the growth formula (\citealp{roerdink1988}, equation~5.6 and Appendix~A; proved below and refereed).
+
+\begin{proposition}\label{prop:exact-R2}
+Under the hypotheses of Proposition~\ref{prop:exact-R1}, the integral defining $U(a,b,z)$ converges and admits differentiation of all orders in $b \in \mathbb{C}$ whenever $\Re a > 0$ and $\Re z > 0$, yielding the exact representations
+\begin{equation}
+\begin{split}
+r(s,c,p) &= \ln s + \left.\frac{\partial}{\partial b}\ln U(p, b, \kappa)\right|_{b=1}\\
+&= \frac{1}{2}\ln\frac{c}{p} + \frac{1}{2}\left.\frac{\partial}{\partial \lambda}\ln W_{\lambda, 0}(\kappa)\right|_{\lambda = 1/2 - p},
+\end{split}
+\label{eq:exact-tricomi}
+\end{equation}
+where $W_{\lambda,\mu}$ is Whittaker's function. At $p = 1$, $r = \ln s - \ln\kappa + E_1(\kappa)^{-1}\int_\kappa^\infty v^{-1}\mathrm{e}^{-v}\ln v\,\mathrm{d}v$ with $E_1(\kappa) = \int_\kappa^\infty v^{-1}\mathrm{e}^{-v}\,\mathrm{d}v$, and at $p = 1/2$, $r = \ln s + 2 K_0(\kappa/2)^{-1}\int_0^\infty \mathrm{e}^{-(\kappa/2)\cosh u}\ln\cosh(u/2)\,\mathrm{d}u$ with $K_\nu$ the modified Bessel function of the second kind. Moreover, for every $\kappa > 0$, $m_p(\kappa) = r - \ln s$ admits the convergent pole-canceled power-series ratio given in Appendix~\ref{sec:exact-app}.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R2}]
+In the integral definition of $U(a,b,z)$, use real logarithms of $t$ and $1+t$ to define the powers. For $\Re a>0$, $\Re z>0$, and $b$ in any compact complex set, exponential decay at infinity dominates all powers and all factors $\ln^j(1+t)$. At zero, these logarithms preserve integrability of $t^{\Re a-1}$. Locally uniform convergence therefore permits differentiation of every order in $b$. For real $b$, the integral at $a=p$, $z=\kappa$ is positive. Its logarithmic $b$ derivative is $\mathbb E\ln(1+X/s)$, proving the Tricomi formula using Proposition~\ref{prop:exact-R1}.
+
+The Whittaker identity is
+\begin{equation}
+ U(a,b,z)=\mathrm{e}^{z/2}z^{-b/2}
+ W_{b/2-a,(b-1)/2}(z).
+ \label{eq:exact-whittaker-identity}
+\end{equation}
+Differentiating in $b$ varies both indices. The second-index derivative vanishes at zero because $W_{\lambda,\mu}=W_{\lambda,-\mu}$. Consequently $r=\ln s-\tfrac12\ln\kappa+\tfrac12\partial_\lambda\ln W_{\lambda,0}(\kappa)|_{\lambda=1/2-p}$, which is \eqref{eq:exact-tricomi}.
+
+For $p=1$, substitution $v=\kappa(1+t)$ gives
+\begin{equation}
+ \begin{split}
+ U(1,b,\kappa)&=\mathrm{e}^{\kappa}\kappa^{1-b}\Gamma(b-1,\kappa),\\
+ r&=\ln s-\ln\kappa+
+ \frac{\int_\kappa^\infty\mathrm{e}^{-v}\ln v\,\mathrm{d}v/v}{E_1(\kappa)},
+ \qquad E_1(\kappa)=\int_\kappa^\infty\mathrm{e}^{-v}\,\mathrm{d}v/v.
+ \end{split}\label{eq:exact-shape-one}
+\end{equation}
+The incomplete-gamma integral converges for every complex $b$ because its lower endpoint is positive. For $p=1/2$, put $t=(\cosh u-1)/2$, so $\mathrm{d}t/\sqrt{t(1+t)}=\mathrm{d}u$. Then
+\begin{equation}
+ \begin{split}
+ U(1/2,1,\kappa)&=\mathrm{e}^{\kappa/2}K_0(\kappa/2)/\sqrt\pi,\\
+ r&=\ln s+
+ \frac{2\int_0^\infty\mathrm{e}^{-(\kappa/2)\cosh u}\ln\cosh(u/2)\,\mathrm{d}u}{K_0(\kappa/2)}.
+ \end{split}\label{eq:exact-shape-half}
+\end{equation}
+Here $K_\nu(z)=\int_0^\infty\mathrm{e}^{-z\cosh u}\cosh(\nu u)\,\mathrm{d}u$ for $z>0$. The required $b$ derivative is transverse to the identity for $U(a,2a,z)$, so it cannot be obtained by differentiating that identity while holding $a$ fixed.
+
+For the convergent series, write $H=-\ln\kappa$, $C_n=(p)_n\kappa^n/(n!)^2$, and $d_n=H+2\psi(n+1)-\psi(p+n)$, where $(p)_n=\Gamma(p+n)/\Gamma(p)$. For every $\kappa>0$,
+\begin{align}
+ \Gamma(p)U(p,1,\kappa)&=\sum_{n\geq0}C_nd_n,\notag\\
+ m_p(\kappa)&=
+ \frac{\sum_{n\geq0}C_n\{d_n[H-\psi(p+n)+2\psi(p)]+\psi_1(p+n)\}}
+ {2\sum_{n\geq0}C_nd_n}.
+ \label{eq:exact-series}
+\end{align}
+To derive this, expand the two functions $M$ in \eqref{eq:exact-connection} in powers $(a)_nz^n/[(b)_nn!]$. At $b=1$, their simple poles cancel. For the $n$th term the two linear exponents before cancellation are $\psi(p)+\gamma-H_n$ and $H-\gamma-\psi(p+n)+\psi(p)+H_n$, with $H_n=\psi(n+1)+\gamma$. Their difference gives $d_n$, and the difference of the quadratic exponent coefficients contributes $\psi_1(p+n)$. The constant and linear terms therefore give \eqref{eq:exact-series}. Factorial decay, even after multiplication by powers of $\ln n$, permits termwise expansion on a compact parameter neighborhood. This series can suffer severe cancellation at large $\kappa$, despite its convergence.
+\end{proof}
+
+\subsubsection{The threshold and its endpoint expansions}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R3}]
+At fixed $s,p$, differentiation of the normalized density gives
+\begin{equation}
+ \partial_c r=\frac{sp}{c^2}\operatorname{Cov}(\ln(s+X),X)>0.
+ \label{eq:exact-rate-derivative}
+\end{equation}
+The exponential tail justifies this calculation on compact positive $c$ intervals. With an independent copy $X^*$, twice the covariance is the expectation of $(X-X^*)[\ln(s+X)-\ln(s+X^*)]$, strictly positive off the diagonal. Thus $r$ is continuous and strictly increasing.
+
+Stationarity and $X'\leq Y/s$ give $\mathbb EX\leq c/s$, hence $0\leq r-\ln s\leq c/s^2$. This proves the limit at zero. Logarithmic integrability and stationarity also give
+\begin{equation}
+ \mathbb E\ln X=\ln c-\ell-r.
+ \label{eq:exact-log-stationarity}
+\end{equation}
+Strict convexity of $v\mapsto\ln(s+\mathrm{e}^v)$ and nondegeneracy of $\ln X$ imply $r>\ln[s+\exp(\ln c-\ell-r)]$, or $\mathrm{e}^{2r}>s\mathrm{e}^r+c\mathrm{e}^{-\ell}$. Thus $r\to\infty$ with $c$, giving a unique root. At that root, $1>s+c\mathrm{e}^{-\ell}$ yields $D<\ell$.
+
+For the lower bound set $c=1-s$ and use the recurrence $z_{n+1}=sz_n+ch_nz_{n-1}$. Define $J_n=z_n+cz_{n-1}$ and let $u=z_n/z_{n-1}\geq s$ have its stationary past distribution. Then
+\begin{equation}
+ \frac{J_{n+1}}{J_n}=1+\alpha(u)(h_n-1),\qquad
+ \alpha(u)=\frac{c}{u+c},\qquad 0<\alpha(u)\leq c<1.
+ \label{eq:exact-strict-jensen}
+\end{equation}
+The fresh nonconstant $h_n$ is independent of $u$ and has mean one. Conditional strict Jensen gives a negative expected logarithm. These logs are integrable because the multiplier is at least $s$ and its positive log part is bounded by a constant plus $h_n$. Its stationary mean equals $r$, since $1\leq J_n/z_n\leq1+c/s$ and the log increments telescope. Thus $r(s,1-s,p)<0$. Strict increase in $c$ puts the root above $1-s$, proving $D>0$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R4}]
+The density of $T=X/s$ is proportional to $t^{p-1}(1+t)^{-p}\mathrm{e}^{-\kappa t}$. Differentiating its normalized integral gives $\mathrm{d}m_p/\mathrm{d}\ln\kappa=-V_p<0$, with strictness proved by the independent-copy covariance argument above. Propositions~\ref{prop:exact-R5} and~\ref{prop:exact-R6}, or the direct estimates in Proposition~\ref{prop:exact-P5}, show that $m_p$ decreases from infinity to zero. Thus each $L>0$ corresponds to one $\kappa>0$. At threshold the definition of $\kappa$ gives
+\begin{equation}
+ D=\ln p-2L-\ln\kappa-\ln(1-\mathrm{e}^{-L}).
+ \label{eq:exact-D-param}
+\end{equation}
+Differentiating with $\mathrm{d}\ln\kappa/\mathrm{d}L=-1/V_p$ proves \eqref{eq:exact-param}. The normalized integral is real analytic for $\kappa>0$ and has nonzero derivative, so its inverse and $D(s,p)$ are real analytic in the interior. The weak covariance inequality is equivalent to $\partial_sD\leq0$, and its strict version to $\partial_sD<0$ everywhere. Weak monotonicity would already imply strict decrease between distinct arguments by analyticity and the unequal endpoint limits, but would allow isolated zero derivatives. The global strict inequality is proved below.
+
+For completeness, the proposed stronger intermediate bound $V_p\leq\mathbb{E}[T/(1+2T)]$ fails. Expansion of the same gamma integrals used below gives $V_p-\mathbb{E}[T/(1+2T)]=p/\kappa^2+O_p(\kappa^{-3})>0$ for sufficiently large $\kappa$. The three differential identities that give the appropriate comparison are proved in Proposition~\ref{prop:exact-P1}.
+\end{proof}
+
+\begin{proposition}\label{prop:exact-R5}
+Fix $p > 0$, and write $L = \ln(1/s)$, $v_p = \psi_1(p)$, $a_p = \psi(p) + \gamma$, and $B = 2(L - a_p)$. At $s = 0$, the threshold loss of the two-step recurrence $x_1(t+1) = c h_t x_1(t-1)$ is $D(0,p) = \ell(p)$. As $s \downarrow 0$,
+\begin{equation}
+D(s,p) = \ell(p) - \frac{v_p}{2L} - \frac{v_p a_p}{2L^2} - \frac{v_p a_p^2/2 + v_p^2/8}{L^3} + O_p(L^{-4}),
+\label{eq:exact-small-s}
+\end{equation}
+and more accurately $D(s,p) = \ell(p) - \ln(1-s) - \tfrac{1}{2}(B - \sqrt{B^2 - 4 v_p}) + O_p(s^2 L^2)$ for sufficiently large $L$. In particular, the leading logarithmic coefficient $v_p/2 = \psi_1(p)/2$ is exact at every $p > 0$, and the $L^{-2}$ term vanishes at $p = 1$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R5}]
+Put $\eta=b-1$. For $\eta\ne0$ near zero, the connection identity is
+\begin{equation}
+ \begin{split}
+ \Gamma(p)U(p,1+\eta,\kappa)
+ ={}&\frac{\Gamma(p)\Gamma(-\eta)}{\Gamma(p-\eta)}
+ M(p,1+\eta,\kappa)\\
+ &+\Gamma(\eta)\kappa^{-\eta}M(p-\eta,1-\eta,\kappa),
+ \end{split}\label{eq:exact-connection}
+\end{equation}
+where $M(a,b,z)=\sum_{n\geq0}(a)_nz^n/[(b)_nn!]$. It follows equivalently by expressing the integral solution in the two Frobenius solutions $M$ and $\kappa^{-\eta}M$, with their beta/gamma integral coefficients. Their poles at $\eta=0$ cancel.
+
+Write $H=-\ln\kappa$ and $C=\gamma^2/2+\pi^2/12$. The expansions
+\begin{align*}
+ \Gamma(\eta)&=\eta^{-1}-\gamma+C\eta+O(\eta^2),&
+ \Gamma(-\eta)&=-\eta^{-1}-\gamma-C\eta+O(\eta^2),\\
+ \frac{\Gamma(p)}{\Gamma(p-\eta)}
+ &=\exp\{\psi(p)\eta-\psi_1(p)\eta^2/2+O_p(\eta^3)\},&
+ \kappa^{-\eta}&=\mathrm{e}^{H\eta}
+\end{align*}
+give, from the $n=0$ terms,
+\begin{align}
+ \Gamma(p)U(p,1,\kappa)&=H-\psi(p)-2\gamma+O_p(\kappa(1+H)),\notag\\
+ \left.\Gamma(p)\partial_bU(p,b,\kappa)\right|_{b=1}
+ &=\frac{[H-\psi(p)-2\gamma][H+\psi(p)]+v_p}{2}
+   +O_p(\kappa(1+H^2)).
+ \label{eq:exact-small-k-U}
+\end{align}
+The normally convergent $M$ series after cancellation, or the $n\geq1$ terms of \eqref{eq:exact-series}, bound these remainders and their parameter derivatives for fixed $p$. Division gives
+\begin{equation}
+ m_p(\kappa)=\frac{H+\psi(p)}2+
+ \frac{v_p}{2[H-\psi(p)-2\gamma]}+O_p(\kappa H).
+ \label{eq:exact-small-k-m}
+\end{equation}
+At threshold, $m_p=L$ and $H=2L+D-\ln p+\ln(1-s)$. Proposition~\ref{prop:exact-R3} bounds $D$, so $\kappa=O_p(s^2)$ and $H\sim2L$. With $\delta=\ell-\ln(1-s)-D$ and $B=2(L-a_p)$, this becomes $\delta=v_p/(B-\delta)+O_p(s^2L)$. It first implies $\delta=O_p(L^{-1})$, selecting the small quadratic root. The derivative of $\delta-v_p/(B-\delta)$ tends to one, so perturbing its right side changes the root by the same order. This proves the stated quadratic expression, with the looser error $O_p(s^2L^2)$. Finally,
+\begin{equation}
+ \frac{B-\sqrt{B^2-4v_p}}2
+ =\frac{v_p}{B}+\frac{v_p^2}{B^3}+O_p(B^{-5}).
+ \label{eq:exact-quadratic-expand}
+\end{equation}
+Expanding $B=2(L-a_p)$ gives \eqref{eq:exact-small-s}, since $-\ln(1-s)=O(s)$ is smaller than every inverse power of $L$. At $p=1$, $a_p=0$. Differentiating the same convergent expansions gives $\mathrm{d}D/\mathrm{d}L=v_p/(2L^2)+O_p(L^{-3})>0$ for sufficiently large $L$.
+
+At $s=0$, each nonzero parity cohort of $z_{n+1}=ch_nz_{n-1}$ multiplies by independent copies of $ch$ every two steps. Absolute logarithmic integrability and the independent strong law give exponent $(\ln c-\ell)/2$ for each such cohort, and for their finite sum. This exponent can be read from the two-coordinate population even when one cohort starts at zero. The mean threshold is $c=1$, and the stochastic threshold is $c=\mathrm{e}^{\ell}$, proving $D(0,p)=\ell$. Independence justifies the strong law on both parity subsequences, which ordinary one-step ergodicity alone would not provide.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R6}]
+Substitute $z=\kappa t$ in the integral for $U$ and put $q=1/\kappa$. Under the resulting $\operatorname{Gamma}(p,1)$ integral, expand $(1+qz)^{-p}$ and its parameter derivative. The denominator divided by $\Gamma(p)$ has coefficient $(-1)^n(p)_n^2/n!$ at $q^n$, and its $b$ derivative has coefficient $-(-1)^n(p)_n^2[\psi(p+n)-\psi(p)]/n!$. Dividing through order three gives
+\begin{equation}
+ m_p(\kappa)=pq-\frac{p(3p+1)}2q^2
+ +\frac{p(10p^2+9p+2)}3q^3+O_p(q^4).
+ \label{eq:exact-large-k-m}
+\end{equation}
+Taylor's integral remainder is bounded by $q^4$ times a fixed polynomial in $z$ against $\mathrm{e}^{-z}z^{p-1}$, uniformly for $b$ near one. All moments are finite. Applying the same bounds to derivatives justifies the differentiated expansions.
+
+At threshold, $q=\varepsilon\mathrm{e}^D/[p(1-\varepsilon)^2]$ and $0=\ln(1-\varepsilon)+m_p(\kappa)$. Boundedness of $D$ first gives $q=O_p(\varepsilon)$. Dividing the threshold equation by $\varepsilon$ then gives $\mathrm{e}^D-1=O_p(\varepsilon)$, hence $D=O_p(\varepsilon)$. Substitution of $D=A\varepsilon+B\varepsilon^2+O_p(\varepsilon^3)$ into \eqref{eq:exact-large-k-m} and expansion of the logarithm yield $A=1/(2p)$ at order $\varepsilon^2$ and $B=-(12p+7)/(24p^2)$ at order $\varepsilon^3$. The divided equation has derivative one with respect to $D$ at $(\varepsilon,D)=(0,0)$, so the controlled remainder justifies the local solution and its error. Division by $Q=\varepsilon/[2p(1+\varepsilon)]$ proves \eqref{eq:exact-long-stay}. Differentiation also gives $\partial_sD=-1/(2p)+O_p(1-s)<0$ near one.
+\end{proof}
+
+\begin{proposition}\label{prop:exact-R7}
+For each fixed $s \in (0,1)$, as $p \to \infty$,
+\begin{equation}
+\begin{gathered}
+D(s,p) = \frac{1-s}{2p(2-s)} + O_s(p^{-2}),\\
+\lim_{s\downarrow 0}\lim_{p\to\infty} p D(s,p) = \frac{1}{4}, \qquad
+\lim_{p\to\infty}\lim_{s\downarrow 0} p D(s,p) = \frac{1}{2},
+\end{gathered}
+\label{eq:exact-noncommute}
+\end{equation}
+whereas the unnormalized iterated limits of $D(s,p)$ itself commute and equal zero.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:exact-R7}]
+In the coordinate $z=\ln X$ the invariant density is proportional to $\exp[-p\Phi(z)]$, with no residual prefactor, where
+\begin{equation}
+ \Phi(z)=\ln(1+s\mathrm{e}^{-z})+(s/c)\mathrm{e}^z,
+ \qquad B(z)=\ln(s+\mathrm{e}^z).
+ \label{eq:exact-laplace-potential}
+\end{equation}
+The potential is smooth and strictly convex, tends to infinity at both ends, and has its unique nondegenerate minimum at $x=\mathrm{e}^{z_*}$ satisfying $x(s+x)=c$. Taylor expansion at $z_*$, rescaling by $\sqrt p$, and Gaussian integration give
+\begin{equation}
+ \mathbb EB=B(z_*)+\frac1{2p}
+ \left[\frac{B''}{\Phi''}-\frac{B'\Phi'''}{(\Phi'')^2}\right]_{z_*}
+ +O(p^{-2}).\label{eq:exact-laplace-first}
+\end{equation}
+The surviving terms are the quadratic term of $B$ and the product of its linear term with the cubic potential term. Terms multiplying $B(z_*)$ cancel in normalization. On a fixed neighborhood of $z_*$, derivatives are bounded and $\Phi''$ has a positive lower bound. Outside that neighborhood convexity supplies a positive potential gap and integrable exponential tails. Gaussian odd moments vanish and higher moments bound the remainder. These estimates are uniform for $c$ near $1-s$ at fixed interior $s$. The more detailed differentiated version is given in Proposition~\ref{prop:exact-P7} below.
+
+At $c=1-s$, put $t=1-s$. Then $x_*=t$, $s+x_*=1$, and $B'=t$, $B''=st$, $\Phi''=s(1+t)$, $\Phi'''=s^2(1+2t)$. Equation~\eqref{eq:exact-laplace-first} gives $r(s,1-s,p)=-t^2/[2p(1+t)^2]+O_s(p^{-2})$. The deterministic rate has derivative $t/(1+t)$ with respect to $\ln c$ at threshold. Local uniformity and this positive derivative justify solving for $D$, yielding $D=t/[2p(1+t)]+O_s(p^{-2})$.
+
+For completeness, apply the same Laplace calculation to the mean-one gamma density, with potential $h-\ln h$, prefactor $A(h)=1/h$, and observable $\ln h$. The general coefficient includes $B'A'/(A\Phi'')$ in addition to the terms in \eqref{eq:exact-laplace-first}. At $h=1$ its value is $-1/2-1+1=-1/2$. The same local Taylor and tail estimates give $\ell(p)=1/(2p)+O(p^{-2})$. Combining this with Proposition~\ref{prop:exact-R5} gives the normalized limits $1/4$ and $1/2$ in the stated order. Finally $0<D<\ell(p)\to0$ uniformly in $s$ proves that the unnormalized iterated limits both vanish.
+\end{proof}
+
+\subsection{Fluctuation in the staying coefficient}
+
+The next proposition concerns a different positive random-matrix model. The generalized-inverse-Gaussian law and Bessel exponent are published results \citep{letac1983,tourigny2007,marklof2008}. The threshold conclusions and the proof below have been refereed.
+
+\begin{proposition}\label{prop:exact-R8}
+Let $p>0$, $0<s<1$, $c>0$, and let $Y_n=sh_n$ be independent $\operatorname{Gamma}(p,\theta)$ variables with $\theta=s/p$. For $z_{n+1}=Y_nz_n+cz_{n-1}$, the chain $X_{n+1}=c/(Y_n+X_n)$ has unique invariant density
+\begin{equation}
+ f_c(x)=\frac{c^{p/2}}{2K_p(2\sqrt c/\theta)}
+ x^{-p-1}\exp[-(x+c/x)/\theta],\qquad x>0.
+ \label{eq:exact-GIG}
+\end{equation}
+From every finite nonnegative ratio start, the strong law holds for each measurable, everywhere finite observable integrable under $f_c$. For fixed positive transfers with product $c$, every fixed nonzero nonnegative population and the top matrix exponent have rate
+\begin{equation}
+ \begin{split}
+ \mathbb EX^q&=c^{q/2}\frac{K_{q-p}(2\sqrt c/\theta)}{K_p(2\sqrt c/\theta)}
+ \quad(q\in\mathbb R),\\
+ r_{\mathrm{stay}}&=\tfrac12\ln c+
+ \left.\partial_\nu\ln K_\nu(2p\sqrt c/s)\right|_{\nu=p}.
+ \end{split}\label{eq:exact-Bessel}
+\end{equation}
+The order derivative holds the argument fixed. The unique threshold $c_*(s)=(1-s)\mathrm{e}^{D_{\mathrm{stay}}}$ satisfies $D_{\mathrm{stay}}>0$ and
+\begin{equation}
+ 0=\tfrac12[\ln(1-s)+D_{\mathrm{stay}}]+
+ \left.\partial_\nu\ln K_\nu\!\left(
+ \frac{2p\sqrt{1-s}}s\mathrm{e}^{D_{\mathrm{stay}}/2}\right)\right|_{\nu=p}.
+ \label{eq:exact-stay-root}
+\end{equation}
+For every fixed $p>0$, $D_{\mathrm{stay}}\to\infty$ as $s\uparrow1$.
+\end{proposition}
+
+\begin{proof}
+The transition density is $K(z,x)=(c/x^2)g(c/x-z)\mathbf1_{0<z<c/x}$. Inserting $z^{-p-1}\exp[-(z+c/z)/\theta]$ cancels the factors $\mathrm{e}^{-z/\theta}$ and $\mathrm{e}^{z/\theta}$. In the remaining integral put $v=c/z-x$. Direct calculation gives
+\begin{equation}
+ z^{-p-1}(c/x-z)^{p-1}|\mathrm{d}z|
+ =c^{-1}x^{1-p}v^{p-1}\,\mathrm{d}v,
+ \qquad \mathrm{e}^{-c/(\theta z)}=\mathrm{e}^{-(v+x)/\theta}.
+ \label{eq:exact-GIG-substitution}
+\end{equation}
+The outer factor is $cx^{-2}\mathrm{e}^{-c/(x\theta)}/[\Gamma(p)\theta^p]$. Integration of $v^{p-1}\mathrm{e}^{-v/\theta}$ returns the proposed density. For normalization substitute $x=\sqrt c\,\mathrm{e}^u$ and pair positive and negative $u$ to obtain
+\begin{equation}
+ \int_0^\infty x^{\nu-1}\mathrm{e}^{-(x+c/x)/\theta}\,\mathrm{d}x
+ =2c^{\nu/2}K_\nu(2\sqrt c/\theta).
+ \label{eq:exact-GIG-moment}
+\end{equation}
+Take $\nu=-p$, use $K_{-\nu}=K_\nu$, and then take $\nu=q-p$. The two exponential tails ensure all real moments and absolute log moments are finite.
+
+The minorization argument from Proposition~\ref{prop:exact-R1} applies again. On $Y_1\geq a>0$, $X_1\leq c/a$ uniformly. Choose $0<b_1<b_2<a$. On $[0,c/a]\times[b_1,b_2]$, $c/w-z$ is bounded strictly away from zero and the continuous transition density has a positive minimum. This proves uniform two-step minorization, uniqueness, and the all-start strong law.
+
+Now $u_n=Y_n+X_n=c/X_{n+1}$, so $r=\ln c-\mathbb E\ln X$. Differentiating the moment formula at $q=0$ gives $\mathbb E\ln X=\tfrac12\ln c-\partial_p\ln K_p$, proving \eqref{eq:exact-Bessel}. The population norm differs from $z_n$ by a factor $1+g_1/u_{n-1}$. Under stationarity, finite $\mathbb E|\ln u|$ implies $\sum_n\mathbb P(|\ln u_n|>\epsilon n)<\infty$. Borel--Cantelli, which needs no independence here, makes its logarithm sublinear. Finite-time coupling transfers this to every start. Column sums then give the matrix exponent as before.
+
+Matrix products are entrywise nondecreasing in $c$, hence so is their exponent. Equation~\eqref{eq:exact-Bessel} is real analytic for $c>0$. Expansion of the Bessel integral at $u=0$ gives
+\begin{equation}
+ K_\nu(z)=\sqrt{\frac\pi{2z}}\mathrm{e}^{-z}
+ \left[1+\frac{4\nu^2-1}{8z}+O_\nu(z^{-2})\right],
+ \label{eq:exact-Bessel-large}
+\end{equation}
+so $r=\tfrac12\ln c+O(c^{-1/2})\to\infty$. A nondecreasing analytic function taking the same value at two distinct points would be constant on their interval and hence everywhere. Thus $r$ is strictly increasing. At small argument, $K_p(z)\sim2^{p-1}\Gamma(p)z^{-p}$ and $\partial_p\ln K_p(z)=\ln2+\psi(p)-\ln z+o(1)$ for fixed $p>0$, by the small-argument integral. Hence $r\to\ln\theta+\psi(p)=\ln s-\ell<0$ as $c\downarrow0$, and the root exists uniquely.
+
+At $c=1-s$ use $J_n=z_n+cz_{n-1}$. Its multiplier is $1+\alpha(u)(h_n-1)$ with $\alpha(u)=s/(1+c/u)\in(0,s)$. Conditional strict Jensen and logarithmic integrability give $r<0$ as in Proposition~\ref{prop:exact-R3}, proving $D_{\mathrm{stay}}>0$. Finally extend the formula to $s=1$. Its small-$c$ limit is $-\ell<0$, and its unique root is a finite $c_1>0$. Continuity and strict increase bracket the roots and force $c_*(s)\to c_1$. Therefore $D_{\mathrm{stay}}=\ln[c_*(s)/(1-s)]\to\infty$.
+\end{proof}
+
+\subsection{Differential identities for the monotonicity proof}
+
+Let
+\begin{equation}
+ Z(p,\kappa)=\int_0^\infty t^{p-1}(1+t)^{-p}\mathrm{e}^{-\kappa t}\,\mathrm{d}t,
+ \qquad f_T(t)=Z^{-1}t^{p-1}(1+t)^{-p}\mathrm{e}^{-\kappa t}.
+\end{equation}
+The integral is finite and positive: its integrand is \(O(t^{p-1})\) at zero and \(O(t^{-1}\mathrm{e}^{-\kappa t})\) at infinity. Define
+\begin{equation}
+ W=\ln(1+T),\quad m=\mathbb{E}W,\quad s=\mathrm{e}^{-m},\quad
+ a=\kappa \mathbb{E}T,\quad V=\kappa\operatorname{Cov}(W,T).
+\end{equation}
+Thus \(0<m<\infty\), \(0<s<1\), and all moments used below exist.
+
+\begin{proposition}[differential identities]\label{prop:exact-P1} For $p>0$ and $\kappa>0$, with primes denoting \(\mathrm{d}/\mathrm{d}\kappa\),
+\begin{equation}
+ \kappa m'=-V,\qquad
+ \kappa a'=a^2+\kappa a-p\kappa,\qquad
+ \kappa V'=(\kappa+2a)V-a,\qquad V>0.                 \label{eq:exact-P1}
+\end{equation}
+
+\end{proposition}
+\begin{proof} On a compact subset of \(\kappa>0\), differentiation of the normalized integrals is justified by an exponential majorant at infinity and the integrable power \(t^{p-1}\) at zero. It gives
+\begin{equation}
+ \frac{\mathrm{d}}{\mathrm{d}\kappa}\mathbb{E} H(T)=-\operatorname{Cov}(H(T),T)
+\end{equation}
+for the observables in use. If \(T_1,T_2\) are independent copies, then
+\begin{equation}
+ 2\operatorname{Cov}(W,T)
+ =\mathbb{E}[(\ln(1+T_1)-\ln(1+T_2))(T_1-T_2)]>0.
+\end{equation}
+The integrand is strictly positive off the diagonal, and the law has a positive density. This proves the first identity and \(V>0\).
+
+For the remaining two identities introduce, solely for this calculation,
+\begin{equation}
+ Z_b(\kappa)=\int_0^\infty
+ t^{p-1}(1+t)^{b-p-1}\mathrm{e}^{-\kappa t}\,\mathrm{d}t,
+ \qquad A_b=-\kappa\partial_\kappa\ln Z_b.
+\end{equation}
+The subscript \(b\) denotes the parameter, not a derivative. These integrals and all the parameter derivatives used here converge locally uniformly near any real \(b\) and positive \(\kappa\). Integrating the derivative of
+\(t^p(1+t)^{b-p}\mathrm{e}^{-\kappa t}\), whose boundary values vanish, gives
+\begin{equation}
+ 0=\int_0^\infty [p+(b-\kappa)t-\kappa t^2]
+ t^{p-1}(1+t)^{b-p-1}\mathrm{e}^{-\kappa t}\,\mathrm{d}t.
+\end{equation}
+Equivalently,
+\begin{equation}
+ \kappa\partial_\kappa^2Z_b+(b-\kappa)\partial_\kappa Z_b-pZ_b=0.
+\end{equation}
+Substitution of \(A_b=-\kappa Z_b'/Z_b\) yields
+\begin{equation}
+ \kappa\partial_\kappa A_b=A_b^2+(\kappa+1-b)A_b-p\kappa.
+\end{equation}
+At \(b=1\), \(A_1=a\), and
+\begin{equation}
+ \left.\partial_b A_b\right|_{b=1}
+ =-\kappa\partial_\kappa
+   \left.\partial_b\ln Z_b\right|_{b=1}
+ =-\kappa m'=V.
+\end{equation}
+Evaluating the last differential equation at \(b=1\), and then differentiating it in \(b\) there, proves the second and third identities in \eqref{eq:exact-P1}. \end{proof}
+
+\subsection{The single-crossing lemma}
+
+Densities below are extended by zero outside their support. Values at individual boundary points do not matter. The weak crossing condition permits ties, jump crossings, and symmetric densities. Strictness comes from the even kernel in the proof.
+
+\begin{proposition}[single crossing implies a strict Jensen-gap bound]\label{prop:exact-P2} Let \(X\) have a density supported in a half-line \([b,\infty)\), $b\in\mathbb R$, finite mean \(\mu\), and
+\(\mathbb{E}[(1+|X-\mu|)\mathrm{e}^{X-\mu}]<\infty\). Put
+\begin{equation}
+ f_+(x)=f_X(\mu+x),\quad f_-(x)=f_X(\mu-x),\quad x>0.
+\end{equation}
+Suppose there is \(c>0\) such that, almost everywhere,
+\begin{equation}
+ f_+(x)-f_-(x)\le0\quad(0<x<c),\qquad
+ f_+(x)-f_-(x)\ge0\quad(x>c).
+                                                               \label{eq:exact-P2}
+\end{equation}
+Then
+\begin{equation}
+ 2(\mathbb{E}\mathrm{e}^X-\mathrm{e}^{\mathbb{E}X})<\operatorname{Cov}(X,\mathrm{e}^X).             \label{eq:exact-P3}
+\end{equation}
+
+\end{proposition}
+\begin{proof} Write \(Y=X-\mu\), so \(\mathbb{E}Y=0\). Define
+\begin{equation}
+ h(y)=(2-y)\mathrm{e}^y-2-y.
+\end{equation}
+For \(x>0\), its even part and its odd part divided by \(x\) are
+\begin{equation}
+ A(x)=\frac{h(x)+h(-x)}2=2(\cosh x-1)-x\sinh x,
+\end{equation}
+\begin{equation}
+ B(x)=\frac{h(x)-h(-x)}{2x}
+      =\frac{2\sinh x}{x}-\cosh x-1.
+\end{equation}
+The absolutely convergent power series are
+\begin{equation}
+ A(x)=\sum_{n\ge1}\frac{2-2n}{(2n)!}x^{2n}<0,
+ \qquad
+ B(x)=\sum_{n\ge1}\frac{1-2n}{(2n+1)!}x^{2n}.
+\end{equation}
+Thus \(B\) is strictly decreasing on \(x>0\). Centering the mean gives
+\begin{equation}
+ \int_0^\infty x(f_+(x)-f_-(x))\,\mathrm{d}x=0.
+\end{equation}
+Consequently
+\begin{equation}
+\begin{aligned}
+ \mathbb{E}h(Y)
+ &=\int_0^\infty A(x)(f_+(x)+f_-(x))\,\mathrm{d}x\\
+ &\quad+\int_0^\infty x[B(x)-B(c)](f_+(x)-f_-(x))\,\mathrm{d}x<0. \label{eq:exact-P4}
+\end{aligned}
+\end{equation}
+The second integrand is nonpositive on both sides of \(c\), by \eqref{eq:exact-P2} and the decrease of \(B\). The first integral is strictly negative because \(A(x)<0\) for every \(x>0\) and a probability density cannot be concentrated at its mean. All terms are absolutely integrable: the positive half-line is controlled by \(\mathbb{E}[(1+|Y|)\mathrm{e}^Y]<\infty\), and the negative half-line of \(Y\) is bounded by the support assumption.
+
+Finally \(\mathbb{E}Y=0\) implies
+\begin{equation}
+ \mathbb{E}h(Y)=2\mathbb{E}\mathrm{e}^Y-\mathbb{E}(Y\mathrm{e}^Y)-2<0.
+\end{equation}
+Multiplying by \(\mathrm{e}^\mu\) proves \eqref{eq:exact-P3}. \end{proof}
+
+\begin{proposition}[the required single crossing holds for every \(p>0\)]\label{prop:exact-P3} For the density in this problem,
+\begin{equation}
+ 0<\kappa\delta<\frac V2,
+ \qquad \delta=\mathbb{E}(1+T)-\mathrm{e}^m.                       \label{eq:exact-P5}
+\end{equation}
+
+\end{proposition}
+\begin{proof} Changing variables \(t=\mathrm{e}^w-1\) gives the particularly simple density
+\begin{equation}
+ f_W(w)=Z^{-1}(1-\mathrm{e}^{-w})^{p-1}
+                  \mathrm{e}^{-\kappa(\mathrm{e}^w-1)},\qquad w>0.     \label{eq:exact-P6}
+\end{equation}
+Set \(r=\mathrm{e}^{-m}\). For \(0<x<m\), both reflected densities are positive and
+\begin{equation}
+ \ln\frac{f_W(m+x)}{f_W(m-x)}
+ =(p-1)\ln\frac{1-r \mathrm{e}^{-x}}{1-r \mathrm{e}^x}
+       -2\kappa \mathrm{e}^m\sinh x.                         \label{eq:exact-P7}
+\end{equation}
+If \(0<p\le1\), the logarithm on the right before multiplication by \(p-1\) is positive. Hence \eqref{eq:exact-P7} is negative throughout \(0<x<m\). For \(x>m\), the left reflected density is zero and the right reflected density is positive. Condition \eqref{eq:exact-P2} therefore holds with \(c=m\).
+
+Now suppose \(p>1\). For \(0<x<m\) define
+\begin{equation}
+ H_r(x)=\frac{1}{2\sinh x}
+          \ln\frac{1-r \mathrm{e}^{-x}}{1-r \mathrm{e}^x}
+       =\sum_{n\ge1}\frac{r^n}{n}
+                    \frac{\sinh(nx)}{\sinh x}.        \label{eq:exact-P8}
+\end{equation}
+The series follows by subtracting the two convergent logarithmic series; it converges locally uniformly because \(r \mathrm{e}^x<1\). For an integer \(n\ge2\),
+\begin{equation}
+ \frac{\sinh(nx)}{\sinh x}
+   =\mathrm{e}^{(n-1)x}+\mathrm{e}^{(n-3)x}+\cdots+\mathrm{e}^{-(n-1)x}
+\end{equation}
+is strictly increasing on \(x>0\): pair each positive exponent with its negative to obtain positive multiples of \(\cosh(jx)\), with at least one \(j>0\). The \(n=1\) term is constant. Thus \(H_r\) is strictly increasing. Also \(H_r(x)\to\infty\) as \(x\uparrow m\), since \(1-r \mathrm{e}^x\downarrow0\) and \(\sinh m>0\).
+
+By \eqref{eq:exact-P7}, the sign of the reflected-density difference on \(0<x<m\) is the sign of
+\begin{equation}
+ (p-1)H_r(x)-\kappa \mathrm{e}^m,
+\end{equation}
+a continuous strictly increasing function tending to \(+\infty\). It must be negative somewhere: otherwise the reflected-density difference would be nonnegative everywhere and strictly positive for \(x>m\), contradicting
+\begin{equation}
+ 0=\mathbb{E}(W-m)=\int_0^\infty x[f_W(m+x)-f_W(m-x)]\,\mathrm{d}x.
+\end{equation}
+It therefore has a unique zero \(c\in(0,m)\). The difference is negative below \(c\) and positive above \(c\), including \(x\ge m\). This proves \eqref{eq:exact-P2} for \(p>1\) as well.
+
+The density \eqref{eq:exact-P6} has a lower bounded support and a superexponential upper tail, so every integrability condition in Proposition~\ref{prop:exact-P2} holds. Applying \eqref{eq:exact-P3} to \(X=W\), and using \(\mathrm{e}^W=1+T\), gives
+\begin{equation}
+ 2\kappa\delta<\kappa\operatorname{Cov}(W,\mathrm{e}^W)=V.
+\end{equation}
+Strict Jensen for the strictly convex exponential gives \(\delta>0\), since \(W\) is nonconstant. \end{proof}
+
+\subsection{The strict covariance inequality}
+
+\noindent The covariance inequality in Theorem~\ref{thm:exact-mono} states that, for every \(p>0,\kappa>0\),
+\begin{equation}
+ V<\frac{1-s}{2-s},\qquad s=\mathrm{e}^{-m}. \label{eq:exact-P9}
+\end{equation}
+
+\begin{proof}[Proof of the covariance inequality in Theorem~\ref{thm:exact-mono}] Set
+\begin{equation}
+ F(\kappa)=(2-s)V-(1-s).
+\end{equation}
+Equation \eqref{eq:exact-P1} gives \(\kappa s'=sV\), hence at every \(\kappa>0\)
+\begin{equation}
+ \kappa F'=(2-s)[(\kappa+2a)V-a]+sV(1-V).             \label{eq:exact-P10}
+\end{equation}
+At a zero of \(F\), use \(V=(1-s)/(2-s)\) to obtain
+\begin{equation}
+\begin{aligned}
+ \kappa F'
+ &=\kappa(1-s)-as+sV(1-V)\\
+ &=s[V(1-V)-\kappa\delta],                           \label{eq:exact-P11}
+\end{aligned}
+\end{equation}
+because \(\kappa\delta=a+\kappa-\kappa/s\). The identity includes the factor \((2-s)^{-2}\), since \(V(1-V)=(1-s)/(2-s)^2\) at a zero.
+
+At such a zero \(0<V<1/2\). Proposition~\ref{prop:exact-P3} implies
+\begin{equation}
+ \kappa F'>s[V(1-V)-V/2]=sV(1/2-V)>0.                \label{eq:exact-P12}
+\end{equation}
+It remains to rule out a positive component of \(F\) that continues to infinity. We do this directly from the defining integral.
+
+Put \(q=1/\kappa\), and let \(G\) have the gamma density
+\(z^{p-1}\mathrm{e}^{-z}/\Gamma(p)\). Substitution \(z=\kappa t\) gives
+\begin{equation}
+ m=\frac{\mathbb{E}[(1+qG)^{-p}\ln(1+qG)]}{\mathbb{E}[(1+qG)^{-p}]}.
+\end{equation}
+The moments \(\mathbb{E}G=p\), \(\mathbb{E}G^2=p(p+1)\) follow by integration by parts in the gamma integral. Taylor expansion at \(q=0\) gives
+\begin{equation}
+ \mathbb{E}[(1+qG)^{-p}]=1-p^2q+O_p(q^2),
+\end{equation}
+\begin{equation}
+ \mathbb{E}[(1+qG)^{-p}\ln(1+qG)]
+ =pq-p(p+1)(p+1/2)q^2+O_p(q^3).
+\end{equation}
+Dividing and differentiating yields
+\begin{equation}
+ m=pq-\frac{p(3p+1)}2q^2+O_p(q^3),\qquad
+ V=q\frac{\mathrm{d}m}{\mathrm{d}q}=pq-p(3p+1)q^2+O_p(q^3).             \label{eq:exact-P13}
+\end{equation}
+These are expansions with differentiated remainders: the integrands and their first three \(q\)-derivatives on \(0\le q\le q_0\) are bounded by fixed polynomials in \(G\), times at most \(1+\ln(1+q_0G)\). Those bounds are gamma-integrable. Taylor's theorem and dominated differentiation apply to both expectations and to their quotient, whose denominator equals one at zero. More explicitly, for $0\leq j\leq3$,
+\begin{equation}
+ \begin{split}
+ |\partial_q^j(1+qG)^{-p}|&\leq(p)_jG^j,\\
+ |\partial_q^j[(1+qG)^{-p}\ln(1+qG)]|
+ &\leq C_{p,j}G^j[1+\ln(1+q_0G)].
+ \end{split}\label{eq:exact-gamma-domination}
+\end{equation}
+Thus $m$ is $C^3$ at $q=0$. Taylor expansion of $m'$ through its linear term has error $O_p(q^2)$, which multiplication by $q$ turns into the $O_p(q^3)$ remainder in $V$.
+
+Since
+\begin{equation}
+ \frac{1-\mathrm{e}^{-m}}{2-\mathrm{e}^{-m}}=m-\frac32m^2+O(m^3),
+\end{equation}
+\eqref{eq:exact-P13} implies
+\begin{equation}
+ V-\frac{1-s}{2-s}=-\frac p2q^2+O_p(q^3),
+ \qquad F=-\frac p2q^2+O_p(q^3)<0                   \label{eq:exact-P14}
+\end{equation}
+for all sufficiently large \(\kappa\), with \(p\) fixed.
+
+Here is the final topological step explicitly. If \(F(x)>0\) at some \(x\), choose \(y>x\) with \(F(y)<0\). The first zero \(z\in(x,y)\) after \(x\) has \(F>0\) immediately to its left. Its left difference quotients are nonpositive, so differentiability gives \(F'(z)\le0\), contradicting \eqref{eq:exact-P12}. If instead \(F(x)=0\), \eqref{eq:exact-P12} makes \(F\) positive immediately to its right, reducing to the previous contradiction. Thus \(F<0\) everywhere. This proves \eqref{eq:exact-P9}. \end{proof}
+
+Only the large-\(\kappa\) endpoint is needed for this argument.
+
+\subsection{The infimum of the logarithmic derivative}
+
+\begin{proposition}\label{prop:exact-P5} The threshold parametrization covers \(0<s<1\), and
+\begin{equation}
+\begin{gathered}
+ D=\ln p-2m-\ln\kappa-\ln(1-\mathrm{e}^{-m}),\\
+ g:=\frac{\mathrm{d}D}{\mathrm{d}L}=\frac1V-2-\frac{s}{1-s}>0,
+ \quad L=m=-\ln s.                                  \label{eq:exact-P15}
+\end{gathered}
+\end{equation}
+For every fixed \(p>0\),
+\begin{equation}
+ \inf_{\kappa>0}g(p,\kappa)=0;
+ \quad g\to0\text{ as }\kappa\downarrow0;
+ \quad g\to\frac1{2p}\text{ as }\kappa\to\infty.       \label{eq:exact-P16}
+\end{equation}
+The infimum is not attained. In particular \(D\) strictly decreases with \(s\), and with \(\tau=1/(1-s)\).
+
+\end{proposition}
+\begin{proof} The definition \(\kappa=s^2p/[(1-s)\mathrm{e}^D]\) gives the first identity. Since \(\mathrm{d}m/\mathrm{d}\ln\kappa=-V<0\), differentiating it in \(L=m\) gives the second identity. Its positivity is precisely \eqref{eq:exact-P9}.
+
+For the small-\(\kappa\) endpoint, write \(H=-\ln\kappa\) and \(z=\ln t\). The unnormalized density in \(z\) is
+\begin{equation}
+ w_H(z)=(1+\mathrm{e}^{-z})^{-p}\mathrm{e}^{-\mathrm{e}^{z-H}}.
+\end{equation}
+For \(H>0\), its \(L^1\) distance from \(1_{[0,H]}\) is bounded independently of \(H\). Indeed, for \(z<0\) it is at most \(\mathrm{e}^{pz}\); on \(0<z<H\),
+\begin{equation}
+ 0\le1-w_H(z)\le p \mathrm{e}^{-z}+\mathrm{e}^{z-H};
+\end{equation}
+and on \(z>H\) it is at most \(\mathrm{e}^{-\mathrm{e}^{z-H}}\), whose integral is finite. Consequently \(Z=H+O_p(1)\). For $H\geq1$, split the logarithmic numerator minus $\int_0^H z\,\mathrm{d}z$ into $I_-$, $I_0$, and $I_+$ on the three intervals $z<0$, $0\leq z\leq H$, and $z>H$. The bounds $\ln(1+\mathrm{e}^z)\leq\mathrm{e}^z$ for $z<0$ and $0\leq\ln(1+\mathrm{e}^z)-z\leq\mathrm{e}^{-z}$ for $z\geq0$ give
+\begin{equation}
+ \begin{split}
+ 0\leq I_-&\leq\int_{-\infty}^0\mathrm{e}^{(p+1)z}\,\mathrm{d}z=\frac1{p+1},\\
+ |I_0|&\leq\int_0^H\mathrm{e}^{-z}\,\mathrm{d}z
+ +\int_0^H z(p\mathrm{e}^{-z}+\mathrm{e}^{z-H})\,\mathrm{d}z=O_p(H),\\
+ 0\leq I_+&\leq\int_0^\infty(H+u+\ln2)\mathrm{e}^{-\mathrm{e}^u}\,\mathrm{d}u=O(H).
+ \end{split}\label{eq:exact-plateau-bounds}
+\end{equation}
+Summing gives
+\begin{equation}
+ \int\ln(1+\mathrm{e}^z)w_H(z)\,\mathrm{d}z=\frac{H^2}{2}+O_p(H),
+ \qquad m=\frac H2+O_p(1).                            \label{eq:exact-P17}
+\end{equation}
+Define the two unnormalized integrals
+\begin{equation}
+ N_0=\int \mathrm{e}^{z-H}w_H(z)\,\mathrm{d}z,\qquad
+ N_1=\int \mathrm{e}^{z-H}\ln(1+\mathrm{e}^z)w_H(z)\,\mathrm{d}z.
+\end{equation}
+With \(u=z-H\), dominated convergence gives
+\begin{equation}
+ N_0\to\int_{-\infty}^\infty \mathrm{e}^u \mathrm{e}^{-\mathrm{e}^u}\,\mathrm{d}u=1,
+ \qquad N_1/H\to1.
+\end{equation}
+For the second assertion a dominating function is
+\(\mathrm{e}^u \mathrm{e}^{-\mathrm{e}^u}(1+|u|+\ln2)\), for \(H\ge1\), because
+\(\ln(1+\mathrm{e}^{H+u})/H\le1+|u|+\ln2\). Therefore
+\begin{equation}
+ V=\frac{N_1}{Z}-m\frac{N_0}{Z}\longrightarrow1-\frac12=\frac12,
+ \qquad s\to0.
+\end{equation}
+This proves the small-$\kappa$ limit in \eqref{eq:exact-P16}, as well as \(m\to\infty\). At the other end \eqref{eq:exact-P13} gives \(m\to0\). The strict decrease of \(m\) now proves that it parametrizes all \(L>0\).
+
+To obtain the last limit of \eqref{eq:exact-P16}, use \eqref{eq:exact-P13} and
+\(s/(1-s)=1/(\mathrm{e}^m-1)=1/m-1/2+O(m)\). The constant term in
+\(1/V-2-s/(1-s)\) is
+\begin{equation}
+ \frac{3p+1}{p}-2-\frac{3p+1}{2p}+\frac12=\frac1{2p}.
+\end{equation}
+Positivity from Theorem~\ref{thm:exact-mono} and the zero limit at the other endpoint prove the infimum assertion. Finally \(\mathrm{d}D/\mathrm{d}s=-g/s<0\), and \(\mathrm{d}s/\mathrm{d}\tau=1/\tau^2>0\). \end{proof}
+
+\subsection{The rate at the infimum and a second proof}
+
+Write \(\psi(p)=\mathrm{d}\ln\Gamma(p)/\mathrm{d}p\) and
+\begin{equation}
+ v_p=\sum_{n=0}^\infty\frac1{(p+n)^2}.
+\end{equation}
+
+\begin{proposition}\label{prop:exact-P6} The following identities and fixed-\(p\) limits hold:
+\begin{equation}
+ m=\frac{\psi(p)-\ln\kappa-\partial_p\ln Z}{2},
+ \qquad \partial_p a=1-2V,                            \label{eq:exact-P18}
+\end{equation}
+\begin{equation}
+ g(p,\kappa)\sim\frac{2v_p}{[\ln(1/\kappa)]^2},
+ \qquad g\,m^2\longrightarrow\frac{v_p}{2}
+ \quad(\kappa\downarrow0).                           \label{eq:exact-P19}
+\end{equation}
+Here \(v_p=\psi'(p)\).
+
+\end{proposition}
+\begin{proof} Consider the positive, symmetric joint density proportional to
+\begin{equation}
+ t^{p-1}u^{p-1}\mathrm{e}^{-\kappa(t+u+tu)},\qquad t,u>0.
+\end{equation}
+Integrating in \(u\) gives
+\(\Gamma(p)\kappa^{-p}t^{p-1}(1+t)^{-p}\mathrm{e}^{-\kappa t}\).
+Thus both marginals are the specified law of \(T\). Conditional on \(T=t\), the other coordinate is gamma with shape \(p\) and rate \(\kappa(1+t)\). Differentiating the gamma integral in \(p\) gives its mean logarithm as
+\(\psi(p)-\ln\kappa-\ln(1+t)\). Taking expectations proves
+\begin{equation}
+ \mathbb{E}\ln T+m=\psi(p)-\ln\kappa.
+\end{equation}
+Also \(\partial_p\ln Z=\mathbb{E}\ln T-m\), by differentiation of the defining integral. These two equations give the first identity \eqref{eq:exact-P18}. Differentiating it in \(\kappa\), and using
+\(a=-\kappa\partial_\kappa\ln Z\), gives the second.
+
+Use \(H,z,w_H,N_0\) from Proposition~\ref{prop:exact-P5}. Dominated convergence in the \(p\)-derivative of \(Z\) is valid because
+\begin{equation}
+ (1+\mathrm{e}^{-z})^{-p}\ln(1+\mathrm{e}^{-z})
+\end{equation}
+is integrable on the real line. To justify differentiation locally in $p$, let $\widetilde p\in[p/2,3p/2]$. On $z<0$ a common bound is $(1+\mathrm{e}^{-z})^{-p/2}\ln(1+\mathrm{e}^{-z})$, integrable as $|z|\mathrm{e}^{pz/2}$, and on $z\geq0$ the bound is $\mathrm{e}^{-z}$. These bounds are uniform in $\kappa\geq0$, so they justify both differentiation and the endpoint limit. The substitution \(x=t/(1+t)\) therefore gives
+\begin{equation}
+ \partial_pZ\longrightarrow
+ \int_0^1\frac{x^{p-1}\ln x}{1-x}\,\mathrm{d}x
+ =-\sum_{n=0}^\infty\frac1{(p+n)^2}=-v_p.             \label{eq:exact-P20}
+\end{equation}
+The series follows by monotone convergence after changing the sign of the integrand. Moreover
+\begin{equation}
+ |\partial_pN_0|=O_p(\kappa(1+H)).                    \label{eq:exact-P21}
+\end{equation}
+To verify \eqref{eq:exact-P21}, split its integral into \(z<0\), \(0\le z\le H\), and \(z>H\). On the first interval its absolute integrand is bounded by
+\(\kappa \mathrm{e}^{(p+1)z}(|z|+\ln2)\). On the second it is at most \(\kappa\). On the third it is at most
+\(\kappa \mathrm{e}^{-\mathrm{e}^{z-H}}\). These three integrals have the stated bound.
+
+Since \(a=N_0/Z\), \(Z/H\to1\), and \(N_0\to1\), equations \eqref{eq:exact-P20}--\eqref{eq:exact-P21} imply
+\begin{equation}
+ \partial_p a
+ =\frac{\partial_pN_0}{Z}-\frac{N_0\,\partial_pZ}{Z^2}
+ =\frac{v_p}{H^2}+o_p(H^{-2}).
+\end{equation}
+In \eqref{eq:exact-P15}, use \(2V=1-\partial_pa\) and
+\(s=\exp[-H/2+O_p(1)]\). Expanding \(2/(1-\partial_pa)\) gives
+\(g=2v_p/H^2+o_p(H^{-2})\). Equation \eqref{eq:exact-P17} proves the second limit in \eqref{eq:exact-P19}.
+
+Finally, the beta integral equals
+\begin{equation}
+ B(p,\epsilon)=\int_0^1x^{p-1}(1-x)^{\epsilon-1}\,\mathrm{d}x
+ =\frac{\Gamma(p)\Gamma(\epsilon)}{\Gamma(p+\epsilon)}.
+\end{equation}
+The last identity follows by substituting \(x=u/(u+v)\), \(y=u+v\) in the product of two gamma integrals. Differentiate it in \(p\) and let \(\epsilon\downarrow0\). Its integral derivative tends to the integral in \eqref{eq:exact-P20}. On the gamma side,
+\begin{equation}
+ B(p,\epsilon)[\psi(p)-\psi(p+\epsilon)]\to-\psi'(p),
+\end{equation}
+because \(\epsilon B(p,\epsilon)\to1\). This proves \(v_p=\psi'(p)\), including the coefficient used in the numerical checks. \end{proof}
+
+\begin{proof}[An independent proof of the covariance inequality] The identities just proved also give a second closing argument, which does not need an endpoint expansion. Direct differentiation in \(p\) yields
+\begin{equation}
+ \partial_p a
+ =\kappa\operatorname{Cov}\!\left(T,\ln\frac{T}{1+T}\right)>0,
+\end{equation}
+because both functions of \(T\) are strictly increasing. By \eqref{eq:exact-P18} and \(V>0\), this proves \(0<V<1/2\) everywhere, independently of Theorem~\ref{thm:exact-mono}. The full equation \eqref{eq:exact-P10}, before imposing \(F=0\), can be written
+\begin{equation}
+ F'-\left(1+\frac{2a}{\kappa}\right)F
+ =\frac{s}{\kappa}\,[V(1-V)-\kappa\delta].
+\end{equation}
+Its right side is strictly positive by \eqref{eq:exact-P5} and \(V<1/2\). Since \(a=-\kappa Z'/Z\), the integrating factor is
+\(I(\kappa)=\mathrm{e}^{-\kappa}Z(\kappa)^2\). Thus
+\begin{equation}
+ F(\kappa)
+ =-\frac{\mathrm{e}^\kappa}{Z(\kappa)^2}
+ \int_\kappa^\infty
+   \frac{\mathrm{e}^{-u}Z(u)^2s(u)}{u}
+       [V(u)(1-V(u))-u\delta(u)]\,\mathrm{d}u<0.               \label{eq:exact-P21a}
+\end{equation}
+To justify the endpoint and convergence, \(V<1/2\) and \(0<s<1\) bound \(F\) in absolute value by a constant; also
+\(Z(u)\le\Gamma(p)u^{-p}\), directly from its integral.
+Hence \(I(u)F(u)\to0\). The square bracket is positive and at most \(V(u)(1-V(u))<1/4\), so the displayed integral converges by the same bound on \(Z\).
+This proves the inequality using the density identities and Proposition~\ref{prop:exact-P3}.\end{proof}
+
+\subsection{Differentiated small-noise estimates}
+
+\begin{proposition}\label{prop:exact-P7} As \(p\to\infty\), the following expansions hold uniformly on every compact subinterval of \(0<s<1\), with differentiated remainders in \(s\):
+\begin{equation}
+ D(s,p)=\frac{1-s}{2p(2-s)}+O(p^{-2}),\qquad
+ g(s,p)=\frac{s}{2p(2-s)^2}+O(p^{-2}).                 \label{eq:exact-P22}
+\end{equation}
+The leading coefficient of \(g\) is strictly positive for \(0<s<1\). Its continuous extension vanishes only at \(s=0\).
+
+\end{proposition}
+\begin{proof} Put \(c=(1-s)\mathrm{e}^D\), \(X=sT\), and \(z=\ln X\). Direct change of variables in the specified density gives
+\begin{equation}
+ f_z(z)\ \propto\ \mathrm{e}^{-p\Phi(z)},\qquad
+ \Phi(z)=\ln(1+s \mathrm{e}^{-z})+(s/c)\mathrm{e}^z.
+\end{equation}
+The threshold equation is \(r=\mathbb{E}F(z)=0\), where
+\(F(z)=\ln(s+\mathrm{e}^z)\). The potential is strictly convex:
+\begin{equation}
+ \Phi''(z)=\frac{s \mathrm{e}^z}{(s+\mathrm{e}^z)^2}+(s/c)\mathrm{e}^z>0.
+\end{equation}
+It has a unique minimum at \(x=\mathrm{e}^z\) satisfying \(x(s+x)=c\).
+
+We record the elementary first-order Laplace formula used here. For a density proportional to \(A(z)\mathrm{e}^{-n\Phi(z)}\), with a unique nondegenerate interior minimum \(z_0\), it is
+\begin{equation}
+ \mathbb{E}B=B(z_0)+\frac1n
+ \left[\frac{B''}{2\Phi''}
+       +\frac{B'A'}{A\Phi''}
+       -\frac{B'\Phi'''}{2(\Phi'')^2}\right]_{z_0}
+ +O(n^{-2}).                                        \label{eq:exact-P23}
+\end{equation}
+Here is the coefficient calculation and remainder justification. Set
+\(z=z_0+y/\sqrt n\) and expand
+\begin{equation}
+ n(\Phi-\Phi(z_0))
+ =\tfrac12\Phi''y^2+\tfrac1{6\sqrt n}\Phi'''y^3
+   +\tfrac1{24n}\Phi''''y^4+\cdots.
+\end{equation}
+Expand \(A\) and \(B\) in the same variable, multiply, and integrate against the centered Gaussian of variance \(1/\Phi''\). Odd powers integrate to zero. The terms proportional to \(B(z_0)\) cancel on dividing numerator by denominator. The surviving terms are \(B''y^2/2\), \(B'A'y^2/A\), and \(-B'\Phi'''y^4/6\). Since the Gaussian second and fourth moments are \(1/\Phi''\) and \(3/(\Phi'')^2\), they give \eqref{eq:exact-P23}.
+
+For the present smooth potentials, choose a fixed neighborhood of the minimum on which \(\Phi''\) is bounded below. In the rescaled variable first restrict to \(|y|\le n^{1/20}\). Taylor expansion through degree eight, and the exponential expansion through the needed total degree, leave a bound by \(C n^{-2}\) times a fixed polynomial in \(|y|\) times \(\mathrm{e}^{-c y^2}\), after all odd terms of order \(n^{-3/2}\) have integrated to zero. The part with \(n^{1/20}<|y|\) inside that neighborhood is smaller than every inverse power of \(n\), using the same Gaussian bound; one can use a smaller quadratic exponent to absorb all fixed polynomials. Outside the neighborhood convexity supplies a positive potential gap and linear lower bounds on both tails, so its contribution is exponentially small relative to the central integral. These estimates are uniform for \(s,c\) in compact parameter neighborhoods under consideration. Differentiating in either parameter inserts smooth derivatives and polynomial factors in \(n\); taking the Taylor expansion finitely further gives the same order of remainder after any specified finite number of parameter derivatives. This proves the differentiated version needed here, not merely a formal series.
+
+At \(c=1-s\), let \(t=1-s\); the minimum has \(x=t\), \(s+x=1\), and
+\begin{equation}
+ F'=t,\quad F''=st,\quad
+ \Phi''=s(2-s),\quad \Phi'''=s^2(3-2s).
+\end{equation}
+In \eqref{eq:exact-P23}, \(A=1\). Substitution gives
+\begin{equation}
+ r(s,1-s,p)=-\frac{(1-s)^2}{2p(2-s)^2}+O(p^{-2}).     \label{eq:exact-P24}
+\end{equation}
+The limiting deterministic rate is \(\ln(s+x)\). Since
+\(x(s+x)=c\), its derivative in \(\ln c\) at \(c=1-s\) is
+\((1-s)/(2-s)>0\).
+
+For clarity about solving the root: the uniform zeroth-order Laplace limit places the root in any fixed neighborhood of \(c=1-s\) for all sufficiently large \(p\); the exact rate increases strictly in \(c\), because its derivative in \(\ln c\) is \(V>0\). In that neighborhood its derivative converges uniformly to the positive deterministic derivative. Taylor's theorem in \(\ln c\), applied to \eqref{eq:exact-P24}, now gives
+\(D=(1-s)/(2p(2-s))+O(p^{-2})\). The parameter-differentiated estimates and the derivative bounded away from zero give the same remainder order after differentiation in \(s\). Finally \(g=-s\,\partial_sD\), which gives \eqref{eq:exact-P22}. \end{proof}
+
+The coefficient \eqref{eq:exact-P22} is not uniform as \(s\downarrow0\). In particular, it alone cannot locate the interior minimum of \(g\).
+
+\subsection{The interior local minimum at large shape}
+
+\begin{proposition}[uniform fixed-\(\kappa\) asymptotics]\label{prop:exact-P8} Uniformly for \(\kappa\) in any compact subset of \((0,\infty)\), including two derivatives in \(\kappa\),
+\begin{equation}
+ g(p,\kappa)
+ =p^{-3/2}\frac{4\kappa+1}{32\sqrt\kappa}+O(p^{-2}).
+                                                               \label{eq:exact-P25}
+\end{equation}
+For all sufficiently large \(p\), \(g(p,\cdot)\) has a unique local minimum in \([1/8,1/2]\), and
+\begin{equation}
+\begin{gathered}
+ \kappa_p=\frac14+O(p^{-1/2}),\qquad
+ s_p=\frac1{2\sqrt p}+O(p^{-1}),\\
+ g(p,\kappa_p)=\frac1{8p^{3/2}}+O(p^{-2}).             \label{eq:exact-P26}
+\end{gathered}
+\end{equation}
+These are assertions about this interior local minimum; the global infimum is the one in \eqref{eq:exact-P16}.
+
+\end{proposition}
+\begin{proof} Set \(\lambda=\sqrt{p\kappa}\) and
+\(t=(\lambda/\kappa)\mathrm{e}^z\). Then
+\begin{equation}
+ Z=\int_{\mathbb R}
+ \exp\left[-\frac{\lambda^2}{\kappa}
+                  \ln(1+\kappa \mathrm{e}^{-z}/\lambda)-\lambda \mathrm{e}^z\right]\,\mathrm{d}z.
+                                                               \label{eq:exact-P27}
+\end{equation}
+A Laplace expansion, with coefficients calculated below, gives
+\begin{equation}
+\begin{split}
+ \ln Z
+ &=-2\lambda-\tfrac12\ln\lambda+\tfrac12\ln\pi
+  +\frac\kappa2+\frac{A(\kappa)}{\lambda}
+  +O(\lambda^{-2}),\\
+ A(\kappa)&=\frac\kappa2-\frac{\kappa^2}{12}-\frac1{16}.
+\end{split}
+                                                               \label{eq:exact-P28}
+\end{equation}
+The remainder in \eqref{eq:exact-P28} has bounds
+\begin{equation}
+ |\partial_\lambda^j\partial_\kappa^\ell R|
+ \le C_{j,\ell,K}\lambda^{-2-j}
+ \quad(0\le j\le5;\ 0\le\ell\le5)
+                                                               \label{eq:exact-P29}
+\end{equation}
+on any fixed compact \(\kappa\)-set \(K\). We justify these bounds as well as the coefficient, since differentiating an unspecified remainder would be insufficient.
+
+On a fixed neighborhood of zero, expand the exponent in \eqref{eq:exact-P27} as
+\begin{equation}
+ -2\lambda\cosh z+\frac\kappa2 \mathrm{e}^{-2z}
+             -\frac{\kappa^2}{3\lambda}\mathrm{e}^{-3z}
+             +O_K(\lambda^{-2}).
+\end{equation}
+The logarithmic Taylor remainder and its stated parameter derivatives have the indicated powers of \(\lambda^{-1}\) there. Set
+\(B_\kappa(z)=\exp[(\kappa/2)\mathrm{e}^{-2z}]\).
+Using \(2\cosh z=2+z^2+z^4/12+\cdots\), the central integral is
+\begin{equation}
+ \mathrm{e}^{-2\lambda}\sqrt{\frac{\pi}{\lambda}} B_\kappa(0)
+ \left[1+\frac1\lambda
+  \left(\frac{B_\kappa''(0)}{4B_\kappa(0)}
+            -\frac1{16}-\frac{\kappa^2}{3}\right)
+       +O_K(\lambda^{-2})\right].                    \label{eq:exact-P30}
+\end{equation}
+The \(1/4\) is the Gaussian second moment divided by two; the \(-1/16\) is the quartic exponent term integrated against the Gaussian of variance \(1/2\).
+Here
+\begin{equation}
+ B_\kappa(0)=\mathrm{e}^{\kappa/2},\qquad
+ B_\kappa''(0)/B_\kappa(0)=2\kappa+\kappa^2.
+\end{equation}
+Thus the coefficient in parentheses is exactly \(A(\kappa)\).
+Taking the logarithm proves the coefficients in \eqref{eq:exact-P28}.
+
+For the tail estimates, the potential divided by \(\lambda\) is
+\begin{equation}
+ Q_\epsilon(z)=\epsilon^{-1}\ln(1+\epsilon \mathrm{e}^{-z})+\mathrm{e}^z,
+ \qquad \epsilon=\kappa/\lambda.
+\end{equation}
+It is strictly convex, tends locally smoothly to \(2\cosh z\), and its unique minimum satisfies
+\(\mathrm{e}^{2z}+\epsilon \mathrm{e}^z=1\), hence tends to zero.
+For any fixed small \(\eta>0\), when \(\epsilon\) is sufficiently small,
+\(Q_\epsilon(\pm\eta)>2+c_\eta\) and its outward derivatives there have absolute value at least \(d_\eta>0\). Convexity therefore gives uniform linear tail bounds
+\(Q_\epsilon(z)\ge2+c_\eta+d_\eta(|z|-\eta)\) outside \([-\eta,\eta]\).
+Every fixed number of derivatives of the integrand in \eqref{eq:exact-P27} adds only polynomial factors in \(\lambda\) and factors bounded by \(C \mathrm{e}^{C|z|}\). The linear bounds absorb these factors for sufficiently large \(\lambda\), leaving exponentially small tails.
+
+On the central interval, set \(y=\sqrt\lambda z\), restrict first to \(|y|\le\lambda^{1/20}\), and Taylor expand as in the proof of \eqref{eq:exact-P23}. There is now an amplitude with a smooth expansion in \(\lambda^{-1}\); the same Gaussian-polynomial remainder bound applies to it and all the specified derivatives. Odd powers of \(y\) integrate to zero. Expanding one order beyond the retained \(1/\lambda\) term bounds the remainder by \(C\lambda^{-2}\). Differentiating the rescaled, normalized integral in \(\lambda\) differentiates its powers of \(\lambda^{-1/2}\); the only odd powers have zero integral, so the remainder derivative is \(O(\lambda^{-3})\). The cutoff-boundary terms are exponentially small by the Gaussian bound. Repeated \(\lambda\)-derivatives give the additional factor \(\lambda^{-j}\) in \eqref{eq:exact-P29}; to bound all of them at once, start with a Taylor expansion finitely further than the order used to display \eqref{eq:exact-P30}. Repeating with five \(\kappa\)-derivatives gives the same orders because their coefficients and local Taylor remainders are uniformly bounded on \(K\). Together with the tail estimate, this proves \eqref{eq:exact-P29}. At fixed \(p\), a \(\kappa\)-derivative acts on this expansion as \(\partial_\kappa|_\lambda+[\lambda/(2\kappa)]\partial_\lambda|_\kappa\), so these bounds also control the fixed-\(p\) derivatives used below.
+
+We also need
+\begin{equation}
+ \psi(p)=\ln p-\frac1{2p}+O(p^{-2}).                  \label{eq:exact-P31}
+\end{equation}
+Here is a derivation without importing a digamma asymptotic. If \(G\) is gamma with shape \(p\), \(h=G/p\) has density proportional to
+\(h^{-1}\exp[-p(h-\ln h)]\), and \(\psi(p)-\ln p=\mathbb{E}\ln h\).
+Apply \eqref{eq:exact-P23} at \(h=1\), with
+\(\Phi=h-\ln h,\ A=1/h,\ B=\ln h\).
+Their derivatives are
+\(\Phi''=1,\Phi'''=-2,A'/A=-1,B'=1,B''=-1\).
+The coefficient is \(-1/2-1+1=-1/2\).
+The potential increases towards both endpoints; near zero its logarithmic growth, together with the factor \(1/h\), is integrable for large \(p\). Splitting at a fixed neighborhood of one gives the same exponential tail bounds relative to the minimum. Thus the remainder argument in \eqref{eq:exact-P23} applies and proves \eqref{eq:exact-P31}.
+
+Use \eqref{eq:exact-P18}, \eqref{eq:exact-P28}--\eqref{eq:exact-P31}, and
+\(\partial_p|_\kappa=(\kappa/(2\lambda))\partial_\lambda|_\kappa\).
+With \(\zeta=p^{-1/2}\) this gives
+\begin{equation}
+ m=\frac12\ln(p/\kappa)
+    +\frac{\sqrt\kappa}{2}\zeta-\frac18\zeta^2
+    +\frac{A(\kappa)}{4\sqrt\kappa}\zeta^3+O_K(\zeta^4).
+                                                               \label{eq:exact-P32}
+\end{equation}
+The remainder and the needed \(\kappa\)-derivatives have this order by \eqref{eq:exact-P29}. Therefore
+\begin{equation}
+ s=\sqrt\kappa\,\zeta-\frac\kappa2 \zeta^2
+       +\frac{\sqrt\kappa(1+\kappa)}8 \zeta^3+O_K(\zeta^4),
+\end{equation}
+\begin{equation}
+ V=\frac12-\frac{\sqrt\kappa}{4}\zeta
+   +\left(-\frac{\sqrt\kappa}{16}
+          +\frac{\kappa^{3/2}}{32}
+          -\frac1{128\sqrt\kappa}\right)\zeta^3
+   +O_K(\zeta^4).                                        \label{eq:exact-P33}
+\end{equation}
+Substitute \eqref{eq:exact-P33} into \(g=1/V-2-s/(1-s)\). The terms of orders \(\zeta\) and \(\zeta^2\) cancel. The coefficient of \(\zeta^3\) is
+\(\sqrt\kappa/8+1/(32\sqrt\kappa)\), which proves \eqref{eq:exact-P25}, including its two derivatives.
+
+Finally let
+\begin{equation}
+ f(\kappa)=\frac{4\kappa+1}{32\sqrt\kappa}.
+\end{equation}
+Then
+\begin{equation}
+ f'(\kappa)=\frac{4\kappa-1}{64\kappa^{3/2}},\qquad
+ f''(\kappa)=\frac{3-4\kappa}{128\kappa^{5/2}}.
+\end{equation}
+On \([1/8,1/2]\), \(f''>0\); its derivative changes sign from negative to positive, and its unique minimum is \(f(1/4)=1/8\).
+The uniform twice-differentiated expansion \eqref{eq:exact-P25} makes \(p^{3/2}g\) strictly convex on that interval for all sufficiently large \(p\), with the same derivative signs at its endpoints. There is a unique minimizer \(\kappa_p\) there. The derivative error \(O(p^{-1/2})\), and the positive lower bound for \(f''\), give
+\(\kappa_p=1/4+O(p^{-1/2})\). Substitution in \eqref{eq:exact-P25} and \eqref{eq:exact-P33} gives \eqref{eq:exact-P26}. \end{proof}
+
+The real analyticity assertion of Theorem~\ref{thm:exact-mono} follows from Proposition~\ref{prop:exact-R4}. Its strict derivative sign follows from the covariance inequality and \eqref{eq:exact-param}. Propositions~\ref{prop:exact-P5}, \ref{prop:exact-P6}, and~\ref{prop:exact-P8} prove its infimum, endpoint-rate, and interior-minimum assertions, respectively.
+
+\subsection{Hosts with memory}\label{subsec:exact-app-memory}
+
+We now allow dependence between successive hosts in the recurrence of
+\citet{roerdink1988}. The independent gamma law used above is replaced by
+the laws stated below. Write
+\begin{equation}
+ U_t=s+\frac{c h_t}{U_{t-1}},\qquad
+ r(s,c_*)=0,\qquad c_*=(1-s)\mathrm{e}^D,
+ \qquad \ell=-\mathbb E\ln h_t.
+ \label{eq:exact-mem-def}
+\end{equation}
+Here $U_t=x_{t+1}/x_t$, $0<s<1$, and $c>0$. Derivatives in $s$ hold
+the host law fixed. The exit fraction $q=1-s$ below is distinct from
+the mean stay $a$ in Proposition~\ref{prop:exact-mem-ring}.
+
+\begin{proposition}[Gaussian memory and its second-order boundary]
+\label{prop:exact-mem-coefficient}
+Let $h_t=\exp(\sigma\xi_t-\sigma^2/2)$, where $\xi_t$ is a centered
+stationary Gaussian process of unit variance and covariance $\rho(j)$.
+The zero of the expected growth exponent satisfies
+\begin{equation}
+ D=\sigma^2 F_\rho(s)+O(\sigma^4),\qquad
+ F_\rho(s)=\frac{q}{2(1+q)}H_\rho(q),\qquad
+ H_\rho(q)=1+2\sum_{j\geq1}(-q)^{j-1}\rho(j).
+ \label{eq:exact-mem-gaussian}
+\end{equation}
+The remainder and its first $s$ derivative are uniform on compact
+subintervals of $0<s<1$. The coefficient series and its interior
+derivatives converge absolutely without summability of $\rho$.
+If the environment is ergodic, this is also the almost-sure threshold.
+In general,
+\begin{equation}
+ \partial_sF_\rho<0
+ \quad\Longleftrightarrow\quad H_\rho+q(1+q)H_\rho'>0.
+ \label{eq:exact-mem-sign}
+\end{equation}
+For $\rho(j)=\phi^j$, $-1<\phi<1$,
+\begin{equation}
+ F_\phi=\frac{q[1+(q+2)\phi]}{2(1+q)(1+q\phi)},\qquad
+ \partial_sF_\phi=-\frac{1+2\phi+2q\phi-q^2\phi^2}
+ {2(1+q)^2(1+q\phi)^2}.
+ \label{eq:exact-mem-ar}
+\end{equation}
+The derivative signs are
+\begin{equation}
+\begin{gathered}
+\begin{array}{c|c}
+ \text{memory parameter}&\text{sign of }\partial_sF_\phi\text{ on }(0,1)\\ \hline
+ 2-\sqrt5\leq\phi<1& -\\
+ -1/2<\phi<2-\sqrt5& +\ (s<s_*),\quad 0\ (s=s_*),\quad -\ (s>s_*)\\
+ -1<\phi\leq-1/2& +
+\end{array}\\
+s_*=1-\frac{1-\sqrt{2(1+\phi)}}{\phi}.
+\end{gathered}
+ \label{eq:exact-mem-sign-table}
+\end{equation}
+Also $F_\phi<0$ exactly when $\phi<-1/(3-s)$.
+\end{proposition}
+
+\begin{proof}
+The remainder needs control of the full history. Put $v=\ln U$ and
+$f_t(v)=\ln\{s+c\exp(\sigma\xi_t-\sigma^2/2-v)\}$.
+For $G_t=f_t\circ f_{t-1}$, maximizing the derivative of the associated
+fractional linear ratio map gives
+\begin{equation}
+ 0\leq\partial_vG_t(v)\leq
+ k_t=\frac{\sqrt{s^2+c h_t}-s}{\sqrt{s^2+c h_t}+s}<1.
+ \label{eq:exact-mem-contraction}
+\end{equation}
+On compact positive $s,c$ ranges and $|\sigma|\leq\sigma_0$, replacing
+$h_t$ by $\exp(\sigma_0|\xi_t|)$ gives a stationary upper bound
+$\bar k_t<1$. Every moment of $(1-\bar k_t)^{-1}$ is finite, since it
+is bounded by a constant times $1+\exp(\sigma_0|\xi_t|/2)$.
+For any $p\geq1$, $M>0$, and any $n$ time indices, H\"older's inequality gives
+\begin{equation}
+ \left\|\prod_{i=1}^n\bar k_{t_i}\right\|_p
+ \leq(\mathbb E\bar k_0^{np})^{1/p}
+ \leq C_{p,M}(1+n)^{-M}.
+ \label{eq:exact-mem-holder}
+\end{equation}
+The last inequality follows from
+$y^{np}\leq\exp[-np(1-y)]\leq C_K n^{-K}(1-y)^{-K}$,
+with $K>Mp$. Independence of the factors is not needed.
+
+Every fixed-order parameter derivative of $G_t$, apart from the map
+itself, has a polynomial bound in $1+|\xi_t|+|\xi_{t-1}|$ on these
+compact sets. This follows by differentiating log-sum-exp; all its
+positive-order derivatives are bounded. A derivative $V_n^{(j)}$ of
+the recursion over pairs has the form
+$V_n^{(j)}=G_{n,v}V_{n-1}^{(j)}+B_{n,j}$, where $B_{n,j}$ is a
+polynomial in lower-order derivatives and those bounded coefficients.
+Induction over derivative order and all finite moment norms, followed
+by H\"older's inequality and \eqref{eq:exact-mem-holder}, gives
+\begin{equation}
+ \sup_n\|V_n^{(j)}\|_p
+ \leq\sup_n\|B_{n,j}\|_{2p}
+ \sum_{m\geq0}\left\|\prod_{i=1}^m\bar k_{t_i}\right\|_{2p}<\infty.
+ \label{eq:exact-mem-derivatives}
+\end{equation}
+Start at a fixed positive ratio independent of the parameters.
+Four derivatives in $\sigma$, also with one derivative in $s$ or $c$,
+therefore control the Taylor remainder and its needed derivatives.
+Gaussian sign symmetry removes the odd terms. After two steps,
+$s\leq U_t\leq s+c h_t/s$, so log ratios have bounded moments.
+Equation~\eqref{eq:exact-mem-holder} makes remote starting histories
+converge in every finite moment norm and almost surely to a stationary
+ratio. Thus the finite-history expansions pass to
+$\bar r=\mathbb E\ln U_t$. Birkhoff's theorem identifies this with
+almost-sure growth when the environment is ergodic; the vector norm
+and scalar population have a bounded logarithmic discrepancy.
+
+To compute the coefficient at $c=q$, expand
+$U_t=1+\sigma z_t+\sigma^2 w_t+\cdots$. Then
+\begin{equation}
+ z_t=q(\xi_t-z_{t-1}),\qquad
+ w_t=q\{(\xi_t^2-1)/2-\xi_tz_{t-1}+z_{t-1}^2-w_{t-1}\}.
+ \label{eq:exact-mem-recursions}
+\end{equation}
+With $K=\mathbb E\xi_tz_{t-1}$ and $V_z=\mathbb Ez_t^2$,
+\begin{equation}
+\begin{gathered}
+ K=q\sum_{j\geq0}(-q)^j\rho(j+1),\qquad
+ V_z=\frac{q^2}{1-q^2}
+       \left[1+2\sum_{j\geq1}(-q)^j\rho(j)\right],\\
+ \bar r(s,q,\sigma)=-\sigma^2
+ \left[\frac{1-q}{2(1+q)}V_z+\frac{q}{1+q}K\right]+O(\sigma^4).
+ \label{eq:exact-mem-rate}
+\end{gathered}
+\end{equation}
+The deterministic eigenvalue solves $\lambda^2=s\lambda+c$;
+its derivative in $\ln c$ at threshold is $q/(1+q)>0$.
+Dividing the rate loss by this derivative gives
+$(1-q)V_z/(2q)+K=F_\rho$.
+Existence and uniqueness of the root follow because the expected
+growth is finite, convex, and nondecreasing in $\ln c$ (expand a
+population as a sum over paths), tends to $\ln s<0$ as $c\downarrow0$,
+and satisfies $2\bar r\geq\ln c+\mathbb E\ln h_t$.
+A convex nondecreasing function with a negative value to the left of
+a zero cannot have two zeros. The uniform expansion and the positive
+deterministic slope locate the root within $O(\sigma^2)$ of $\ln q$.
+The differentiated estimates then give \eqref{eq:exact-mem-gaussian}
+with its differentiated remainder on compact interior $s$ intervals.
+
+Absolute convergence follows from $|\rho(j)|\leq1$ and $q<1$;
+differentiating gives \eqref{eq:exact-mem-sign}. For the autoregressive
+case, the lag sum is $\phi/(1+q\phi)$, giving
+\eqref{eq:exact-mem-ar}. Its derivative numerator is positive for
+$\phi\geq0$. For $\phi=-u<0$ it is
+$2(1-u)-(1+qu)^2$, strictly decreasing in $q$. If $u\geq1/2$ it is
+negative throughout. Otherwise its positive root is
+$[\sqrt{2(1-u)}-1]/u$, which is at least one exactly when
+$u\leq\sqrt5-2$. This proves the sign table, including its equality
+cases. The sign of $F_\phi$ follows from its numerator.
+\end{proof}
+
+\begin{proposition}[Strict bounds for a bounded Markov host]
+\label{prop:exact-mem-bounds}
+Let $h_t=1+\delta Z_t$, $0<\delta<1$, where $Z_t\in\{-1,1\}$ is
+stationary with $\mathbb P(Z_{t+1}=Z_t)=(1+\phi)/2$, $-1<\phi<1$.
+For every interior $s$ and $c>0$, the joint environment--ratio chain
+has a unique invariant law, attracts every positive initial ratio,
+and gives the top Lyapunov exponent. The threshold is unique and smooth,
+and
+\begin{equation}
+ D<\ell=-\tfrac12\ln(1-\delta^2),\qquad
+ 0<D<\ell\quad\text{if }0\leq\phi<1.
+ \label{eq:exact-mem-bounds}
+\end{equation}
+At small amplitude, $D=\delta^2F_\phi(s)+O(\delta^4)$, including
+one $s$ derivative on compact interior intervals.
+\end{proposition}
+
+\begin{proof}
+After two steps $U$ lies in the invariant interval
+$[s,s+c(1+\delta)/s]$. Equation~\eqref{eq:exact-mem-contraction}
+is now a uniform strict contraction. Pullback iteration constructs
+the stationary ratio. Two copies of the aperiodic host chain couple
+with probability $1-|\phi|>0$ per step until they agree. Contraction
+then proves uniqueness and attraction. The stationary ratio is an
+ergodic function of the host's past; its bounded logarithm gives the
+growth exponent by time averaging. Componentwise comparison identifies
+this with the top matrix exponent.
+
+Every entry of a three-step matrix product has logarithmic $c$
+derivative at least $c(1-\delta)/[s^2+c(1-\delta)]$.
+Multiplying the entrywise inequalities over blocks shows that, on a
+compact $c$ interval,
+\begin{equation}
+ \partial_{\ln c}r\geq
+ \frac{c_{\min}(1-\delta)}{3[s^2+c_{\min}(1-\delta)]}>0.
+ \label{eq:exact-mem-slope}
+\end{equation}
+For example, the upper-left entry is $s^3+sc(h_t+h_{t-1})$;
+the other entries are $c h_{t-2}(s^2+c h_t)$,
+$s^2+c h_{t-1}$, and $sc h_{t-2}$.
+Uniform contraction gives smooth parameter dependence by the same
+derivative recursion as above. The limits $r\to\ln s$ as $c\downarrow0$
+and $r\geq\tfrac12\ln[c(1-\delta)]$ as $c\to\infty$ give the
+unique threshold.
+
+For the upper bound, write $h_t=g\mathrm{e}^{\eta Z_t}$, with
+$g=\sqrt{1-\delta^2}$ and $\eta=\operatorname{atanh}\delta$, and put
+$k=cg$. The entrywise geometric mean of the two-step matrices for a
+host path and its sign reversal is the deterministic positive matrix
+\begin{equation}
+ C=\begin{pmatrix}
+ \sqrt{s^4+2s^2k\cosh\eta+k^2}&sk\\s&k
+ \end{pmatrix}.
+ \label{eq:exact-mem-geometric}
+\end{equation}
+Expanding products over internal indices and applying Cauchy--Schwarz
+gives $C^n_{ij}\leq\sqrt{\Pi_{2n}(\eta)_{ij}\Pi_{2n}(-\eta)_{ij}}$.
+Summing entries, taking logarithms, and using host sign symmetry yields
+$r\geq\tfrac12\ln\rho(C)$. At $c=(1-s)/g$, this matrix exceeds the
+square of the deterministic threshold matrix strictly in its
+upper-left entry and weakly in every entry. Strict Perron monotonicity
+gives $r>0$, so $D<\ln(1/g)=\ell$.
+
+For positivity, set $c=1-s$ and use the left Perron norm
+$V_t=x_t+c x_{t-1}$. Then
+\begin{equation}
+ \frac{V_{t+1}}{V_t}=1+\alpha(U_{t-1})(h_t-1),\qquad
+ \alpha(u)=\frac{c}{u+c}.
+ \label{eq:exact-mem-perron-norm}
+\end{equation}
+For $\phi\geq0$, couple the reversible host pasts conditional on
+$Z_{t-1}=+1$ and $-1$. While they differ, a backward step keeps them
+opposite with probability $\phi$, or makes them agree at either sign
+with probability $(1-\phi)/2$. Thereafter use an identical earlier
+past. From their common entering ratio, the differing portions are
+constant runs of plus and minus hosts. The $n$th iterate of
+$F_h(u)=s+ch/u$ is strictly increasing in a constant $h$: its
+logarithmic derivative obeys $q_{j+1}=\alpha_j(1-q_j)$, $q_0=0$,
+where $\alpha_j=(F_h^{j+1}(u)-s)/F_h^{j+1}(u)\in(0,1)$.
+Thus $0<q_j<1$ for $j\geq1$. The conditional ratios are strictly
+ordered, so the decreasing function $\alpha$ satisfies
+$\mathbb E[Z_{t-1}\alpha(U_{t-1})]<0$.
+The Markov property gives
+$\mathbb E[\alpha(U_{t-1})(h_t-1)]
+=\delta\phi\mathbb E[\alpha(U_{t-1})Z_{t-1}]\leq0$.
+The strict inequality $\ln(1+x)<x$ in
+\eqref{eq:exact-mem-perron-norm} gives $r<0$, also at $\phi=0$,
+and therefore $D>0$.
+Finally, bounded inputs and uniform contraction justify the
+small-amplitude expansion. The recursions
+\eqref{eq:exact-mem-recursions} have $\xi=Z$ and zero second
+derivative of $h$; the term removed there had zero expectation.
+Sign symmetry removes odd powers of $\delta$ and gives the stated coefficient.
+\end{proof}
+
+The small-staying correction below closes GAP~2 (proved here and checked
+by a second party). The parameters are fixed in the open ranges stated.
+
+The stationary symmetric two-state Markov host is $h_t=1+\delta Z_t$, with $0<\delta<1$ and $\mathbb P(Z_{t+1}=Z_t)=(1+\phi)/2$, $-1<\phi<1$.
+
+Section~\ref{subsec:exact-memory} summarizes the following result; Proposition~\ref{prop:exact-mem-small} restates it in the notation of its proof.
+
+\begin{proposition}\label{prop:exact-memory-small}
+For the stationary symmetric two-state Markov host just defined, fix
+$0<\delta<1$ and $-1<\phi<1$. With
+$\ell=-\tfrac12\ln(1-\delta^2)$ and $L=\ln(1/s)$, as $s\downarrow0$,
+\begin{equation}
+ D(s)-\ell=-\frac{\operatorname{atanh}(\delta)^2(1-\phi)}{2(1+\phi)L}
+ +O_{\delta,\phi}\!\left(\frac{\ln L}{L^2}\right).
+ \label{eq:exact-memory-small}
+\end{equation}
+\end{proposition}
+
+\begin{proposition}[Small staying for a Markov host]
+\label{prop:exact-mem-small}
+Let $h_t=1+\delta Z_t$, where $Z_t$ is the stationary symmetric
+Markov chain on $\{-1,1\}$ with
+$\mathbb P(Z_{t+1}=Z_t)=(1+\phi)/2$. Fix $0<\delta<1$ and
+$-1<\phi<1$, and define $D$ by \eqref{eq:exact-mem-def}.
+Put $b=\operatorname{atanh}\delta$, $\ell=-\tfrac12\ln(1-\delta^2)$,
+and $L=\ln(1/s)$. Then, as $s\downarrow0$,
+\begin{equation}
+ D(s)-\ell=-\frac{b^2(1-\phi)}{2(1+\phi)L}
+       +O_{\delta,\phi}(\ln L/L^2).
+ \label{eq:exact-mem-small}
+\end{equation}
+This is also Proposition~\ref{prop:exact-memory-small}. No second
+coefficient or uniform limit at the parameter boundaries is asserted.
+\end{proposition}
+
+\begin{proof}
+Write $h_t=\exp(-\ell+bZ_t)$ and set
+$m=\ln c-\ell$, $a=s\mathrm e^{-m/2}$, $\Lambda=-\ln a=L+m/2$,
+$X_t=\ln U_t-m/2$, and $\eta_t=bZ_t$. The stationary ratio from
+Proposition~\ref{prop:exact-mem-bounds} is measurable in the host past.
+Its normalized recursion is
+\begin{equation}
+ X_t=-X_{t-1}+\eta_t+Q_t,\qquad
+ Q_t=\ln\{1+\exp(X_{t-1}-\eta_t-\Lambda)\}.
+ \label{eq:exact-mem-small-map}
+\end{equation}
+For $\Lambda\geq1$, one update gives $X\geq-\Lambda$ and the next
+$X\leq\ln(\mathrm e^{-\Lambda}+\mathrm e^{\Lambda+b})
+\leq\Lambda+b+1$. Thus the stationary moments below are finite.
+Put $q_\Lambda=\mathbb E Q_t$, a mean distinct from the exit fraction
+$q=1-s$. Stationarity gives $2\mathbb E X=q_\Lambda$ and
+$2r=m+q_\Lambda$. With $C=\mathbb E[X_t\eta_t]$, the Markov property
+gives $\mathbb E[X_{t-1}\eta_t]=\phi C$, whence
+$(1+\phi)C=b^2+\mathbb E[\eta_tQ_t]$. Expanding the stationary
+second-moment difference yields
+\begin{equation}
+\begin{gathered}
+ 0=b^2-2\phi C+2\mathbb E[(\eta_t-X_{t-1})Q_t]+\mathbb E Q_t^2,\\
+ V_\pi:=b^2\frac{1-\phi}{1+\phi}
+ =\mathbb E\left[\left(2X_{t-1}
+       -\frac{2\eta_t}{1+\phi}-Q_t\right)Q_t\right].
+ \label{eq:exact-mem-small-moment}
+\end{gathered}
+\end{equation}
+
+Let $Y=X_{t-1}-\Lambda\leq b+1$ and
+$Q_*=\ln(1+\mathrm e^{2b+1})$, so $0\leq Q_t\leq Q_*$.
+Then $V_\pi=2\Lambda q_\Lambda+H_\Lambda$, where
+$H_\Lambda=\mathbb E[(2Y-2\eta_t/(1+\phi)-Q_t)Q_t]$.
+Define $C_+=2(b+1)+2b/(1+\phi)$ and
+$C_-=2b/(1+\phi)+Q_*$. Pointwise comparison gives
+$H_\Lambda\leq C_+q_\Lambda$. For $M\geq1$, split at $Y=-M$.
+On $Y\geq-M$, $2YQ_t\geq-2MQ_t$. On $Y=-d<-M$,
+$Q_t\leq\mathrm e^{b-d}$ and $d\mathrm e^{-d}\leq M\mathrm e^{-M}$.
+Consequently $H_\Lambda\geq-(2M+C_-)q_\Lambda-2M\mathrm e^{b-M}$, and
+\begin{equation}
+ \frac{V_\pi}{2\Lambda+C_+}\leq q_\Lambda\leq
+ \frac{V_\pi+2M\mathrm e^{b-M}}{2\Lambda-2M-C_-}
+ \quad\text{if }2\Lambda-2M-C_->0.
+ \label{eq:exact-mem-small-bracket}
+\end{equation}
+Taking $M=2\ln\Lambda$ for sufficiently large $\Lambda$ gives
+$q_\Lambda=V_\pi/(2\Lambda)+O_{b,\phi}(\ln\Lambda/\Lambda^2)$.
+This argument requires no density for the invariant law.
+
+Comparison with the constant hosts $1\pm\delta$ gives
+$(1-s)/(1+\delta)\leq c_*\leq(1-s)/(1-\delta)$, hence
+$\ln(1-s)-b\leq m_*\leq\ln(1-s)+b$.
+Thus $\Lambda_*=L+m_*/2=L+O(1)\to\infty$ without assuming the
+endpoint limit. At threshold $m_*=-q_{\Lambda_*}$, so the preceding
+estimate first gives $m_*=O(1/L)$ and then
+$m_*=-V_\pi/(2L)+O_{b,\phi}(\ln L/L^2)$.
+Finally $D-\ell=m_*-\ln(1-s)$ and $-\ln(1-s)=O(s)$, proving the result.
+\end{proof}
+
+\begin{proposition}[Long stays and a finite-amplitude counterexample]
+\label{prop:exact-mem-long}
+For the bounded host in Proposition~\ref{prop:exact-mem-bounds}, fix
+$(\delta,\phi)$ and put $\varepsilon=1-s$. The threshold is analytic
+near $\varepsilon=0$, with
+\begin{equation}
+ D=A\varepsilon+B\varepsilon^2+O(\varepsilon^3),\qquad
+ A=\delta^2(1/2+\phi),\qquad
+ B=-\delta^2(1/2+\phi+\phi^2)+\tfrac32 A^2.
+ \label{eq:exact-mem-long}
+\end{equation}
+If $A\ne0$, then $0<\varepsilon<|A|/262144$ implies
+$|D_s+A|<|A|/2$ and $\operatorname{sign}D_s=-\operatorname{sign}A$.
+If $\phi=-1/2$, then $B=-\delta^2/4$ and $D_s>0$ for
+$0<\varepsilon<|B|(1/256)^3/2$. In every case
+$D/[\delta^2F_\phi(s)]\to1$ as $s\uparrow1$.
+In particular, $\delta=1/2$, $\phi=-3/4$, $s=1-10^{-8}$ gives
+$D_s>1/32$.
+\end{proposition}
+
+\begin{proof}
+Put $U_t=1+v_t$ and allow complex $\varepsilon,D$. The recursion is
+\begin{equation}
+ v_t=\varepsilon\left(\frac{\mathrm{e}^D h_t}{1+v_{t-1}}-1\right).
+ \label{eq:exact-mem-complex}
+\end{equation}
+For $R=1/256$, $|\varepsilon|\leq R$, and $|D|\leq1/4$, the ball
+$|v|\leq4|\varepsilon|$ is invariant because
+$1+2\mathrm{e}^{1/4}/(1-4R)<4$. Its contraction factor is at most
+$2R\mathrm{e}^{1/4}/(1-4R)^2<1$. Iteration gives a bounded holomorphic
+stationary solution. With the removable value at zero, let
+$f(\varepsilon,D)=\mathbb E\ln(1+v)/\varepsilon$.
+The logarithm series and the recursion give
+\begin{equation}
+ |f-(\mathrm{e}^D-1)|
+ \leq\frac{8\mathrm{e}^{1/4}+8}{1-4R}|\varepsilon|
+ <19|\varepsilon|.
+ \label{eq:exact-mem-rouche}
+\end{equation}
+On $|D|=1/4$, $|\mathrm{e}^D-1|\geq3/2-\mathrm{e}^{1/4}>0.21$,
+whereas $19R<0.075$. Rouch\'e's theorem gives one simple zero in this
+disk. Uniqueness joins the local analytic roots, and for real positive
+$\varepsilon$ this root is the threshold. Hence
+\begin{equation}
+ |D(\varepsilon)|<1/4,\qquad
+ |[\varepsilon^n]D|\leq\tfrac14 R^{-n}.
+ \label{eq:exact-mem-cauchy}
+\end{equation}
+
+For the coefficients write
+$v_t=\varepsilon b_t+\varepsilon^2d_t+\varepsilon^3e_t+\cdots$.
+Equation~\eqref{eq:exact-mem-complex} gives
+\begin{equation}
+\begin{gathered}
+ b_t=h_t-1,\qquad d_t=h_t(A-b_{t-1}),\\
+ e_t=h_t\{B+A^2/2-A b_{t-1}+b_{t-1}^2-d_{t-1}\}.
+ \label{eq:exact-mem-long-recursion}
+\end{gathered}
+\end{equation}
+The quadratic term of $\mathbb E\ln(1+v)=0$ gives
+$A=\tfrac12\operatorname{Var}(h_t)+\operatorname{Cov}(h_t,h_{t-1})$.
+For the symmetric chain, put $V_h=\delta^2$; then $b_t^2=V_h$,
+odd joint moments vanish, and $\mathbb E b_tb_{t-j}=V_h\phi^j$.
+The cubic equation is
+$\mathbb E e_t-\mathbb E b_td_t+\mathbb E b_t^3/3=0$.
+Using
+$\mathbb E h_tb_{t-1}^2=V_h$,
+$\mathbb E h_th_{t-1}b_{t-2}=V_h(\phi+\phi^2)$, and
+$\mathbb E(h_t^2-h_t)b_{t-1}=V_h\phi$ gives
+$B=-A^2/2+A[1+V_h(1+2\phi)]-V_h(1+\phi)^2$.
+Since $V_h(1+2\phi)=2A$, this is \eqref{eq:exact-mem-long}.
+
+For $x=\varepsilon/R\leq1/2$, Cauchy's bound gives
+\begin{equation}
+ |D_\varepsilon-A|
+ \leq\frac{(1-x)^{-2}-1}{4R}\leq\frac{2\varepsilon}{R^2}.
+ \label{eq:exact-mem-derivative-bound}
+\end{equation}
+The stated interval lies in this range because $|A|<3/2$.
+When $A=0$, the bound after subtracting $2B\varepsilon$ is
+$2\varepsilon^2/R^3$, giving the stated positive $D_s$ interval.
+Expanding \eqref{eq:exact-mem-ar} at $q=\varepsilon$ gives the same
+linear coefficient and quadratic coefficient $-\delta^2/4$ when
+$\phi=-1/2$, proving the ratio limit even in that case.
+For the counterexample, $A=-1/16$ and
+$10^{-8}<1/4194304=|A|/262144$, so $D_s>1/32$.
+Here $\delta^2$ is host variance; log-host variance is
+$\operatorname{atanh}(\delta)^2$ and cannot replace it at finite amplitude.
+\end{proof}
+
+\begin{proposition}[An alternating host]
+\label{prop:exact-mem-alternating}
+Let $0<\delta<1$ and let the host alternate between $1+\delta$ and
+$1-\delta$, with a uniformly random initial phase. For $0\leq s<1$,
+the top-growth threshold satisfies
+\begin{equation}
+ D_{\rm alt}(s)=\ln\frac{1+s}{1+\sqrt{\delta^2+(1-\delta^2)s^2}}<0,
+ \qquad D_{\rm alt}'(s)>0.
+ \label{eq:exact-mem-alternating}
+\end{equation}
+For $s>0$ the joint invariant law has two atoms. Starting at a fixed
+phase, attraction holds along each parity, and the joint laws converge
+to the invariant law in Ces\`aro average. Unaveraged convergence from
+a fixed phase is not asserted. At $s=0$, the threshold is
+$D_{\rm alt}(0)=-\ln(1+\delta)\ne\ell$.
+\end{proposition}
+
+\begin{proof}
+The two-step matrix has trace $s^2+2c$ and determinant
+$c^2(1-\delta^2)$. Its Perron eigenvalue equals one at the smaller
+root of $1-s^2-2c+c^2(1-\delta^2)=0$, namely
+\begin{equation}
+ c_* =\frac{1-s^2}{1+Q},\qquad
+ Q=\sqrt{\delta^2+(1-\delta^2)s^2}.
+ \label{eq:exact-mem-alt-root}
+\end{equation}
+The other eigenvalue is $c_*^2(1-\delta^2)<1$, since
+$c_*\leq1/(1+\delta)$. Dividing by $1-s$ gives the claimed loss.
+Since $Q>s$, it is negative. The numerator of its derivative, after
+multiplication by positive factors, is
+$Q(1+Q)-(1-\delta^2)s(1+s)=Q+\delta^2-(1-\delta^2)s>0$.
+With $h_\pm=1\pm\delta$, the positive solution of
+$s u_+^2+[c(h_--h_+)-s^2]u_+-sc h_-=0$, together with
+$u_-=s+c h_-/u_+$, gives the two periodic ratios.
+The invariant law assigns mass $1/2$ to each $(u_+,+)$ and $(u_-,-)$.
+Two-step contraction proves uniqueness and attraction on each parity;
+averaging the two parities gives the stated Ces\`aro convergence.
+The exponent is $\tfrac12\ln(u_+u_-)$.
+At $s=0$, with both cohorts initially positive, the good-parity cohort
+dominates and $r=\tfrac12\ln[c(1+\delta)]$; this is also the top
+matrix exponent. Thus one-step ergodicity of the random-phase host
+does not supply the two-step ergodicity needed for the usual unmixed
+threshold $\ell$.
+\end{proof}
+
+\paragraph{Unbounded hosts.}
+The following four propositions give the proved parts of GAP~3. Each
+proof was checked by a second party, and the parity and scope fixes
+are included below. We use two stationary host models. The gamma
+value-refresh kernel is
+\begin{equation}
+ P(x,\mathrm d y)=\phi\delta_x(\mathrm d y)
+ +(1-\phi)\operatorname{Gamma}(p,1/p)(\mathrm d y),
+ \qquad p>0,\quad 0\leq\phi<1,
+ \label{eq:exact-mem-refresh}
+\end{equation}
+where $\delta_x$ is point mass at $x$. The invariant marginal is
+$\operatorname{Gamma}(p,1/p)$. The lognormal autoregressive host is
+\begin{equation}
+ h_t=\exp(\sigma\xi_t-\sigma^2/2),\qquad
+ \xi_t=\phi\xi_{t-1}+\sqrt{1-\phi^2}\,\eta_t,
+ \qquad \sigma>0,\quad |\phi|<1,
+ \label{eq:exact-mem-lognormal}
+\end{equation}
+where $\eta_t$ are independent standard Gaussian innovations and
+$\xi_t$ has its stationary standard Gaussian law. Regeneration in
+the first model and the Gaussian moving-average representation in the
+second establish ergodicity. Both have every positive moment and
+integrable absolute log. Their logarithmic gaps are respectively
+$\ell=\ln p-\psi(p)$ and $\ell=\sigma^2/2$.
+
+\begin{proposition}[Stationary ratios and a unique threshold]
+\label{prop:exact-mem-unbounded-root}
+Let $(h_t)_{t\in\mathbb Z}$ be positive, stationary, and ergodic under
+the one-step shift, with $\mathbb E h_0=1$ and
+\begin{equation}
+ \mathbb E h_0^4<\infty,\qquad \mathbb E|\ln h_0|<\infty.
+ \label{eq:exact-mem-H4}
+\end{equation}
+For every $0<s<1$ and $c>0$, \eqref{eq:exact-mem-def} has a unique
+stationary ratio compatible with this environment. It is measurable
+in the past and attracts every positive initial ratio on a stationary
+host trajectory. The top matrix growth exponent is
+$r(s,c)=\mathbb E\ln U_t$, is continuous and convex in $\ln c$, and
+has exactly one zero $c_*(s)>0$.
+\end{proposition}
+
+\begin{proof}
+The two-step log-ratio contraction \eqref{eq:exact-mem-contraction}
+and the trapping bound $s\leq U_t\leq s+c h_t/s$ still hold.
+Write its contraction factor as $k(h_t)$. Since
+$(1-k(h))^{-8}\leq C(1+h^4)$, generalized H\"older and
+$k^{2n}\leq\exp[-2n(1-k)]$ give, for any $n$ time indices,
+\begin{equation}
+ \left\|\prod_{i=1}^n k(h_{t_i})\right\|_2
+ \leq(\mathbb E k(h_0)^{2n})^{1/2}
+ \leq C(1+n)^{-4}.
+ \label{eq:exact-mem-unbounded-contraction}
+\end{equation}
+No independence of these factors is used. The logarithms of the
+trapping bounds have every finite moment under \eqref{eq:exact-mem-H4}.
+For finite histories started from ratio one, Cauchy--Schwarz now
+bounds adjacent lengths of either parity in log ratio by
+$C(1+n)^{-4}$ in $L^1$. Summing proves convergence in $L^1$ and
+almost surely for each parity.
+
+The two parities must also be compared. Let $Y_{t,m}$ be the ratio
+obtained after $m$ updates ending at $t$, started from one.
+The histories $Y_{t,2n}$ and $Y_{t,2n+1}$ share the last $2n$
+updates and enter them at $1$ and $s+c h_{t-2n}$, respectively.
+Because $s>0$ gives $\ln(s+c h_0)\in L^2$, the same estimate yields
+\begin{equation}
+ \mathbb E|\ln Y_{t,2n+1}-\ln Y_{t,2n}|
+ \leq C'(1+n)^{-4}.
+ \label{eq:exact-mem-parity-fix}
+\end{equation}
+Summability equates the two limits. Shifting the recursion alone
+would only exchange them. Shifting the common limit now proves
+stationarity and the recursion. Applying the contraction after the
+trapping steps proves attraction for every positive starting ratio.
+Any other stationary extension obeys the same trapping bounds.
+Coupling on the entire host path and sending the starting time to
+minus infinity bounds its expected log discrepancy by
+$C(1+n)^{-4}\to0$, proving uniqueness even among extensions that
+might depend on future hosts.
+
+The stationary ratio is an ergodic function of the environment.
+Birkhoff's theorem gives $r=\mathbb E\ln U_t$.
+Attraction makes the average log discrepancy from a positive start
+vanish. The vector norm and scalar population differ in log by at
+most $\ln(1+1/s)$, and positive comparison with the sum of all matrix
+entries identifies the top exponent. The same $L^1$ estimates give
+convergence of expected finite-time growth.
+Finite-time populations are polynomials in $c$ with positive
+coefficients, so their logarithms are convex and nondecreasing in
+$\ln c$. These properties pass to the finite limiting growth,
+which is therefore continuous. The trapping bound gives
+$r\to\ln s<0$ as $c\downarrow0$ by domination, while
+$U_tU_{t-1}\geq c h_t$ gives
+$2r\geq\ln c+\mathbb E\ln h_t\to\infty$ as $c\to\infty$.
+A zero exists. Two zeros would give a zero secant slope to the right
+of a positive secant slope from a negative value, contrary to convexity.
+\end{proof}
+
+\begin{proposition}[Strict bounds for unbounded hosts]
+\label{prop:exact-mem-unbounded-bounds}
+Under Proposition~\ref{prop:exact-mem-unbounded-root}, if
+$\mathbb P(h_0=1)<1$, then $D(s)<\ell=-\mathbb E\ln h_0$ for
+$0<s<1$. For the gamma-refresh kernel \eqref{eq:exact-mem-refresh}
+and the lognormal host \eqref{eq:exact-mem-lognormal} with
+$0\leq\phi<1$, also $D(s)>0$. This positivity assertion is specific
+to these kernels and is not an assertion about every correlated
+gamma process or every negative-memory lognormal host.
+\end{proposition}
+
+\begin{proof}
+At threshold put $v_t=\ln U_t$, so $\mathbb E v_t=0$. The identity
+$\ln(U_t-s)=\ln c_*+\ln h_t-v_{t-1}$ makes every term integrable.
+The function $f(v)=\ln(\mathrm e^v-s)$ on $v>\ln s$ satisfies
+$f''(v)=-s\mathrm e^v/(\mathrm e^v-s)^2<0$.
+Strict Jensen gives $\ln c_*+\mathbb E\ln h_t<\ln(1-s)$,
+since a constant $U_t$ would force a constant host. This proves
+$D<\ell$ using a stationary, per-time-step identity.
+
+For positivity take $c=1-s$ and use
+\eqref{eq:exact-mem-perron-norm}, with decreasing
+$\alpha(u)=c/(u+c)$. It suffices to show
+$\mathbb E[\alpha(U_{t-1})(h_t-1)]\leq0$.
+The multiplier is bounded below by $s>0$ and has integrable positive
+part. Since the host is nonconstant, $\ln(1+z)<z$ with positive
+probability makes its mean log strictly negative. Thus
+$r(s,1-s)<0$ and uniqueness places $c_*>1-s$.
+
+For gamma refresh, detailed balance gives the same transition
+backward in time. Conditional on $h_{t-1}=x$, the past holds $x$
+for a geometric number of steps, then refreshes to an independent
+stationary past. Both this length and the entering ratio are
+independent of $x$. For $F_x(u)=s+cx/u$, the elasticity of its
+$j$th constant-host iterate obeys
+$q_0=0$, $q_{j+1}=a_j(1-q_j)$, where
+$a_j=(F_x^{j+1}(u)-s)/F_x^{j+1}(u)\in(0,1)$.
+Thus $0<q_j<1$ for $j\geq1$ and
+$m(x)=\mathbb E[\alpha(U_{t-1})\mid h_{t-1}=x]$ is decreasing.
+Since $\mathbb E[h_t-1\mid h_{t-1}]=\phi(h_{t-1}-1)$,
+\begin{equation}
+ \mathbb E[\alpha(U_{t-1})(h_t-1)]
+ =\phi\operatorname{Cov}(m(h_{t-1}),h_{t-1})\leq0.
+ \label{eq:exact-mem-refresh-order}
+\end{equation}
+The covariance sign follows by introducing an independent copy $X'$
+and averaging $(m(X)-m(X'))(X-X')\leq0$.
+
+For lognormal autoregression, conditional on $\xi_{t-1}=z$, the
+backward Gaussian law is $\xi_{t-1-j}=\phi^jz+N_j$, where the
+residual sequence is independent of $z$. In a finite history, the
+derivative of the log ratio at lag $j$ obeys
+$q_j=a_j(\sigma\phi^j-q_{j+1})$, with $0<a_j<1$ and zero entering
+derivative. Induction from the deepest lag gives
+$0\leq q_j\leq\sigma\phi^j$ for $0\leq\phi<1$.
+Hence the conditional mean of $\alpha$ is decreasing in $z$.
+Finite-history means converge in $L^1$ by the preceding contraction,
+so their limit has a decreasing version. The conditional next-host
+mean $g(z)=\exp(\sigma\phi z-\sigma^2\phi^2/2)$ is increasing.
+Conditional independence of the next innovation gives the required
+expectation as $\operatorname{Cov}(m(\xi_{t-1}),g(\xi_{t-1}))\leq0$.
+\end{proof}
+
+\begin{proposition}[Finite-order expansion at long stays]
+\label{prop:exact-mem-unbounded-long}
+Under Proposition~\ref{prop:exact-mem-unbounded-root}, fix the host
+law and put $\varepsilon=1-s$, $b_t=h_t-1$,
+$V=\mathbb E b_0^2$, $C_j=\mathbb E b_0b_{-j}$,
+$m_3=\mathbb E b_0^3$, $T_{12}=\mathbb E b_0b_{-1}^2$,
+$T_{21}=\mathbb E b_0^2b_{-1}$, and
+$T_{111}=\mathbb E b_0b_{-1}b_{-2}$. Then
+\begin{equation}
+\begin{split}
+ D&=A\varepsilon+B\varepsilon^2+O(\varepsilon^3),\\
+ A&=V/2+C_1,\\
+ B&=-A-C_2-T_{12}-T_{21}-T_{111}-m_3/3+\tfrac32A^2.
+\end{split}
+ \label{eq:exact-mem-unbounded-long}
+\end{equation}
+The remainder is at fixed host law, with no uniform claim over noise
+or memory parameters.
+\end{proposition}
+
+\begin{proof}
+Put $\mathcal L(z)=r(1,z)$ for $z>0$ and $\mathcal L(0)=0$.
+Scaling $U$ by $s$ gives
+$r(s,c)=\ln s+\mathcal L(c/s^2)$.
+We first construct a finite positive measure $\nu$ with
+\begin{equation}
+ \mathcal L(z)=\int_0^\infty\ln(1+zx)\,\nu(\mathrm d x),\qquad
+ \mu_k=\int_0^\infty x^k\,\nu(\mathrm d x).
+ \label{eq:exact-mem-spectral}
+\end{equation}
+Let $\mathbf J_N$ be the symmetric tridiagonal matrix on a path of
+$N$ vertices, with zero diagonal and off-diagonal entries
+$\sqrt{h_j}$, $1\leq j<N$. The polynomials $Q_0=Q_1=1$,
+$Q_N=Q_{N-1}+zh_{N-1}Q_{N-2}$ satisfy
+\begin{equation}
+ Q_N(z)=\det(\mathbf I-\mathrm i\sqrt z\,\mathbf J_N)
+       =\prod_{\lambda_j>0}(1+z\lambda_j^2),
+ \label{eq:exact-mem-continuant}
+\end{equation}
+where $\lambda_j$ are the eigenvalues of $\mathbf J_N$.
+The first equality follows by expanding the determinant, the second
+by pairing the positive and negative eigenvalues of the path.
+The stationary construction above holds also at $s=1$ for positive
+$c$, so $N^{-1}\mathbb E\ln Q_N(z)\to\mathcal L(z)$.
+
+For $\nu_N=N^{-1}\mathbb E\sum_{\lambda_j>0}\delta_{\lambda_j^2}$,
+\begin{equation}
+ \int x^k\,\nu_N(\mathrm d x)
+ =\frac{1}{2N}\mathbb E\operatorname{tr}\mathbf J_N^{2k},\qquad
+ \frac{N-1}{N}\mathbb E h_0^k
+ \leq\int x^k\,\nu_N(\mathrm d x)
+ \leq2^{2k-1}\mathbb E h_0^k.
+ \label{eq:exact-mem-trace}
+\end{equation}
+Indeed each closed walk crosses every edge an even number of times,
+so its weight is a degree-$k$ monomial in hosts. H\"older bounds its
+expectation by $\mathbb E h_0^k$. There are at most $N2^{2k}$ walks,
+and the two repeated crossings of each edge give the lower bound.
+The measures have mass at most $1/2$ and bounded first moment, hence
+are tight. Select a weakly convergent subsequence.
+Since $\ln(1+zx)/x\to0$ at infinity, the logarithm is uniformly
+integrable, giving \eqref{eq:exact-mem-spectral}.
+The fourth-moment upper bound passes by lower semicontinuity and
+makes the first three moments uniformly integrable. Enumerating
+walks of lengths two, four, and six gives
+\begin{equation}
+\begin{gathered}
+ \mu_1=1,\qquad \mu_2=\mathbb E h_0^2+2\mathbb E h_0h_1,\\
+ \mu_3=\mathbb E h_0^3+
+ 3\mathbb E(h_0^2h_1+h_0h_1^2+h_0h_1h_2),\qquad
+ \mu_4\leq128\mathbb E h_0^4.
+ \label{eq:exact-mem-spectral-moments}
+\end{gathered}
+\end{equation}
+Boundary terms vanish after division by $N$.
+Integrating the scalar remainder
+$|\ln(1+y)-y+y^2/2-y^3/3|\leq y^4/4$ for $y\geq0$ proves
+\begin{equation}
+ \mathcal L(z)=z-\frac{\mu_2z^2}{2}+\frac{\mu_3z^3}{3}+R_4(z),
+ \qquad |R_4(z)|\leq32\mathbb E h_0^4z^4.
+ \label{eq:exact-mem-spectral-remainder}
+\end{equation}
+This step uses a finite remainder rather than an infinite series.
+
+Write $c=\varepsilon q$. Uniformly on compact positive $q$ intervals,
+$r/\varepsilon=q-1+O(\varepsilon)$. Its signs bracket the unique root,
+so $q_*\to1$ and then $D=\ln q_*=O(\varepsilon)$.
+Substituting $z=\varepsilon\mathrm e^D/(1-\varepsilon)^2$ and the
+trial $D=A\varepsilon+B\varepsilon^2$ gives
+$A=(\mu_2-3)/2$ and
+$B=3A^2/2+5A+10/3-\mu_3/3$.
+Expanding the host moments in $b_t$ gives
+$\mu_2=3+2A$ and
+$\mu_3/3=10/3+6A+C_2+T_{12}+T_{21}+T_{111}+m_3/3$,
+which proves the displayed coefficients.
+For the root error set
+$f(\varepsilon,D)=r(1-\varepsilon,\varepsilon\mathrm e^D)/\varepsilon$.
+Then
+\begin{equation}
+ \partial_D f=\frac{z}{\varepsilon}
+       \int\frac{x}{1+zx}\,\nu(\mathrm d x).
+ \label{eq:exact-mem-root-slope}
+\end{equation}
+The integral tends uniformly to $\mu_1=1$ for bounded $D$ as
+$\varepsilon\downarrow0$, and $z/\varepsilon=
+\mathrm e^D/(1-\varepsilon)^2$ is bounded below there.
+Thus $\partial_D f$ is bounded away from zero near $D=0$.
+The trial residual in $f$ is $O(\varepsilon^3)$ by
+\eqref{eq:exact-mem-spectral-remainder}, so the mean value theorem
+gives the claimed $O(\varepsilon^3)$ root error.
+\end{proof}
+
+For gamma refresh, conditional moments and reversibility give
+$V=1/p$, $C_j=V\phi^j$, $m_3=2V^2$,
+$T_{12}=T_{21}=\phi m_3$, and $T_{111}=\phi^2m_3$. Hence
+\begin{equation}
+\begin{split}
+ A&=V(1/2+\phi),\\
+ B&=-V(1/2+\phi+\phi^2)-2V^2(1/3+2\phi+\phi^2)
+       +\tfrac32V^2(1/2+\phi)^2.
+\end{split}
+ \label{eq:exact-mem-refresh-coefficients}
+\end{equation}
+At $\phi=0$ this recovers $B=-1/(2p)-7/(24p^2)$ in
+Proposition~\ref{prop:exact-R6}. For lognormal autoregression,
+Gaussian exponential moments with $w=\sigma^2$ give
+\begin{equation}
+\begin{gathered}
+ V=\mathrm e^w-1,\qquad C_j=\mathrm e^{w\phi^j}-1,\qquad
+ m_3=\mathrm e^{3w}-3\mathrm e^w+2,\\
+ T_{12}=T_{21}=\mathrm e^{w(1+2\phi)}-\mathrm e^w-2\mathrm e^{w\phi}+2,\\
+ T_{111}=\mathrm e^{w(2\phi+\phi^2)}-2\mathrm e^{w\phi}
+                 -\mathrm e^{w\phi^2}+2.
+ \label{eq:exact-mem-lognormal-moments}
+\end{gathered}
+\end{equation}
+These expressions apply to either sign of $\phi$. In particular,
+$w=1/10$, $\phi=-3/4$ give
+$A=(\mathrm e^{1/10}-1)/2+\mathrm e^{-3/40}-1<-0.0191875$.
+To check the sign without numerical inference, sum the exponential
+series through degree four and bound its tail geometrically to obtain
+$\mathrm e^{1/10}<1.106$, and use
+$\mathrm e^{-3/40}\leq1-0.075+0.075^2/2=0.9278125$.
+Equation~\eqref{eq:exact-mem-unbounded-long} therefore gives $D<0$
+for sufficiently long stays in this negative-memory example.
+
+\begin{proposition}[Divergence of the long-stay series]
+\label{prop:exact-mem-zero-radius}
+Under Proposition~\ref{prop:exact-mem-unbounded-root}, suppose also
+that $h_0$ is unbounded above and $\mathbb E h_0^k<\infty$ for every
+positive integer $k$. At fixed host law, the right Taylor series of
+$\mathcal L(z)$ at $z=0$ and of $D(1-\varepsilon)$ at
+$\varepsilon=0$ both have zero radius of convergence. Both functions
+still have asymptotic expansions to every finite order. This applies
+to every gamma-refresh and lognormal autoregressive host in
+\eqref{eq:exact-mem-refresh}--\eqref{eq:exact-mem-lognormal}.
+\end{proposition}
+
+\begin{proof}
+For each $k$, the $(k+1)$st trace bound makes $x^k$ uniformly
+integrable on the same weakly convergent subsequence. Thus
+\begin{equation}
+ \mathbb E h_0^k\leq\mu_k\leq2^{2k-1}\mathbb E h_0^k,\qquad
+ \mathcal L^{(k)}(0+)=(-1)^{k+1}(k-1)!\mu_k.
+ \label{eq:exact-mem-zero-radius-moments}
+\end{equation}
+Differentiation under the integral and domination give the right
+derivatives. The integrated scalar logarithm remainder at order $m$
+is bounded by $\mu_{m+1}z^{m+1}/(m+1)$.
+Unboundedness implies $(\mathbb E h_0^k)^{1/k}\to\infty$, since
+for every $M$ with $\mathbb P(h_0>M)>0$ this root is at least
+$M\mathbb P(h_0>M)^{1/k}$. Hence $(\mu_k/k)^{1/k}\to\infty$,
+which gives zero radius for the Taylor series of $\mathcal L$.
+
+Parametrize the threshold near zero by
+\begin{equation}
+ s(z)=\mathrm e^{-\mathcal L(z)},\qquad
+ \varepsilon(z)=1-\mathrm e^{-\mathcal L(z)},\qquad
+ D(s(z))=\ln\frac{z}{\varepsilon(z)}-2\mathcal L(z).
+ \label{eq:exact-mem-series-inversion}
+\end{equation}
+Here $\varepsilon'(0+)=\mathcal L'(0+)=1$.
+The smooth one-sided inverse and the removable quotient
+$\varepsilon(z)/z=\int_0^1\varepsilon'(tz)\,\mathrm d t$
+give all right derivatives and finite-order expansions of $D$.
+If its formal Taylor series had positive radius, the formal series
+$z(\varepsilon)=\varepsilon\exp(D(1-\varepsilon))/(1-\varepsilon)^2$
+would converge with derivative one at zero. Its convergent inverse
+would make $\mathcal L(z)=-\ln(1-\varepsilon(z))$ a convergent
+formal series, a contradiction. The argument concerns Taylor
+coefficients and therefore also excludes convergence with a flat,
+nonanalytic correction. It makes no claim about holomorphy in a
+noise parameter at fixed interior $s$.
+\end{proof}
+
+\begin{proposition}[The distinct ring comparisons]
+\label{prop:exact-mem-ring}
+Consider a primitive geometric ring with one fluctuating transfer,
+log-host covariance $\sigma^2\phi^j$, and $0<\phi<1$.
+Write $\theta=\phi/(1-\phi)$ and $\gamma_n=\Gamma_n/\sigma^2$ for
+the second-order threshold coefficient in $n$ stages. The mean stays
+are at least one, and are not all one when $n>1$.
+For a fluctuating stay $a$ and a steady stay $b$,
+\begin{equation}
+ \gamma_2(a,b)>\gamma_1(a)=\frac1{2a}
+ \quad\Longleftrightarrow\quad
+ b<\frac{a(2a-1)\theta}{a+\theta}.
+ \label{eq:exact-mem-add}
+\end{equation}
+At fixed $a$, some $b\geq1$ and $\theta>0$ satisfy this inequality
+exactly when $a>1$. At fixed $\theta$ it additionally requires
+$(2a+1)(a-1)\theta>a$.
+A positive derivative $\partial_b\gamma_2$ somewhere on $b\geq1$
+is possible for sufficiently large $\theta$ exactly when
+$a>(3+\sqrt{17})/4$. At $a=1$ the algebraic peak lies in $(0,1/3)$,
+outside the physical range. For three stages $(1,b,c_3)$, a rise at
+short $b\geq1$ for $\phi$ sufficiently near one is possible exactly
+when $c_3>2$, with limiting peak
+\begin{equation}
+ b_{\max}\longrightarrow\frac{2c_3^2-c_3+1}{2c_3+3},
+ \qquad b_{\max}\longrightarrow\frac{46}{13}\quad(c_3=5).
+ \label{eq:exact-mem-third-peak}
+\end{equation}
+These are coefficient comparisons, with the small-noise limit taken first.
+\end{proposition}
+
+\begin{proof}
+From Proposition~\ref{prop:ring-steady}, put
+$Q_2=\theta(a+b)+ab$. Direct subtraction and differentiation give
+\begin{equation}
+\begin{split}
+ \gamma_2-\gamma_1
+ &=\frac{b[a(2a-1)\theta-b(a+\theta)]}{2a(a+b)Q_2},\\
+ \partial_b\gamma_2
+ &=-\frac{1+2\theta}{2(a+b)^2}
+   +\frac{\theta^2(a+\theta)}{Q_2^2}.
+ \label{eq:exact-mem-two-algebra}
+\end{split}
+\end{equation}
+The first denominator is positive. Its upper limit for admissible
+$b$ exceeds one exactly when $(2a+1)(a-1)\theta>a$, proving
+\eqref{eq:exact-mem-add} and its quantifiers.
+The ratio $Q_2/(a+b)$ increases strictly with $b$, with derivative
+$a^2/(a+b)^2$. The derivative in \eqref{eq:exact-mem-two-algebra}
+is positive exactly when this ratio is below
+$\theta\sqrt{2(a+\theta)/(1+2\theta)}$.
+At $b=0$ the derivative is $(2a-1)/(2a^2)>0$, whereas its large-$b$
+coefficient is $-[a+(2a+1)\theta]/[2(a+\theta)]<0$.
+There is therefore one algebraic peak. It exceeds one exactly when
+\begin{equation}
+ (a+1)(2a^2-3a-1)\theta^2
+       -2a(2a+1)\theta-a^2>0.
+ \label{eq:exact-mem-two-boundary}
+\end{equation}
+This is possible for large $\theta$ exactly at the stated critical $a$.
+For $a=1$, the derivative at $b=1/3$ equals
+$-9(10\theta+1)/[32(4\theta+1)^2]<0$, proving the sharper peak bound.
+At $\theta=0$, $\gamma_2=1/[2(a+b)]$ decreases directly.
+
+For the third stage, let $L_j$ be its geometric residence times.
+Their generating functions are
+$\mathbb E\phi^{L_j}=\phi/[\tau_j-\phi(\tau_j-1)]$.
+Successive returns to the fluctuating transfer form a renewal process,
+so the return sum is $R/(1-R)$, where
+$R=\prod_j\mathbb E\phi^{L_j}$. Multiplying the ring's per-step
+second-order loss by its generation time $T=\sum_j\tau_j$ gives
+$\gamma_n=(1+2\theta)/(2T)-R/(1-R)$.
+For $(1,b,c_3)$ this yields, without taking a memory limit,
+\begin{equation}
+ \gamma_3=\frac{1+2\theta}{2(1+b+c_3)}-\frac{\theta^3}{Q_3},\qquad
+ Q_3=(\theta+1)(\theta+b)(\theta+c_3)-\theta^3.
+ \label{eq:exact-mem-three}
+\end{equation}
+Write $S=1+c_3$, $u=(\theta+1)(\theta+c_3)$, and
+$v=\theta[(1+c_3)\theta+c_3]$, so $Q_3=ub+v$.
+The derivative is positive exactly when
+$Q_3/(S+b)<\sqrt{2\theta^3u/(1+2\theta)}$.
+This ratio is strictly increasing because
+$uS-v=(c_3^2+c_3+1)\theta+c_3(c_3+1)>0$.
+Thus a rise anywhere on $b\geq1$ requires a positive derivative at one.
+Its numerator, with positive denominator $2(c_3+2)^2Q_3(1)^2$, is
+\begin{equation}
+\begin{split}
+ &(c_3-2)(2c_3+1)(c_3+2)\theta^4
+ +(2c_3^3-8c_3^2-18c_3-6)\theta^3\\
+ &\hspace{1em}-(14c_3^2+12c_3+1)\theta^2
+             -(6c_3^2+2c_3)\theta-c_3^2.
+ \label{eq:exact-mem-three-boundary}
+\end{split}
+\end{equation}
+For $1\leq c_3\leq2$ this is strictly negative: its leading coefficient
+is nonpositive and all others are negative (use $2c_3^3\leq4c_3^2$).
+For $c_3>2$ its leading coefficient is positive, giving a rise for
+sufficiently large $\theta$.
+Expansion of the rational expression \eqref{eq:exact-mem-three},
+including its derivative on compact $b$ intervals, gives
+\begin{equation}
+\begin{gathered}
+ \lim_{\theta\to\infty}\gamma_3
+ =\frac{2bc_3+3b+3c_3+1}{2(1+b+c_3)^2},\\
+ \lim_{\theta\to\infty}\partial_b\gamma_3
+ =\frac{2c_3^2-c_3+1-(2c_3+3)b}{2(1+b+c_3)^3}.
+ \label{eq:exact-mem-three-limit}
+\end{gathered}
+\end{equation}
+The limiting derivative has one simple zero at
+\eqref{eq:exact-mem-third-peak}. Its signs on either side and the
+increasing ratio above locate the unique finite-memory peak near it
+for sufficiently large $\theta$, proving the peak limit.
+\end{proof}
+
+The diffusion index in Proposition~\ref{prop:ring-steady} is a separate
+comparison. Put $L=\ln R_0/\sigma^2$ and
+$E=2(\ln R_0-\Gamma)/(\mathcal T V)$, where $V$ is the second-order
+growth-variance rate. The identity
+\begin{equation}
+ E_2-E_1=\frac{2b}{1+2\theta}
+ \left[L-\frac{a\theta}{a\theta+b(a+\theta)}\right]
+ \label{eq:exact-mem-index}
+\end{equation}
+gives $E_2>E_1$ iff $b>[a\theta/(a+\theta)](1-L)/L$ for $0<L<1$.
+This scalar index comparison is checked by \texttt{Dobson.Parking.E2\_gt\_E1\_iff}
+in Lean; it is not an inequality for $\Gamma$. If $L\geq1/(2a)$, its reversal threshold is at most
+$a(2a-1)\theta/(a+\theta)$, so a reversal at $b\geq1$ again needs $a>1$.
+
+\subsubsection{Uniform decrease for the bounded Markov host}\label{subsec:exact-app-gap1}
+% Added 2026-11-15 (memfold3). Sources: gap1/gap1_proof.md,
+% gap1/coefficients.txt; verification/gap1-check/gap1-check.md.
+We prove Proposition~\ref{prop:exact-memory-uniform}. The argument controls a finite series and its entire remainder uniformly in \(0<\delta<1\) and \(0\leq\phi<1\). Numerical signs outside this interval do not enter the proof.
+
+\begin{proof}
+Write \(Q=c/s^2\), distinct from the exit fraction \(q=1-s\), and \(U_t=s(1+w_t)\). Proposition~\ref{prop:exact-mem-bounds} gives the stationary real ratio, smooth threshold, and positive growth slope. Thus
+\begin{equation}\label{eq:exact-gap1-scaling}
+ w_t=\frac{Q(1+\delta Z_t)}{1+w_{t-1}},\qquad
+ R(Q)=\mathbb E\log(1+w_t),\qquad
+ V(Q)=QR'(Q)>0,\qquad r=\log s+R(Q).
+\end{equation}
+On the threshold \(s=\mathrm e^{-R}\). Differentiating \(D=\log Q+2\log s-\log(1-s)\) there gives
+\begin{equation}\label{eq:exact-gap1-sign}
+ D'(s)=-\frac{G(Q)}{s(1-s)V(Q)},\qquad
+ G=1-\mathrm e^{-R}-(2-\mathrm e^{-R})QR'(Q).
+\end{equation}
+
+Hold real \(\phi\) fixed, and allow complex \(|Q|\leq1/10\), \(|\delta|\leq6/5\). The disk \(|w|\leq1/3\) is invariant, since the image modulus is at most \(33/100<1/3\), and the derivative in the entering \(w\) is at most \(99/200<1/2\). Strictness extends the bounds to a neighborhood of the closed parameter disks. Uniform pullback convergence yields a holomorphic stationary ratio and permits expectation and differentiation of its principal logarithm. Differentiating the recursion gives
+\(Qw_{t,Q}=w_t-b_tQw_{t-1,Q}\), where
+\(b_t=Q(1+\delta Z_t)/(1+w_{t-1})^2\).
+Consequently,
+\begin{equation}\label{eq:exact-gap1-disk}
+ |Qw_Q|\leq2/3,\quad |R|\leq\log(3/2),\quad
+ |QR'|\leq1,\quad |G|\leq\tfrac12+\tfrac72=4.
+\end{equation}
+Host sign symmetry makes \(G\) even in \(\delta\). At \(\delta=0\),
+\(1+w=(1+\sqrt{1+4Q})/2\), and substitution gives \(G=0\).
+The removable quotient \(G/\delta^2\) therefore has modulus at most
+\(4/(6/5)^2=25/9\) by the maximum modulus principle. With
+\(G=\sum_{n\geq0}g_nQ^n\), Cauchy's estimate gives
+\begin{equation}\label{eq:exact-gap1-tail}
+ |g_n|\leq\frac{25}{9}\delta^2 10^n,\qquad
+ \left|G-\sum_{n=0}^8g_nQ^n\right|
+ \leq\frac{25}{9}\delta^2\frac{(10Q)^9}{1-10Q}
+ \quad(0<Q<1/10).
+\end{equation}
+The factor \(\delta^2\) is retained in the entire tail.
+
+For completeness, the finite coefficient calculation is specified by a triangular recurrence. Let \(M_{k,n,j}=[Q^n]\mathbb E[w_t^k\mid Z_t=j]\), \(j\in\{-1,1\}\). Put \(M_{0,0,j}=1\), \(M_{0,n,j}=0\) for \(n>0\), and \(M_{k,n,j}=0\) for \(k>n\). The symmetric chain is reversible, with \(P_{ji}=(1+\phi ji)/2\). Conditioning on its backward step gives, for \(1\leq k\leq n\),
+\begin{equation}\label{eq:exact-gap1-moments}
+ M_{k,n,j}=(1+\delta j)^k\sum_{m=0}^{n-k}(-1)^m
+ {k+m-1\choose m}\sum_{i=\pm1}P_{ji}M_{m,n-k,i}.
+\end{equation}
+All terms on the right have smaller \(Q\) degree. If \(R=\sum_{n\geq1}r_nQ^n\) and \(\mathrm e^{-R}=\sum_{n\geq0}e_nQ^n\), then
+\begin{equation}\label{eq:exact-gap1-coefficients}
+ \begin{gathered}
+ r_n=\frac12\sum_{k=1}^n\frac{(-1)^{k+1}}k(M_{k,n,-1}+M_{k,n,1}),\qquad e_0=1,\\
+ e_n=-\frac1n\sum_{k=1}^nkr_ke_{n-k},\qquad
+ g_0=g_1=0,\qquad g_n=-e_n-2nr_n+\sum_{k=1}^ne_{n-k}kr_k.
+ \end{gathered}
+\end{equation}
+Iterating these exact rational recurrences through degree eight gives
+\(g_2=\delta^2(1/2+\phi)\) and
+\(g_3=-\delta^2(4+8\phi+2\phi^2)\).
+Every nonzero coefficient of \(g_4,g_6,g_8\) as polynomials in \(\delta,\phi\) is positive, and those of \(g_5,g_7\) are negative. The sums of absolute coefficients of \(g_5/\delta^2\) and \(g_7/\delta^2\) are \(3531/4\) and \(104991/2\), respectively. These are finite polynomial identities obtained from \eqref{eq:exact-gap1-moments}--\eqref{eq:exact-gap1-coefficients}, not signs inferred from numerical samples.
+For \(0\leq\phi\leq1\), \(Q\leq1/30\),
+\((g_2+Qg_3)/\delta^2\geq1/2-4Q+\phi(1-10Q)\geq1/2-4Q\).
+Discarding the nonnegative even-degree terms and subtracting the full tail gives
+\begin{equation}\label{eq:exact-gap1-margin}
+ \begin{split}
+ \frac{G}{\delta^2Q^2}
+ &\geq\frac12-4Q-\frac{3531}{4}Q^3-\frac{104991}{2}Q^5
+       -\frac{25}{9}\frac{10^9Q^7}{1-10Q}\\
+ &\geq\frac{185403593}{1312200000}>0.14.
+ \end{split}
+\end{equation}
+The lower expression decreases on \([0,1/30]\), and the fraction is its exact value at \(1/30\). This proves the sign whenever the threshold has \(Q\leq1/30\).
+
+For real parameters \(0\leq w_t\leq2Q\). A lower chord bound for the concave function \(h\mapsto\log(1+Qh/(1+2Q))\), using \(0\leq h\leq2\) and \(\mathbb E h=1\), gives
+\begin{equation}\label{eq:exact-gap1-stay}
+ R\geq\tfrac12\log\frac{1+4Q}{1+2Q},\qquad
+ Q\leq\frac{1-s^2}{4s^2-2}\quad(s>1/\sqrt2).
+\end{equation}
+The last bound equals \(1/30\) at \(s=4/\sqrt{17}\) and decreases thereafter. Equations~\eqref{eq:exact-gap1-sign} and~\eqref{eq:exact-gap1-margin} prove strict decrease including that endpoint, uniformly over the stated \(\delta,\phi\) ranges. The argument supplies no sign for the remaining \(s\) interval.
+\end{proof}
+
+\subsubsection{Interval certification of the reported computations}\label{subsec:exact-app-certification}
+% Sources: gap4/gap4_report.md, including both dated corrections;
+% verification/gap4-check/gap4-check.md. Certification scope is finite as stated.
+The certification behind Remark~\ref{rem:exact-certification} combines outward-rounded arithmetic with analytic remainder bounds. The recorded run contains 70 certified records and one explicitly open continuous-Gaussian record. A record may contain several cases. Independent interval implementations confirmed the reported enclosures. This is certification of the listed computations, not a theorem on every parameter value.
+
+\paragraph{Series and derivative tails.}
+Let \(\lambda=(s+\sqrt{s^2+4c})/2\), \(b=c/\lambda^2\), and \(U=\lambda(1+z)\). Then
+\(z_t=b(\delta Z_t-z_{t-1})/(1+z_{t-1})\), and write
+\(G(b,\delta)=\mathbb E\log(1+z)\).
+For a real interval \(I=[b_-,b_+]\subset(0,1)\), choose
+\(\eta=\min(b_-,1-b_+)/100\), \(B=b_++\eta<1\), and
+\(\mathcal R=(1-B)^2/(8B)\).
+On \(|b|\leq B\), \(|\delta|\leq\mathcal R\), the disk
+\(|z|\leq(1-B)/2\) is invariant and contracts with factor at most
+\((1+6B+B^2)/[2(1+B)^2]<1\). Thus \(G\) is jointly holomorphic and \(|G|<\log2\). For \(u=|\delta|/\mathcal R<1\), truncation at amplitude degree \(N\) has tails
+\begin{equation}\label{eq:exact-cert-tails}
+ T_N=\log2\,\frac{u^{N+1}}{1-u},\qquad
+ |\partial_b^j(G-G_N)|\leq j!T_N/\eta^j\quad(j=0,1,2).
+\end{equation}
+The derivative bounds follow from Cauchy on every radius-\(\eta\) disk centered in \(I\).
+
+The coefficients can be evaluated without an invariant-density approximation. Let
+\(M_{k,n,j}=[\delta^n]\mathbb E[z_t^k\mid Z_t=j]\), with the same zero and degree initial conditions as in \eqref{eq:exact-gap1-moments}. Expanding the ratio map gives
+\begin{equation}\label{eq:exact-cert-moments}
+ \begin{split}
+ M_{k,n,j}-(-b)^k\sum_iP_{ji}M_{k,n,i}
+ =b^k\!\sum_{\substack{0\leq a\leq k,\ 0\leq m\leq n-k\\(a,m)\ne(k,0)}}
+ {k\choose a}(-1)^{a+m}{k+m-1\choose m}
+ j^{k-a}\sum_iP_{ji}M_{a+m,n-k+a,i}.
+ \end{split}
+\end{equation}
+For each increasing \(n\), solve in decreasing \(k\). The right side uses either lower amplitude degree or larger \(k\) at degree \(n\). The matrix \(\mathbf I-(-b)^k\mathbf P\) is invertible for \(|b|<1\). Expanding \(\log(1+z)\) and averaging the two conditional moments gives \(G_N\). Interval arithmetic encloses this finite calculation and \eqref{eq:exact-cert-tails} encloses everything omitted.
+
+At fixed \(s\), the root equation is \(r(b)=\log[s/(1-b)]+G(b,\delta)=0\). A verified lower slope \(r_b\geq m>0\) near \(b_0\), with \(|r(b_0)|<m d\), proves opposite endpoint signs at \(b_0\pm d\). Uniqueness follows from Proposition~\ref{prop:exact-mem-bounds}. On this bracket,
+\begin{equation}\label{eq:exact-cert-derivative}
+ \begin{gathered}
+ D=\log b+2\log\frac{s}{1-b}-\log(1-s),\\
+ J=b-1+s+b(2-s)(1-b)G_b,\qquad
+ D_s=\frac{J}{s(1-s)b[1+(1-b)G_b]}.
+ \end{gathered}
+\end{equation}
+For stationary points, substitute \(s(b)=(1-b)\mathrm e^{-G}\) in \(J\). The second-derivative tail in \eqref{eq:exact-cert-tails} encloses \(J_b\). A strict sign for \(J_b\) and opposite endpoint signs for \(J\) certify a unique local zero, without asserting global uniqueness of extrema.
+
+\paragraph{Exact-operator bounds.}
+For moderate and small \(s\), define \(v=\log U\),
+\(f_j(v)=\log[s+c(1+\delta j)\mathrm e^{-v}]\), and the transition operator
+\((\mathcal K Q)_i(v)=\sum_jP_{ij}Q_j(f_j(v))\).
+Choose bounded polynomial test functions \(Q_i\) on a compact interval verified to be forward invariant. Stationarity cancels the added operator difference:
+\begin{equation}\label{eq:exact-cert-residual}
+ H_i(v)=v+(\mathcal K Q)_i(v)-Q_i(v),\qquad
+ \min_{i,v}H_i(v)\leq r\leq\max_{i,v}H_i(v).
+\end{equation}
+Collocation selects the polynomial coefficients, which are then fixed as exact dyadic numbers. It supplies no assumption about the stationary measure. After rescaling the interval to \([-1,1]\), cover it by cells of center \(x_0\) and halfwidth \(d\). Taylor's theorem encloses each component by its center value plus or minus
+\begin{equation}\label{eq:exact-cert-cell}
+ \sum_{j=1}^{m-1}\left|\frac{H^{(j)}(x_0)}{j!}\right|d^j
+ +\sup_{\mathrm{cell}}\left|\frac{H^{(m)}}{m!}\right|d^m.
+\end{equation}
+Interval evaluation over the whole cell bounds the final derivative. The cells cover the entire invariant interval, so no spatial tail remains. If \(\beta=c_{\min}(1-\delta)/[s^2+c_{\min}(1-\delta)]\), the slope bound \eqref{eq:exact-mem-slope} converts a rate bound \(|r|\leq e\) at a trial root into a log-threshold radius \(3e/\beta\), provided that radius stays inside the interval on which the slope was bounded. This inclusion is checked for each certificate.
+
+\paragraph{Finite Gaussian chains and saved tables.}
+For the 12- and 20-state Gaussian calculations, disjoint sign brackets enclose all roots of the probabilists' Hermite polynomial \(He_n\). The weights \((n-1)!/[nHe_{n-1}(x_j)^2]\), row-normalized transition matrix, stationary probabilities \(\pi_j\), and multipliers \(h_j(\sigma)=\mathrm e^{\sigma x_j}/\sum_i\pi_i\mathrm e^{\sigma x_i}\) are enclosed. If \(X=\max_j|x_j|\), then on
+\begin{equation}\label{eq:exact-cert-gaussian}
+ |\sigma|\leq\sigma_{\max}=X^{-1}\log(1+\mathcal R/(2+\mathcal R)),
+ \quad E=\mathrm e^{X|\sigma|}-1,\quad
+ |h_j-1|\leq\frac{2E}{1-E}\leq\mathcal R.
+\end{equation}
+The same contraction gives an amplitude tail
+\(\log2\,(|\sigma|/\sigma_{\max})^{N+1}/(1-|\sigma|/\sigma_{\max})\).
+The finite moment equations, their interval linear solves, this tail, and the slope bound with \(\min_jh_j\) in place of \(1-\delta\) certify the six thresholds and their secants at \(\phi=-0.35\), \(\sigma=10^{-5}\), \(s=s_*(-0.35),s_*(-0.35)\pm0.03\).
+No bound between either finite chain and the continuous Gaussian operator follows from the difference between 12 and 20 states. That discretization error remains open.
+
+For the saved simulation tables, each decimal difference and paired standard error was enclosed before applying the rules \(\Delta D+4\mathrm{SE}<0\) for decline and \(\Delta D-4\mathrm{SE}>0\) for rise. A curve was classified as nonmonotone when both occurred. Integer tallying certified 112 of 112 primary two-stage curves and 15 of 24 three-stage curves. The smallest distance from a decision boundary exceeds \(1.4645\times10^{-6}\). This certifies arithmetic conditional on the saved estimates, not sampling error, finite-path bias, simultaneous coverage, or simulation roundoff.
+
+\paragraph{Corrections dated 15 November 2026.}
+Two finite-amplitude stationary points at \(\phi=-0.35\) had been computed as central-secant zeros with halfwidth \(2\times10^{-5}\). The true derivative zeros have the certified enclosures
+\begin{equation}\label{eq:exact-cert-corrections}
+ \begin{aligned}
+ \delta=0.004:\quad s_{\mathrm{stat}}&\in[0.599487404631930049609566\ \pm\ 2.93\times10^{-25}],\\
+ \delta=0.002:\quad s_{\mathrm{stat}}&\in[0.599495940375631125891313\ \pm\ 2.26\times10^{-25}].
+ \end{aligned}
+\end{equation}
+Here \([m\pm r]\) means the closed interval \([m-r,m+r]\), not a standard error. The corresponding displacement ratio from \(s_*(-0.35)\) lies in \([4.000202980728363138046\pm3.91\times10^{-22}]\). The discrepancy was caused by replacing a derivative with a finite secant, not by arithmetic precision. Separately, converting the critical mean stay \(a_{\mathrm{crit}}=(3+\sqrt{17})/4\) gives the staying probability \(1-1/a_{\mathrm{crit}}=(5-\sqrt{17})/2\), approximately \(0.438447\). A denominator of four in that conversion was a transcription error. The printed critical mean stay and its proof are unchanged.
+
+\paragraph{Open problems.}
+GAP~1 is proved on \(4/\sqrt{17}\leq s<1\) for every \(0<\delta<1\), \(0\leq\phi<1\) by Proposition~\ref{prop:exact-memory-uniform}. Global decrease on the remaining interval \(0<s<4/\sqrt{17}\) is open. GAP~2 is closed by Proposition~\ref{prop:exact-mem-small}. GAP~3 is partly closed by Propositions~\ref{prop:exact-mem-unbounded-root}--\ref{prop:exact-mem-zero-radius}. Their finite-order long-stay expansions are asymptotic, not convergent. Extensions of memA P5's quantitative derivative interval, P6's small-staying limit, and P7's noise-parameter holomorphy remain open. The gamma positivity result is restricted to the value-refresh kernel. GAP~4 is closed for the listed bounded-host computations, proof constants, alternating-host values, finite-state Gaussian calculations, and saved-table arithmetic. Continuous Gaussian discretization and stochastic simulation error remain open.

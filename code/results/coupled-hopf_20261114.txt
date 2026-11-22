@@ -1,0 +1,25 @@
+[PASS] L0 the routine reproduces the three-stage ring: l1 = -0.096225044865 (referees: -0.096225044865)
+      V, logistic: 300 parameter sets with a boundary, from 7092 drawn
+      V, no self-regulation: 300 parameter sets with a boundary, from 1235 drawn
+      M, logistic: 300 parameter sets with a boundary, from 5206 drawn
+      M, no self-regulation: 300 parameter sets with a boundary, from 695 drawn
+[PASS] L1 a purely imaginary pair at every boundary used: largest |Re| / largest modulus = 2.5e-16
+
+      sign of the first Lyapunov coefficient at the boundaries (negative: a small stable cycle is born)
+        V, self-regulated host below its peak, lower end of the island (long stage): negative 300, positive 0 of 300
+        V, self-regulated host below its peak, upper end of the island (short stage): negative 300, positive 0 of 300
+        V, no self-regulation, critical length: negative 300, positive 0 of 300
+        M, self-regulated host below its peak, lower end of the island (long stage): negative 300, positive 0 of 300
+        M, self-regulated host below its peak, upper end of the island (short stage): negative 265, positive 35 of 300
+        M, no self-regulation, critical length: negative 121, positive 179 of 300
+
+      amplitude just inside the unstable side, six supercritical boundaries
+        V, lower end of the island (long stage): predicted relative amplitude 0.341, integrated 0.342 [ok]
+        V, upper end of the island (short stage): predicted relative amplitude 0.348, integrated 0.351 [ok]
+        V, upper end of the island (short stage): predicted relative amplitude 0.464, integrated 0.467 [ok]
+        V, upper end of the island (short stage): predicted relative amplitude 0.768, integrated 0.782 [ok]
+        V, upper end of the island (short stage): predicted relative amplitude 2.046, integrated 2.310 [ok]
+        V, lower end of the island (long stage): predicted relative amplitude 0.611, integrated 0.623 [ok]
+[PASS] L2 the cycle born at a supercritical boundary has the size the coefficient predicts: 6 cases
+
+ALL CHECKS PASSED

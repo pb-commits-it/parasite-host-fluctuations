@@ -1,0 +1,50 @@
+% Shared, unscaled Springer artwork style. Compile from this directory.
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{sansmathfonts}
+\usepackage{tgheros}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath}
+% sansmath supplies Heros Latin letters; use sans fonts for Greek and symbols too.
+\SetSymbolFont{letters}{sans}{OML}{cmssm}{m}{it}
+\SetSymbolFont{symbols}{sans}{OMS}{cmsssy}{m}{n}
+\SetSymbolFont{largesymbols}{sans}{OMX}{cmssex}{m}{n}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+% Keep subscripts, superscripts and log tick exponents legible too.
+\DeclareMathSizes{8.5}{8.5}{8}{8}
+\DeclareMathSizes{9}{9}{8}{8}
+\DeclareMathSizes{10}{10}{8}{8}
+\AtBeginDocument{\sffamily\fontsize{9}{11}\selectfont\sansmath}
+\tikzset{every picture/.append style={font=\sffamily\fontsize{9}{11}\selectfont,
+  line width=0.5pt},
+  every node/.append style={font=\sffamily\fontsize{9}{11}\selectfont}}
+\pgfplotsset{
+ every axis/.append style={
+   font=\sffamily\fontsize{9}{11}\selectfont,
+   tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+   label style={font=\sffamily\fontsize{9}{11}\selectfont},
+   title style={font=\sffamily\fontsize{9}{11}\selectfont},
+   legend style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+   axis line style={line width=0.5pt},
+   tick style={line width=0.4pt,black},
+   major tick style={line width=0.4pt,black},
+   minor tick style={line width=0.4pt,black},
+   grid style={line width=0.4pt,black!20},
+   major grid style={line width=0.4pt,black!20},
+   minor grid style={line width=0.4pt,black!20},
+   error bars/error bar style={line width=0.5pt},
+   error bars/error mark options={line width=0.5pt,mark size=2pt},
+ }}
+% Fixed page width, with no \resizebox or graphic scaling. Abort if art overflows.
+\newsavebox{\jmbartwork}
+\newenvironment{jmbfigure}[1]{%
+  \def\jmbwidth{#1}\begin{lrbox}{\jmbartwork}%
+}{%
+  \end{lrbox}%
+  \typeout{JMB artwork width: \the\wd\jmbartwork; target: \jmbwidth}%
+  \ifdim\wd\jmbartwork>\jmbwidth\relax
+    \PackageError{jmb-artwork}{Artwork exceeds target width}{Reduce axis width or reflow labels; do not scale fonts.}%
+  \fi
+  \makebox[\jmbwidth][c]{\usebox{\jmbartwork}}%
+}

@@ -1,0 +1,9 @@
+[ok] S1 shared regulation: eigenvalues a[(1 - ln R0/n) w - 1]: 300 random cases, n from 1 to 9: largest difference 3.2e-10 a
+[ok] S2 shared regulation: return rate ln R0/tau for ln R0 <= n; unstable above ln R0 = 2n (n even), n(1 + sec(pi/n)) (n odd): thresholds in ln R0 by n: 2: 4.00, 3: 9.00, 4: 8.00, 5: 11.18, 6: 12.00, 7: 14.77, 8: 16.00, 9: 18.58
+[ok] S3 one regulated transfer: unstable above ln R0 = 1 + sec^n(pi/n), never above the shared threshold: one transfer against shared, by n: 3: 9.00 against 9.00, 4: 5.00 against 8.00, 5: 3.89 against 11.18, 6: 3.37 against 12.00, 7: 3.08 against 14.77, 8: 2.88 against 16.00, 9: 2.75 against 18.58
+[ok] S4 nonlinear model, n = 4, ln R0 = 6: shared regulation settles, one-stage regulation oscillates: relative amplitude at the end of the run 2.1e-10 (shared) and 0.82 (one transfer)
+[ok] S5 primary's blind thresholds and eigenvalues = ours; its alternating steady state exists and is stable just above the threshold: thresholds n = 1 to 12 identical: True; eigenvalues, 200 random cases, largest difference 4.0e-10 a; alternating state residual 5.3e-13, stable for n = 2, 4, 6, 8: True
+[ok] S6 odd rings just beyond the critical value settle to a small oscillation whose amplitude follows a square-root law: n = 3: relative amplitude 0.283 and 0.577 at 2% and 8% beyond the critical value (ratio 2.04); n = 5: relative amplitude 0.288 and 0.549 at 2% and 8% beyond the critical value (ratio 1.90)
+[ok] S7 the first Lyapunov coefficient of the odd-ring bifurcation, computed from the standard formula, is negative and equals the referee's expression: odd n = 3 to 31: all negative: True; largest relative difference from the referee's expression 6.0e-15; l1(3) = -0.096225044865, l1(5) = -0.462090907898; intermediate expression against the rational one 6.7e-16; n = 3: predicted relative amplitude 0.277, integrated 0.283; n = 5: predicted relative amplitude 0.288, integrated 0.288
+
+ALL CHECKS PASSED

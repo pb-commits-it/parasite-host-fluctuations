@@ -1,0 +1,99 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+\IfFileExists{figures/data/ring-1.csv}{%
+  \def\ringonecsv{figures/data/ring-1.csv}%
+}{%
+  \def\ringonecsv{data/ring-1.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{groupplot}[
+  group style={
+    group size=1 by 3,
+    vertical sep=5.5mm,
+  },
+  width=76mm,
+  height=38mm,
+  scale only axis=false,
+  xmin=1,
+  xmax=200,
+  xtick={1, 50, 100, 150, 200},
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  clip=true,
+]
+
+\nextgroupplot[
+  ymin=0,
+  ymax=0.068,
+  ytick={0, 0.02, 0.04, 0.06},
+  yticklabels={$0$, $0.02$, $0.04$, $0.06$},
+  xticklabels={},
+  scaled y ticks=false,
+  legend columns=2,
+  legend style={
+    at={(0.5,1.05)},
+    anchor=south,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    column sep=4mm,
+    row sep=0.5pt,
+  },
+]
+\addlegendimage{solid, line width=0.95pt, black}
+\addlegendentry{$\Gamma/\sigma^2$}
+\addlegendimage{dashed, line width=0.75pt, black}
+\addlegendentry{upper band}
+\addlegendimage{dotted, line width=0.85pt, black}
+\addlegendentry{lower band}
+\addlegendimage{dashdotted, line width=0.65pt, darkgray}
+\addlegendentry{one stage $1/(2a)$}
+\addplot[dashdotted, line width=0.65pt, darkgray, forget plot] table[col sep=comma, x=b, y=one_stage] {\ringonecsv};
+\addplot[dotted, line width=0.85pt, black, forget plot] table[col sep=comma, x=b, y=low_band] {\ringonecsv};
+\addplot[solid, line width=0.95pt, black, forget plot] table[col sep=comma, x=b, y=g_phi0] {\ringonecsv};
+\node[anchor=north east, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.97,0.95) {(a) $\phi = 0$};
+
+\nextgroupplot[
+  ymin=0,
+  ymax=0.148,
+  ylabel={Second-order loss $\Gamma/\sigma^2$},
+  ytick={0, 0.05, 0.10, 0.14},
+  yticklabels={$0$, $0.05$, $0.10$, $0.14$},
+  xticklabels={},
+  scaled y ticks=false,
+]
+\addplot[dashdotted, line width=0.65pt, darkgray] table[col sep=comma, x=b, y=one_stage] {\ringonecsv};
+\addplot[dotted, line width=0.85pt, black] table[col sep=comma, x=b, y=low_band] {\ringonecsv};
+\addplot[dashed, line width=0.75pt, black] table[col sep=comma, x=b, y=up_phi05] {\ringonecsv};
+\addplot[solid, line width=0.95pt, black] table[col sep=comma, x=b, y=g_phi05] {\ringonecsv};
+\node[anchor=north east, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.97,0.95) {(b) $\phi = 0.5$};
+
+\nextgroupplot[
+  ymin=0,
+  ymax=0.26,
+  xlabel={Steady-stage lineage stay $b$ (steps)},
+  ytick={0, 0.05, 0.10, 0.15, 0.20, 0.25},
+  yticklabels={$0$, $0.05$, $0.10$, $0.15$, $0.20$, $0.25$},
+  scaled y ticks=false,
+]
+\addplot[dashdotted, line width=0.65pt, darkgray] table[col sep=comma, x=b, y=one_stage] {\ringonecsv};
+\addplot[dotted, line width=0.85pt, black] table[col sep=comma, x=b, y=low_band] {\ringonecsv};
+\addplot[dashed, line width=0.75pt, black] table[col sep=comma, x=b, y=up_phi09] {\ringonecsv};
+\addplot[solid, line width=0.95pt, black] table[col sep=comma, x=b, y=g_phi09] {\ringonecsv};
+\node[anchor=north east, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.97,0.95) {(c) $\phi = 0.9$};
+
+\end{groupplot}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

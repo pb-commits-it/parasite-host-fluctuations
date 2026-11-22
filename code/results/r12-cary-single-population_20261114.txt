@@ -1,0 +1,150 @@
+R12: Cary Institute plots, one population with hosts and infection measured together.  Started 2026-11-14 09:50:30 CST.
+A pattern check on one landscape; not a test of the predicted loss of R0.  Protocol: protocols/R12-cary-single-population.md
+Files read: data/raw/cary_lyme/dryad_d1c8046_forest_food_web_2018/Lyme_Study_Dataset.csv
+            data/raw/cary_lyme/figshare_31872853_ecology_of_lyme_2026/Full_dataset_20260326.csv
+
+0. Code checks that do not touch the data
+  K1  sd 1.290994448736 (hand 1.290994448736); r1 0.327326835354 from 3 pairs (hand 0.327326835354)   [ok]
+  K2  alternating series: bootstrap sd in [0.512989176043, 0.512989176043] (exact 0.512989176043); r1 = -1.000000 to -1.000000 in 1998 resamples (exact -1)   [ok]
+  K3  within-plot slope, synthetic: 0.409045300628 against least squares with dummies 0.409045300628   [ok]
+
+1. What was read
+  Dryad file: 174 rows, plots ['GC', 'GX', 'HC', 'HX', 'TC', 'TX'], years 1987-2015
+  Figshare file: 195 rows (1 without a plot label, left out), plots ['GC', 'GE', 'HC', 'HE', 'TC', 'TE'], years 1991-2026
+  NIP (share of questing nymphs infected), by how the value was obtained (plot-years):
+    fluorescence only   73   years 1995-2006, 2009
+    PCR only             7   years 2007-2008
+    both, weighted      34   years 2008-2013
+    other                0   years none
+    largest |NIP - value rebuilt from the assay columns| = 7.77e-16
+    corrected fluorescence share / (infected / tested): 1.2857 to 1.2857 over 107 plot-years
+    nymphs tested per plot and year (both assays): least 3, median 53, most 173
+
+2. Part A: ranges (no hypothesis).  sd = standard deviation of ln values across years; r1 = correlation with the next year.
+   Intervals: 2,000 resamples of blocks of two consecutive years, the same years for every plot; seed 20261114.
+
+  PRIMARY SOURCE: Dryad file (README pp. 1-2)
+
+  A1  mice: PL_grid, Jolly-Seber estimate per 2.25-ha grid at 15 August
+  calendar span 1991-2015 (25 years); each resample draws 13 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2015             21     - -                       1.027  [0.670, 1.277]    -0.171    20  [-0.661, 0.590]
+  GX    1996, 1998-2015       19     - 1997                    0.977  [0.683, 1.225]    -0.096    17  [-0.706, 0.676]
+  HC    1991-2015             24  1996 -                       1.108  [0.806, 1.321]    -0.105    22  [-0.559, 0.471]
+  HX    1996, 1998-2015       19     - 1997                    0.898  [0.632, 1.080]    -0.036    17  [-0.668, 0.742]
+  TC    1991-2015             25     - -                       1.129  [0.757, 1.484]    -0.153    24  [-0.516, 0.233]
+  TX    1996, 1998-2015       19     - 1997                    1.045  [0.790, 1.213]    -0.080    17  [-0.559, 0.634]
+  mean of the six within-plot values                                  1.030  [0.762, 1.217]    -0.107        [-0.537, 0.486]
+  mean across the six plots, then ln; years with all six: 1996, 1998-2015 (n = 19, zeros 0)
+                                                                      0.999  [0.716, 1.182]    -0.080    17  [-0.607, 0.705]
+
+  A2  chipmunks: TS_grid, Jolly-Seber estimate per 2.25-ha grid at 15 August
+  calendar span 1991-2015 (25 years); each resample draws 13 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2015             21     - -                       0.486  [0.320, 0.605]     0.371    20  [-0.359, 0.838]
+  GX    1996-1997, 1999-2015  19     - 1998                    0.762  [0.488, 0.956]     0.273    17  [-0.327, 0.807]
+  HC    1991-2015             24  1996 -                       1.111  [0.520, 1.505]     0.005    22  [-0.517, 0.673]
+  HX    1996-1997, 1999-2015  19     - 1998                    0.603  [0.313, 0.869]    -0.217    17  [-0.701, 0.692]
+  TC    1991-1992, 1994-2015  24     - 1993                    0.959  [0.492, 1.294]    -0.112    22  [-0.753, 0.739]
+  TX    1996-1997, 1999-2015  19     - 1998                    0.744  [0.379, 1.064]    -0.305    17  [-0.897, 0.639]
+  mean of the six within-plot values                                  0.778  [0.526, 0.916]     0.003        [-0.335, 0.440]
+  mean across the six plots, then ln; years with all six: 1996-1997, 1999-2015 (n = 19, zeros 0)
+                                                                      0.461  [0.258, 0.573]    -0.034    17  [-0.685, 0.770]
+
+  A3  nymphs: DON, questing nymphs per m2 of drag area at the seasonal peak
+  calendar span 1991-2015 (25 years); each resample draws 13 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2015             21     - -                       0.803  [0.620, 0.943]    -0.513    20  [-0.876, 0.008]
+  GX    1995-2015             21     - -                       1.047  [0.688, 1.339]    -0.035    20  [-0.659, 0.620]
+  HC    1991-2015             25     - -                       0.775  [0.592, 0.873]    -0.206    24  [-0.707, 0.360]
+  HX    1995-2015             21     - -                       0.764  [0.629, 0.870]    -0.436    20  [-0.797, 0.014]
+  TC    1991-2015             25     - -                       0.864  [0.622, 0.975]     0.035    24  [-0.497, 0.469]
+  TX    1995-2015             21     - -                       0.744  [0.522, 0.864]    -0.263    20  [-0.822, 0.335]
+  mean of the six within-plot values                                  0.833  [0.692, 0.898]    -0.236        [-0.594, 0.165]
+  mean across the six plots, then ln; years with all six: 1995-2015 (n = 21, zeros 0)
+                                                                      0.695  [0.556, 0.772]    -0.279    20  [-0.793, 0.307]
+
+  LONGER RECORD, FOR COMPARISON: Figshare file (variable key)
+
+  A4  mice: PL_t, minimum number alive per 2.25-ha grid
+  calendar span 1991-2025 (35 years); each resample draws 18 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2025             31     - -                       0.745  [0.591, 0.864]    -0.375    30  [-0.779, 0.102]
+  GE    1995-1996, 1998-2025  30     - 1997                    0.733  [0.578, 0.842]    -0.374    28  [-0.776, 0.096]
+  HC    1991-2025             35     - -                       0.784  [0.610, 0.927]    -0.409    34  [-0.721, -0.002]
+  HE    1995-1996, 1998-2025  30     - 1997                    0.745  [0.566, 0.865]    -0.380    28  [-0.826, 0.126]
+  TC    1991-2025             35     - -                       0.780  [0.638, 0.899]    -0.444    34  [-0.743, -0.085]
+  TE    1995-1996, 1998-2025  30     - 1997                    0.844  [0.670, 0.973]    -0.425    28  [-0.762, 0.008]
+  mean of the six within-plot values                                  0.772  [0.624, 0.871]    -0.401        [-0.728, -0.004]
+  mean across the six plots, then ln; years with all six: 1995-1996, 1998-2025 (n = 30, zeros 0)
+                                                                      0.754  [0.598, 0.859]    -0.444    28  [-0.813, -0.025]
+
+  A5  chipmunks: TS_t, minimum number alive per 2.25-ha grid
+  calendar span 1991-2025 (35 years); each resample draws 18 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2025             31     - -                       0.656  [0.442, 0.810]     0.326    30  [-0.018, 0.684]
+  GE    1995-1997, 1999-2025  30     - 1998                    0.866  [0.582, 1.006]     0.198    28  [-0.334, 0.755]
+  HC    1991-2025             35     - -                       0.709  [0.545, 0.827]     0.037    34  [-0.293, 0.391]
+  HE    1995-1997, 1999-2025  30     - 1998                    0.731  [0.487, 0.874]    -0.114    28  [-0.653, 0.386]
+  TC    1991-2022, 2024-2025  34     - 2023                    0.650  [0.451, 0.768]    -0.162    32  [-0.641, 0.408]
+  TE    1995-1997, 1999-2025  30     - 1998                    0.673  [0.429, 0.787]    -0.127    28  [-0.548, 0.323]
+  mean of the six within-plot values                                  0.714  [0.533, 0.804]     0.026        [-0.255, 0.342]
+  mean across the six plots, then ln; years with all six: 1995-1997, 1999-2022, 2024-2025 (n = 29, zeros 0)
+                                                                      0.571  [0.393, 0.654]     0.159    26  [-0.293, 0.617]
+
+  A6  nymphs: nymph_peak_t, peak questing nymphs per m2
+  calendar span 1991-2025 (35 years); each resample draws 18 blocks of two consecutive years
+  plot  years with a value     n  zero missing inside span  sd of ln  95% interval          r1 pairs  95% interval    
+  GC    1995-2025             31     - -                       0.880  [0.698, 1.061]    -0.338    30  [-0.778, 0.139]
+  GE    1995-2025             31     - -                       1.095  [0.827, 1.317]    -0.007    30  [-0.462, 0.463]
+  HC    1991-2025             35     - -                       0.990  [0.774, 1.171]    -0.213    34  [-0.527, 0.154]
+  HE    1995-2025             31     - -                       0.935  [0.771, 1.106]    -0.260    30  [-0.606, 0.136]
+  TC    1991-2025             35     - -                       1.005  [0.797, 1.126]     0.039    34  [-0.348, 0.362]
+  TE    1995-2025             31     - -                       0.959  [0.747, 1.110]    -0.118    30  [-0.553, 0.327]
+  mean of the six within-plot values                                  0.977  [0.818, 1.099]    -0.149        [-0.451, 0.166]
+  mean across the six plots, then ln; years with all six: 1995-2025 (n = 31, zeros 0)
+                                                                      0.881  [0.719, 1.010]    -0.153    30  [-0.566, 0.262]
+
+  Beside draft 7's inputs for this row (sigma 0.67, range 0.46 to 0.87; memory 0.30 per step of 4.4 months):
+    mean within-plot sd of ln mice, Dryad file   1.030  [0.762, 1.217]   (Figshare file 0.772  [0.624, 0.871])
+    mean within-plot r1 of ln mice, Dryad file   -0.107  [-0.537, 0.486]   (Figshare file -0.401  [-0.728, -0.004])
+    a memory of 0.30 per 4.4 months, if it decays geometrically, is a one-year correlation of 0.30 ** (12/4.4) = 0.037
+
+3. Part B: two pattern checks (Dryad file: PL_grid and NIP on the same plots)
+
+  P1  sd of ln NIP < sd of ln mice, plot by plot.  Fails if it fails on more than one plot of six.
+  plot  NIP years      n  zero NIP  sd ln NIP   mice years in window     n  zero sd ln mice   NIP varies less  [sd ln mice, all years, A1]
+  GC    1995-2013     19         -      0.493   1995-2013               19     -      1.076   yes              [1.027]
+  GX    1995-2013     19         -      0.348   1996, 1998-2013         17     -      1.028   yes              [0.977]
+  HC    1995-2013     19         -      0.347   1995-2013               18  1996      1.161   yes              [1.108]
+  HX    1995-2013     19         -      0.371   1996, 1998-2013         17     -      0.924   yes              [0.898]
+  TC    1995-2013     19         -      0.295   1995-2013               19     -      1.219   yes              [1.129]
+  TX    1995-2013     18      2007      0.330   1996, 1998-2013         17     -      1.084   yes              [1.045]
+  P1 HOLDS: the inequality fails on 0 of 6 plots (criterion: fails if more than one).
+
+  P2  slope b of ln NIP in year t+1 on ln mice in year t, one intercept per plot; 0 <= b <= 1 - pbar.
+    GC: 18 pairs, mouse years 1995-2012
+    GX: 16 pairs, mouse years 1996, 1998-2012
+    HC: 18 pairs, mouse years 1994-1995, 1997-2012
+    HX: 16 pairs, mouse years 1996, 1998-2012
+    TC: 19 pairs, mouse years 1994-2012
+    TX: 15 pairs, mouse years 1996, 1998-2005, 2007-2012
+    pairs used 102; pairs left out because of a zero 2; mouse years 1994-2012; 10 blocks per resample
+    b = 0.0378   (least squares with plot dummies 0.0378; K3 on the data [ok])
+    bootstrap standard error 0.0575   (2000 resamples; their mean 0.0430; 2.5th to 97.5th percentile -0.0674 to 0.1602)
+    pbar = 0.4134 (mean of all 114 NIP values; mean of the 102 values used as response 0.4143);  1 - pbar = 0.5866
+    allowed by the criterion: -0.1150 <= b <= 0.7016   (0 - 2 se and 1 - pbar + 2 se)
+  P2 HOLDS: b is inside the interval [0, 0.587]; distance below 0: 0.00 se; distance above 1 - pbar: 0.00 se.
+
+4. Part C: one recomputation of the loss D of ln R0 for the Borrelia cycle of draft 7 (stays 1 and 10/4.4 steps), method of run R10
+  K4  second-order value at draft 7's inputs (sigma 0.668, memory 0.30): 0.1043; the draft's discrete-time entry is 0.10   [ok]
+  K5  one stage, s = 0.5, sigma = 0.6, memory 0.75: D = 0.09185 +- 0.00025; exact 0.09185   [ok]   (41 s)
+  inputs from A1: sigma = 1.0304; r1 = -0.1071 is not positive, so the memory per step is set to zero (protocol, part C)
+  (r1 of the plot-mean series, A1: -0.0799; it has the same sign)
+  M = 200 populations, T = 200000 steps, burn-in 2000; seed 2026111412
+  D = 0.2013 +- 0.0002 (one standard error of the simulation)   second-order value 0.1622   no-staying value sigma^2/2 = 0.5309   (67 s)
+  draft 7, this row: 0.05 to 0.10 (second-order values, continuous and discrete time) with sigma 0.67 and memory 0.30
+
+Summary: P1 HOLDS (0 of 6 plots against it); P2 HOLDS (b = 0.038, se 0.058, allowed 0 to 0.587 with two se either side); D = 0.2013 +- 0.0002 at sigma 1.030, memory 0.000.
+Finished 2026-11-14 09:52:19 CST; wall time 109 s.
+CODE CHECKS K1 TO K5: ALL PASSED

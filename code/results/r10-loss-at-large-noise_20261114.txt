@@ -1,0 +1,69 @@
+R10: 161 cases, M = 200 populations, T = 200000 steps, burn-in 2000
+
+H1a  one stage: simulation against the exact value
+  H1a s=0.5 sigma=0.6 phi=0.0        D = 0.09164 +- 0.00010   exact 0.09185   second order 0.09000   [ok]
+  H1a s=0.5 sigma=0.6 phi=0.75       D = 0.09164 +- 0.00026   exact 0.09185   second order 0.09000   [ok]
+  H1a s=0.5 sigma=1.0 phi=0.0        D = 0.26213 +- 0.00017   exact 0.26254   second order 0.25000   [ok]
+  H1a s=0.5 sigma=1.0 phi=0.75       D = 0.26280 +- 0.00040   exact 0.26254   second order 0.25000   [ok]
+  H1a s=0.5 sigma=1.4 phi=0.0        D = 0.53149 +- 0.00024   exact 0.53174   second order 0.49000   [ok]
+  H1a s=0.5 sigma=1.4 phi=0.75       D = 0.53177 +- 0.00066   exact 0.53174   second order 0.49000   [ok]
+  H1a s=0.9 sigma=0.6 phi=0.0        D = 0.02050 +- 0.00010   exact 0.02051   second order 0.01800   [ok]
+  H1a s=0.9 sigma=0.6 phi=0.75       D = 0.02007 +- 0.00026   exact 0.02051   second order 0.01800   [ok]
+  H1a s=0.9 sigma=1.0 phi=0.0        D = 0.06921 +- 0.00018   exact 0.06924   second order 0.05000   [ok]
+  H1a s=0.9 sigma=1.0 phi=0.75       D = 0.06983 +- 0.00043   exact 0.06924   second order 0.05000   [ok]
+  H1a s=0.9 sigma=1.4 phi=0.0        D = 0.16871 +- 0.00029   exact 0.16854   second order 0.09800   [ok]
+  H1a s=0.9 sigma=1.4 phi=0.75       D = 0.16851 +- 0.00066   exact 0.16854   second order 0.09800   [ok]
+  H1a s=0.96 sigma=0.6 phi=0.0       D = 0.00841 +- 0.00011   exact 0.00846   second order 0.00720   [ok]
+  H1a s=0.96 sigma=0.6 phi=0.75      D = 0.00884 +- 0.00026   exact 0.00846   second order 0.00720   [ok]
+  H1a s=0.96 sigma=1.0 phi=0.0       D = 0.03077 +- 0.00019   exact 0.03067   second order 0.02000   [ok]
+  H1a s=0.96 sigma=1.0 phi=0.75      D = 0.03104 +- 0.00046   exact 0.03067   second order 0.02000   [ok]
+  H1a s=0.96 sigma=1.4 phi=0.0       D = 0.08358 +- 0.00029   exact 0.08334   second order 0.03920   [ok]
+  H1a s=0.96 sigma=1.4 phi=0.75      D = 0.08348 +- 0.00076   exact 0.08334   second order 0.03920   [ok]
+
+H1b  three stages, no staying: D = sum sigma^2 / 2 = 1.5
+  H1b no staying phi=0.0             D = 1.50027 +- 0.00047   [ok]
+  H1b no staying phi=0.75            D = 1.50043 +- 0.00078   [ok]
+
+H1c  small noise: within 5% of the second-order value, or 3 standard errors if larger
+  H1c (1,24) sigma=0.2 phi=0.4       D = 0.001396 +- 0.000046   second order 0.001430   ratio 0.976   [ok]
+  H1c (1,1.25,2) sigma=0.2 phi=0.4   D = 0.009592 +- 0.000047   second order 0.009539   ratio 1.006   [ok]
+
+H2  bounds: D <= sum sigma^2/2 always; D >= 0 without memory
+  161 cases: above the upper bound 0; below zero without memory 0; largest (D - bound)/se = 0.6
+
+H3  the loss against the second-order value as sigma rises (D, and D / Gamma_0)
+  schistosome (1,24)             phi=0.0 : 0.0008 (1.00)  0.0036 (1.12)  0.0085 (1.18)  0.0169 (1.32)  0.0309 (1.54)  0.0520 (1.81)  0.0840 (2.14)  0.1566 (2.71)  0.2699 (3.37)
+  schistosome (1,24)             phi=0.4 : 0.0015 (1.03)  0.0059 (1.03)  0.0145 (1.13)  0.0272 (1.19)  0.0473 (1.32)  0.0749 (1.45)  0.1141 (1.63)  0.1994 (1.93)  0.3238 (2.27)
+  schistosome (1,24)             phi=0.75: 0.0018 (0.94)  0.0084 (1.07)  0.0198 (1.12)  0.0372 (1.18)  0.0640 (1.30)  0.1019 (1.44)  0.1514 (1.57)  0.2575 (1.81)  0.4060 (2.07)
+  malaria (1,7.5)                phi=0.0 : 0.0024 (1.03)  0.0100 (1.06)  0.0241 (1.14)  0.0468 (1.24)  0.0806 (1.37)  0.1294 (1.53)  0.1941 (1.68)  0.3294 (1.94)  0.5164 (2.19)
+  malaria (1,7.5)                phi=0.4 : 0.0042 (1.01)  0.0169 (1.02)  0.0396 (1.06)  0.0731 (1.10)  0.1195 (1.15)  0.1815 (1.22)  0.2617 (1.29)  0.4189 (1.40)  0.6265 (1.51)
+  malaria (1,7.5)                phi=0.75: 0.0057 (1.02)  0.0224 (1.01)  0.0526 (1.05)  0.0968 (1.09)  0.1563 (1.12)  0.2341 (1.17)  0.3303 (1.21)  0.5155 (1.28)  0.7532 (1.35)
+  Borrelia (1,2.273)             phi=0.0 : 0.0063 (1.03)  0.0255 (1.04)  0.0606 (1.10)  0.1141 (1.17)  0.1884 (1.23)  0.2864 (1.30)  0.4090 (1.37)  0.6444 (1.46)  0.9449 (1.55)
+  Borrelia (1,2.273)             phi=0.4 : 0.0103 (1.00)  0.0413 (1.00)  0.0936 (1.01)  0.1683 (1.02)  0.2662 (1.04)  0.3890 (1.05)  0.5367 (1.07)  0.8095 (1.09)  1.1422 (1.11)
+  Borrelia (1,2.273)             phi=0.75: 0.0130 (1.00)  0.0523 (1.00)  0.1166 (1.00)  0.2077 (1.00)  0.3249 (1.00)  0.4700 (1.00)  0.6407 (1.01)  0.9496 (1.01)  1.3224 (1.02)
+  Echinococcus (1,1.25,2), egg   phi=0.0 : 0.0047 (1.01)  0.0201 (1.07)  0.0485 (1.14)  0.0929 (1.23)  0.1574 (1.34)  0.2443 (1.44)  0.3569 (1.55)  0.5773 (1.70)  0.8657 (1.84)
+  Echinococcus (1,1.25,2), egg   phi=0.4 : 0.0096 (1.00)  0.0387 (1.02)  0.0881 (1.03)  0.1591 (1.04)  0.2532 (1.06)  0.3728 (1.09)  0.5177 (1.11)  0.7876 (1.14)  1.1234 (1.18)
+  Echinococcus (1,1.25,2), egg   phi=0.75: 0.0143 (1.00)  0.0571 (1.00)  0.1290 (1.00)  0.2297 (1.00)  0.3587 (1.00)  0.5171 (1.00)  0.7046 (1.00)  1.0441 (1.01)  1.4470 (1.01)
+  columns: sigma = 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.7, 2.0
+
+H4  the parameter sets of the real systems
+  1a S. haematobium                                D = 0.0137 +- 0.0002   second order 0.0124   ratio 1.11   no-staying value 0.173
+  1b S. mansoni                                    D = 0.1068 +- 0.0004   second order 0.0656   ratio 1.63   no-staying value 0.952
+  2a E. multilocularis, transfer out of the egg    D = 0.4952 +- 0.0005   second order 0.4934   ratio 1.00   no-staying value 0.689
+  2a E. multilocularis, transfer out of the fox    D = 0.4955 +- 0.0005   second order 0.4934   ratio 1.00   no-staying value 0.689
+  2a E. multilocularis, transfer out of the vole   D = 0.4944 +- 0.0005   second order 0.4934   ratio 1.00   no-staying value 0.689
+  2b E. multilocularis, fox and vole               D = 0.5049 +- 0.0005   second order 0.5023   ratio 1.01   no-staying value 0.705
+  3a B. burgdorferi, oak forest                    D = 0.1075 +- 0.0001   second order 0.1043   ratio 1.03   no-staying value 0.223
+  3b B. burgdorferi, northern edge                 D = 0.4056 +- 0.0003   second order 0.3937   ratio 1.03   no-staying value 0.708
+  5 T. tenuis in red grouse                        D = 0.0541 +- 0.0004   second order 0.0488   ratio 1.11   no-staying value 0.245
+  6 P. falciparum                                  D = 0.3305 +- 0.0007   second order 0.2725   ratio 1.21   no-staying value 0.980
+  7 T. circumcincta in Soay sheep                  D = 0.0348 +- 0.0002   second order 0.0347   ratio 1.00   no-staying value 0.061
+
+H5  a steady stage of stay b added to a fluctuating stage of stay 10 (memory 0.9)
+  sigma=0.3: one stage exact 0.0047 (2nd 0.0045);  b=2: 0.0143+-0.0002 (2nd 0.0143);  b=5: 0.0176+-0.0002 (2nd 0.0176);  b=19: 0.0133+-0.0002 (2nd 0.0133);  b=50: 0.0075+-0.0002 (2nd 0.0072);  b=200: 0.0021+-0.0002 (2nd 0.0022)
+  sigma=0.6: one stage exact 0.0205 (2nd 0.0180);  b=2: 0.0595+-0.0004 (2nd 0.0572);  b=5: 0.0706+-0.0004 (2nd 0.0704);  b=19: 0.0552+-0.0004 (2nd 0.0533);  b=50: 0.0300+-0.0004 (2nd 0.0290);  b=200: 0.0097+-0.0004 (2nd 0.0088)
+  sigma=1.0: one stage exact 0.0692 (2nd 0.0500);  b=2: 0.1718+-0.0008 (2nd 0.1589);  b=5: 0.2025+-0.0007 (2nd 0.1955);  b=19: 0.1593+-0.0008 (2nd 0.1480);  b=50: 0.0925+-0.0007 (2nd 0.0804);  b=200: 0.0320+-0.0008 (2nd 0.0244)
+  sigma=1.4: one stage exact 0.1685 (2nd 0.0980);  b=2: 0.3584+-0.0010 (2nd 0.3114);  b=5: 0.4119+-0.0010 (2nd 0.3832);  b=19: 0.3256+-0.0010 (2nd 0.2901);  b=50: 0.1995+-0.0011 (2nd 0.1577);  b=200: 0.0776+-0.0013 (2nd 0.0479)
+
+wall time 780 s; slowest case 58 s
+H1 and H2: ALL CHECKS PASSED

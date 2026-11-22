@@ -1,0 +1,7 @@
+[ok] K1 one stage: the same cost at every frequency: 2,000 random cases: largest relative departure from 1/(2 tau^2) is 1.1e-12
+[ok] K2 the average of K over frequency is 1/(2 T^2): 300 random rings: largest relative difference 9.1e-10
+[ok] K3 at low frequency K is (1 - CV^2)/(2T), above the average for two or more stages: largest relative difference at w = 1e-4: 2.1e-07; smallest excess of K(0) over the average, as a share of it: 1.35e+00
+[ok] K4 a cyclic (AR(2)) host: closed form = sum over lags = spectrum times K: 300 random rings against the lag sum: 2.0e-14; 100 against the spectral integral: 9.0e-10
+[ok] K5 resonance: a regular generation equal to the period gains; half the period costs at least three times the uncorrelated value: T = P = 12: n=2: +0.1251, n=3: +0.1270, n=4: +0.1047, n=6: +0.0273, n=8: -0.0764 (uncorrelated 0.0417); T = P/2: n=2: +0.2561, n=4: +0.3903 (uncorrelated 0.0833)
+
+ALL CHECKS PASSED

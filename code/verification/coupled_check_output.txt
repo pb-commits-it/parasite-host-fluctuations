@@ -1,0 +1,155 @@
+coupled_check.py started (seed=2026111401)
+==============================================================================
+STEP 0: REPRODUCING KNOWN ANALYTICAL RESULTS (Rule 7)
+Pre-declared tolerance: TOL_BENCH = 1.0e-07
+==============================================================================
+  [0a] 3-stage RLL ring kappa=8.9: FD max Re=-0.0041841494, exact=-0.0041841494, err=6.78e-11
+  [0a] 3-stage RLL ring kappa=9.0: FD max Re=-0.0000000000, exact=+0.0000000000, err=2.31e-11
+  [0a] 3-stage RLL ring kappa=9.1: FD max Re=+0.0041494250, exact=+0.0041494251, err=9.39e-11
+  [0b] A&M (1978) instantaneous eps=1.0: max eig err=8.44e-10, max Re=+0.0000000008
+  [0b] A&M (1978) instantaneous eps=2.0: max eig err=1.78e-09, max Re=-0.3999999985
+  [0c] Dobson & Hudson (1992) App. 1 Model I cubic: rel eig err=5.23e-10
+  -> ALL STEP 0 BENCHMARKS PASSED.
+
+==============================================================================
+PART 1, ITEM 1: CHECKING K3 (V BLOCK AND M BLOCK)
+Pre-declared tolerances: TOL_EQ_RESID=1.0e-11, TOL_FD_VS_ANA=1.0e-06,
+  TOL_GAIN_BOUND=1.0e-08, TOL_CLASS_MARG=1.0e-05
+==============================================================================
+  [K3a-V] 3200 random V blocks with rho >= 0 (incl. 200 at rho = 0): PASS
+           max(|E_FD(iw)| - q/d) = +8.948e-09 (tol 1.0e-08)
+           at rho = 0, max(|E_FD(iw)| / (q/d)) = 1.0000000383 (exact 1.0 attained at w=sqrt(dh))
+           max |E_FD - E_analytic| = 5.799e-08, max eq resid = 2.94e-13
+  [K3a-M] 3200 random M blocks with rho >= 0 (incl. 200 at rho = 0): PASS
+           max(|E_FD(iw)| - q/d) = +8.835e-10 (tol 1.0e-08)
+           at rho = 0, max(|E_FD(iw)| / (q/d)) = 1.0000000012 (exact 1.0 attained at w=sqrt(dh))
+           max |E_FD - E_analytic| = 2.024e-09, max eq resid = 4.27e-12
+  [K3b-V] 3200 random V blocks classified vs direct FD frequency response: PASS
+           misclassified = 0/3200 (skipped near boundary: 252)
+           breakdown: 1831 damping (1127 with rho < 0), 1369 non-damping (430 Hurwitz amplifying, 939 non-Hurwitz)
+  [K3b-M] 3200 random M blocks classified vs direct FD frequency response: PASS
+           misclassified = 0/3200 (skipped near boundary: 159)
+           breakdown: 1701 damping (1011 with rho < 0), 1499 non-damping (664 Hurwitz amplifying, 835 non-Hurwitz)
+
+==============================================================================
+PART 1, ITEM 2: NONLINEAR STIFF INTEGRATIONS FOR K4 AND K5 (Radau)
+Pre-declared tolerances: sign agreement 100%, |sigma_fit - Re(lam)| <= max(2.0e-03, 3%*|Re(lam)|)
+==============================================================================
+  Physical Regime-2 Island V-block (a_V=1.05 >= alpha=1.0, p=0.2, rho=-0.196, h=0.2):
+    Exact island boundaries: a_- = 0.045609, a_+ = 1.932628
+  Physical Regime-3 No-self-reg V-blocks (rho = -h):
+    Set 3A critical rate a_c = 0.650000; Set 3B critical rate a_c = 1.758333
+  [PASS] R1-1 (rho>0, slow L):
+         Re(lam_dom)=-0.044179, ODE_fit=-0.044179, err=4.39e-08 (tol 2.00e-03), norm 4.3e-06->8.2e-07 over T=56.6
+  [PASS] R1-2 (rho>0, med L):
+         Re(lam_dom)=-0.345487, ODE_fit=-0.345428, err=5.88e-05 (tol 1.04e-02), norm 5.6e-06->2.6e-09 over T=31.8
+  [PASS] R1-3 (rho>0, fast L):
+         Re(lam_dom)=-0.232765, ODE_fit=-0.232804, err=3.86e-05 (tol 6.98e-03), norm 5.2e-06->3.0e-09 over T=42.8
+  [PASS] R1-4 (rho=0 exact K/2):
+         Re(lam_dom)=-0.134819, ODE_fit=-0.134814, err=4.49e-06 (tol 4.04e-03), norm 4.6e-06->7.0e-09 over T=64.2
+  [PASS] R2-1 (below a_-=0.046, long L -> stable):
+         Re(lam_dom)=-0.001474, ODE_fit=-0.001474, err=1.30e-07 (tol 2.00e-03), norm 3.2e-05->1.6e-05 over T=600.0
+  [PASS] R2-2 (above a_-=0.046, in island -> unstable):
+         Re(lam_dom)=+0.001543, ODE_fit=+0.001543, err=3.62e-08 (tol 2.00e-03), norm 1.7e-05->4.0e-05 over T=600.0
+  [PASS] R2-3 (below a_+=1.933, in island -> unstable):
+         Re(lam_dom)=+0.004724, ODE_fit=+0.004724, err=9.21e-08 (tol 2.00e-03), norm 1.9e-05->2.1e-04 over T=529.2
+  [PASS] R2-4 (above a_+=1.933, short L -> stable):
+         Re(lam_dom)=-0.006594, ODE_fit=-0.006594, err=1.31e-07 (tol 2.00e-03), norm 1.8e-05->1.6e-06 over T=379.1
+  [PASS] R3-1 (Set 3A, a_L > a_c=0.650 -> stable):
+         Re(lam_dom)=-0.004312, ODE_fit=-0.004312, err=1.18e-07 (tol 2.00e-03), norm 1.5e-05->1.3e-06 over T=579.8
+  [PASS] R3-2 (Set 3A, a_L < a_c=0.650 -> unstable):
+         Re(lam_dom)=+0.002757, ODE_fit=+0.002758, err=1.05e-07 (tol 2.00e-03), norm 1.3e-05->6.4e-05 over T=600.0
+  [PASS] R3-3 (Set 3A, very long L a_L << a_c -> still unstable):
+         Re(lam_dom)=+0.000784, ODE_fit=+0.000784, err=8.52e-08 (tol 2.00e-03), norm 2.8e-05->4.2e-05 over T=600.0
+  [PASS] R3-4 (Set 3B, a_L > a_c=1.758 -> stable):
+         Re(lam_dom)=-0.004867, ODE_fit=-0.004867, err=4.82e-08 (tol 2.00e-03), norm 1.8e-05->1.6e-06 over T=513.6
+  [PASS] R3-5 (Set 3B, a_L < a_c=1.758 -> unstable):
+         Re(lam_dom)=+0.005455, ODE_fit=+0.005455, err=1.08e-07 (tol 2.00e-03), norm 1.9e-05->2.1e-04 over T=458.3
+  [PASS] R2-primary-unstable (a_V=0.5<alpha=2, a_L=3 in (1.138,22.85)):
+         Re(lam_dom)=+0.014151, ODE_fit=+0.014150, err=4.67e-08 (tol 2.00e-03), norm 1.3e-05->1.4e-04 over T=176.7
+  [PASS] R2-primary-stable-fast (a_V=0.5<alpha=2, a_L=30 > 22.85):
+         Re(lam_dom)=-0.001107, ODE_fit=-0.001107, err=4.01e-09 (tol 2.00e-03), norm 1.3e-05->6.5e-06 over T=600.0
+  -> Summary K4/K5 linear-regime perturbation check: 15/15 passed.
+
+  --- LONG-RUN TRAJECTORY FATE OF UNSTABLE CASES ---
+  * LongRun-1: Physical Regime-2 Island (a_V=1.05>=alpha=1, a_L=0.65*a_+):
+      t_end=3000.0, success=True
+      Tail N range = [3.869132e+00, 2.316273e+01]
+      Tail I range = [2.130098e-01, 8.472750e+00]
+      Tail w range = [1.754519e-01, 6.225290e+00]
+      Min N-I (susceptibles S) over all t = +2.767750e+00, min N = +3.869132e+00, min I = +2.130098e-01
+  * LongRun-2: Physical Regime-3 No-self-reg (a_V=1.2>=alpha=1, a_L=0.5*a_c):
+      t_end=2500.0, success=True
+      Tail N range = [5.445613e+00, 1.695134e+01]
+      Tail I range = [1.072153e+00, 5.193191e+00]
+      Tail w range = [3.982454e+00, 1.373225e+01]
+      Min N-I (susceptibles S) over all t = +3.969045e+00, min N = +5.445613e+00, min I = +1.072153e+00
+  * LongRun-3: primary flagship example (a_V=0.5 < alpha=2.0, a_L=3.0):
+      t_end=445.8, success=False
+      Tail N range = [-2.104825e+01, 1.915138e+00]
+      Tail I range = [-2.928939e-02, 8.517186e-01]
+      Tail w range = [-8.028423e-04, 2.768913e-01]
+      Min N-I (susceptibles S) over all t = -2.101896e+01, min N = -2.104825e+01, min I = -2.928939e-02
+
+==============================================================================
+PART 1, ITEM 3: COUNTEREXAMPLE SEARCH FOR K2 (>= 5,000 RANDOM CYCLES, n=2..8)
+Pre-declared tolerance: TOL_HURWITZ_K2 = 1.0e-11
+==============================================================================
+  [K2] Tested 6000 random cycles (lengths 2..8): PASS
+       Counterexamples found (Re >= 0): 0
+       Largest Re(lambda) across all 6000 cycles: -4.138782e-06
+       Closest-to-zero case: cycle #5316, n=2, types=['R', 'R'], max Re=-4.1388e-06
+       Cycles per length: {2: 863, 3: 859, 4: 830, 5: 875, 6: 880, 7: 859, 8: 834}
+       Total blocks sampled by type: {'L': 5347, 'R': 6186, 'S': 3736, 'V': 7322, 'M': 7372}
+
+==============================================================================
+PART 2: TESTING AGAINST DOBSON & HUDSON (1992) AND GABA & GOURBIERE (2008)
+==============================================================================
+  [P2-Check] 3-state (H,A,P) host-block E_DH(z) vs FD Jacobian across 100 sets: max err = 2.84e-09 (PASS)
+
+  --- (a) Destabilising effect of longer-lived free-living stage (sigma = 0, D&H Table 2 + Fig. 7a) ---
+      Parameters: a=1.8, b=1.05, lam=11, mu_P=1.0, alpha=3e-4, delta=5e-4, k=1.0, beta=0.1, K=180 (Delta=0.00417)
+      1/gamma=0.50 mo (gamma=24.00/yr): H*/K=0.373, rho=-0.1909, Re_full=-0.07293, Re_K1(aW_eff)=-0.06947, Re_K1(gamma)=-0.06697
+      1/gamma=0.75 mo (gamma=16.00/yr): H*/K=0.257, rho=-0.3643, Re_full=-0.01380, Re_K1(aW_eff)=-0.00786, Re_K1(gamma)=-0.00420
+      1/gamma=1.00 mo (gamma=12.00/yr): H*/K=0.196, rho=-0.4555, Re_full=+0.01875, Re_K1(aW_eff)=+0.02685, Re_K1(gamma)=+0.03105
+      1/gamma=1.50 mo (gamma= 8.00/yr): H*/K=0.133, rho=-0.5501, Re_full=+0.05405, Re_K1(aW_eff)=+0.06559, Re_K1(gamma)=+0.06962
+      1/gamma=2.00 mo (gamma= 6.00/yr): H*/K=0.101, rho=-0.5986, Re_full=+0.07267, Re_K1(aW_eff)=+0.08667, Re_K1(gamma)=+0.08961
+      1/gamma=3.00 mo (gamma= 4.00/yr): H*/K=0.068, rho=-0.6481, Re_full=+0.09060, Re_K1(aW_eff)=+0.10763, Re_K1(gamma)=+0.10753
+
+  --- (b) Stabilising effect of long arrestment (sigma = 1, gamma = 13/yr [4 wk], D&H Table 2 + Fig. 7b) ---
+      1/theta= 0.25 mo (theta=48.00/yr): H*/K=0.221, rho=-0.4180, sup|E_DH|=2.132, Re_full=+0.01708, Re_K1(aW_eff)=+0.02673
+      1/theta= 0.50 mo (theta=24.00/yr): H*/K=0.231, rho=-0.4035, sup|E_DH|=1.968, Re_full=+0.02110, Re_K1(aW_eff)=+0.03252
+      1/theta= 1.00 mo (theta=12.00/yr): H*/K=0.251, rho=-0.3739, sup|E_DH|=1.676, Re_full=+0.02358, Re_K1(aW_eff)=+0.03765
+      1/theta= 2.00 mo (theta= 6.00/yr): H*/K=0.291, rho=-0.3128, sup|E_DH|=1.204, Re_full=+0.01558, Re_K1(aW_eff)=+0.03289
+      1/theta= 3.00 mo (theta= 4.00/yr): H*/K=0.334, rho=-0.2491, sup|E_DH|=1.050, Re_full=-0.00122, Re_K1(aW_eff)=+0.01787
+      1/theta= 4.00 mo (theta= 3.00/yr): H*/K=0.378, rho=-0.1828, sup|E_DH|=1.002, Re_full=-0.02253, Re_K1(aW_eff)=-0.00248
+      1/theta= 5.00 mo (theta= 2.40/yr): H*/K=0.424, rho=-0.1142, sup|E_DH|=0.964, Re_full=-0.04654, Re_K1(aW_eff)=-0.02611
+      1/theta= 6.00 mo (theta= 2.00/yr): H*/K=0.471, rho=-0.0435, sup|E_DH|=0.933, Re_full=-0.07235, Re_K1(aW_eff)=-0.05198
+      1/theta= 8.00 mo (theta= 1.50/yr): H*/K=0.569, rho=+0.1035, sup|E_DH|=0.884, Re_full=-0.12751, Re_K1(aW_eff)=-0.10841
+
+  --- (c) Non-monotone effect of arrestment duration WITHOUT host self-regulation (Delta = 0, Gaba & Gourbiere 2008) ---
+      [c1] G&G Model A (Delta=0, fast W [gamma=1300/yr, H0=130], sigma=0.85, lam=11, alpha=3e-4, delta=0, k=9.5):
+      1/theta= 0.50 mo: f_A=0.838, H*=  51.3, |E_DH(0.9i)|=1.211, arg= +21.2 deg, Re_full=-0.015454, Re_K1(no -betaWH)=-0.007352
+      1/theta= 1.00 mo: f_A=0.826, H*=  56.6, |E_DH(0.9i)|=1.210, arg= +19.9 deg, Re_full=-0.002855, Re_K1(no -betaWH)=+0.010442
+      1/theta= 2.00 mo: f_A=0.804, H*=  67.7, |E_DH(0.9i)|=1.205, arg= +17.9 deg, Re_full=+0.008008, Re_K1(no -betaWH)=+0.027703
+      1/theta= 3.00 mo: f_A=0.783, H*=  79.5, |E_DH(0.9i)|=1.201, arg= +16.5 deg, Re_full=+0.010967, Re_K1(no -betaWH)=+0.034556
+      1/theta= 4.00 mo: f_A=0.762, H*=  92.1, |E_DH(0.9i)|=1.196, arg= +15.6 deg, Re_full=+0.010890, Re_K1(no -betaWH)=+0.037171
+      1/theta= 5.00 mo: f_A=0.743, H*= 105.6, |E_DH(0.9i)|=1.192, arg= +14.9 deg, Re_full=+0.009517, Re_K1(no -betaWH)=+0.037790
+      1/theta= 7.00 mo: f_A=0.708, H*= 135.4, |E_DH(0.9i)|=1.185, arg= +14.0 deg, Re_full=+0.005408, Re_K1(no -betaWH)=+0.036394
+      1/theta=10.00 mo: f_A=0.660, H*= 189.4, |E_DH(0.9i)|=1.178, arg= +13.5 deg, Re_full=-0.001143, Re_K1(no -betaWH)=+0.032025
+      1/theta=12.00 mo: f_A=0.632, H*= 233.3, |E_DH(0.9i)|=1.175, arg= +13.4 deg, Re_full=-0.005091, Re_K1(no -betaWH)=+0.028742
+
+      [c2] G&G Model B (Delta=0, free-living W [gamma=6.5/yr, beta=0.1], sigma=0.85, lam=5.8, alpha=3e-4, delta=0, k=13.0):
+      no arrest (sigma=0):          H*=  63.1, Re_full=+0.004636, Re_K1(no -betaWH)=+0.031655
+      1/theta= 0.25 mo: f_A=0.844, H*=  68.4, |E_DH(0.8i)|=1.296, arg= +27.0 deg, Re_full=+0.008201, Re_K1(no -betaWH)=+0.040396
+      1/theta= 1.00 mo: f_A=0.826, H*=  86.4, |E_DH(0.8i)|=1.294, arg= +25.2 deg, Re_full=+0.011794, Re_K1(no -betaWH)=+0.054956
+      1/theta= 2.00 mo: f_A=0.804, H*= 117.9, |E_DH(0.8i)|=1.290, arg= +23.4 deg, Re_full=+0.009339, Re_K1(no -betaWH)=+0.061307
+      1/theta= 3.00 mo: f_A=0.783, H*= 162.6, |E_DH(0.8i)|=1.286, arg= +22.2 deg, Re_full=+0.004265, Re_K1(no -betaWH)=+0.061622
+      1/theta= 4.00 mo: f_A=0.762, H*= 231.5, |E_DH(0.8i)|=1.282, arg= +21.3 deg, Re_full=-0.001369, Re_K1(no -betaWH)=+0.059283
+      1/theta= 5.00 mo: f_A=0.743, H*= 350.9, |E_DH(0.8i)|=1.279, arg= +20.7 deg, Re_full=-0.006826, Re_K1(no -betaWH)=+0.055582
+      1/theta= 6.00 mo: f_A=0.725, H*= 609.0, |E_DH(0.8i)|=1.276, arg= +20.2 deg, Re_full=-0.011811, Re_K1(no -betaWH)=+0.051089
+      1/theta= 7.00 mo: f_A=0.708, H*=1583.1, |E_DH(0.8i)|=1.273, arg= +19.9 deg, Re_full=-0.016200, Re_K1(no -betaWH)=+0.046084
+
+==============================================================================
+ALL CHECKS COMPLETED IN 18.63 s.
+==============================================================================

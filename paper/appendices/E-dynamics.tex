@@ -1,0 +1,267 @@
+\section{Proofs and model equations for hosts with their own dynamics}\label{app:dyn}
+
+\subsection{Block linearizations and admissibility relations}\label{subsec:app-dyn-blocks}
+
+We first verify the five linear response functions in Table~\ref{tab:dyn-blocks} and the slope relations~\eqref{eq:dyn-abjc}--\eqref{eq:dyn-slope}. Let $(u^*, v^*)$ denote the positive equilibrium input and output of a single block, and write $x = \delta u / u^*$ and $y = \delta v / v^*$ for relative perturbations.
+
+For blocks L and R, equilibrium gives $u^* = a w^*$, so the relative state perturbation $w_1 = \delta w / w^*$ satisfies $\dot{w}_1 = a(x - w_1)$. In Laplace variables at complex rate $z$, $w_1(z) = [a/(z + a)]x(z)$. For L, $v = cw$ gives $y = w_1$ and $E_L(z) = a/(z + a)$ with $D_L(z) = z + a$. For R, $v = cf(w)w$ with $f(w^*) > 0$ gives $\delta v = c[f(w^*) + w^* f'(w^*)]\delta w = v^*(1 - \kappa)w_1$, where $\kappa = -w^* f'(w^*)/f(w^*)$, yielding $E_R(z) = (1 - \kappa)a/(z + a)$ and $D_R(z) = z + a$. For block S, equilibrium of $\dot{I} = u(N - I) - aI$ with $p = I^*/N \in (0, 1)$ gives $u^*(1 - p) = ap$, so $u^* = ap/(1 - p)$. Linearizing gives $I^* \dot{y} = u^*(N - I^*)x - (u^* + a)I^* y$, hence $\dot{y} = ax - dy$ with $d = a + u^* = a/(1 - p)$, which gives $E_S(z) = a/(z + d)$ and $D_S(z) = z + d$.
+
+For block V, set $b = \delta N / N^*$ and $y = \delta I / I^*$. At equilibrium, $\Phi(N^*) = \alpha I^*$, so $\Phi(N^*)/N^* = \alpha p = h$, and $u^* = ap/(1 - p)$. Differentiating $\dot{N} = \Phi(N) - \alpha I$ and $\dot{I} = u(N - I) - aI$ with $\rho = -\Phi'(N^*)$ yields
+\begin{equation}\label{eq:app-dyn-vm-lin}
+\dot{b} = -\rho b - hy, \qquad \dot{y} = db - dy + qx,
+\end{equation}
+with $q = a$ and $d = a/(1 - p)$. For block M, set $b = \delta H / H^*$ and $y = \delta P / P^*$, with $m = P^*/H^* > 0$. At equilibrium, $\Phi(H^*) = \alpha P^*$ gives $\Phi(H^*)/H^* = \alpha m = h$, and $\dot{P} = 0$ gives $u^* = m(\xi + \varepsilon\alpha m) = mq$, where $q = \xi + \varepsilon h$. Differentiating $\dot{H} = \Phi(H) - \alpha P$ and $\dot{P} = uH - \xi P - \alpha\varepsilon P^2/H$ yields~\eqref{eq:app-dyn-vm-lin} with $d = \xi + 2\varepsilon h$. In both V and M, the internal linear system has matrix
+\[
+\mathbf{A}_{\mathrm{int}} = \begin{pmatrix} -\rho & -h \\ d & -d \end{pmatrix}, \qquad D(z) = \det(z\mathbf{I} - \mathbf{A}_{\mathrm{int}}) = (z + \rho)(z + d) + dh = z^2 + Az + B.
+\]
+Solving $(z + \rho)b = -hy$ away from $z = -\rho$ and substituting into $(z + d)y = db + qx$ gives $E(z) = y(z)/x(z) = q(z + \rho)/D(z)$. Differentiating $\Phi(X)/X$ at $X^*$ gives
+\[
+-X^* \left.\frac{\dd}{\dd X}\frac{\Phi(X)}{X}\right|_{X = X^*} = -X^* \frac{X^* \Phi'(X^*) - \Phi(X^*)}{(X^*)^2} = -\Phi'(X^*) + \frac{\Phi(X^*)}{X^*} = \rho + h,
+\]
+proving~\eqref{eq:dyn-slope}. Finally, for V with $a \ge \alpha$ and $p \in (0, 1)$, $d - q = ap/(1 - p) > ap \ge \alpha p = h$. For M with $\varepsilon \ge 1$, $d - q = \varepsilon h \ge h$. Hence $d - q \ge h$ in both blocks, so $J = \rho + d - q \ge \rho + h$ and $A = \rho + d > \rho + h$. Whenever $\rho > -h$, both $A$ and $J$ are strictly positive. At $\rho = -h$, $J > 0$ for every admissible V block with $p \in (0, 1)$ and for M with $\varepsilon > 1, h > 0$, while $J = 0$ for M with $\varepsilon = 1$.
+
+\subsection{Further results and proofs for Section~\ref{sec:dyn}}\label{subsec:app-dyn-proofs}
+
+\begin{proposition}[Full characteristic polynomial]\label{prop:dyn-k1}
+For a ring of $n \ge 1$ scalar-coupled blocks at a positive equilibrium, every eigenvalue of the linearization (with multiplicity) is a root of
+\begin{equation}\label{eq:dyn-charpoly}
+\chi(z) = \prod_{k=1}^n D_k(z) - \prod_{k=1}^n N_k(z).
+\end{equation}
+Only away from all roots of every $D_k(z)$ is $\chi(z) = 0$ equivalent to $\prod_{k=1}^n E_k(z) = 1$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k1}}]
+Write the uncoupled linearization of block $k$ in relative coordinates as $\dot{\mathbf{X}}_k = \mathbf{A}_k \mathbf{X}_k + \mathbf{b}_k x_k$ and $y_k = \mathbf{c}_k^{\mathsf{T}} \mathbf{X}_k$, so that $D_k(z) = \det(z\mathbf{I} - \mathbf{A}_k)$ and $E_k(z) = \mathbf{c}_k^{\mathsf{T}}(z\mathbf{I} - \mathbf{A}_k)^{-1}\mathbf{b}_k = N_k(z)/D_k(z)$ by Cramer's rule. Closing the ring sets $x_k = y_{k-1}$ (indices modulo $n$). For any $z \in \mathbb{C}$ not in the finite set of eigenvalues of $\mathbf{A}_1, \dots, \mathbf{A}_n$, eliminating $\mathbf{X}_k = (z\mathbf{I} - \mathbf{A}_k)^{-1}\mathbf{b}_k x_k$ leaves the $n \times n$ cyclic scalar system $x_k - E_{k-1}(z)x_{k-1} = 0$. Its matrix has $(i, j)$ entry $\delta_{ij} - \mathbf{1}_{i \equiv j + 1 \pmod n} t_j$ with $t_j = E_j(z)$ (for $n = 1$, the diagonal and cyclic indices coincide and the single entry is $1 - t_0$), whose determinant is $1 - \prod_{k=1}^n E_k(z)$. By the Schur complement formula for the full Jacobian $\mathbf{J}$,
+\[
+\det(z\mathbf{I} - \mathbf{J}) = \left(\prod_{k=1}^n \det(z\mathbf{I} - \mathbf{A}_k)\right)\left(1 - \prod_{k=1}^n E_k(z)\right) = \prod_{k=1}^n D_k(z) - \prod_{k=1}^n N_k(z).
+\]
+Both $\det(z\mathbf{I} - \mathbf{J})$ and $\chi(z)$ are polynomials in $z$ that agree on $\mathbb{C}$ outside finitely many points, so they are identically equal on $\mathbb{C}$, including for $n = 1$ and when some $N_k(z)$ vanishes identically.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~{\upshape\ref{thm:dyn-k2}}]
+Each block is internally Hurwitz, so $D_k(z)$ has no zeros in the closed right half-plane $\overline{\mathbb{C}}_+ = \{z \in \mathbb{C} : \operatorname{Re} z \ge 0\}$. Each response $E_k(z)$ in Table~\ref{tab:dyn-blocks} is a strictly proper rational function that is analytic on $\mathbb{C}_+ = \{\operatorname{Re} z > 0\}$, continuous on $\overline{\mathbb{C}}_+$, and satisfies $\lim_{|z| \to \infty} E_k(z) = 0$. Applying the maximum-modulus principle on semi-disks $\{z \in \overline{\mathbb{C}}_+ : |z| \le R\}$ as $R \to \infty$ gives $\sup_{z \in \overline{\mathbb{C}}_+} |E_k(z)| = \sup_{\omega \in \mathbb{R}} |E_k(\mathrm{i}\omega)|$. Every block is non-amplifying, so $|E_k(z)| \le 1$ on $\overline{\mathbb{C}}_+$. For the damping block $j$, $|E_j(\mathrm{i}\omega)| < 1$ for all $\omega \in \mathbb{R}$ and $\lim_{|\omega| \to \infty} |E_j(\mathrm{i}\omega)| = 0$, so continuity implies $\sup_{\omega \in \mathbb{R}} |E_j(\mathrm{i}\omega)| = \gamma_j < 1$, whence $|E_j(z)| \le \gamma_j < 1$ on $\overline{\mathbb{C}}_+$. Consequently $|\prod_{k=1}^n E_k(z)| \le \gamma_j < 1$ throughout $\overline{\mathbb{C}}_+$. For every $z \in \overline{\mathbb{C}}_+$, $\prod_{k=1}^n D_k(z) \ne 0$ and $\prod_{k=1}^n E_k(z) \ne 1$, so $\chi(z) \ne 0$ by~\eqref{eq:dyn-charpoly}.
+\end{proof}
+
+\begin{proposition}[Qualification of blocks]\label{prop:dyn-k3}
+In Table~\ref{tab:dyn-blocks}: (a) L has $|E(\mathrm{i}\omega)| \le 1$ (equality at $\omega = 0$) and never damps; (b) R is non-amplifying if and only if $0 \le \kappa \le 2$ and damping if and only if $0 < \kappa < 2$; (c) S has $|E(\mathrm{i}\omega)| \le 1 - p$ and damps for $p \in (0, 1)$; (d) for V or M with $\rho \ge 0$, $|E(z)| \le q/d$ for $\operatorname{Re} z \ge 0, z + \rho \ne 0$ ($E(0) = 0$ at $\rho = 0, h > 0$), where $q/d = 1 - p$ for V and $(\xi + \varepsilon h)/(\xi + 2\varepsilon h)$ for M, so V damps if $\rho + h > 0$, M damps if $h > 0$ and is non-amplifying at $h = 0, \rho > 0$, and at $\rho = h = 0$ neither is Hurwitz; and (e) at any $\rho$, setting
+\begin{equation}\label{eq:dyn-uv}
+U = \rho^2 + d^2 - 2dh - q^2, \qquad V_0 = d^2(\rho + h)^2 - q^2\rho^2,
+\end{equation}
+V or M is damping if and only if $A, B, V_0 > 0$ and $U + 2\sqrt{V_0} > 0$ (non-amplifying with non-strict inequalities in the last two).
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k3}}]
+Parts~(a)--(c) follow directly from $|a/(\mathrm{i}\omega + a)| = a/\sqrt{\omega^2 + a^2} \le 1$ (with $D_L(z) = z + a$ Hurwitz), $|(1 - \kappa)a/(\mathrm{i}\omega + a)| \le |1 - \kappa|$ (attained at $\omega = 0$), and $|a/(\mathrm{i}\omega + d)| \le a/d = 1 - p < 1$ for $p \in (0, 1)$.
+
+For V and M, the quadratic $D(z) = z^2 + Az + B$ is Hurwitz if and only if $A > 0$ and $B > 0$. Setting $x = \omega^2 \ge 0$, direct expansion gives
+\begin{align*}
+|D(\mathrm{i}\omega)|^2 - q^2|\mathrm{i}\omega + \rho|^2
+&= (B - \omega^2)^2 + A^2\omega^2 - q^2(\omega^2 + \rho^2) \\
+&= x^2 + (\rho^2 + d^2 - 2dh - q^2)x + d^2(\rho + h)^2 - q^2\rho^2 = x^2 + Ux + V_0.
+\end{align*}
+A monic quadratic $x^2 + Ux + V_0$ is strictly positive for all $x \ge 0$ if and only if $V_0 > 0$ and either $U \ge 0$ or $U^2 - 4V_0 < 0$, which combine into $V_0 > 0$ and $U + 2\sqrt{V_0} > 0$. Nonnegativity for all $x \ge 0$ holds if and only if $V_0 \ge 0$ and $U + 2\sqrt{V_0} \ge 0$. Combining with $A, B > 0$ proves part~(e).
+
+For part~(d), assume $\rho \ge 0$ and $\operatorname{Re} z \ge 0$. Whenever $z + \rho \ne 0$, divide numerator and denominator of $E(z)$ by $z + \rho$ to write $E(z) = q/[z + d + dh/(z + \rho)]$. Because $\operatorname{Re} z \ge 0$, $\rho \ge 0$, and $dh \ge 0$, we have $\operatorname{Re}[dh/(z + \rho)] = dh(\operatorname{Re} z + \rho)/|z + \rho|^2 \ge 0$, so $\operatorname{Re}[z + d + dh/(z + \rho)] \ge d > 0$ and $|E(z)| \le q/d$. At $\rho = 0$ and $h > 0$, the excluded point $z = 0$ has $D(0) = dh > 0$ and $E(0) = 0 \le q/d$. For V, $q/d = 1 - p < 1$, and $A = \rho + d > 0$, while $B = d(\rho + h) > 0$ holds when $\rho + h > 0$. For M, $q/d = (\xi + \varepsilon h)/(\xi + 2\varepsilon h)$, which is strictly below $1$ when $h > 0$ (giving $B = d(\rho + h) > 0$) and equals $1$ when $h = 0$ (giving $D(z) = (z + \rho)(z + \xi)$, Hurwitz when $\rho > 0$). When $\rho = h = 0$, $B = 0$ and $D(z) = z(z + d)$ has a zero root, so neither block is internally Hurwitz.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k4}}]
+Substituting $D_H(z) = z^2 + Az + B$, $N_H(z) = q(z + \rho)$, $D_L(z) = z + a_L$, and $N_L(z) = a_L$ into~\eqref{eq:dyn-charpoly} gives
+\[
+\chi(z) = (z + a_L)(z^2 + Az + B) - qa_L(z + \rho) = z^3 + (a_L + A)z^2 + (B + a_L J)z + a_L C.
+\]
+By the Routh--Hurwitz criterion, a monic real cubic $z^3 + b_2 z^2 + b_1 z + b_0$ is Hurwitz if and only if $b_2 > 0$, $b_1 > 0$, $b_0 > 0$, and $b_2 b_1 - b_0 > 0$, which yields $a_L + A > 0$, $B + a_L J > 0$, $a_L C > 0$, and $F(a_L) > 0$, where expanding $(a_L + A)(B + a_L J) - a_L C$ and using $B - C = q\rho$ gives~\eqref{eq:dyn-fquad}.
+
+Now assume $-h < \rho < 0$ and the standing admissibility conditions ($a_V \ge \alpha$ for V or $\varepsilon \ge 1$ for M). By Section~\ref{subsec:app-dyn-blocks}, $d - q \ge h > |\rho|$, so $A = d - |\rho| > 0$, $B = d(h - |\rho|) > 0$, $J = d - q - |\rho| > 0$, and $C = d(h - |\rho|) + q|\rho| > 0$. Hence $a_L + A$, $B + a_L J$, and $a_L C$ are strictly positive for all $a_L > 0$, and Hurwitz stability is equivalent to $F(a_L) > 0$. Since $J > 0$ and $AB > 0$, $F(a_L) > 0$ for sufficiently small and sufficiently large $a_L > 0$. Writing $AJ + q\rho = AJ - q|\rho|$, the quadratic $F(a_L)$ takes negative values on $(0, \infty)$ if and only if $AJ - q|\rho| < 0$ and $(q|\rho| - AJ)^2 - 4JAB > 0$, that is, $q|\rho| - AJ > 2\sqrt{JAB}$, in which case its roots $0 < a_- < a_+$ are given by~\eqref{eq:dyn-island} and $F(a_L) < 0$ precisely for $a_- < a_L < a_+$. At $q|\rho| - AJ = 2\sqrt{JAB}$, $F$ has a double positive root $a_- = a_+$ and is positive elsewhere. At any root $F(a_L) = 0$ with positive cubic coefficients, $\chi(z)$ factors as $(z + a_L + A)(z^2 + \omega^2)$ with $\omega^2 = B + a_L J = a_L C/(a_L + A) > 0$. (Without the standing admissibility condition, if $A, B, C > 0$, $\rho < 0$, and $J < 0$, then $F$ has one positive root and only sufficiently small $a_L$ is stable; if $J = 0$, stability holds for $a_L < AB/(q|\rho|)$.)
+\end{proof}
+
+\begin{proposition}[Host without first-order self-regulation]\label{prop:dyn-k5}
+For one V or M block with $h > 0, \rho = -h$ ($A = d - h$, $J = d - h - q$, $B = 0$) and one L block of rate $a_L > 0$ at fixed equilibrium and static gain, $\chi(z) = z^3 + (a_L + A)z^2 + a_L J z + a_L qh$ is Hurwitz if and only if $J > 0$ and $(a_L + A)J > qh$ (stable for all $a_L > 0$ if $AJ \ge qh$, for $a_L > a_c = qh/J - A$ if $AJ < qh$, and for no $a_L > 0$ if $J \le 0$). For M, $J = (\varepsilon - 1)h$ and $AJ - qh = h\{(\varepsilon - 2)\xi + [2(\varepsilon - 1)^2 - 1]h\}$, so $\varepsilon \ge 2$ makes any single L stage stable. When the rest of the ring contains only L blocks, (i) two equal small rates $a_L$ destabilize whenever $A > 0$, and (ii) every nonempty finite L cascade is unstable when $J \le 0$. For one host and one L with $d, q, h$ fixed, $d > h$, and $qd > (d - h)^2$, small self-regulation $\delta = \rho + h > 0$ gives lower stability threshold $a_{\mathrm{crit}} \sim [(d - h)d/(qd - (d - h)^2)]\delta$ as $\delta \downarrow 0$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k5}}]
+At $\rho = -h$ with $h > 0$, we have $A = d - h$, $B = 0$, $J = d - h - q$, and $C = qh > 0$. Setting $B = 0$ and $C = qh$ in Proposition~\ref{prop:dyn-k4} gives $\chi(z) = z^3 + (a_L + A)z^2 + a_L J z + a_L qh$. Since $a_L qh > 0$, the strict Routh--Hurwitz conditions $a_L + A > 0$, $a_L J > 0$, and $(a_L + A)a_L J > a_L qh$ reduce to $J > 0$ and $(a_L + A)J > qh$ (because $(a_L + A)J > qh > 0$ with $J > 0$ implies $a_L + A > 0$). Thus if $J \le 0$, no $a_L > 0$ is Hurwitz; if $J > 0$ and $AJ \ge qh$, every $a_L > 0$ is Hurwitz; and if $J > 0$ and $AJ < qh$, stability holds if and only if $a_L > a_c = qh/J - A > 0$. For block M, substituting $q = \xi + \varepsilon h$ and $d = \xi + 2\varepsilon h$ gives $J = (\varepsilon - 1)h$ and
+\[
+AJ - qh = [\xi + (2\varepsilon - 1)h](\varepsilon - 1)h - (\xi + \varepsilon h)h = h\bigl\{(\varepsilon - 2)\xi + [2(\varepsilon - 1)^2 - 1]h\bigr\},
+\]
+which is strictly positive whenever $\varepsilon \ge 2$ and $h > 0$.
+
+Now consider a ring consisting of this host block ($\rho = -h, h > 0$) followed only by $m \ge 1$ L blocks with positive rates $a_1, \dots, a_m$. By~\eqref{eq:dyn-charpoly},
+\[
+\chi(z) = z(z + A)\prod_{j=1}^m (z + a_j) - q(z - h)\prod_{j=1}^m a_j.
+\]
+Its constant term is $qh\prod_{j=1}^m a_j > 0$ and its linear coefficient is $(A - q)\prod_{j=1}^m a_j = J\prod_{j=1}^m a_j$. A monic real polynomial with all roots in $\{\operatorname{Re} z \le 0\}$ factors into $(z + r_i)$ with $r_i \ge 0$ and $(z^2 + \beta_\ell z + \gamma_\ell)$ with $\beta_\ell \ge 0, \gamma_\ell > 0$, so all its coefficients are nonnegative; this rules out $\operatorname{Re} z \le 0$ for all roots when $J < 0$. If $J = 0$ and all roots had $\operatorname{Re} z \le 0$, a positive constant term and vanishing linear coefficient would require every linear factor to be absent and every quadratic factor to have $\beta_\ell = 0$, forcing all roots to be purely imaginary and the coefficient of $z^{m+1}$ to vanish. However, the coefficient of $z^{m+1}$ is $A + \sum_{j=1}^m a_j = q + \sum_{j=1}^m a_j > 0$, a contradiction. Thus $\chi(z)$ has a root in $\mathbb{C}_+$ whenever $J \le 0$, proving~(ii).
+
+For~(i), take $m = 2$ with $a_1 = a_2 = a_L \to 0$ and $A > 0$. Then $\chi(z) = z(z + A)(z + a_L)^2 - qa_L^2(z - h)$. Rescaling $z = a_L^{2/3} w$ gives
+\[
+a_L^{-2}\chi(a_L^{2/3}w) = w(A + a_L^{2/3}w)(w + a_L^{1/3})^2 + qh - qa_L^{2/3}w \longrightarrow Aw^3 + qh \quad (a_L \downarrow 0).
+\]
+By continuity of polynomial roots, three roots satisfy $z \sim a_L^{2/3}(qh/A)^{1/3}\ee^{\pm \mathrm{i}\pi/3}, -a_L^{2/3}(qh/A)^{1/3}$, two of which have positive real part $\sim \frac{1}{2}(qh/A)^{1/3}a_L^{2/3} > 0$ for all sufficiently small $a_L > 0$.
+
+Finally, for one host and one L block with $d, q, h$ fixed, $A_0 = d - h > 0$, $qd > A_0^2$, and $\delta = \rho + h > 0$, substitute $\rho = -h + \delta$, $A = A_0 + \delta$, $B = d\delta$, and $J = A_0 - q + \delta$ into~\eqref{eq:dyn-fquad}:
+\[
+F(a_L) = (A_0 - q + \delta)a_L^2 + [A_0^2 - qd + 2A_0\delta + \delta^2]a_L + (A_0 + \delta)d\delta.
+\]
+Collecting the leading terms as $\delta \downarrow 0$ with $a_L = O(\delta)$ gives $F(a_L) = A_0 d\delta - (qd - A_0^2)a_L + O(\delta^2 + \delta a_L + a_L^2)$. Because $A_0 d > 0$ and $qd - A_0^2 > 0$, the smaller positive root satisfies $a_{\mathrm{crit}} \sim [A_0 d/(qd - A_0^2)]\delta$, with $F(a_L) > 0$ for $0 < a_L < a_{\mathrm{crit}}$ (for example, $h = \xi = 1$ gives stability for all $a_L > 0$ at $\varepsilon = 2$ where $qd < A_0^2$, and $a_c = 2$ at $\varepsilon = 1.5$; adding an S block with $d_S = 100, q_S = 10$ to an unregulated M block with $d = 3, q = 2, h = 1, \rho = -1$ and a unit-rate L block yields four negative eigenvalues despite $J = 0$).
+\end{proof}
+
+\begin{proposition}[One long-lived stage in a general ring]\label{prop:dyn-k6}
+Let one L rate $a_L \to 0$ with $c_L/a_L$, the equilibrium, and all other responses fixed, and let every other block be internally Hurwitz with unreduced product $Q(z) = \mathcal{N}(z)/\mathcal{D}(z) = \prod_{k \ne L} E_k(z)$ and finite $Q(0)$. Then $\chi(z) = (z + a_L)\mathcal{D}(z) - a_L\mathcal{N}(z)$ has slow root $z_s = a_L[Q(0) - 1] + O(a_L^2)$ while other roots approach those of $\mathcal{D}(z)$, so the ring is Hurwitz for small $a_L > 0$ if $Q(0) < 1$, has a positive real root for all $a_L > 0$ if $Q(0) > 1$, and has root zero for all $a_L > 0$ if $Q(0) = 1$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k6}}]
+With $\mathcal{D}(z) = \prod_{k \ne L} D_k(z)$ and $\mathcal{N}(z) = \prod_{k \ne L} N_k(z)$,~\eqref{eq:dyn-charpoly} gives $\chi(z) = (z + a_L)\mathcal{D}(z) - a_L\mathcal{N}(z)$. Because every block $k \ne L$ is internally Hurwitz, $\mathcal{D}(z)$ is a monic real polynomial whose roots all lie in $\{\operatorname{Re} z < 0\}$, so $\mathcal{D}(0) > 0$ and $Q(0) = \mathcal{N}(0)/\mathcal{D}(0)$ is finite. At $a_L = 0$, $\chi(z) = z\mathcal{D}(z)$ has a simple root at $z = 0$ and remaining roots equal to those of $\mathcal{D}(z)$. By root continuity and the implicit function theorem applied to $\chi(z, a_L) = 0$ at $(0, 0)$ (where $\partial_z \chi(0, 0) = \mathcal{D}(0) > 0$ and $\partial_{a_L}\chi(0, 0) = \mathcal{D}(0) - \mathcal{N}(0)$), the simple root near zero satisfies $z_s(a_L) = a_L[Q(0) - 1] + O(a_L^2)$, while all other roots remain in $\{\operatorname{Re} z < 0\}$ for sufficiently small $a_L > 0$. Hence $Q(0) < 1$ implies Hurwitz stability for all sufficiently small $a_L > 0$. If $Q(0) > 1$, then $\chi(0) = a_L[\mathcal{D}(0) - \mathcal{N}(0)] = a_L\mathcal{D}(0)[1 - Q(0)] < 0$ for every $a_L > 0$, whereas $\lim_{z \to +\infty}\chi(z) = +\infty$, so $\chi$ has a positive real root for every $a_L > 0$ (for example, two internally stable V blocks each with $d = 10, q = 5, h = 1, \rho = -0.8$ have $E_V(0) = -2$ and $Q(0) = 4 > 1$; a single such V block is stable with any single L stage yet unstable with eight L stages of rate $0.001$, leading real part $\approx 7.62 \times 10^{-6}$). If $Q(0) = 1$, then $\chi(0) = 0$ for every $a_L > 0$.
+\end{proof}
+
+\begin{proposition}[Unequal rates and the secant condition]\label{prop:dyn-k7}
+In an R/L ring with rates $a_k > 0$, $\beta_k = 1 - \kappa_k$ for R, $\beta_k = 1$ for L, and $G = \prod_{k=1}^n \beta_k = -g < 0$, every $g > 0$ is Hurwitz when $n \le 2$. For $n \ge 3$, with $\sum_{k=1}^n \arctan(\omega_c/a_k) = \pi$ ($\omega_c > 0$) and $\theta_k = \arctan(\omega_c/a_k)$, stability holds if and only if
+\begin{equation}\label{eq:dyn-secant}
+g < g_c = \prod_{k=1}^n \sec\theta_k \ge \sec^n(\pi/n),
+\end{equation}
+with equality in the bound if and only if all $a_k$ are equal. For $n = 3$, $g_c = (\sum_k a_k)(\sum_k a_k^{-1}) - 1$ and $\omega_c^2 = a_1 a_2 + a_2 a_3 + a_3 a_1$. Common rate rescaling preserves $g_c$, whereas $a_1 \to 0$ at fixed $a_2, \dots, a_n > 0$ gives $g_c \sim (\Omega/a_1)\prod_{k=2}^n \sqrt{1 + (\Omega/a_k)^2}$ where $\sum_{k=2}^n \arctan(\Omega/a_k) = \pi/2$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k7}}]
+With $G = \prod_{k=1}^n \beta_k = -g < 0$,~\eqref{eq:dyn-charpoly} reads $\prod_{k=1}^n (z + a_k) + g\prod_{k=1}^n a_k = 0$. At $g = 0$, the roots are $-a_k < 0$. Because $\chi(0) = (1 + g)\prod_k a_k > 0$ for all $g > 0$, no root can cross zero; stability can change as $g$ increases only when conjugate roots cross the nonzero imaginary axis $z = \pm \mathrm{i}\omega$ ($\omega > 0$). There, $\prod_{k=1}^n (1 + \mathrm{i}\omega/a_k) = -g$, so the modulus $\prod_k \sqrt{1 + (\omega/a_k)^2}$ equals $g$ and the phase $\Phi(\omega) = \sum_{k=1}^n \arctan(\omega/a_k)$ is an odd multiple of $\pi$. Since $\Phi(\omega)$ increases strictly from $0$ to $n\pi/2$ on $(0, \infty)$, no solution exists when $n \le 2$, so the ring stays Hurwitz for all $g > 0$. For $n \ge 3$, $\Phi(\omega_c) = \pi$ has a unique root $\omega_c > 0$, giving the smallest crossing gain $g_c = \prod_{k=1}^n \sqrt{1 + (\omega_c/a_k)^2} = \prod_{k=1}^n \sec\theta_k$. Differentiating $\sum_{k=1}^n \ln(z + a_k) = \ln(-g) + \sum_k \ln a_k$ along any root branch at $z = \mathrm{i}\omega$ gives
+\[
+\frac{\dd z}{\dd\ln g} = \left(\sum_{k=1}^n \frac{1}{\mathrm{i}\omega + a_k}\right)^{-1}, \qquad \operatorname{Re}\left(\sum_{k=1}^n \frac{1}{\mathrm{i}\omega + a_k}\right) = \sum_{k=1}^n \frac{a_k}{\omega^2 + a_k^2} > 0,
+\]
+so $\operatorname{Re}(\dd z/\dd\ln g) > 0$ at every imaginary-axis crossing. Crossings therefore move strictly into $\mathbb{C}_+$ and cannot return, proving Hurwitz stability if and only if $g < g_c$.
+
+Because $\theta_k \in (0, \pi/2)$, $\frac{1}{n}\sum_{k=1}^n \theta_k = \pi/n$, and $\theta \mapsto -\ln\cos\theta$ is strictly convex on $(0, \pi/2)$ (its second derivative is $\sec^2\theta > 0$), Jensen's inequality yields $\ln g_c = \sum_{k=1}^n (-\ln\cos\theta_k) \ge -n\ln\cos(\pi/n)$, so $g_c \ge \sec^n(\pi/n)$ with equality if and only if all $\theta_k$, and hence all $a_k$, coincide. For $n = 3$, expanding $(z + a_1)(z + a_2)(z + a_3) + g a_1 a_2 a_3 = z^3 + s_1 z^2 + s_2 z + (1 + g)s_3$ and applying the cubic Routh boundary $s_1 s_2 = (1 + g_c)s_3$ with $\omega_c^2 = s_2$ gives $g_c = s_1 s_2/s_3 - 1 = (\sum_k a_k)(\sum_k a_k^{-1}) - 1$. Replacing every $a_k$ by $\mu a_k$ ($\mu > 0$) replaces $\omega_c$ by $\mu\omega_c$ and leaves $\theta_k$ and $g_c$ unchanged. Finally, as $a_1 \downarrow 0$ with $a_2, \dots, a_n > 0$ fixed ($n \ge 3$), $\arctan(\omega/a_1) \to \pi/2$ for every $\omega > 0$, so monotonicity of the phase sum implies $\omega_c(a_1) \to \Omega$, where $\Omega > 0$ uniquely solves $\sum_{k=2}^n \arctan(\Omega/a_k) = \pi/2$. Then $\sec\theta_1 = \sqrt{1 + (\omega_c/a_1)^2} \sim \Omega/a_1$, yielding the stated asymptotic for $g_c$.
+\end{proof}
+
+\begin{proposition}[Constant-number hosts, loop gain, and return rate]\label{prop:dyn-k8}
+In an S/L ring at a positive equilibrium with at least one S block and circuit $R_0 = \prod_{k \in S}(c_k N_k / a_k)\prod_{k \in L}(c_k / a_k) > 1$ (if $\widehat{R}_0 = R_0^{1/m}$, set $R_0 = \widehat{R}_0^m$),
+\begin{equation}\label{eq:dyn-slgain}
+R_0 \prod_{k \in S}(1 - p_k) = 1, \qquad \prod_{k=1}^n E_k(0) = \frac{1}{R_0},
+\end{equation}
+the ring is Hurwitz, and the slowest return rate $\Gamma_{\mathrm{ret}}$ is the unique root in $(0, \min_k d_k)$ of $\prod_{k=1}^n (1 - \Gamma_{\mathrm{ret}}/d_k) = 1/R_0$ ($d_k = a_k$ for L, $a_k/(1 - p_k)$ for S; any other positive real roots are faster decay modes). For $n$ identical S blocks alone, hold $R_0>1$ fixed in both comparisons. Holding total stage lifetime $\mathcal{T} = n/a$ fixed gives $\Gamma_{\mathrm{ret}} = (n/\mathcal{T})(R_0^{1/n} - 1)$ (equal to invasion growth when rare), decreasing strictly to $(\ln R_0)/\mathcal{T}$, whereas holding total filter time $\mathcal{T}_{\mathrm{lin}} = n/d$ fixed gives $\Gamma_{\mathrm{ret}} = (n/\mathcal{T}_{\mathrm{lin}})(1 - R_0^{-1/n})$, increasing strictly to $(\ln R_0)/\mathcal{T}_{\mathrm{lin}}$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k8}}]
+At a positive equilibrium, an L block satisfies $v_k^*/u_k^* = c_k/a_k$, and an S block satisfies $u_k^*(N_k - I_k^*) = a_k I_k^*$ and $v_k^* = c_k I_k^*$, so $v_k^*/u_k^* = (c_k N_k/a_k)(1 - p_k)$. Because $u_{k+1}^* = v_k^*$, multiplying around the ring gives
+\[
+1 = \prod_{k=1}^n \frac{v_k^*}{u_k^*} = \left(\prod_{k \in S} \frac{c_k N_k}{a_k} \prod_{k \in L} \frac{c_k}{a_k}\right) \prod_{k \in S}(1 - p_k) = R_0 \prod_{k \in S}(1 - p_k).
+\]
+Since $E_k(0) = 1$ for L and $E_k(0) = 1 - p_k$ for S, we obtain $\prod_{k=1}^n E_k(0) = \prod_{k \in S}(1 - p_k) = 1/R_0$. With at least one S block at $p_k \in (0, 1)$, $R_0 > 1$ and Theorem~\ref{thm:dyn-k2} proves that the ring is Hurwitz.
+
+With $d_k = a_k$ for L and $d_k = a_k/(1 - p_k)$ for S, we have $\prod_{k=1}^n (a_k/d_k) = \prod_{k \in S}(1 - p_k) = 1/R_0$, and~\eqref{eq:dyn-charpoly} becomes $\chi(z) = \prod_{k=1}^n (z + d_k) - \prod_{k=1}^n a_k$. On $\Gamma \in [0, \min_k d_k]$, the function $\psi(\Gamma) = \prod_{k=1}^n (1 - \Gamma/d_k)$ decreases strictly and continuously from $1$ to $0$, so $\psi(\Gamma_{\mathrm{ret}}) = 1/R_0 \in (0, 1)$ has a unique root $\Gamma_{\mathrm{ret}} \in (0, \min_k d_k)$, giving $\chi(-\Gamma_{\mathrm{ret}}) = 0$. If any root $z$ satisfied $\operatorname{Re} z > -\Gamma_{\mathrm{ret}}$, then for every $k$, $|z + d_k| \ge \operatorname{Re} z + d_k > d_k - \Gamma_{\mathrm{ret}} > 0$, whence $|\prod_k (z + d_k)| > \prod_k (d_k - \Gamma_{\mathrm{ret}}) = \prod_k d_k / R_0 = \prod_k a_k$, contradicting $\chi(z) = 0$. Hence $-\Gamma_{\mathrm{ret}}$ has strictly largest real part among all eigenvalues (other positive real roots of $\prod_k(1 - \Gamma/d_k) = 1/R_0$ may or may not exist: two equal rates $d$ give $d(1 \pm R_0^{-1/2})$ with the smaller equal to $\Gamma_{\mathrm{ret}}$, whereas three equal rates $d = 1$ at $R_0 = 2$ give a single real root $\approx 0.206299$).
+
+For $n$ identical S blocks ($N_k = N, a_k = a, c_k = c$) with no L blocks, the static map $u \mapsto v = cNu/(u + a)$ is strictly increasing on $(0, \infty)$; a strictly increasing scalar map has no nonconstant finite periodic orbit, so $u_k^*$, $p_k = p$, and $d_k = d$ are equal across blocks. Then $(1 - p)^n = 1/R_0$, $d = a R_0^{1/n}$, $(z + d)^n = a^n$ has roots $z_j = a\ee^{2\pi\mathrm{i}j/n} - d$ ($j = 0, \dots, n - 1$), and $\Gamma_{\mathrm{ret}} = d - a = a(R_0^{1/n} - 1)$ (which also equals the rare-parasite invasion eigenvalue $cN - a = a(R_0^{1/n} - 1)$ since $R_0 = (cN/a)^n$). Put $L = \ln R_0 > 0$ and $x = n > 0$. For fixed $\mathcal{T} = n/a$, $\Gamma_{\mathrm{ret}} = \mathcal{T}^{-1} x(\ee^{L/x} - 1)$; differentiating $x(\ee^{L/x} - 1)$ with respect to $x$ gives $\ee^{L/x}(1 - L/x) - 1 < 0$ for $L/x > 0$ (since $\ee^{-u} > 1 - u$ for $u > 0$), with limit $L$ as $x \to \infty$. For fixed $\mathcal{T}_{\mathrm{lin}} = n/d$, $a = d\ee^{-L/n}$ gives $\Gamma_{\mathrm{ret}} = \mathcal{T}_{\mathrm{lin}}^{-1} x(1 - \ee^{-L/x})$, whose derivative $1 - \ee^{-L/x}(1 + L/x) > 0$ (since $\ee^u > 1 + u$ for $u > 0$), increasing toward $L/\mathcal{T}_{\mathrm{lin}}$.
+\end{proof}
+
+\begin{proposition}[First-order noise response with feedback]\label{prop:dyn-k9}
+At a Hurwitz equilibrium, multiply $u_j$ by $\exp\eta(t)$, where stationary $\eta$ has two-sided spectral density $S_\eta(\omega)$ with $\Var\eta = (2\pi)^{-1}\int_{-\infty}^\infty S_\eta(\omega)\dd\omega$. With directed path $[j, k)$ (empty if $j = k$) and density filter $F_k = E_k$ for L, S, V, M and $a_k/(z + a_k)$ for R, first-order log parasite density in block $k$ has spectrum $|W_k(\mathrm{i}\omega)|^2 S_\eta(\omega)$, where
+\begin{equation}\label{eq:dyn-wk}
+W_k(z) = \frac{F_k(z)\prod_{\ell \in [j, k)} E_\ell(z)}{1 - \prod_{\ell=1}^n E_\ell(z)},
+\end{equation}
+understood as a rational function continued across removable singularities.
+Restricting to S/L rings with $R_0 > 1$, fixed equilibrium, gains, and other rates as one L rate $a_L \to 0$, let $P_k(z)$ be the numerator of~\eqref{eq:dyn-wk} without $a_L/(z + a_L)$: (i) if the numerator includes the slow stage and $S_\eta$ is fixed, continuous, and positive at $0$ (or for linearized white forcing), $\Var(\delta\ln X_k) = a_L S_\eta(0) P_k(0)^2 / [2(1 - 1/R_0)] + o(a_L)$; (ii) if the numerator bypasses it and $S_\eta > 0$ on positive measure, $\Var(\delta\ln X_k) \to (2\pi)^{-1}\int_{-\infty}^\infty |P_k(\mathrm{i}\omega)|^2 S_\eta(\omega)\dd\omega > 0$; and (iii) at frequencies $|\omega|\ll a_L(1-1/R_0)$ and below all other block rates, $W_k(\mathrm i\omega)\simeq P_k(0)/(1-1/R_0)$. Consequently, for a family of nonzero input spectra supported on $|\omega|\leq\epsilon a_L(1-1/R_0)$, with all rates and gains fixed, the ratio $\Var(\delta\ln X_k)/\Var\eta$ tends to $P_k(0)^2/(1-1/R_0)^2$ as $\epsilon\downarrow0$.
+\end{proposition}
+
+No nonlinear remainder is supplied, host-production forcing uses a different numerator, limits~(i) and~(iii) do not commute (zero-frequency atoms are excluded from~(i)), and the factor $R_0/(R_0 - 1)$ applies only to S/L rings, replaced in general by $1/[1 - \prod_\ell E_\ell(0)]$.
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:dyn-k9}}]
+Multiplying $u_j$ by $\exp\eta(t)$ gives, to first order in $\eta$, $x_j = y_{j-1} + \eta$ and $x_\ell = y_{\ell - 1}$ for $\ell \ne j$. Around the ring, $y_{j-1}(z) = [\prod_{\ell=1}^n E_\ell(z)]x_j(z)$, so $[1 - \prod_{\ell=1}^n E_\ell(z)]x_j(z) = \eta(z)$, where the denominator has no zeros in $\overline{\mathbb{C}}_+$ because the equilibrium is Hurwitz. Propagating $x_j(z)$ along $[j, k)$ to $x_k(z) = [\prod_{\ell \in [j, k)} E_\ell(z)]x_j(z)$ and applying the relative parasite-density filter $F_k(z)$ (which equals $w_1(z)/x_k(z) = a_k/(z + a_k)$ for R even if $1 - \kappa_k = 0$) gives $\delta\ln X_k(z) = \delta X_k(z)/X_k^* = W_k(z)\eta(z)$ with $W_k(z)$ in~\eqref{eq:dyn-wk}. Because $W_k$ is a causal stable rational filter, a stationary input with spectral density $S_\eta(\omega)$ produces output spectral density $|W_k(\mathrm{i}\omega)|^2 S_\eta(\omega)$.
+
+Now restrict to an S/L ring with $R_0 > 1$, let $L_{a_L}(z) = a_L/(z + a_L)$ be the selected L block, and write $\prod_{\ell \ne L} E_\ell(z) = Q(z)$, so $|Q(\mathrm{i}\omega)| \le Q(0) = g = 1/R_0 < 1$ for all $\omega \in \mathbb{R}$. Multiplying numerator and denominator of~\eqref{eq:dyn-wk} by $z + a_L$ yields
+\[
+W_k(z) = \begin{cases}
+\dfrac{a_L P_k(z)}{z + a_L[1 - Q(z)]}, & \text{if the numerator includes } L_{a_L}, \\[6pt]
+\dfrac{(z + a_L)P_k(z)}{z + a_L[1 - Q(z)]}, & \text{if the numerator bypasses } L_{a_L},
+\end{cases}
+\]
+where the slow stage's own density always falls in the first case via $F_L = L_{a_L}$. For every real $\omega$, $|\mathrm{i}\omega+a_L[1-Q(\mathrm{i}\omega)]|^2\geq a_L^2(1-g)^2+\max\{0,|\omega|-a_Lg\}^2$.
+
+In case~(i), substitute $\omega = a_L t$:
+\[
+\Var(\delta\ln X_k) = \frac{a_L}{2\pi}\int_{-\infty}^\infty \frac{|P_k(\mathrm{i}a_L t)|^2 S_\eta(a_L t)}{|\mathrm{i}t + 1 - Q(\mathrm{i}a_L t)|^2}\dd t.
+\]
+For $|\mathrm{i}t + 1 - Q(\mathrm{i}a_L t)|$, the real part is at least $1 - g > 0$ and the imaginary part satisfies $|t - \operatorname{Im} Q(\mathrm{i}a_L t)| \ge |t| - g$, so $|\mathrm{i}t + 1 - Q(\mathrm{i}a_L t)|^{-2} \le [(1 - g)^2 + \max(0, |t| - g)^2]^{-1}$, which is integrable on $\mathbb{R}$. When $S_\eta$ is integrable and continuous at $0$ (split into $|a_L t| \le \delta_0$, where $S_\eta$ is bounded and converges to $S_\eta(0)$, and $|\omega| > \delta_0$, where $|W_k(\mathrm{i}\omega)|^2\leq4a_L^2\|P_k\|_\infty^2/\delta_0^2$ for $a_L(1+g)\leq\delta_0/2$ gives an $O(a_L^2)$ tail) or constant $S_\eta \equiv S_w$, dominated convergence gives
+\[
+\lim_{a_L \downarrow 0} \frac{\Var(\delta\ln X_k)}{a_L} = \frac{|P_k(0)|^2 S_\eta(0)}{2\pi}\int_{-\infty}^\infty \frac{\dd t}{t^2 + (1 - g)^2} = \frac{S_\eta(0)P_k(0)^2}{2(1 - 1/R_0)}.
+\]
+In case~(ii), $|W_k(\mathrm{i}\omega)| \le (1 + 1/(1 - g))|P_k(\mathrm{i}\omega)|$ for all $\omega \ne 0$, where $P_k$ includes the strictly proper filter $F_k$ (so $|P_k(\mathrm{i}\omega)|^2$ is integrable even for constant $S_\eta$), and $W_k(\mathrm{i}\omega) \to P_k(\mathrm{i}\omega)$ for every $\omega \ne 0$. Dominated convergence gives $\Var(\delta\ln X_k) \to (2\pi)^{-1}\int_{-\infty}^\infty |P_k(\mathrm{i}\omega)|^2 S_\eta(\omega)\dd\omega$, which is strictly positive because $P_k(\mathrm{i}\omega) \ne 0$ for all $\omega \in \mathbb{R}$ on an S/L path and $S_\eta > 0$ on a set of positive measure. Finally, continuity of the stable rational filter at zero gives $W_k(\mathrm{i}\omega)\to P_k(0)/(1-g)$ as $\omega\to0$. For the input families in~(iii), this convergence is uniform on their shrinking spectral supports. Integrating against $S_\eta/\int S_\eta$ proves the variance-ratio limit. (Outside S/L rings, $1/(1 - \prod_\ell E_\ell(0))$ is not $R_0/(R_0 - 1)$: for a V--L cycle with $\rho = 0.4, h = 0.25, a = 1.2, p = 0.25, \alpha = 1$, $E_V(0)E_L(0) = 6/13$ gives static feedback factor $13/7 \approx 1.857$, whereas $R_0 = 24/13$ gives $R_0/(R_0 - 1) = 24/11 \approx 2.182$.)
+\end{proof}
+
+\subsection{Extended grouse--nematode block, trophic equations, and Lean scope}\label{subsec:app-dyn-models}
+
+\paragraph{Three-state grouse--nematode host block.}
+Model~III of \citet{dobson1992} and Models~A--D of \citet{gaba2008} track grouse $H$, arrested larvae $A_H$, adult worms $P$, and free-living larvae $W$:
+\begin{equation}\label{eq:dyn-dh-odes}
+\begin{aligned}
+\dot{H} &= (a - b - \Delta H)H - (\alpha + \delta)P, \\
+\dot{A}_H &= \sigma\beta WH - (\mu_A + b + \theta)A_H - \alpha PA_H/H, \\
+\dot{P} &= \theta A_H + (1 - \sigma)\beta WH - (\mu_P + b + \alpha)P - \alpha k' P^2/H, \\
+\dot{W} &= \lambda P - \gamma W - \beta WH,
+\end{aligned}
+\end{equation}
+where $a, b$ are host birth and death rates, $\Delta$ is territorial regulation, $\alpha$ and $\delta$ are worm-induced host mortality and fecundity loss, $\mu_A$ and $\mu_P$ are larval and adult worm death rates, $\theta$ is the arrestment-exit rate, $\sigma \in [0, 1]$ is the arresting fraction, $\beta$ is larval uptake, $\lambda$ is egg output, $\gamma$ is free-living mortality, and $k' = (k + 1)/k$. Grouping $(H, A_H, P)$ with input $u = \beta W$ and output $v = \lambda P$, let $m_P = P^*/H^*$, $h_{\mathrm{eff}} = (\alpha + \delta)m_P = a - b - \Delta H^*$, $\rho = -(a - b) + 2\Delta H^*$, $d_A = \mu_A + b + \theta + \alpha m_P$, $d_P = \mu_P + b + \alpha + \alpha k' m_P$, and $f_A = (\sigma\theta/d_A)/[(1 - \sigma) + \sigma\theta/d_A]$. With relative perturbations $\widetilde{h}, \widetilde{a}, \widetilde{p}, \widetilde{x}$, linearizing $\dot{H}$ and $\dot{A}_H$ gives $\widetilde{h} = -h_{\mathrm{eff}}\widetilde{p}/(z + \rho)$ and $\widetilde{a} = [d_A\widetilde{x} + (d_A + \alpha m_P)\widetilde{h} - \alpha m_P\widetilde{p}]/(z + d_A)$. Substituting into $\dot{P}$ yields
+\begin{equation}\label{eq:dyn-dh-resp}
+E_{\mathrm{DH}}(z) = \frac{d_P(z + \rho)L_A(z)}{(z + \rho)[z + \widetilde{d}(z)] + h_{\mathrm{eff}}[d_P L_A(z) + \widetilde{d}(z) - d_P]},
+\end{equation}
+where $L_A(z) = (1 - f_A) + f_A d_A/(z + d_A)$ and $\widetilde{d}(z) = d_P + \alpha k' m_P + f_A d_P \alpha m_P/(z + d_A)$ (clearing $z + d_A$ gives a cubic internal denominator; at $\sigma = 0$, $f_A = 0$ and $E_{\mathrm{DH}}$ reduces to an M-like form with effective clumping $\varepsilon_{\mathrm{eff}} = \alpha k'/(\alpha + \delta)$, which can fall below $1$). Linearizing $\dot{W}$ gives $\widetilde{w}(z) = [a_W/(z + a_W)]\widetilde{p} - [\beta H^*/(z + a_W)]\widetilde{h}$ with $a_W = \gamma + \beta H^*$, so replacing $W$ by a scalar L block $E_W(z) = a_W/(z + a_W)$ omits the direct host-depletion term $-[\beta H^*/(z + a_W)]\widetilde{h}$ (Table~\ref{tab:dyn-grouse}).
+
+\begin{table}[ht]
+\caption{Leading eigenvalue real parts ($\mathrm{yr}^{-1}$) in the full four-equation grouse--nematode Jacobian~\eqref{eq:dyn-dh-odes} versus the scalar-ring reduction $E_{\mathrm{DH}}(z)E_W(z) = 1$}\label{tab:dyn-grouse}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrrr@{}}
+\toprule
+Regime$^{\mathrm{a}}$ & Duration (mo) & Full $\operatorname{Re} z_{\max}$ & Red.\ $\operatorname{Re} z_{\max}$ & $H^*/K$ ($H^*$) \\
+\midrule
+Territorial ($\Delta > 0$), $\sigma = 0$ & Free-living $1/\gamma = 0.50$ & $-0.0729$ & $-0.0695$ & $0.373$ \\
+ & Free-living $1/\gamma = 0.75$ & $-0.0138$ & $-0.0079$ & $0.257$ \\
+ & Free-living $1/\gamma = 1.00$ & $+0.0188$ & $+0.0269$ & $0.196$ \\
+ & Free-living $1/\gamma = 3.00$ & $+0.0906$ & $+0.1076$ & $0.068$ \\
+Territorial ($\Delta > 0$), $\sigma = 1$ & Arrestment $1/\theta = 0.25$ & $+0.0171$ & $+0.0267$ & $0.221$ \\
+ & Arrestment $1/\theta = 1.00$ & $+0.0236$ & $+0.0377$ & $0.251$ \\
+ & Arrestment $1/\theta = 4.00$ & $-0.0225$ & $-0.0025$ & $0.378$ \\
+ & Arrestment $1/\theta = 6.00$ & $-0.0724$ & $-0.0520$ & $0.471$ \\
+ & Arrestment $1/\theta = 8.00$ & $-0.1275$ & $-0.1084$ & $0.569$ \\
+Unself-regulated, Model A & Arrestment $1/\theta = 1.00$ & $-0.0029$ & $+0.0104$ & $(56.6)$ \\
+ & Arrestment $1/\theta = 5.00$ & $+0.0095$ & $+0.0378$ & $(105.6)$ \\
+ & Arrestment $1/\theta = 12.00$ & $-0.0051$ & $+0.0287$ & $(233.3)$ \\
+Unself-regulated, Model B & Arrestment $1/\theta = 1.00$ & $+0.0118$ & $+0.0550$ & $(86.4)$ \\
+ & Arrestment $1/\theta = 4.00$ & $-0.0014$ & $+0.0593$ & $(231.5)$ \\
+ & Arrestment $1/\theta = 7.00$ & $-0.0162$ & $+0.0461$ & $(1583.1)$ \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\noindent\footnotesize
+$^{\mathrm{a}}$Territorial scans use Table~2 of \citet{dobson1992}: $a = 1.8, b = 1.05, \lambda = 11, \mu_P = 1.0, \mu_A = 0.5\ \mathrm{yr}^{-1}$, $\alpha = 3 \times 10^{-4}, \delta = 5 \times 10^{-4}\ \mathrm{worm}^{-1}\,\mathrm{yr}^{-1}$, $k = 1, \beta = 0.1\ \mathrm{host}^{-1}\,\mathrm{yr}^{-1}$, $\Delta = (a - b)/K$ with $K = 180$, and $\gamma = 13\ \mathrm{yr}^{-1}$ when $\sigma = 1$. Unself-regulated scans ($\Delta = \delta = 0$, after \citealp{gaba2008}, using these base rates) set $\gamma = 1300\ \mathrm{yr}^{-1}$ ($H_0 = 130$), $\sigma = 0.85, \lambda = 11, k = 9.5$ in Model~A, and $\gamma = 6.5\ \mathrm{yr}^{-1}, \sigma = 0.85, \lambda = 5.8, k = 13$ in Model~B, with $H^*$ in parentheses.
+\end{table}
+
+\paragraph{Trophic predator--prey--parasite equations (run R11).}
+With predator death rate $d = 1$ and half-saturation prey density $C_{50} = 1$, the registered equations for predators $H$, adult parasites $P$, free-living stages $W$, susceptible prey $C$, and infected prey $I$ ($N_C = C + I$) are
+\begin{equation}\label{eq:dyn-r11-odes}
+\begin{aligned}
+\dot{H} &= \frac{eaH N_C}{C_{50} + N_C} - dH - \alpha P, \quad
+\dot{W} = \lambda P - \sigma W - \beta N_C W, \\
+\dot{P} &= \frac{\nu aHI}{C_{50} + N_C} - (\mu + d + \alpha)P - \alpha\frac{k + 1}{k}\frac{P^2}{H}, \\
+\dot{C} &= f N_C\!\left(1 - \frac{N_C}{K}\right) - d_C C - \frac{aHC}{C_{50} + N_C} - \beta CW, \quad
+\dot{I} = \beta CW - d_C I - \frac{aHI}{C_{50} + N_C}.
+\end{aligned}
+\end{equation}
+At the positive parasite-free predator--prey equilibrium $(H_0, C_0)$, with $K' = K(1 - d_C/f)$ and per-prey predation rate $\varphi_0 = aH_0/(C_{50} + C_0)$, the predator--prey subsystem is unstable if and only if $C_0 < (K' - C_{50})/2$ (always unstable when $K = \infty$), and the whole-circuit reproduction number is
+\begin{equation}\label{eq:dyn-r11-r0}
+R_0 = \frac{\lambda}{\mu + d + \alpha}\,\frac{\beta C_0}{\sigma + \beta C_0}\,\frac{\varphi_0}{d_C + \varphi_0}\,\nu.
+\end{equation}
+Log-uniform ranges across the 20,000 draws (seed 20261114) were $d_C \in [2, 50]$, $f/d_C \in [1.5, 10]$, finite $K \in [2, 200]$ ($K = \infty$ on every fifth draw), $a \in [5, 100]$, $e \in [0.02, 0.5]$ (redrawn if $ea \le d$), $\mu \in [0.2, 20]$, $\alpha \in [10^{-3}, 1]$, $k \in \{0.2, 1, 5, \infty\}$, $\lambda \in [1, 10^4]$, $\sigma \in [1, 200]$, $\beta \in [10^{-3}, 10]$, and $\nu \in [0.1, 10]$. The direct-cycle comparator removes $I$, retains prey $C$ as predator food, replaces predator recruitment of $P$ by $\beta_H WH$ and free-living uptake by $-\beta_H WH$, and adjusts $(\beta_H, \lambda_D)$ to match both $R_0$ and the sum of endemic mean stage residence times.
+
+\begin{table}[ht]
+\caption{Machine-checked Lean~4 items supporting the stability results in Section~\ref{sec:dyn} and this appendix, with each result identified by label below}\label{tab:dyn-lean}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lp{0.31\textwidth}p{0.48\textwidth}@{}}
+\toprule
+Result & \raggedright Lean~4 items (\texttt{Dobson.}) & \raggedright Formalized scope and unformalized boundary \tabularnewline
+\midrule
+Prop.~\ref{prop:dyn-k1} & \raggedright \texttt{Full3.BlockRing.}\allowbreak\texttt{prop\_dyn\_k1} & \raggedright Complete block-ring characteristic polynomial, spectrum and multiplicities, including self-feedback and hidden modes \tabularnewline
+Thm.~\ref{thm:dyn-k2} & \raggedright \texttt{Full3.NonAmplifying.}\allowbreak\texttt{thm\_dyn\_k2} & \raggedright Complete non-amplifying stability theorem; rational decay and strict half-plane damping are derived \tabularnewline
+Prop.~\ref{prop:dyn-k3} & \raggedright \texttt{Full1.}\allowbreak\texttt{BlockQualification.}\allowbreak\texttt{prop\_dyn\_k3}, \texttt{internal\_determinant} & \raggedright Internal stability and R/V/M gain tests, including converse, non-strict and degenerate cases, for the linearized block responses as stated; their derivation from the nonlinear block equations is outside coverage \tabularnewline
+Prop.~\ref{prop:dyn-k4} & \raggedright \texttt{Full1.DelayStability.}\allowbreak\texttt{prop\_dyn\_k4}, \texttt{V\_admissible}, \texttt{M\_admissible}, \texttt{characteristic\_is\_det}, \texttt{eigenvalue\_iff}, \texttt{matrix\_hurwitz\_iff} & \raggedright Spectrum/Hurwitz equivalence, admissibility and stability-island boundaries for the stated linearized V/M-plus-delay Jacobian; its derivation from the nonlinear model is outside coverage \tabularnewline
+Prop.~\ref{prop:dyn-k5} & \raggedright \texttt{Full4.}\allowbreak\texttt{UnregulatedHost.}\allowbreak\texttt{prop\_dyn\_k5} & \raggedright Unregulated-host delay regimes, cascade/two-slow-stage instability and small-self-regulation boundary asymptotic for the stated linearized host block; its derivation from the nonlinear model is outside coverage \tabularnewline
+Prop.~\ref{prop:dyn-k6} & \raggedright \texttt{Coverage6Dynamics.}\allowbreak\texttt{characteristic\_eval}, \texttt{zero\_root}, \texttt{characteristic\_monic}, \texttt{positive\_root\_all\_rates}, \texttt{slow\_root\_error} & \raggedright For the stated unreduced polynomial $\chi(z)=(z+a_L)\mathcal{D}(z)-a_L\mathcal{N}(z)$, degree/monicity and the positive/zero-root alternatives are checked with $\mathcal{D}$ monic, $\deg\mathcal{N}\le\deg\mathcal{D}$ and $\mathcal{D}(0)>0$ supplied; the polynomial identification and these premises are not derived from the block model. The slow-root error bound assumes an existing root and local Lipschitz data satisfying the stated smallness condition. Branch construction, convergence of the other roots and small-rate stability remain outside coverage \tabularnewline
+Prop.~\ref{prop:dyn-k7} & \raggedright \texttt{ThreeStages.}\allowbreak\texttt{sum\_mul\_sum\_inv\_ge\_nine}, \texttt{char\_eq\_zero\_iff}; \texttt{Secant.E1} & \raggedright The secant inequality $\prod_k\sec\theta_k\ge\sec^n(\pi/n)$ is checked for $n\ge3$, $0<\theta_k<\pi/2$ and $\sum_k\theta_k=\pi$, together with the three-stage imaginary-root equations and the AM--HM bound, including its equality case. The $n\le2$ stability claim, existence and uniqueness of $\omega_c$, identification of $g_c$ with $\prod_k\sec\theta_k$, general Hurwitz equivalence, crossing direction, the general secant equality criterion, rate rescaling and small-rate asymptotics remain outside coverage \tabularnewline
+Prop.~\ref{prop:dyn-k8} & \raggedright \texttt{Full3.ConstantHosts.}\allowbreak\texttt{prop\_dyn\_k8} & \raggedright Complete constant-host equilibrium and Jacobian, stability, slowest return root, and both duration comparisons and limits \tabularnewline
+\bottomrule
+\end{tabular*}
+\end{table}

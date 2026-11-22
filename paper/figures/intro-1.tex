@@ -1,0 +1,63 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,bending}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    >={Latex[line width=0pt]},
+    stage/.style={
+        circle,
+        draw=black,
+        line width=0.7pt,
+        minimum size=13.5mm,
+        inner sep=1pt,
+        align=center,
+        fill=white
+    },
+    stay/.style={
+        ->,
+        draw=black,
+        line width=0.65pt
+    },
+    fluct/.style={
+        ->,
+        draw=black,
+        line width=0.75pt,
+         densely dashed
+    }
+]
+
+% Bounding width ~82mm so 84mm inclusion is ~1:1 scale
+\node[stage] (S1) at (90:19mm) {Stage $1$\\[-1pt]$x_1(t)$};
+\node[stage] (S2) at (330:19mm) {Stage $2$\\[-1pt]$x_2(t)$};
+\node[stage] (Sn) at (210:19mm) {Stage $n$\\[-1pt]$x_n(t)$};
+
+% Fixed staying self-loops (solid)
+\draw[stay] (S1.118) .. controls +(125:9mm) and +(55:9mm) ..
+    node[above=1pt] {$s_1$} (S1.62);
+\draw[stay] (S2.358) .. controls +(25:9mm) and +(295:9mm) ..
+    node[right=1.5pt] {$s_2$} (S2.302);
+\draw[stay] (Sn.238) .. controls +(245:9mm) and +(175:9mm) ..
+    node[left=1.5pt] {$s_n$} (Sn.182);
+
+% Fluctuating host-driven transfers (dashed)
+\draw[fluct] (S1.335) to[bend left=24]
+    node[midway, right=2pt, align=left] {$g_1 h_1(t)$} (S2.85);
+\draw[fluct] (S2.205) to[bend left=24]
+    node[midway, below=2pt, align=center] {$g_2 h_2(t)\;\cdots\;g_{n-1}h_{n-1}(t)$} (Sn.335);
+\draw[fluct] (Sn.95) to[bend left=24]
+    node[midway, left=2pt, align=right] {$g_n h_n(t)$} (S1.205);
+
+% Compact legend at bottom for line styles
+\coordinate (L0) at (-37mm,-31.5mm);
+\draw[stay] (L0) -- ++(7.5mm,0) node[right=2pt, anchor=west] {fixed staying $s_k$};
+\draw[fluct] ($(L0)+(33.5mm,0)$) -- ++(8.5mm,0) node[right=2pt, anchor=west] {fluctuating transfer $g_k h_k(t)$};
+
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

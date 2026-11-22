@@ -1,0 +1,288 @@
+\section{Proofs for the second-order theory of the ring}\label{app:ring}
+
+\subsection{Further results and proofs for Section~\ref{sec:ring}}
+
+\subsubsection{Lineage renewals, the geometric ring, the band, and serial hosts}\label{subsec:app-ring-basic}
+
+We express the published perturbation coefficient \citep{ruelle1979,tuljapurkar1982a,tuljapurkar2006} through reproductive-value-weighted lineage return times \citep{bienvenu2015,bienvenu2017}. For a finite primitive nonnegative mean matrix $\mathbf{A}_0$, let $\lambda > 0$ be its Perron root, $\mathbf{M} = \mathbf{A}_0 / \lambda$, and $\mathbf{v}, \mathbf{w}$ its positive eigenvectors ($\mathbf{1}^{\mathsf{T}}\mathbf{v} = \mathbf{w}^{\mathsf{T}}\mathbf{v} = 1$). The probabilities $P(j \to i) = M_{ij} w_i / w_j$ define an irreducible, aperiodic Markov chain with stationary law $\pi_j = v_j w_j$.
+
+\begin{proposition}[Lineage and renewal form]\label{prop:ring-lineage}
+Under the primitive mean-matrix setting above, let $\mathbf{B} = b\mathbf{e}_i\mathbf{e}_j^{\mathsf{T}}$ ($0 < b \le M_{ij}$) be a labeled contribution to entry $(i,j)$ of $\mathbf{M}$, multiplied at step $t$ by $h(t) = \exp(z(t) - \sigma^2/2)$, where $z(t)$ is a centered stationary ergodic Gaussian series with variance $\sigma^2 > 0$ and bounded autocorrelation $\rho(\ell)$. Put $c = \mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v} = b w_i v_j$ (stationary use frequency) and $u(\ell) = b(\mathbf{M}^{\ell-1})_{ji}$ (reuse probability at lag $\ell \ge 1$). The formal second-order per-step cost coefficient is
+\begin{equation}
+C = \frac{(\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v})^2}{2} - \sum_{\ell=1}^{\infty} \rho(\ell)\,\mathbf{w}^{\mathsf{T}}\mathbf{B}(\mathbf{M}^{\ell-1} - \mathbf{v}\mathbf{w}^{\mathsf{T}})\mathbf{B}\mathbf{v} = \frac{c^2}{2} - c \sum_{\ell=1}^{\infty} \rho(\ell)\,[u(\ell) - c].
+\label{eq:ring-lineage}
+\end{equation}
+Successive uses form a renewal process with gap $L_e$ and mean $\mathcal{T}_e = \E[L_e] = 1/c$. If $\rho(\ell) = \phi^\ell$ with $|\phi| < 1$, put $\theta = \phi/(1 - \phi)$ and $R_e = \E[\phi^{L_e}]$ ($R_e = 0$ at $\phi = 0$). Then
+\begin{equation}
+C = \frac{1 + 2\theta}{2\mathcal{T}_e^2} - \frac{1}{\mathcal{T}_e}\frac{R_e}{1 - R_e}.
+\label{eq:ring-renewal}
+\end{equation}
+For finitely many contributions $\mathbf{B}_a$ sharing one driver $z(t)$ with real sensitivities $\kappa_a$ via $\exp(\kappa_a z(t) - \kappa_a^2\sigma^2/2)$, summing over ordered pairs $(a,b)$ gives $C = \frac{1}{2}(\sum_a \kappa_a c_a)^2 - \sum_{a,b} \kappa_a \kappa_b c_b \sum_{\ell=1}^{\infty} \rho(\ell)\,[u_{b \to a}(\ell) - c_a]$, where $u_{b \to a}(\ell)$ is the lag-$\ell$ probability of using $a$ after $b$. Independent drivers add.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-lineage}}]
+Because $\mathbf{w}^{\mathsf{T}}\mathbf{M} = \mathbf{w}^{\mathsf{T}}$ and $\mathbf{w} > \mathbf{0}$, the row sums of the nonnegative probabilities $P(j \to i) = M_{ij} w_i / w_j$ satisfy $\sum_i P(j \to i) = (\sum_i M_{ij} w_i)/w_j = 1$. Primitivity of $\mathbf{A}_0$ makes $\mathbf{M}$ primitive, so the similarity transform $\mathbf{P} = \operatorname{diag}(\mathbf{w})\,\mathbf{M}\operatorname{diag}(\mathbf{w})^{-1}$ is column-stochastic, irreducible, and aperiodic. Its stationary distribution $\pi_j = v_j w_j$ satisfies $\sum_j \pi_j = \mathbf{w}^{\mathsf{T}}\mathbf{v} = 1$ and $\sum_j P(j \to i)\pi_j = \sum_j M_{ij} w_i v_j = w_i v_i = \pi_i$.
+
+For $\mathbf{B} = b\mathbf{e}_i\mathbf{e}_j^{\mathsf{T}}$ ($0 < b \le M_{ij}$), direct multiplication gives $\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v} = b w_i v_j = c$, $(\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v})^2 = c^2$, and
+\[
+\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{M}^{\ell-1}\mathbf{B}\mathbf{v} = b w_i (\mathbf{M}^{\ell-1})_{ji} b v_j = c\,u(\ell), \qquad u(\ell) = b(\mathbf{M}^{\ell-1})_{ji}.
+\]
+Substituting these into the matrix lag sum yields Eq.~\eqref{eq:ring-lineage}. Because $\mathbf{M}$ is primitive, $\mathbf{M}^{\ell-1} - \mathbf{v}\mathbf{w}^{\mathsf{T}}$ decays geometrically in $\ell$, so the series converges absolutely whenever $\rho(\ell)$ is bounded. Under the stationary chain, state $j$ has probability $\pi_j = v_j w_j$ and chooses $\mathbf{B}$ from $j$ with probability $b w_i / w_j$, giving stationary use frequency $\pi_j b w_i / w_j = b w_i v_j = c$. Conditioned on using $\mathbf{B}$ at step $0$, the chain enters state $i$, reaches state $j$ after $\ell - 1$ steps with probability $(\mathbf{P}^{\ell-1})_{ji} = (\mathbf{M}^{\ell-1})_{ji} w_j / w_i$, and then uses $\mathbf{B}$ at step $\ell$ with probability $b w_i / w_j$, whose product is $u(\ell)$.
+
+Because every use of $\mathbf{B}$ leaves the Markov chain in the single state $i$, the inter-use gaps $L_1, L_2, \dots$ are independent and identically distributed copies of $L_e$ with finite mean $\mathcal{T}_e = \E[L_e] = 1/c$. When $\rho(\ell) = \phi^\ell$ with $|\phi| < 1$, $|R_e| = |\E[\phi^{L_e}]| \le \E[|\phi|^{L_e}] < 1$ because $L_e \ge 1$. Since $u(\ell) = \sum_{r=1}^{\infty} \Pr(L_1 + \dots + L_r = \ell)$,
+\[
+\sum_{\ell=1}^{\infty} \phi^\ell u(\ell) = \sum_{r=1}^{\infty} \E\!\left[\phi^{L_1 + \dots + L_r}\right] = \sum_{r=1}^{\infty} R_e^r = \frac{R_e}{1 - R_e}, \qquad \sum_{\ell=1}^{\infty} \phi^\ell c = \frac{c\phi}{1 - \phi} = c\theta.
+\]
+Substituting both sums into Eq.~\eqref{eq:ring-lineage} with $c = 1/\mathcal{T}_e$ gives
+\[
+C = \frac{1}{2\mathcal{T}_e^2} - \frac{1}{\mathcal{T}_e}\left(\frac{R_e}{1 - R_e} - \frac{\theta}{\mathcal{T}_e}\right) = \frac{1 + 2\theta}{2\mathcal{T}_e^2} - \frac{1}{\mathcal{T}_e}\frac{R_e}{1 - R_e},
+\]
+which is Eq.~\eqref{eq:ring-renewal}. For several contributions $\mathbf{B}_a = b_a \mathbf{e}_{i_a}\mathbf{e}_{j_a}^{\mathsf{T}}$ sharing one driver with real sensitivities $\kappa_a$, replacing $\mathbf{B}$ by $\sum_a \kappa_a \mathbf{B}_a$ in the bilinear lag sum and using $\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{M}^{\ell-1}\mathbf{B}_b\mathbf{v} = c_b u_{b \to a}(\ell)$ and $(\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{v})(\mathbf{w}^{\mathsf{T}}\mathbf{B}_b\mathbf{v}) = c_a c_b$ gives the ordered-pair formula. Uncorrelated independent drivers have zero cross-covariances at all lags, so their coefficients add.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-gamma}}]
+In the ring $\mathbf{A}_0$, $\mathbf{w}^{\mathsf{T}}\mathbf{A}_0 = \lambda\mathbf{w}^{\mathsf{T}}$ reads $s_k w_k + g_k w_{k+1} = \lambda w_k$ (for $n = 1$, $s_1 w_1 + g_1 w_1 = \lambda w_1$). Since $g_k > 0$ and $\mathbf{w} > \mathbf{0}$, $m_k = s_k/\lambda < 1$ and $(g_k/\lambda)(w_{k+1}/w_k) = 1 - m_k > 0$. Thus from stage $k$, the reference chain stays with probability $m_k$ and transfers to $k + 1$ with probability $1 - m_k$. Each visit to stage $k$ lasts a geometric number of steps $G_k \in \{1, 2, \dots\}$ with mean $\tau_k = (1 - m_k)^{-1} \ge 1$ and, for $0 < \phi < 1$, probability generating function
+\[
+\E\!\left[\phi^{G_k}\right] = \sum_{j=1}^{\infty} m_k^{j-1}(1 - m_k)\phi^j = \frac{(1 - m_k)\phi}{1 - m_k\phi} = \frac{1}{1 + \tau_k/\theta}, \qquad \theta = \frac{\phi}{1 - \phi}.
+\]
+Stationary transfer flux $\pi_k(1 - m_k)$ is identical across all $k$, so $\sum_{k=1}^n \pi_k = 1$ gives $\pi_k = \tau_k / \mathcal{T}$ and transfer frequency $c = \pi_k(1 - m_k) = 1/\mathcal{T}$. Between two uses of any chosen transfer, the chain visits every stage $1, \dots, n$ once in cyclic order; by the Markov property the stays $G_1, \dots, G_n$ are independent, so $L_e = \sum_{k=1}^n G_k$ has mean $\mathcal{T}$ and transform $R = \prod_{k=1}^n \E[\phi^{G_k}] = \prod_{k=1}^n (1 + \tau_k/\theta)^{-1}$ ($R = 0$ at $\phi = 0$). Applying Eq.~\eqref{eq:ring-renewal} gives $C$, and multiplying by $\mathcal{T}\sigma^2$ gives Eq.~\eqref{eq:ring-gamma}, which is symmetric in $\tau_1, \dots, \tau_n$ and independent of the chosen transfer. Additivity for independent hosts follows from Proposition~\ref{prop:ring-lineage}, and the $O(\sigma^4)$ remainder for a fixed primitive ring follows from Theorem~\ref{thm:ring-rem-ar1}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-band}}]
+At $\phi = 0$, $\theta = 0$ and $R = 0$, so $\Gamma = \sigma^2/(2\mathcal{T})$ equals both edges of Eq.~\eqref{eq:ring-band}. For $0 < \phi < 1$, $\theta > 0$ and $\tau_k \ge 1 > 0$, so expanding $P = \prod_{k=1}^n (1 + \tau_k/\theta)$ gives
+\[
+P = 1 + \sum_{k=1}^n \frac{\tau_k}{\theta} + \sum_{1 \le j < k \le n} \frac{\tau_j\tau_k}{\theta^2} + \dots \ge 1 + \frac{\mathcal{T}}{\theta},
+\]
+with equality if and only if $n = 1$. Since $R = 1/P \in (0, 1)$, we have $0 < R/(1 - R) = (P - 1)^{-1} \le \theta/\mathcal{T}$, with right equality if and only if $n = 1$. Subtracting $R/(1 - R)$ from $(1 + 2\theta)/(2\mathcal{T})$ yields Eq.~\eqref{eq:ring-band} and its strictness for $n \ge 2, \phi > 0$.
+
+As $\phi \to 0^+$, $\theta \to 0$ and $R \to 0$, so $C \to 1/(2\mathcal{T}^2)$. For $\phi = \ee^{-\epsilon}$ with $\epsilon \downarrow 0$, $\theta = (\ee^\epsilon - 1)^{-1} = \epsilon^{-1} - \frac{1}{2} + O(\epsilon)$, so $(1 + 2\theta)/(2\mathcal{T}^2) = (\epsilon\mathcal{T}^2)^{-1} + O(\epsilon)$. Meanwhile $R = \E[\ee^{-\epsilon L}] = 1 - \epsilon\mathcal{T} + \frac{1}{2}\epsilon^2\E[L^2] + O(\epsilon^3)$, so
+\[
+\frac{1}{\mathcal{T}}\frac{R}{1 - R} = \frac{1}{\mathcal{T}}\left[\frac{1}{\epsilon\mathcal{T}}\left(1 + \frac{\epsilon\E[L^2]}{2\mathcal{T}} + O(\epsilon^2)\right) - 1\right] = \frac{1}{\epsilon\mathcal{T}^2} + \frac{\E[L^2] - 2\mathcal{T}^2}{2\mathcal{T}^3} + O(\epsilon).
+\]
+Subtracting gives $C = [2\mathcal{T}^2 - (\Var(L) + \mathcal{T}^2)]/(2\mathcal{T}^3) + O(\epsilon) = (1 - \mathrm{CV}^2)/(2\mathcal{T}) + O(\epsilon)$, with $\Var(L) = \sum_{k=1}^n \Var(G_k) = \sum_{k=1}^n \tau_k(\tau_k - 1)$. Finally, for fixed $n, \mathcal{T}$ and $0 < \phi < 1$, $\Gamma$ is strictly decreasing in $R$, while $-\ln R = \sum_{k=1}^n \ln(1 + \tau_k/\theta)$ is strictly concave and symmetric on the simplex $\{\tau_k \ge 1 : \sum_{k=1}^n \tau_k = \mathcal{T}\}$. By Jensen's inequality and convexity of $- \ln(1 + \tau/\theta)$, $-\ln R$ is uniquely maximized (hence $R$ minimized and $\Gamma$ maximized) at $\tau_1 = \dots = \tau_n = \mathcal{T}/n$, and minimized (hence $\Gamma$ minimized) at the vertices where $n - 1$ stays equal $1$ and one equals $\mathcal{T} - n + 1$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-series}}]
+Summing Eq.~\eqref{eq:ring-gamma} over $n$ independent hosts with equal $\sigma^2, \phi$ gives $\Gamma = \sigma^2 n [(1 + 2\theta)/(2\mathcal{T}) - (P - 1)^{-1}]$ (without $(P - 1)^{-1}$ at $\phi = 0$).
+\begin{enumerate}
+\item[(i)] Multiply Eq.~\eqref{eq:ring-band} by $n$ and substitute $\mathcal{T}/n = \bar{\tau}$.
+\item[(ii)] At $\phi = 0$, $\Gamma_n = \sigma^2/(2\tau)$. For $0 < \phi < 1$, $a = 1 + \tau/\theta > 1$ and $P = a^n$. Differentiating $n/(a^n - 1)$ with respect to real $n > 0$ gives, with $x = n\ln a > 0$,
+\[
+\frac{\dd}{\dd n}\frac{n}{a^n - 1} = \frac{\ee^x(1 - x) - 1}{(a^n - 1)^2} < 0,
+\]
+because $\ee^{-x} > 1 - x$ for all $x > 0$. Thus $\Gamma_n$ strictly increases in $n$; strict decrease in $\tau$ is a special case of part~(iv).
+\item[(iii)] At $\phi = 0$, $\mathcal{T} + \mathcal{T}/n = \mathcal{T}(n + 1)/n$, so $\sigma^2(n + 1)/[2\mathcal{T}(n + 1)/n] = \sigma^2 n/(2\mathcal{T})$ is unchanged. For $0 < \phi < 1$, put $x = \mathcal{T}/\theta > 0$. The new total has generation time $\mathcal{T}(1 + 1/n)$ and product $P(1 + x/n)$, so the first term $(n + 1)(1 + 2\theta)/[2\mathcal{T}(1 + 1/n)] = n(1 + 2\theta)/(2\mathcal{T})$ cancels, leaving
+\[
+\frac{\Delta\Gamma}{\sigma^2} = \frac{n}{P - 1} - \frac{n + 1}{P(1 + x/n) - 1} = \frac{P(x - 1) + 1}{(P - 1)[P(1 + x/n) - 1]}.
+\]
+Since $P > 1$, the denominator is positive. If $x \ge 1$, $P(x - 1) + 1 \ge 1 > 0$. If $0 < x < 1$, $\ln P = \sum_{k=1}^n \ln(1 + \tau_k/\theta) < \sum_{k=1}^n \tau_k/\theta = x < -\ln(1 - x)$, so $P < (1 - x)^{-1}$ and $P(x - 1) + 1 > 0$.
+\item[(iv)] At $\phi = 0$, $\Gamma(c\boldsymbol{\tau}) = \sigma^2/(2c\bar{\tau})$ decreases strictly in $c$. For $0 < \phi < 1$, put $y_k = \tau_k/\theta > 0$, let $e_1, \dots, e_n$ be the elementary symmetric polynomials in $y_1, \dots, y_n$ with $e_{n+1} = 0$, and write $P(c) - 1 = D(c) = \sum_{j=1}^n e_j c^j$ and $N(c) = \sum_{i=1}^n e_{i+1} c^i$. Since $\theta/\mathcal{T} = 1/e_1$,
+\[
+\frac{\Gamma(c\boldsymbol{\tau})}{\sigma^2 n} = \frac{1}{2c\mathcal{T}} + \frac{1}{c e_1} - \frac{1}{D(c)} = \frac{1}{2c\mathcal{T}} + \frac{N(c)}{e_1 D(c)}.
+\]
+Here $(2c\mathcal{T})^{-1}$ strictly decreases in $c > 0$. Moreover,
+\[
+N'(c)D(c) - N(c)D'(c) = \sum_{1 \le i < j \le n} (i - j)(e_{i+1}e_j - e_{j+1}e_i)c^{i+j-1}.
+\]
+By Newton's inequalities, $e_i / \binom{n}{i}$ is log-concave in $i$, while $\binom{n}{i+1}/\binom{n}{i} = (n - i)/(i + 1)$ decreases in $i$, so $e_{i+1}/e_i$ is nonincreasing in $i$. Hence $e_{i+1}e_j - e_{j+1}e_i \ge 0$ and $(i - j)(e_{i+1}e_j - e_{j+1}e_i) \le 0$ for every $i < j$, so $N(c)/D(c)$ is nonincreasing in $c$.
+\item[(v)] Write $A_* = (1 + 2\theta)/(2\tau^2)$ and $h = \ln a > 0$. Direct algebra gives
+\begin{align*}
+n(n + 1)(f_{n+1} - f_n) &= -A_* + \frac{a - 1}{\tau}\frac{n(n + 1)a^n}{(a^n - 1)(a^{n+1} - 1)} \\
+&= -A_* + \frac{(a - 1)\ee^{-h/2}}{4\tau}\left[\frac{n}{\sinh(nh/2)}\right]\left[\frac{n + 1}{\sinh((n + 1)h/2)}\right].
+\end{align*}
+Because $u/\sinh u$ is positive and strictly decreasing for $u > 0$, $n(n + 1)(f_{n+1} - f_n)$ strictly decreases in $n$ toward $-A_* < 0$, so $f_{n+1} - f_n$ changes sign from positive to negative at most once. Consequently $\sup_{n \ge 2} f_n > f_1$ if and only if $f_2 > f_1$. Since $f_2 - f_1 = [2\theta(\tau - 1) - \tau]/[4\tau^2(2\theta + \tau)]$, this holds if and only if $\theta > \tau/[2(\tau - 1)]$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsubsection{Steady stages, alternative hosts, cyclic drivers, and continuous time}\label{subsec:app-ring-ext}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-steady}}]
+Each transfer in the ring has elasticity $c_k = 1/\mathcal{T}$, and an independent $\mathrm{AR}(1)$ log-host series has integrated variance $\sum_{\ell=-\infty}^{\infty} \sigma_k^2 \phi_k^{|\ell|} = \sigma_k^2(1 + 2\theta_k)$, giving leading per-step growth-variance rate $V = S_I / \mathcal{T}^2$ and per-generation rate $\mathcal{T}V = S_I / \mathcal{T}$.
+\begin{enumerate}
+\item[(a)] Adding stay $t > 0$ with integrated variance $s = v(1 + 2\theta_v)$ gives $(S_I + s)/(\mathcal{T} + t) < S_I / \mathcal{T}$ if and only if $s/t < S_I / \mathcal{T}$; at $v = 0$ this holds whenever $S_I > 0$.
+\item[(b)] At $\phi_k = 0$, $\Gamma = S/(2\mathcal{T})$, and $(S + v)/[2(\mathcal{T} + t)] - S/(2\mathcal{T}) = (v\mathcal{T} - St)/[2\mathcal{T}(\mathcal{T} + t)]$.
+\item[(c)] Setting $n = 2$, $\tau_1 = a$, $\tau_2 = b$ in Proposition~\ref{prop:ring-gamma} gives $R = \theta^2/[(\theta + a)(\theta + b)]$ and $R/(1 - R) = \theta^2/[\theta(a + b) + ab]$, proving Eq.~\eqref{eq:ring-steady}. Multiplying by $a + b$ and letting $b \to \infty$ gives $(1 + 2\theta)/2 - \theta^2/(\theta + a)$.
+\item[(d)] Summing Eq.~\eqref{eq:ring-gamma} gives $\mathcal{T}V/2 - \Gamma = \sum_k \sigma_k^2 R_k/(1 - R_k) \ge 0$, and Eq.~\eqref{eq:ring-band} places $k = 2\Gamma/(\mathcal{T}V)$ in $[1/(1 + 2\theta), 1]$. For Brownian motion $B_u$ with drift $\mu > 0$ and variance $\mathcal{T}V$, $\exp(-2\mu B_u/(\mathcal{T}V))$ is a martingale, yielding $\Pr(\inf_{u \ge 0} B_u \le -x) = \exp(-Ex)$ for $x > 0$, whereas $\inf_{u \ge 0} B_u = -\infty$ almost surely for $\mu \le 0$. For one fluctuating stage $a$, $E(a) = 2a\ln R_0 / [\sigma^2(1 + 2\theta)] - 1/(1 + 2\theta)$, while for $(a,b)$, $k(a,b) = 1 - 2(a + b)\theta^2/[(1 + 2\theta)\{\theta(a + b) + ab\}]$. Direct subtraction gives
+\[
+E(a,b) - E(a) = \frac{2b L}{1 + 2\theta} - \left[k(a,b) - \frac{1}{1 + 2\theta}\right] = \frac{2b}{1 + 2\theta}\left[L - \frac{a\theta}{a\theta + b(a + \theta)}\right],
+\]
+whose bracket is negative for $L<0$ and for $L=0,\theta>0$, and is zero for $L=\theta=0$; its positive-sign condition is the one in the proposition. Because $k \in [1/(1 + 2\theta), 1]$ can increase by at most $2\theta/(1 + 2\theta)$, any stay increase $\Delta$ raises $E$ whenever $2\Delta\ln R_0 / [\sigma^2(1 + 2\theta)] > 2\theta/(1 + 2\theta)$, i.e., $\Delta\ln R_0 > \theta\sigma^2$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-alt}} and Remark~{\upshape\ref{rem:ring-joint-stay}}]
+Write the transfer contribution as $\sum_{m=1}^M \mathbf{B}_m$ with $\mathbf{B}_m = \pi_m \mathbf{B}$, so $c_m = \pi_m/\mathcal{T}$ and $u_{m' \to m}(\ell) = \pi_m u(\ell)$ where $u(\ell)$ is the single-transfer renewal probability. For independent hosts, Proposition~\ref{prop:ring-lineage} sums their individual terms with weights $\pi_m^2\sigma_m^2$, yielding Eq.~\eqref{eq:ring-alt}; Theorem~\ref{thm:ring-rem-ar1} gives the $O(\sigma^4)$ remainder because parallel contributions to one matrix entry are explicitly covered. At $\pi_1 = \pi_2 = 1/2$, $\sigma_1^2 = \sigma^2$, $\sigma_2^2 = 9\sigma^2$, and $\phi_1 = \phi_2 = \phi$, $\sum_m \pi_m^2\sigma_m^2 = (1 + 9)\sigma^2/4 = 2.5\sigma^2$. If $M$ hosts have equal shares $1/M$, common variance $\sigma^2$, common autocovariance $\gamma(\ell)$, and cross-covariance $\rho\gamma(\ell)$ for all $m \ne m'$, summing Eq.~\eqref{eq:ring-rem-lin} over the $M$ self-pairs and $M(M - 1)$ off-diagonal pairs multiplies the single-host coefficient by $[M + \rho M(M - 1)]/M^2 = [1 + \rho(M - 1)]/M$.
+
+For a fluctuating staying contribution in stage $k$ ($m_k > 0$), $\mathbf{B} = m_k\mathbf{e}_k\mathbf{e}_k^{\mathsf{T}}$ has stationary frequency $c = \pi_k m_k = (\tau_k m_k)/\mathcal{T} = (\tau_k - 1)/\mathcal{T} = e_k$. Let $J$ be the renewal gap between successive uses of the staying edge, and put $A_* = \prod_{j \ne k} (1 + \tau_j/\theta)^{-1}$ ($\theta$ at $\psi$). Immediately after a stay in $k$, the reference chain is in stage $k$: on the next step it either stays again ($J = 1$) with probability $m_k$, or leaves $k$ with probability $1 - m_k$, traverses the remaining $n - 1$ stages with transform $A_*$, re-enters $k$, and faces the same waiting distribution $W = \E[\psi^J]$. Thus $W = m_k\psi + (1 - m_k)\psi A_* W$, giving $W = m_k\psi / [1 - (1 - m_k)\psi A_*]$. Since $R = A_* (1 - m_k)\psi / (1 - m_k\psi)$, we have
+\[
+\frac{W}{1 - W} = \frac{m_k\psi}{1 - m_k\psi - (1 - m_k)\psi A_*} = \frac{m_k\psi}{(1 - m_k\psi)(1 - R)}.
+\]
+Applying Eq.~\eqref{eq:ring-renewal} in the form $C = c^2(1 + 2\theta)/2 - c W/(1 - W)$ with $c = e_k$ yields the per-step cost and its sign criterion.
+
+For Remark~\ref{rem:ring-joint-stay}, take $\lambda = 1$ in the two-stage ring with steady stage $0$ ($s_0 = 1 - 1/a, g_0 = 1/a$) and fluctuating-host stage $1$ ($s_1 = 1 - 1/b, g_1 = 1/b$), $\mathcal{T} = a + b$, $\mathbf{v} = (a, b)^{\mathsf{T}}/\mathcal{T}$, and $\mathbf{w} = (1, 1)^{\mathsf{T}}$. Transfer $0 \to 1$ has $\mathbf{B}_g = g_0\mathbf{e}_2\mathbf{e}_1^{\mathsf{T}}$ driven by $\xi_t$ ($\kappa_g = 1$), and staying $1 \to 1$ has $\mathbf{B}_s = s_1\mathbf{e}_2\mathbf{e}_2^{\mathsf{T}}$ driven by $\epsilon_{t+1}$ ($\kappa_s = \kappa\sqrt{1 - \phi^2}$). The self-terms in $\Gamma/\sigma^2 = \mathcal{T}C''$ are $(1 + 2\theta)/(2\mathcal{T}) - \theta^2/(\theta\mathcal{T} + ab)$ (Proposition~\ref{prop:ring-steady}(c)) and $\mathcal{T}\kappa_s^2 c_s^2/2 = \kappa^2(1 - \phi^2)(b - 1)^2/(2\mathcal{T})$ (since $\epsilon_{t+1}$ is white and $c_s = (b - 1)/\mathcal{T}$). For cross-lags, $\E[\xi_t\epsilon_{t+1}] = 0$ and $\E[\epsilon_{t+1}\xi_{t-1-m}] = 0$ for all $m \ge 0$, whereas $\E[\xi_t\epsilon_{t-m}] = \sqrt{1 - \phi^2}\,\phi^m$ for $m \ge 0$. On $\mathbf{w}^{\mathsf{T}}\mathbf{z} = 0$ (spanned by $(1, -1)^{\mathsf{T}}$), $\mathbf{T}_\perp$ acts as the scalar $s_0 + s_1 - 1 = 1 - 1/a - 1/b$. Since $\mathbf{Q}\mathbf{B}_s\mathbf{v} = s_1(b/\mathcal{T})(-a/\mathcal{T}, a/\mathcal{T})^{\mathsf{T}} = -[a(b - 1)/\mathcal{T}^2](1, -1)^{\mathsf{T}}$ and $\mathbf{w}^{\mathsf{T}}\mathbf{B}_g(1, -1)^{\mathsf{T}} = g_0 = 1/a$, the cross contribution to $C''$ in Eq.~\eqref{eq:ring-rem-lin} is
+\[
+-\kappa_g\kappa_s \sum_{m=0}^{\infty} \sqrt{1 - \phi^2}\,\phi^m\,\mathbf{w}^{\mathsf{T}}\mathbf{B}_g\mathbf{T}_\perp^m\mathbf{Q}\mathbf{B}_s\mathbf{v} = \frac{\kappa(1 - \phi^2)(b - 1)}{\mathcal{T}^2[1 - \phi(1 - 1/a - 1/b)]}.
+\]
+Multiplying by $\mathcal{T}$ gives the stated $\Gamma/\sigma^2$, whose dominant term as $b \to \infty$ at fixed $a, \phi < 1, \kappa > 0$ is $\kappa^2(1 - \phi^2)b/2$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-spectrum}}]
+\begin{enumerate}
+\item[(a)] For any complex $|z| < 1$, $|R_e(z)| \le \E[|z|^{L_e}] < 1$, so $\sum_{\ell=1}^{\infty} z^\ell u(\ell) = R_e(z)/[1 - R_e(z)]$ and $\sum_{\ell=1}^{\infty} z^\ell c = cz/(1 - z)$. Substituting $\rho(\ell) = \sum_j B_j z_j^\ell$ into Eq.~\eqref{eq:ring-lineage} gives the finite-mixture formula. For the $\mathrm{AR}(2)$ recursion $X_t = 2r_c\cos\omega_0\,X_{t-1} - r_c^2 X_{t-2} + \eta_t$, the Yule--Walker equations give $\rho(1) = 2r_c\cos\omega_0/(1 + r_c^2)$ and $\rho(\ell) = \operatorname{Re}(B z^\ell) = \frac{1}{2}B z^\ell + \frac{1}{2}\bar{B}\bar{z}^\ell$ for $\ell \ge 0$ with $z = r_c\ee^{\mathrm{i}\omega_0}$ and $B = 1 + \mathrm{i}[\cos\omega_0 - \rho(1)/r_c]/\sin\omega_0$.
+\item[(b)] Because $\mathbf{M}$ is primitive and $b > 0$, $u(\ell) > 0$ for all sufficiently large $\ell$, so the support of $L_e$ has greatest common divisor $1$ and $g(\omega) = \E[\ee^{\mathrm{i}\omega L_e}] \ne 1$ for every $\omega \in (0, 2\pi)$. For $|\zeta| < 1$, write $F(\zeta) = \E[\zeta^{L_e}]$ and decompose
+\[
+\sum_{\ell=1}^{\infty} [u(\ell) - c]\zeta^\ell + \frac{c\zeta}{1 - \zeta} = \frac{F(\zeta)}{1 - F(\zeta)}.
+\]
+Since $|u(\ell) - c|$ decays geometrically, the first series converges uniformly on $|\zeta| \le 1$. Letting $\zeta = r\ee^{\mathrm{i}\omega}$ with $r \uparrow 1$ for $\omega \in (0, \pi]$ and taking real parts (using $\operatorname{Re}[\ee^{\mathrm{i}\omega}/(1 - \ee^{\mathrm{i}\omega})] = -1/2$) gives
+\[
+\sum_{\ell=1}^{\infty} [u(\ell) - c]\cos(\omega\ell) = \operatorname{Re}\frac{g(\omega)}{1 - g(\omega)} + \frac{c}{2},
+\]
+which extends continuously to $\omega = 0$. Substituting $\rho(\ell) = \pi^{-1}\int_0^\pi f(\omega)\cos(\omega\ell)\dd\omega$ into Eq.~\eqref{eq:ring-lineage} and exchanging the finite integral with the geometrically convergent sum yields
+\[
+c\sum_{\ell=1}^{\infty} \rho(\ell)[u(\ell) - c] = \frac{c}{\pi}\int_0^\pi f(\omega)\operatorname{Re}\frac{g(\omega)}{1 - g(\omega)}\dd\omega + \frac{c^2}{2}\cdot\frac{1}{\pi}\int_0^\pi f(\omega)\dd\omega.
+\]
+Since $\pi^{-1}\int_0^\pi f(\omega)\dd\omega = 1$ and $c = 1/\mathcal{T}_e$, the $c^2/2$ term cancels that of Eq.~\eqref{eq:ring-lineage}, proving Eq.~\eqref{eq:ring-spectrum}.
+\item[(c)] Taking white noise $f(\omega) \equiv 1$ ($\rho(\ell) = 0$ for $\ell \ge 1$) gives $\pi^{-1}\int_0^\pi K(\omega)\dd\omega = C_{\mathrm{white}} = c^2/2 = 1/(2\mathcal{T}_e^2)$. As $\omega \to 0$, $g(\omega) = 1 + \mathrm{i}\omega\mathcal{T}_e - \frac{1}{2}\omega^2\E[L_e^2] + O(\omega^3)$, so
+\[
+\begin{aligned}
+1 - g(\omega) &= -\mathrm{i}\omega\mathcal{T}_e\left(1 + \frac{\mathrm{i}\omega\E[L_e^2]}{2\mathcal{T}_e} + O(\omega^2)\right), \\
+\operatorname{Re}\frac{g(\omega)}{1 - g(\omega)} &= \operatorname{Re}\left(\frac{1}{1 - g(\omega)} - 1\right) \to \frac{\E[L_e^2]}{2\mathcal{T}_e^2} - 1 = \frac{\mathrm{CV}^2 - 1}{2},
+\end{aligned}
+\]
+giving $K(\omega) \to (1 - \mathrm{CV}^2)/(2\mathcal{T}_e)$. For a one-stage transfer, $g(\omega) = (1 - m)\ee^{\mathrm{i}\omega}/(1 - m\ee^{\mathrm{i}\omega})$, so $g(\omega)/[1 - g(\omega)] = (1 - m)\ee^{\mathrm{i}\omega}/(1 - \ee^{\mathrm{i}\omega})$, whose real part is $-(1 - m)/2 = -1/(2\tau)$, giving $K(\omega) = 1/(2\tau^2)$. For $n \ge 2$ in a primitive ring, $(1 - \mathrm{CV}^2)/(2\mathcal{T}) > 1/(2\mathcal{T}^2)$ is equivalent to $\mathcal{T}^2 - \Var(L) > \mathcal{T}$, which holds because $\mathcal{T}^2 - \sum_{k=1}^n \tau_k(\tau_k - 1) - \mathcal{T} = 2\sum_{1 \le j < k \le n} \tau_j\tau_k > 0$. Finally, $\operatorname{Re}[g/(1 - g)] = (\operatorname{Re} g - |g|^2)/|1 - g|^2$ makes $K(\omega) < 0$ if and only if $\operatorname{Re} g(\omega) > |g(\omega)|^2$, and the eight-stage example in the main text shows non-monotonicity. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Continuous-time ring]\label{prop:ring-ct}
+In $\dd x_{k+1}/\dd t = b_k\nu_k h_k(t) x_k - (\nu_{k+1} + \mu_{k+1}) x_{k+1}$ ($k$ modulo $n$, $b_k\nu_k > 0$, fixed $\nu_k + \mu_k > 0$, baseline growth $r_0$), set $a_k = r_0 + \nu_k + \mu_k > 0$, $T = \sum_{k=1}^n 1/a_k$, and $R = \prod_{k=1}^n a_k/(a_k + \alpha)$ ($\alpha > 0$).
+\begin{enumerate}
+\item[(a)] With independent Ornstein--Uhlenbeck drivers $z_k$ ($\Cov[z_k(t), z_k(0)] = \ee^{-\alpha|t|}$) in $h_k = \exp(\sigma z_k - \sigma^2/2)$, each exposed transfer has formal second-order cost
+\begin{equation}
+\sigma^2\left[\frac{1}{\alpha T^2} - \frac{1}{T}\frac{R}{1 - R}\right] \ \text{per unit time}, \qquad \Gamma = \sigma^2\left[\frac{1}{\alpha T} - \frac{R}{1 - R}\right] \ \text{per generation}.
+\label{eq:ring-ct}
+\end{equation}
+For $n = 1$ the cost is zero at every $\sigma$; for $n \ge 2$ the per-time coefficient lies in $(0, (\alpha T^2)^{-1})$. At equal $a_k = q$ across $n$ fluctuating hosts, $\sigma^2[q/\alpha - n/\{(1 + \alpha/q)^n - 1\}]$ strictly increases with $n$ (limits $\sigma^2(n - 1)/2$ as $\alpha \to 0$ and $\sigma^2 q/\alpha$ as $\alpha \to \infty$, $n \ge 2$), while unequal stays can lower the total ($\sigma^2/3$ for $(1,1)$ versus $0.022\sigma^2$ for $(1,1,100)$ at $\alpha = 1$).
+\item[(b)] With fixed gains and net stage-$j$ loss rate $\bar{\mu}_j + \sigma z(t)$ (or $\bar{\mu}_j\exp(\epsilon z - \epsilon^2/2)$ with $\bar{\mu}_j^2\epsilon^2$ for $\sigma^2$), put $p_j = 1/(a_j T)$. The formal per-time cost $\sigma^2 p_j [p_j/\alpha - \{(a_j + \alpha)(1 - R)\}^{-1}]$ is zero for $n = 1$ and negative for $n \ge 2$, with fast limit $-\sigma^2 p_j(1 - p_j)/\alpha$ \citep{monmarche2025}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-ct}}]
+\begin{enumerate}
+\item[(a)] Let $\mathbf{A}_0$ be the mean generator with Perron eigenvalue $r_0$ and positive eigenvectors $\mathbf{v}, \mathbf{w}$ ($\mathbf{w}^{\mathsf{T}}\mathbf{v} = 1$), and set $\mathbf{H} = \mathbf{A}_0 - r_0\mathbf{I}$ and $\mathbf{Q} = \mathbf{I} - \mathbf{v}\mathbf{w}^{\mathsf{T}}$. For one fluctuating gain $\mathbf{B} = b_k\nu_k\mathbf{e}_{k+1}\mathbf{e}_k^{\mathsf{T}}$ with $h_k(t) = \exp(\sigma z_k(t) - \sigma^2/2) = 1 + \sigma z_k(t) + \frac{1}{2}\sigma^2(z_k(t)^2 - 1) + O(\sigma^3)$, normalize $\mathbf{y}(t) = \mathbf{x}(t)/(\mathbf{w}^{\mathsf{T}}\mathbf{x}(t))$, so $\dd\ln(\mathbf{w}^{\mathsf{T}}\mathbf{x})/\dd t = \mathbf{w}^{\mathsf{T}}\mathbf{A}(t)\mathbf{y}(t) = r_0 + (h_k(t) - 1)\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{y}(t)$. Expanding $\mathbf{y}(t) = \mathbf{v} + \sigma\mathbf{y}_1(t) + O(\sigma^2)$ with $\mathbf{w}^{\mathsf{T}}\mathbf{y}_1 = 0$ gives $\dd\mathbf{y}_1/\dd t = \mathbf{H}\mathbf{y}_1 + z_k(t)\mathbf{Q}\mathbf{B}\mathbf{v}$, whose stationary solution is $\mathbf{y}_1(t) = \int_0^{\infty} \ee^{\mathbf{H}s}\mathbf{Q}\mathbf{B}\mathbf{v}\,z_k(t - s)\dd s$. Taking expectations with $\E[z_k(t)^2 - 1] = 0$ and $\E[z_k(t)z_k(t - s)] = \ee^{-\alpha s}$ gives second-order growth gain $\sigma^2\int_0^{\infty} \ee^{-\alpha s}\mathbf{w}^{\mathsf{T}}\mathbf{B}\ee^{\mathbf{H}s}\mathbf{Q}\mathbf{B}\mathbf{v}\dd s = \sigma^2\mathbf{w}^{\mathsf{T}}\mathbf{B}(\alpha\mathbf{I} - \mathbf{H})^{-1}\mathbf{Q}\mathbf{B}\mathbf{v}$. Under the lineage generator $\operatorname{diag}(\mathbf{w})\,\mathbf{H}\operatorname{diag}(\mathbf{w})^{-1}$, stage $j$ exits to $j + 1$ at rate $a_j = r_0 + \nu_j + \mu_j$, so stationary flux is $c = \mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v} = 1/T$, the circuit Laplace transform is $R = \prod_{j=1}^n a_j/(a_j + \alpha)$, continuous-time renewal gives $\mathbf{w}^{\mathsf{T}}\mathbf{B}(\alpha\mathbf{I} - \mathbf{H})^{-1}\mathbf{B}\mathbf{v} = c R/(1 - R)$, and the Perron part is $c^2/\alpha = 1/(\alpha T^2)$. Subtracting the gain from zero gives Eq.~\eqref{eq:ring-ct}. Equivalently, setting $1 - m_j = a_j\Delta$ and $\phi = \ee^{-\alpha\Delta}$ in Proposition~\ref{prop:ring-gamma}, dividing the per-step cost by $\Delta$, and letting $\Delta \downarrow 0$ yields the same expression.
+
+For $n = 1$, $\dd x_1/\dd t = [b_1\nu_1 h_1(t) - (\nu_1 + \mu_1)]x_1$, so $t^{-1}\ln x_1(t) \to b_1\nu_1\E h_1 - (\nu_1 + \mu_1) = r_0$ at every $\sigma$ because $\E h_1 = 1$ (and $R/(1 - R) = a_1/\alpha = 1/(\alpha T)$). For $n \ge 2$, $\prod_{j=1}^n (1 + \alpha/a_j) - 1 > \alpha\sum_{j=1}^n 1/a_j = \alpha T$, so $0 < R/(1 - R) < 1/(\alpha T)$ and the cost coefficient lies strictly in $(0, (\alpha T^2)^{-1})$. At equal $a_j = q$ across $n$ hosts, $T = n/q$ and $R = (1 + \alpha/q)^{-n}$, giving $\sigma^2[q/\alpha - n/\{(1 + \alpha/q)^n - 1\}]$, which strictly increases in $n$ as in Proposition~\ref{prop:ring-series}(ii); expanding in $\alpha \to 0$ gives $\sigma^2(1 - \mathrm{CV}^2)/2 = \sigma^2(1 - 1/n)/2$ per host, so $\sigma^2(n - 1)/2$ in total, while $\alpha \to \infty$ gives $\sigma^2 q/\alpha$ for $n \ge 2$.
+\item[(b)] For net loss rate $\bar{\mu}_j + \sigma z(t)$, set $\mathbf{B} = -\mathbf{e}_j\mathbf{e}_j^{\mathsf{T}}$; the direct second-derivative expectation vanishes (and likewise for $\bar{\mu}_j\exp(\epsilon z - \epsilon^2/2)$, where $\E[\ee^{\epsilon z - \epsilon^2/2} - 1] = 0$ to all orders). Thus the per-time cost coefficient per $\sigma^2$ is $-\mathbf{w}^{\mathsf{T}}\mathbf{B}(\alpha\mathbf{I} - \mathbf{H})^{-1}\mathbf{Q}\mathbf{B}\mathbf{v}$, with $\mathbf{w}^{\mathsf{T}}\mathbf{B}\mathbf{v} = -\pi_j = -1/(a_j T) = -p_j$. Because the lineage stays in $j$ for an exponential time of rate $a_j$ or returns after any number of circuits of Laplace transform $R$, the $(j,j)$ entry of $(\alpha\mathbf{I} - \mathbf{H})^{-1}$ is $[(a_j + \alpha)(1 - R)]^{-1}$, giving $\sigma^2 p_j [p_j/\alpha - \{(a_j + \alpha)(1 - R)\}^{-1}]$. Put $x_k = \alpha/a_k > 0$. For $n = 1$, $p_1 = 1$ and $1 - R = \alpha/(a_1 + \alpha)$, giving zero. For $n \ge 2$, negativity $p_j/\alpha < [(a_j + \alpha)(1 - R)]^{-1}$ reduces, upon substituting $p_j = x_j/(\sum_k x_k)$ and $1 - R = 1 - (1 + x_j)^{-1}\prod_{k \ne j}(1 + x_k)^{-1}$, to
+\[
+1 - \prod_{k \ne j} \frac{1}{1 + x_k} < \sum_{k \ne j} x_k.
+\]
+Putting $y_k = x_k/(1 + x_k) \in (0, 1)$, we have $1 - \prod_{k \ne j}(1 - y_k) \le \sum_{k \ne j} y_k < \sum_{k \ne j} x_k$, which is strict whenever $\{k \ne j\}$ is nonempty. As $\alpha \to \infty$, $R \to 0$ and $(a_j + \alpha)^{-1} = \alpha^{-1} + O(\alpha^{-2})$, giving $-\sigma^2 p_j(1 - p_j)/\alpha$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsubsection{Proofs of the remainder theorems}\label{subsec:app-ring-rem}
+
+\begin{theorem}[$\mathrm{AR}(1)$ remainder]\label{thm:ring-rem-ar1}
+Fix dimension $d \ge 1$ and finitely many labeled contributions $a$ in $\mathbf{A}(t) = \mathbf{A}_{\mathrm{fixed}} + \sum_a a_a h_a(t)\,\mathbf{e}_{i_a}\mathbf{e}_{j_a}^{\mathsf{T}}$ with $\mathbf{A}_{\mathrm{fixed}} \ge \mathbf{0}$, $a_a > 0$, $\kappa_a \in \mathbb{R}$, primitive $\mathbf{A}_0 = \mathbf{A}_{\mathrm{fixed}} + \sum_a a_a\mathbf{e}_{i_a}\mathbf{e}_{j_a}^{\mathsf{T}}$ ($\mathbf{1}^{\mathsf{T}}\mathbf{v} = \mathbf{w}^{\mathsf{T}}\mathbf{v} = 1$), and $h_a(t) = \exp(\sigma\kappa_a\xi_{\delta(a)}(t) - \sigma^2\kappa_a^2/2)$ driven by independent stationary unit-variance Gaussian $\mathrm{AR}(1)$ series $\xi_\delta$ ($|\phi_\delta| < 1$). Put $\mathbf{M} = \mathbf{A}_0/\lambda$, $\mathbf{Q} = \mathbf{I} - \mathbf{v}\mathbf{w}^{\mathsf{T}}$, $\mathbf{T}_\perp = \mathbf{M} - \mathbf{v}\mathbf{w}^{\mathsf{T}}$, $\mathbf{B}_a = (a_a/\lambda)\mathbf{e}_{i_a}\mathbf{e}_{j_a}^{\mathsf{T}}$, and $c_a = \mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{v}$. From $\mathbf{x}(0) = \mathbf{v}$ with stationary noise, $r(\sigma) = \lim_{N \to \infty} N^{-1}\E\ln(\mathbf{1}^{\mathsf{T}}\mathbf{x}(N))$ exists, and for model-dependent $\sigma_0 > 0, K < \infty$,
+\begin{equation}
+\begin{aligned}
+\bigl|\ln\lambda - r(\sigma) - C\sigma^2\bigr| &\le K\sigma^4 \quad (|\sigma| \le \sigma_0), \\
+C &= \sum_{\substack{a,b\\ \delta(a)=\delta(b)}} \kappa_a\kappa_b \left[ \frac{c_a c_b}{2} - \phi_{\delta(a)}\,\mathbf{w}^{\mathsf{T}}\mathbf{B}_a(\mathbf{I} - \phi_{\delta(a)}\mathbf{T}_\perp)^{-1}\mathbf{Q}\mathbf{B}_b\mathbf{v} \right].
+\end{aligned}
+\label{eq:ring-rem-ar1}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~{\upshape\ref{thm:ring-rem-ar1}}]
+If every $\kappa_a = 0$ (or the contribution list is empty), $\mathbf{A}(t) \equiv \mathbf{A}_0$ and $\ln\lambda - r(\sigma) = C = 0$ identically. Otherwise fix the model and normalize the state by $\mathbf{y}(t) = \mathbf{x}(t)/(\mathbf{w}^{\mathsf{T}}\mathbf{x}(t))$ in $\Delta_w = \{\mathbf{y} \ge \mathbf{0} : \mathbf{w}^{\mathsf{T}}\mathbf{y} = 1\}$, starting at $\mathbf{y}(0) = \mathbf{v}$. On $\Delta_w$, Euclidean norms satisfy $|\mathbf{y}| \le 1/w_{\min}$ where $w_{\min} = \min_i w_i > 0$. Put $G_t = \mathbf{w}^{\mathsf{T}}\mathbf{A}(t)\mathbf{y}(t) > 0$, so $\mathbf{y}(t + 1) = \mathbf{A}(t)\mathbf{y}(t)/G_t$ and $\ln(\mathbf{w}^{\mathsf{T}}\mathbf{x}(N)) = \sum_{t=0}^{N-1} \ln G_t$. Let $V_0 = \{\mathbf{z} \in \mathbb{R}^d : \mathbf{w}^{\mathsf{T}}\mathbf{z} = 0\}$, which is invariant under $\mathbf{M}$ because $\mathbf{w}^{\mathsf{T}}\mathbf{M} = \mathbf{w}^{\mathsf{T}}$. For every fixed noise path, $h_a(t)$ is entire in $\sigma$ and $G_t > 0$, so $\mathbf{y}(t)$ and $\ln G_t$ are smooth on $\mathbb{R}$, with $\mathbf{y}_j(t) = \partial_\sigma^j \mathbf{y}(t) \in V_0$ and $\mathbf{y}_j(0) = \mathbf{0}$ for $j \ge 1$.
+
+\emph{Step 1: Lower bound on $G_t$ and existence of $r(\sigma)$.} Set $\bar{\kappa} = \max_a |\kappa_a|$, $\zeta_t = \max_\delta |\xi_\delta(t)|$, and $\eta_t = |\sigma|\bar{\kappa}\zeta_t + \sigma^2\bar{\kappa}^2/2$. We can write $G_t/\lambda$ as a weighted arithmetic mean of positive multipliers: weights $w_i (\mathbf{A}_{\mathrm{fixed}})_{ij} y_j(t)/\lambda \ge 0$ carry multiplier $1$, and weights $\omega_a = w_{i_a} a_a y_{j_a}(t)/\lambda \ge 0$ carry multiplier $h_a(t) > 0$. These weights contain no explicit signed factor of $\kappa$ (depending on $\kappa$ only through $\mathbf{y}(t) \in \Delta_w$) and sum to $\mathbf{w}^{\mathsf{T}}\mathbf{A}_0\mathbf{y}(t)/\lambda = \mathbf{w}^{\mathsf{T}}\mathbf{y}(t) = 1$. By the weighted arithmetic--geometric mean inequality,
+\begin{equation}
+\frac{G_t}{\lambda} \ge \prod_a h_a(t)^{\omega_a} \ge \exp\!\left(-\max_a |\ln h_a(t)|\right) \ge \ee^{-\eta_t}, \qquad \frac{\lambda}{G_t} \le \ee^{\eta_t}.
+\label{eq:app-ring-lemma1}
+\end{equation}
+Let $\|\mathbf{X}\|_1 = \sum_{i,j} |X_{ij}|$ for matrices, which is submultiplicative, and put $\boldsymbol{\Pi}_N = \mathbf{A}(N - 1)\cdots\mathbf{A}(0)$. Because $\mathbf{v}, \mathbf{w} > \mathbf{0}$ with $\mathbf{1}^{\mathsf{T}}\mathbf{v} = \mathbf{w}^{\mathsf{T}}\mathbf{v} = 1$, we have $w_{\min} v_{\min} \|\boldsymbol{\Pi}_N\|_1 \le \mathbf{w}^{\mathsf{T}}\boldsymbol{\Pi}_N\mathbf{v} \le w_{\max} v_{\max} \|\boldsymbol{\Pi}_N\|_1$ and $v_{\min} \|\boldsymbol{\Pi}_N\|_1 \le \mathbf{1}^{\mathsf{T}}\boldsymbol{\Pi}_N\mathbf{v} \le \|\boldsymbol{\Pi}_N\|_1$. By Eq.~\eqref{eq:app-ring-lemma1}, $\ln(\mathbf{w}^{\mathsf{T}}\boldsymbol{\Pi}_N\mathbf{v}) = \sum_{t=0}^{N-1} \ln G_t \ge N\ln\lambda - \sum_{t=0}^{N-1} \eta_t$, while Jensen's inequality and $\E h_a(t) = 1$ give $\E\ln\|\boldsymbol{\Pi}_N\|_1 \le \sum_{t=0}^{N-1} \E\ln\|\mathbf{A}(t)\|_1 \le N\ln\|\mathbf{A}_0\|_1$. Stationarity makes $e_N = \E\ln\|\boldsymbol{\Pi}_N\|_1$ finite and subadditive ($e_{N+S} \le e_N + e_S$), so by Fekete's lemma $e_N/N$ converges to a finite limit $r(\sigma)$, and both $N^{-1}\E\ln(\mathbf{1}^{\mathsf{T}}\mathbf{x}(N))$ and $N^{-1}\sum_{t=0}^{N-1} \E\ln G_t$ converge to $r(\sigma)$.
+
+\emph{Step 2: Adapted norm and average contraction.} If $d = 1$ with a single whole-entry multiplier ($\mathbf{A}_{\mathrm{fixed}} = \mathbf{0}$, one contribution), $\mathbf{y}(t) \equiv 1$ and $\ln\lambda - r(\sigma) = \kappa_1^2\sigma^2/2$ exactly; for general $d \ge 1$ (including $d = 1$ where $V_0 = \{0\}$), primitivity of $\mathbf{A}_0$ implies that the spectral radius $\rho_2$ of $\mathbf{M}$ restricted to $V_0$ satisfies $\rho_2 < 1$. Choose $\beta \in (\max(\rho_2, 1/2), 1)$, $\hat{\beta} = (1 + \beta)/2 < 1$, and define $\|\mathbf{z}\|_* = \sup_{j \ge 0} \beta^{-j}|\mathbf{M}^j\mathbf{z}|$ on $V_0$. Then $\|\mathbf{M}\mathbf{z}\|_* \le \beta\|\mathbf{z}\|_*$ and $|\mathbf{z}| \le \|\mathbf{z}\|_* \le c_*|\mathbf{z}|$ with $c_* = \sup_{j \ge 0} \beta^{-j}\|\mathbf{M}^j\|_{V_0} < \infty$. The state Jacobian $\mathbf{J}(t) = G_t^{-1}(\mathbf{I} - \mathbf{y}(t + 1)\mathbf{w}^{\mathsf{T}})\mathbf{A}(t)$ maps into $V_0$, and for $\mathbf{z} \in V_0$, $(\mathbf{I} - \mathbf{y}\mathbf{w}^{\mathsf{T}})\mathbf{A}_0\mathbf{z} = \mathbf{A}_0\mathbf{z}$, so
+\[
+\mathbf{J}(t)\mathbf{z} = \frac{\lambda}{G_t}\left[\mathbf{M}\mathbf{z} + (\mathbf{I} - \mathbf{y}(t + 1)\mathbf{w}^{\mathsf{T}})\sum_a (h_a(t) - 1)\mathbf{B}_a\mathbf{z}\right].
+\]
+Using $|(\mathbf{I} - \mathbf{y}\mathbf{w}^{\mathsf{T}})\mathbf{x}| \le (1 + |\mathbf{w}|/w_{\min})|\mathbf{x}|$, $\bar{b} = \sum_a \|\mathbf{B}_a\|$, $|h_a(t) - 1| \le \ee^{\eta_t} - 1$ (valid for either sign of $\ln h_a$ since $|\ln h_a| \le \eta_t$), Eq.~\eqref{eq:app-ring-lemma1}, and $1 + c(\ee^y - 1) \le \ee^{cy}$ for $c \ge 1, y \ge 0$, we obtain
+\[
+\|\mathbf{J}(t)\|_* \le \ee^{\eta_t}\bigl[\beta + c_5(\ee^{\eta_t} - 1)\bigr] \le \beta\ee^{c_4\eta_t}, \qquad c_5 = c_*\left(1 + \frac{|\mathbf{w}|}{w_{\min}}\right)\bar{b}, \quad c_4 = 1 + \max\!\left(1, \frac{c_5}{\beta}\right).
+\]
+For a single stationary unit-variance Gaussian $\mathrm{AR}(1)$ driver $\xi$ with $|\phi| < 1$, expanding $\xi(u) = \phi^{u-\tau}\xi(\tau) + \sqrt{1 - \phi^2}\sum_{i=\tau+1}^u \phi^{u-i}\epsilon(i)$ for $\tau \le u \le \tau + m - 1$ bounds the path sum by $(1 - |\phi|)^{-1}[|\xi(\tau)| + \sqrt{1 - \phi^2}\sum_{i=\tau+1}^{\tau+m-1} |\epsilon(i)|]$. For standard Gaussian $Z$ and $c \ge 0$, $\E\ee^{c|Z|} = 2\ee^{c^2/2}\Phi(c) \le (1 + c\sqrt{2/\pi})\ee^{c^2/2} \le \ee^{c + c^2/2}$. Independence of $\xi(\tau)$ and the $m - 1$ innovations gives, for $a \ge 0$ and $a' = a/(1 - |\phi|)$, the bound $\E\exp[a\sum_{u=\tau}^{\tau+m-1} |\xi(u)|] \le \exp[m(a' + (a')^2/2)]$. Bounding $\zeta_u \le \sum_{\delta=1}^D |\xi_\delta(u)|$ and factoring across the $D$ independent drivers ($\bar{\phi} = \max_\delta |\phi_\delta| < 1$) gives, for every $q \ge 1, \tau \ge 0, m \ge 0$,
+\[
+\bigl\|\|\mathbf{J}(\tau + m - 1)\cdots\mathbf{J}(\tau)\|_*\bigr\|_q \le \rho_q(\sigma)^m, \quad \rho_q(\sigma) = \beta\exp\!\left(\frac{c_4\bar{\kappa}^2\sigma^2}{2} + \frac{D c_4\bar{\kappa}|\sigma|}{1 - \bar{\phi}} + \frac{D q c_4^2\bar{\kappa}^2\sigma^2}{2(1 - \bar{\phi})^2}\right).
+\]
+Since $\rho_q(0) = \beta < \hat{\beta}$, there exists $s_q^J > 0$ such that $\rho_q(\sigma) \le \hat{\beta}$ whenever $|\sigma| \le s_q^J$.
+
+\emph{Step 3: Derivative bounds, parity, and second coefficient.} Differentiating $G_t\mathbf{y}(t + 1) = \mathbf{A}(t)\mathbf{y}(t)$ $j$ times ($1 \le j \le 4$) by Leibniz's rule gives $\mathbf{y}_j(t + 1) = \mathbf{J}(t)\mathbf{y}_j(t) + \mathbf{f}_j(t)$ with $\mathbf{y}_j(0) = \mathbf{0}$, where
+\[
+\mathbf{f}_j(t) = \frac{1}{G_t}\left[\sum_{i=1}^j \binom{j}{i}\mathbf{A}^{(i)}(t)\mathbf{y}_{j-i}(t) - \sum_{i=1}^{j-1} \binom{j}{i} G_t^{(i)}\mathbf{y}_{j-i}(t + 1) - \Gamma_j(t)\mathbf{y}(t + 1)\right],
+\]
+$G_t^{(i)} = \sum_{l=0}^i \binom{i}{l}\mathbf{w}^{\mathsf{T}}\mathbf{A}^{(l)}(t)\mathbf{y}_{i-l}(t)$, $\Gamma_j(t) = \sum_{l=1}^j \binom{j}{l}\mathbf{w}^{\mathsf{T}}\mathbf{A}^{(l)}(t)\mathbf{y}_{j-l}(t)$, and for $l \ge 1$, $\mathbf{A}^{(l)}(t) = \sum_a a_a h_a^{(l)}(t)\mathbf{e}_{i_a}\mathbf{e}_{j_a}^{\mathsf{T}}$ with $h_a^{(l)} = \kappa_a^l\operatorname{He}_l(\xi_{\delta(a)} - \sigma\kappa_a)h_a$ ($\operatorname{He}_l$ the probabilist's Hermite polynomial). Note that for $i \ge 1$, $\mathbf{w}^{\mathsf{T}}\mathbf{y}_i = 0$ implies $\mathbf{w}^{\mathsf{T}}\mathbf{A}(t)\mathbf{y}_i(t) = \sum_a a_a w_{i_a}(h_a(t) - 1)(\mathbf{y}_i(t))_{j_a}$. Every summand in $\mathbf{f}_j(t)$ is bounded by a constant times at most four random factors: $1/G_t \le \ee^{\eta_t}/\lambda$, one noise factor ($|h_a - 1|$ or $|h_a^{(l)}| \le \bar{\kappa}^l|\operatorname{He}_l(\xi_{\delta(a)} - \sigma\kappa_a)|\ee^{\eta_t}$), and at most two lower-order state derivatives $|\mathbf{y}_m|$ ($m < j$). Define nested thresholds recursively by $s_{j,q} = \min(1, s_{2q}^J, \min_{1 \le i < j} s_{i,8q}) > 0$. By four-factor H\"older's inequality with exponents $8q$, $F_{j,2q} = \sup_{t \ge 0, |\sigma| \le s_{j,q}} \||\mathbf{f}_j(t)|\|_{2q} < \infty$, and Minkowski's and Cauchy--Schwarz inequalities on $\mathbf{y}_j(t) = \sum_{\tau=0}^{t-1} \mathbf{J}(t - 1)\cdots\mathbf{J}(\tau + 1)\mathbf{f}_j(\tau)$ yield $\sup_{t \ge 0, |\sigma| \le s_{j,q}} \||\mathbf{y}_j(t)|\|_q \le c_* F_{j,2q}/(1 - \hat{\beta}) < \infty$ for $1 \le j \le 4$ and all $q \ge 1$.
+
+With $g_i = G_t^{(i)}/G_t$, $(\ln G_t)^{(4)} = g_4 - 4g_1 g_3 - 3g_2^2 + 12g_1^2 g_2 - 6g_1^4$ has $\sup_{t \ge 0, |\sigma| \le \sigma_0} \E|(\ln G_t)^{(4)}| \le K_4 < \infty$ on a positive interval $|\sigma| \le \sigma_0$. Writing $\ell_j(t) = (\ln G_t)^{(j)}|_{\sigma=0}$, $h_a(\sigma; \boldsymbol{\xi})$ depends only on $\sigma\boldsymbol{\xi}$ and $\sigma^2$, so $G_t(-\sigma; \boldsymbol{\xi}) = G_t(\sigma; -\boldsymbol{\xi})$ pathwise; since $-\boldsymbol{\xi}$ has the same joint law as $\boldsymbol{\xi}$, $\E\ell_1(t) = \E\ell_3(t) = 0$. At $\sigma = 0$, $\mathbf{d}(t) = \mathbf{y}_1(t)|_{\sigma=0}$ satisfies $\mathbf{d}(t + 1) = \mathbf{M}\mathbf{d}(t) + \sum_b \kappa_b\xi_{\delta(b)}(t)\mathbf{Q}\mathbf{B}_b\mathbf{v}$ ($\mathbf{d}(0) = \mathbf{0}$), $G_t^{(1)}/\lambda = \sum_a \kappa_a c_a\xi_{\delta(a)}(t)$, and $G_t^{(2)}/\lambda = \sum_a \kappa_a^2 c_a(\xi_{\delta(a)}(t)^2 - 1) + 2\sum_a \kappa_a\xi_{\delta(a)}(t)\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{d}(t)$ (since $\mathbf{w}^{\mathsf{T}}\mathbf{M}\mathbf{y}_2 = 0$). Taking expectations and using $\mathbf{M}^m\mathbf{Q} = \mathbf{T}_\perp^m\mathbf{Q}$ gives
+\[
+\E\ell_2(t) = -\sum_{\delta(a)=\delta(b)} \kappa_a\kappa_b c_a c_b + 2\sum_{\delta(a)=\delta(b)} \kappa_a\kappa_b \sum_{m=0}^{t-1} \phi_{\delta(a)}^{m+1}\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{T}_\perp^m\mathbf{Q}\mathbf{B}_b\mathbf{v} \longrightarrow -2C
+\]
+as $t \to \infty$. By Taylor's formula with integral remainder and Tonelli's theorem, $|\E\ln G_t(\sigma) - \ln\lambda - \frac{1}{2}\sigma^2\E\ell_2(t)| \le (K_4/24)\sigma^4$ for all $t \ge 0$ and $|\sigma| \le \sigma_0$. Averaging over $0 \le t < N$ and letting $N \to \infty$ gives Eq.~\eqref{eq:ring-rem-ar1} with $K = K_4/24$.
+\end{proof}
+
+\begin{lemma}[Uniformity on compact families]\label{lem:ring-rem-uniform}
+Fix $d$, positions $(i_a, j_a)$, $\kappa_a \in \mathbb{R}$, $\delta(a)$, and $|\phi_\delta| < 1$. On any compact family $\mathcal{K}$ of pairs $(\mathbf{A}_{\mathrm{fixed}}, (a_a))$ with $\mathbf{A}_{\mathrm{fixed}} \ge \mathbf{0}$, $a_a > 0$, and primitive $\mathbf{A}_0$ (each started at its own $\mathbf{v}$), common $\sigma_0 > 0, K < \infty$ satisfy Eq.~\eqref{eq:ring-rem-ar1} across $\mathcal{K}$, including the ring family $g_k = (1 - s_k)\ee^{y/n}$ on $|y| \le \delta$ ($0 \le s_k < 1$, some $s_k > 0$ if $n \ge 2$).
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~{\upshape\ref{lem:ring-rem-uniform}}]
+With $d$, the finite list of labeled contributions, $\kappa_a$, $\delta(a)$, and $|\phi_\delta| < 1$ fixed across $\mathcal{K}$, the simple Perron root $\lambda$ and normalized positive eigenvectors $\mathbf{v}, \mathbf{w}$ vary continuously on $\mathcal{K}$, so $\sup_{\mathcal{K}} \lambda$, $\sup_{\mathcal{K}} \lambda^{-1}$, $\sup_{\mathcal{K}} |\mathbf{w}|$, $\sup_{\mathcal{K}} w_{\min}^{-1}$, $\sup_{\mathcal{K},a} a_a$, and $\sup_{\mathcal{K}} \sum_a a_a/\lambda$ are all finite. The operator $\mathbf{T}_\perp = \mathbf{M} - \mathbf{v}\mathbf{w}^{\mathsf{T}}$ varies continuously, so $\bar{\rho} = \max_{\mathcal{K}} \spr(\mathbf{T}_\perp) < 1$; fix one $\beta \in (\max(\bar{\rho}, 1/2), 1)$ and $\hat{\beta} = (1 + \beta)/2$. For any member $\mathbf{T}_1$, choose $\beta' \in (\spr(\mathbf{T}_1), \beta)$ and $J \ge 1$ with $\|\mathbf{T}_1^J\| \le (\beta')^J < \beta^J$; continuity gives an open neighborhood, intersected with $\mathcal{K}$, on which $\|\mathbf{T}_\perp^J\| \le \beta^J$. Writing $j = qJ + i$ ($0 \le i < J$) gives $\beta^{-j}\|\mathbf{T}_\perp^j\| \le \beta^{-J}\max(1, \|\mathbf{T}_\perp\|)^J$, so covering compact $\mathcal{K}$ by finitely many such neighborhoods yields a common bound $C_* \ge \sup_{\mathcal{K}} c_* < \infty$. Replacing $c_5, c_4$ in $\rho_q(\sigma)$ by their family upper bounds yields common positive thresholds $s_q^J$. Because $\mathbf{w}^{\mathsf{T}}\mathbf{A}_{\mathrm{fixed}}\mathbf{y}_i + \sum_a a_a w_{i_a}(\mathbf{y}_i)_{j_a} = \lambda\mathbf{w}^{\mathsf{T}}\mathbf{y}_i = 0$ cancels $\mathbf{A}_{\mathrm{fixed}}$ from $G_t^{(i)}$ ($i \ge 1$), every positive majorant in Step~3 of the proof of Theorem~\ref{thm:ring-rem-ar1} is nondecreasing in the finite family suprema above, producing common intervals $s_{j,q} > 0$, $\sigma_0 > 0$, and $K = K_4/24 < \infty$. Passing to $N \to \infty$ separately at each member leaves the uniform bound $(K_4/24)\sigma^4$ intact. The ring family $g_k = (1 - s_k)\ee^{y/n}$ on $|y| \le \delta$ is continuous on a closed bounded interval with positive contributions and primitive means (including $d = 1$ mixed entries and rings with some zero stays), hence compact.
+\end{proof}
+
+\begin{theorem}[Gaussian linear-process remainder]\label{thm:ring-rem-lin}
+Under the primitive contribution model of Theorem~\ref{thm:ring-rem-ar1}, let $\xi_1, \dots, \xi_D$ be centered, unit-variance, jointly stationary Gaussian linear processes $\xi_\delta(t) = \sum_{j=0}^{\infty} \psi_{\delta,j}\epsilon_\delta(t - j)$ with $\Psi_\delta = \sum_{j=0}^{\infty} |\psi_{\delta,j}| < \infty$ and $\sum_{j=0}^{\infty} \psi_{\delta,j}^2 = 1$, where each $\epsilon_\delta(t)$ is independent standard Gaussian across $t$ and innovations may correlate across drivers while preserving joint Gaussian stationarity. With $\rho_{\delta\delta'}(\ell) = \E[\xi_\delta(t)\xi_{\delta'}(t - \ell)]$ ($\ell \ge 0$), there exist $\sigma_0 > 0, K < \infty$ such that for $|\sigma| \le \sigma_0$,
+\begin{equation}
+\begin{aligned}
+\bigl|\ln\lambda - r(\sigma) - C''\sigma^2\bigr| &\le K\sigma^4, \\
+C'' &= \sum_{a,b} \kappa_a\kappa_b \left[ \frac{c_a c_b}{2}\rho_{\delta(a)\delta(b)}(0) - \sum_{m=0}^{\infty} \rho_{\delta(a)\delta(b)}(m + 1)\,\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{T}_\perp^m\mathbf{Q}\mathbf{B}_b\mathbf{v} \right].
+\end{aligned}
+\label{eq:ring-rem-lin}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~{\upshape\ref{thm:ring-rem-lin}}]
+We replace the two steps in Theorem~\ref{thm:ring-rem-ar1} that used independent $\mathrm{AR}(1)$ drivers. First, for $a \ge 0, \tau \ge 0, m \ge 1$, $\sum_{u=\tau}^{\tau+m-1} |\xi_\delta(u)| \le \sum_{j=0}^{\infty} |\psi_{\delta,j}| S_j$, where $S_j = \sum_{u=\tau}^{\tau+m-1} |\epsilon_\delta(u - j)|$. Since $|\psi_{\delta,j}|/\Psi_\delta$ are nonnegative weights summing to one, convexity of the exponential gives
+\[
+\E\exp\!\left(a\sum_{u=\tau}^{\tau+m-1} |\xi_\delta(u)|\right) \le \sum_{j=0}^{\infty} \frac{|\psi_{\delta,j}|}{\Psi_\delta}\,\E\exp(a\Psi_\delta S_j) \le \exp\!\left[m\left(a\Psi_\delta + \frac{a^2\Psi_\delta^2}{2}\right)\right],
+\]
+because each $S_j$ sums $m$ independent standard Gaussian absolute values (requiring no independence among distinct $S_j$). Second, with $\bar{\Psi} = \max_\delta \Psi_\delta$, H\"older's inequality with $D$ equal exponents across drivers replaces driver independence:
+\[
+\E\prod_{\delta=1}^D \exp\!\left(q c_4\bar{\kappa}|\sigma|\sum_{u=\tau}^{\tau+m-1} |\xi_\delta(u)|\right) \le \prod_{\delta=1}^D \left[\E\exp\!\left(D q c_4\bar{\kappa}|\sigma|\sum_{u=\tau}^{\tau+m-1} |\xi_\delta(u)|\right)\right]^{1/D},
+\]
+yielding $\bigl\|\|\mathbf{J}(\tau + m - 1)\cdots\mathbf{J}(\tau)\|_*\bigr\|_q \le \rho_q(\sigma)^m$, where
+\[
+\rho_q(\sigma) = \beta\exp\!\left(\frac{c_4\bar{\kappa}^2\sigma^2}{2} + D c_4\bar{\kappa}\bar{\Psi}|\sigma| + \frac{D^2 q c_4^2\bar{\kappa}^2\bar{\Psi}^2\sigma^2}{2}\right).
+\]
+All one-time Gaussian moment bounds, H\"older steps, and joint centered Gaussian sign symmetry ($\boldsymbol{\xi} \stackrel{\mathrm{d}}{=} -\boldsymbol{\xi}$) hold unchanged. Finally, at $\sigma = 0$, $\mathbf{d}(t) = \sum_{m=0}^{t-1} \mathbf{M}^m \sum_b \kappa_b\xi_{\delta(b)}(t - 1 - m)\mathbf{Q}\mathbf{B}_b\mathbf{v}$ gives
+\[
+\E\ell_2(t) = -\sum_{a,b} \kappa_a\kappa_b c_a c_b\rho_{\delta(a)\delta(b)}(0) + 2\sum_{a,b} \kappa_a\kappa_b \sum_{m=0}^{t-1} \rho_{\delta(a)\delta(b)}(m + 1)\,\mathbf{w}^{\mathsf{T}}\mathbf{B}_a\mathbf{T}_\perp^m\mathbf{Q}\mathbf{B}_b\mathbf{v},
+\]
+which converges geometrically to $-2C''$ because $|\rho_{\delta\delta'}| \le 1$ and $\|\mathbf{T}_\perp^m\| \to 0$ geometrically.
+\end{proof}
+
+\subsection{Regulated deterministic loops}\label{subsec:app-ring-reg}
+
+\begin{proof}[Proof of Proposition~{\upshape\ref{prop:ring-reg}}]
+\begin{enumerate}
+\item[(a)] Set $\gamma_k = c_k f_k(x_k^*) > 0$. Equilibrium balance $c_k f_k(x_k^*) x_k^* = a_{k+1} x_{k+1}^*$ implies $\prod_{k=1}^n \gamma_k = \prod_{k=1}^n a_k$. Differentiating $c_k f_k(x_k) x_k$ at $x_k^*$ gives $\gamma_k(1 - \kappa_k)$, so the Jacobian has diagonal $-a_k$ and cyclic entries $\gamma_k(1 - \kappa_k)$ (added in one cell if $n = 1$), with characteristic equation $\prod_{k=1}^n (z + a_k) = \prod_{k=1}^n \gamma_k(1 - \kappa_k) = G\prod_{k=1}^n a_k$. Whenever $\operatorname{Re} z \ge 0$, $|z + a_k| \ge a_k$ for each $k$, so $\prod_{k=1}^n |z + a_k| \ge \prod_{k=1}^n a_k > |G|\prod_{k=1}^n a_k$ if $|G| < 1$, excluding eigenvalues in $\{\operatorname{Re} z \ge 0\}$.
+\item[(b)] At $a_k = a = n/\tau$, $(z + a)^n = G a^n$ gives $z = a(\zeta - 1)$ with $\zeta^n = G$. For $G > 0$, the rightmost root is real at $\zeta = G^{1/n}$, giving return rate $a(1 - G^{1/n})$ for $0 < G < 1$ and instability for $G > 1$. For $G < 0$, the rightmost roots have $\zeta = |G|^{1/n}\ee^{\pm\mathrm{i}\pi/n}$ and real part $a[|G|^{1/n}\cos(\pi/n) - 1]$, which is negative for $n = 1$ ($\cos\pi = -1$), negative for $n = 2$ ($\cos(\pi/2) = 0$), and for $n \ge 3$ negative when $|G| < \sec^n(\pi/n)$ and positive when $|G| > \sec^n(\pi/n)$.
+\item[(c)] With $f(x) = \ee^{-x/K}$ in one transfer, $\ee^{-x^*/K} = 1/R_0$, so $\kappa = x^*/K = \ln R_0$ and $G = 1 - \ln R_0$; part~(b) gives stability for all $R_0 > 1$ at $n = 1, 2$ and critical $\ln R_0 = 1 + \sec^n(\pi/n)$ at $n \ge 3$. With $\ee^{-x_k/K}$ in every transfer and equal $a, c, K$, $x_k^* = K\ln R_0 / n$ satisfies $\ee^{-x_k^*/K} = R_0^{-1/n}$, $\kappa_k = s = \ln R_0 / n$, and $z = a[(1 - s)\omega - 1]$ over $n$th roots of unity $\omega$. For $s \le 1$, $\omega = 1$ gives real return rate $as = \ln R_0 / \tau$; for $s > 1$, the largest real part is $a(s - 2)$ for even $n$ ($\omega = -1$, critical $\ln R_0 = 2n$) and $a[(s - 1)\cos(\pi/n) - 1]$ for odd $n \ge 3$ ($\omega = \ee^{\pm\mathrm{i}(n-1)\pi/n}$, critical $\ln R_0 = n[1 + \sec(\pi/n)]$). For $n \ge 4$, $\sec(\pi/n) \le \sqrt{2}$ and $\sec^n(\pi/n)$ decreases from $\sec^4(\pi/4) = 4$, so $1 + \sec^n(\pi/n) \le 5 < 8 \le \min(2n, n[1 + \sec(\pi/n)])$. For even $n$, $y_i = x_i^*/K$ solves $y_{i+1} = \ee^s y_i \ee^{-y_i}$; alternating values $s \pm d$ satisfy $(s + d)(s - d) = s^2 - d^2$ and $(s + d)/(s - d) = \ee^d$, i.e., $d = s\tanh(d/2)$, which has a positive root $d > 0$ if and only if $s > 2$. For $s = 2 + \epsilon$ ($\epsilon > 0$ small), $d^2 = 6\epsilon + O(\epsilon^2)$, so $[1 - (s - d)][1 - (s + d)] = (1 - s)^2 - d^2 = 1 - 4\epsilon + O(\epsilon^2)$ and $|G| = |(1 - s)^2 - d^2|^{n/2} < 1$, which is locally stable by part~(a).
+\item[(d)] Counting $m$ births sets $R_{\mathrm{NG}} = R_0^{1/m}$, so $m\ln R_{\mathrm{NG}} = \ln R_0$, leaving the differential equations and Jacobian unchanged. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proof}[Proof of Remark~{\upshape\ref{rem:ring-reg-odd}}]
+At odd $n \ge 3$ the critical pair $(n/\tau)[(1 - s)\ee^{\pm\mathrm{i}(n-1)\pi/n} - 1]$ has derivative $(n/\tau)\cos(\pi/n) > 0$ in $s$ at $s = 1 + \sec(\pi/n)$, while all remaining roots have strictly negative real parts. Rescaling $a = K = 1$ and putting $q = \sec(\pi/n)$, $\omega = \tan(\pi/n)$, $\xi = -(1 + \mathrm{i}\omega)/q$, and $u = q - 1 \in (0, 1]$, the critical Jacobian is $\mathbf{J} = -\mathbf{I} - q\mathbf{S}$ ($\mathbf{S}$ the cyclic shift) with eigenvector $\mathbf{S}\mathbf{v}_c = \xi\mathbf{v}_c$ ($|(v_c)_k| = 1$) and adjoint $\mathbf{p} = \mathbf{v}_c/n$ ($\langle\mathbf{p}, \mathbf{v}_c\rangle = 1$). Since $y\ee^{s - y}$ at $y = s = 1 + q$ has second and third derivatives $q - 1$ and $2 - q$, the standard center-manifold formula
+\[
+l_1 = \frac{1}{2\omega}\operatorname{Re}\Bigl[\langle\mathbf{p}, \mathbf{C}(\mathbf{v}_c, \mathbf{v}_c, \bar{\mathbf{v}}_c)\rangle - 2\langle\mathbf{p}, \mathbf{B}(\mathbf{v}_c, \mathbf{J}^{-1}\mathbf{B}(\mathbf{v}_c, \bar{\mathbf{v}}_c))\rangle + \langle\mathbf{p}, \mathbf{B}(\bar{\mathbf{v}}_c, (2\mathrm{i}\omega\mathbf{I} - \mathbf{J})^{-1}\mathbf{B}(\mathbf{v}_c, \mathbf{v}_c))\rangle\Bigr]
+\]
+gives $(2\omega)^{-1}\operatorname{Re}\{\xi[(2 - q) + 2(q - 1)^2/(q + 1)] + (q - 1)^2\xi^3/(2\mathrm{i}\omega + 1 + q\xi^2)\}$. Referee reports supplied the rational reduction $[-2 - 11u - 6u^2 - 5u^3 - 2u^4(1 - u)]/[2\omega q^2(q + 1)(5q - 4)] < 0$, which we verified numerically against the bilinear and trilinear formula to $6 \times 10^{-15}$ for odd $n = 3, \dots, 31$ without redoing the polynomial reduction by hand. Finally, under $f_k(x) = (1 + x/K)^{-1}$ at symmetric equilibrium $1 + x^*/K = R_0^{1/n}$, $1 - \kappa = (1 + x^*/K)^{-1} = R_0^{-1/n} \in (0, 1)$, giving return rate $(n/\tau)(1 - R_0^{-1/n})$; under $\dd x_i/\dd t = g x_{i-1} - d x_i - c x_i^2$ ($R_0 = (g/d)^n > 1$, $x^* = (g - d)/c$), linearized diagonal loss is $d + 2c x^* = 2g - d$, so the dominant root $g - (2g - d) = -(g - d)$ gives return rate $(n/\tau_b)(R_0^{1/n} - 1)$ at baseline time $\tau_b = n/d$ and $(n/\tau_{\mathrm{eq}})(1 - R_0^{-1/n})$ at equilibrium time $\tau_{\mathrm{eq}} = n/g$.
+\end{proof}

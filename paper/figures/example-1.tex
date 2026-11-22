@@ -1,0 +1,110 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+\IfFileExists{figures/data/example-1a.csv}{%
+  \def\exoneacsv{figures/data/example-1a.csv}%
+  \def\exonebcsv{figures/data/example-1b.csv}%
+}{%
+  \def\exoneacsv{data/example-1a.csv}%
+  \def\exonebcsv{data/example-1b.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{129mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{groupplot}[
+  group style={
+    group size=2 by 1,
+    horizontal sep=13mm,
+  },
+  height=36mm,
+  scale only axis=true,
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  clip=true,
+]
+
+\nextgroupplot[
+  width=55mm,
+  ybar=1.0pt,
+  bar width=2.8mm,
+  area legend,
+  xmin=-0.56,
+  xmax=4.56,
+  ymin=0,
+  ymax=2.75,
+  xtick={0, 1, 2, 3, 4},
+  xticklabels={
+    {1\\(none)},
+    {2\\(3)},
+    {2\\(60)},
+    {3\\(30+30)},
+    {3\\(1+59)}
+  },
+  xticklabel style={
+    align=center,
+    font=\sffamily\fontsize{8.5}{9.5}\selectfont,
+  },
+  ytick={0, 0.5, 1.0, 1.5, 2.0, 2.5},
+  yticklabels={$0$, $0.5$, $1.0$, $1.5$, $2.0$, $2.5$},
+  scaled y ticks=false,
+  xlabel={Hosts in series (steady stays, mo)},
+  ylabel={Relative loss},
+  legend columns=3,
+  legend style={
+    at={(0.5,1.03)},
+    anchor=south,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    column sep=1.6mm,
+  },
+]
+\addplot[sharp plot, line legend, densely dotted, line width=0.8pt, black!55, update limits=false, forget plot] coordinates {(-0.56, 1.0) (4.56, 1.0)};
+\addplot[fill=white, draw=black, line width=0.55pt] table[col sep=comma, x=idx, y=rel_phi0] {\exoneacsv};
+\addlegendentry{$\phi = 0$}
+\addplot[fill=black!62, draw=black, line width=0.55pt] table[col sep=comma, x=idx, y=rel_phi08] {\exoneacsv};
+\addlegendentry{$\phi = 0.8$}
+\addlegendimage{line legend, densely dotted, line width=0.8pt, black!55}
+\addlegendentry{1 host}
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.03,0.95) {(a)};
+
+\nextgroupplot[
+  width=45mm,
+  xmin=0.72,
+  xmax=5.28,
+  xtick={1, 2, 3, 4, 5},
+  ymin=0,
+  ymax=1.32,
+  ytick={0, 0.25, 0.50, 0.75, 1.00, 1.25},
+  yticklabels={$0$, $0.25$, $0.50$, $0.75$, $1.00$, $1.25$},
+  scaled y ticks=false,
+  xlabel={Alternative hosts $M$ in parallel},
+  legend columns=2,
+  legend style={
+    at={(1.0,1.03)},
+    anchor=south east,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    column sep=1.2mm,
+  },
+]
+\addplot[solid, line width=0.9pt, black, mark=*, mark options={solid, draw=black, fill=black, line width=0.6pt, scale=0.75}] table[col sep=comma, x=M, y=rel_indep] {\exonebcsv};
+\addlegendentry{indep.\ ($\rho = 0$)}
+\addplot[dashed, line width=0.9pt, black] table[col sep=comma, x=M, y=rel_sync] {\exonebcsv};
+\addlegendentry{sync.\ ($\rho = 1$)}
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.04,0.95) {(b)};
+
+\end{groupplot}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

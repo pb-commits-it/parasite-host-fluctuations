@@ -1,0 +1,35 @@
+[PASS] K0a known: one regulated transfer, equal rates: largest error 4.2e-11 of the rate (12 cases)
+[PASS] K0b known: direct SIS: largest relative error 7.7e-09 (50 cases)
+[PASS] K1 loop equation (C1): 400 cycles, kinds ['L', 'M', 'R', 'S', 'V'], largest distance 4.5e-10
+[PASS] K2 blocks that cannot amplify (C3): 6,000 blocks, exceptions 0, largest gain/bound 1.000000
+[PASS] K3a any number of hosts, any durations (C4): 5,000 cycles, exceptions 0, largest Re z / largest |z| = -4.06e-05, largest gain/bound 1.000000
+[PASS] K3b over-compensation offset by prevalence (C4): 2,000 cycles with product of bounds < 1, exceptions 0
+[PASS] K4i static response of a harmed host (C5): 500 blocks, largest relative error 2.1e-08
+[PASS] K4ii one harmed host and one delay (C6): 3000 of 3000 agree (0 at the boundary skipped); 27 unstable; 121 cases with an island
+[PASS] K4iii islands of instability at intermediate stage length (C6): 121 islands, exceptions 0
+[PASS] K4iv host with no self-regulation (C6): 176 cases destabilised by every stage longer than tau_c, 824 stable at every length, exceptions 0
+      island case: N*/K = 0.065, prevalence 0.189, unstable for 0.203 < tau < 1.98
+      short stage: leading eigenvalue -0.03909+1.178i, deviation 2.26e-04 -> 1.00e-06, decays (as predicted)
+      intermediate stage: leading eigenvalue +0.0139+0.7455i, deviation 1.97e-04 -> 4.39e-02, grows (as predicted)
+      long stage: leading eigenvalue -0.01295+0.2923i, deviation 1.80e-04 -> 7.88e-07, decays (as predicted)
+      host with no self-regulation: prevalence 0.208, tau_c = 0.354
+      stage 0.4 tau_c: leading eigenvalue -0.01552+0.5016i, deviation 1.00e-04 -> 4.33e-07, decays (as predicted)
+      stage 3 tau_c: leading eigenvalue +0.01248+0.352i, deviation 1.84e-04 -> 4.21e-02, grows (as predicted)
+      stage 300 tau_c: leading eigenvalue +0.0005714+0.04644i, deviation 8.43e-04 -> 1.92e-01, grows (as predicted)
+[PASS] K4v nonlinear integrations (C6): 6 of 6 as predicted
+[PASS] K5 a long-lived stage (C7): G < 1: 1804 cycles, all stable with a long stage, leading eigenvalue within 1.8e-02 of (G-1)/tau; G > 1: 196 cycles, unstable at every length; exceptions 0; 89 skipped near G = 1
+[PASS] K6a critical over-compensation with unequal stays (C8): 2,000 sets of rates, sign changes at g_c in all but 0; smallest g_c / sec^n(pi/n) = 1.014658
+[PASS] K6b three stages: g_c = (sum of stays)(sum of rates) - 1 (C8): 500 cases, largest relative error 6.8e-15
+[PASS] K6c one stay growing: g_c grows in proportion (C8): 300 cases (n = 3..7; n = 2 others gives 1/tau_2 + 1/tau_3), largest relative error 2.5e-07
+[PASS] K6d the same through the nonlinear model (C8): 300 cycles at g_c(1 -+ 0.01), exceptions 0
+[PASS] K7a the loop multiplies a slow disturbance by 1/R0 (C9): 1,000 cycles of S and L blocks, largest error 5.1e-14
+[PASS] K7b equal hosts: return rate = rate when rare = (n/tau)(R0^(1/n) - 1) (C9): 200 cycles, largest relative error 3.4e-07
+[PASS] K7c every start tried ends at the equilibrium (C9, numerical only): 100 integrations of 20 cycles, exceptions 0, largest final relative distance 3.2e-12
+      S-L-S, L stage 2: variance of log output, predicted 8.884e-04, 6.844e-04, 1.352e-04; simulated 8.653e-04, 6.614e-04, 1.306e-04
+      S-L-S, L stage 20: variance of log output, predicted 7.100e-04, 1.500e-04, 3.080e-05; simulated 7.085e-04, 1.522e-04, 3.126e-05
+      V-L (dynamic host, N*/K = 0.7), L stage 2: variance of log output, predicted 7.061e-04, 4.780e-04; simulated 7.130e-04, 4.837e-04
+      V-L (dynamic host, N*/K = 0.7), L stage 20: variance of log output, predicted 4.508e-04, 6.763e-05; simulated 4.547e-04, 6.758e-05
+[PASS] K8 fluctuating host with feedback (C10): 4 runs, largest relative error 0.034 (tolerance 0.12)
+      S-L-S: variance in the L stage falls 4.56-fold when its length rises 10-fold
+
+ALL CHECKS PASSED

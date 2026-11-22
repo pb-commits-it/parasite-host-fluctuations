@@ -1,0 +1,585 @@
+\subsection{Simulated populations, observed host forcing, and experimental design}
+\label{num-esm-simworld}
+
+The available data do not isolate the effect of host variability at a fixed
+mean on parasite persistence. We therefore use controlled host schedules to
+separate variability from residence in a steady stage, and observed host
+sequences to examine where those predictions cease to apply. The numerical
+results concern the specified parasite models. Host data determine forcing
+and checks of the predictions, without fitting parasite parameters or adding
+a mechanism to reproduce an observed pattern.
+
+\subsubsection{Model and measured outcomes}
+\label{num-esm-model}
+% Sources: virtualworld/protocol.md, including both dated fix1 addenda; report.md.
+
+The simulated world represents individuals in ordered biological stages.
+Conditional on the environment, individuals undergo independent demographic
+events. The pilot uses two geometric residence distributions (a constant
+exit probability at each step), an exposed mean stay of 2 steps, and a steady
+mean stay $s\in\{1,5,20\}$ steps. An individual leaving the exposed stage
+produces a Poisson number of entrants to the steady stage, with mean
+$h_t=H_t/\bar H$ (host abundance relative to its stationary arithmetic mean).
+The return transfer has mean offspring yield $R_0$, the constant-environment
+reproduction number. Scarcity reduces successful output without postponing
+departure. There is no additional stage mortality, host feedback, saturation,
+alternative host, dispersal, or density regulation in the pilot.
+
+Host forcing is generated as
+\begin{equation}
+ h_t=\exp(\sigma z_t-\sigma^2/2),\qquad
+ z_t=\phi z_{t-1}+\sqrt{1-\phi^2}\,\varepsilon_t,
+ \label{num-host-forcing}
+\end{equation}
+where $z_t$ has its stationary standard normal distribution and
+$\varepsilon_t$ are independent standard normal innovations. Thus $\sigma$
+is the stationary standard deviation of log abundance and $\phi$ is its
+lag-one correlation. The stationary arithmetic mean of $h_t$ is one.
+Finite paths are not rescaled, and their realized means and log variances
+are retained. This distinction matters when comparing an imposed schedule
+with a finite experimental exposure.
+
+Extinction is the first step at which the total population reaches zero.
+All populations, including extinct ones, contribute to extinction estimates.
+Early growth is calculated from the conditional-mean population operator
+over steps 0--100 for every host schedule. It is not individual growth
+conditioned on survival. The threshold loss $D$ is the difference between
+the log offspring multipliers that restore zero long-run invasion growth
+under fluctuating hosts and under the arithmetic-mean-rate operator.
+The multiplier is applied only at circuit completion. We solve for this
+root separately from finite-horizon extinction and growth.
+
+\subsubsection{Validation before the pilot}
+\label{num-esm-validation}
+% Sources: virtualworld/protocol.md, validation.md and its correction, report.md;
+% verification/replication/validation-rerun.md.
+
+All five of five registered gates passed before the pilot. The gates link
+individual demographic draws to the conditional-mean operator, then compare
+that operator with independently calculated limits and earlier numerical
+results (Table~\ref{num-validation-table}). A second party wrote separate
+code from the protocol, without importing or copying the original
+implementation, and repeated every gate with independent random seeds.
+Both implementations passed 190 of 190 comparisons. Agreement concerns
+these laws and tolerances, rather than the biological realism of every
+available model extension.
+
+\begin{table}[htbp]
+\centering
+\caption{Registered validation gates and independent repetition. Counts include
+algebraic, precision, root, and directional checks within each gate.}
+\label{num-validation-table}
+\begin{tabular}{p{0.57\linewidth}rr}
+\toprule
+Scope & Original & Independent \\
+\midrule
+Small-noise ring coefficient, band, and individual means & 53/53 & 53/53 \\
+Mechanism extensions and conditional-mean matrices & 30/30 & 30/30 \\
+Exact gamma-host case and adjacent-stay decreases & 54/54 & 54/54 \\
+Positive environmental memory and adjacent decreases & 44/44 & 44/44 \\
+Constant-host demographic extinction & 9/9 & 9/9 \\
+\midrule
+Total & 190/190 & 190/190 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The first gate used stage means $(2,5)$, $(1,2,7)$, and $(2,3,4,5)$ at
+$\phi=0$ and $0.6$, with $\sigma=0.03$. Algebraic coefficient error was
+required to be at most $10^{-10}$. Simulated coefficients used 32 independent
+antithetic pairs (opposite Gaussian innovations), 65,536 recorded steps,
+and 2,048 burn-in steps. The allowed error was $0.05K+4\,\mathrm{SE}$,
+with $\mathrm{SE}\leq0.03K$, where $K$ is the second-order coefficient in
+$D\simeq\sigma^2K$ and $\mathrm{SE}$ denotes standard error.
+
+The second gate checked six of six selected mechanism settings, covering
+the base model, residence shape, alternative hosts, patches, mortality,
+and delaying contact. Matrix agreement was required within $10^{-11}$.
+Threshold agreement allowed four combined standard errors plus $0.002$,
+with separate precision, root, and half-run checks. The third gate used
+the exact gamma-host model of \citet{roerdink1988}. Gamma shapes
+$2,1,0.25$ were crossed with staying probabilities $0.2,0.5,0.8,0.95$.
+Independent quadrature refinement had to change roots by at most $10^{-8}$,
+and simulation had to agree within four standard errors plus $0.0005$.
+All nine of nine adjacent exact and simulated decreases passed their
+respective directional checks.
+
+The fourth gate crossed $\sigma=0.3,0.6$, $\phi=0.6,0.9$, and steady
+means $2,5,10$, with exposed mean one. All twelve of twelve roots agreed
+with the archived references within four combined standard errors plus
+$0.001$, and eight of eight adjacent decreases exceeded four paired
+standard errors. These are finite-grid checks. The fifth gate compared
+10,000 trajectories per reproduction setting with a separately implemented
+probability-generating-function recursion (an exact recursion for the
+specified branching probabilities). The settings were $\ln R_0=-0.1,0,0.1$,
+initial counts $(10,0)$, stays $(2,5)$, and endpoints 20, 60, and 120 steps.
+All nine of nine comparisons met the tolerance
+$4\sqrt{p(1-p)/10000}+0.002$, where $p$ is the reference extinction probability.
+
+Sampling intervals do not bound all systematic error. The dated validation
+correction identifies directional statistics as differences of corrected
+influence-sample means, rather than differences of the printed uncorrected
+roots. The registered root tolerance was $10^{-7}$, and the correction
+changed no gate decision. The independent report also distinguishes passing
+registered tolerances from falling inside another run's pointwise interval.
+
+\subsubsection{Pilot and corrected initialization}
+\label{num-esm-pilot}
+% Sources: virtualworld/pilot.md and dated corrections; pilot-rerun-fix1.md;
+% fix1-report.md; verification/replication/pilot-rerun.md.
+
+The factorial pilot crossed $\sigma=0,0.3,0.6$, $\phi=0,0.6$, and
+$s=1,5,20$. Each of 18 cells contained 200 independent host and demographic
+replicates, giving 3,600 of 3,600 completed trajectories at 500 steps.
+Initial abundance was 20 and $\ln R_0=0.05$. The two correlation labels
+at zero noise are separate controls with independent demographic draws.
+They were not pooled.
+
+The original integer allocation assigned remainders to the most abundant
+stage. The corrected run assigns them to the largest fractional remainders,
+giving initial stage counts $(13,7)$, $(6,14)$, and $(2,18)$ for the three
+steady stays. The same seed schedules were reused. Consequently, the
+original and corrected runs are not independent, and their difference
+cannot be attributed solely to allocation rounding. The repair also removed
+an artificial population ceiling, using sums of independent count draws,
+and clarified movement, finite-record centering, and a degenerate
+one-step residence distribution. All 22 of 22 final tests and 144 of 144
+saved-artifact checks passed. The original external-reference gates were
+retained, while the changed sampler was checked again against the known
+branching law.
+
+Corrected extinction and growth estimates are given in
+Tables~\ref{num-pilot-extinction} and \ref{num-pilot-growth}.
+Figure~\ref{num-1} deliberately uses the original archived cell file.
+Its nine plotted cells retain their original counts and intervals, so
+the figure must not be used to reconstruct the corrected contrast.
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected pilot extinction at 500 steps. Each row contains 200 independent
+populations. Intervals are pointwise 95\% score intervals.}
+\label{num-pilot-extinction}
+\begin{tabular}{rrrrl}
+\toprule
+$\sigma$ & $\phi$ & $s$ (steps) & Extinct/total & Probability [interval] \\
+\midrule
+0 & 0 & 1 & 71/200 & $0.355\ [0.292, 0.423]$ \\
+0 & 0 & 5 & 71/200 & $0.355\ [0.292, 0.423]$ \\
+0 & 0 & 20 & 44/200 & $0.220\ [0.168, 0.282]$ \\
+0 & 0.6 & 1 & 68/200 & $0.340\ [0.278, 0.408]$ \\
+0 & 0.6 & 5 & 73/200 & $0.365\ [0.301, 0.434]$ \\
+0 & 0.6 & 20 & 47/200 & $0.235\ [0.182, 0.298]$ \\
+0.3 & 0 & 1 & 104/200 & $0.520\ [0.451, 0.588]$ \\
+0.3 & 0 & 5 & 79/200 & $0.395\ [0.330, 0.464]$ \\
+0.3 & 0 & 20 & 48/200 & $0.240\ [0.186, 0.304]$ \\
+0.3 & 0.6 & 1 & 144/200 & $0.720\ [0.654, 0.778]$ \\
+0.3 & 0.6 & 5 & 103/200 & $0.515\ [0.446, 0.583]$ \\
+0.3 & 0.6 & 20 & 51/200 & $0.255\ [0.200, 0.320]$ \\
+0.6 & 0 & 1 & 182/200 & $0.910\ [0.862, 0.942]$ \\
+0.6 & 0 & 5 & 125/200 & $0.625\ [0.556, 0.689]$ \\
+0.6 & 0 & 20 & 68/200 & $0.340\ [0.278, 0.408]$ \\
+0.6 & 0.6 & 1 & 194/200 & $0.970\ [0.936, 0.986]$ \\
+0.6 & 0.6 & 5 & 157/200 & $0.785\ [0.723, 0.836]$ \\
+0.6 & 0.6 & 20 & 86/200 & $0.430\ [0.363, 0.499]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Corrected pilot conditional-mean early growth per step (200 schedules
+per cell), threshold loss $D$ (32 independent antithetic pairs per cell),
+and the second-order prediction $\sigma^2K$. Brackets give pointwise 95\%
+$t$ intervals for growth and $D$. The dated root correction does not affect
+the displayed threshold precision.}
+\label{num-pilot-growth}
+\begin{tabular}{rrrlll}
+\toprule
+$\sigma$ & $\phi$ & $s$ & Early growth [interval] & $D$ [interval] & $\sigma^2K$ \\
+\midrule
+0 & 0 & 1 & $0.016766\ [0.016766, 0.016766]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0 & 0 & 5 & $0.007222\ [0.007222, 0.007222]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0 & 0 & 20 & $0.002318\ [0.002318, 0.002318]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0 & 0.6 & 1 & $0.016766\ [0.016766, 0.016766]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0 & 0.6 & 5 & $0.007222\ [0.007222, 0.007222]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0 & 0.6 & 20 & $0.002318\ [0.002318, 0.002318]$ & $0.000000\ [0.000000, 0.000000]$ & $0.000000$ \\
+0.3 & 0 & 1 & $0.011250\ [0.009876, 0.012623]$ & $0.015410\ [0.015332, 0.015488]$ & $0.015000$ \\
+0.3 & 0 & 5 & $0.006235\ [0.005595, 0.006874]$ & $0.006642\ [0.006608, 0.006676]$ & $0.006429$ \\
+0.3 & 0 & 20 & $0.002083\ [0.001897, 0.002270]$ & $0.002123\ [0.002114, 0.002132]$ & $0.002045$ \\
+0.3 & 0.6 & 1 & $0.007101\ [0.004275, 0.009926]$ & $0.028818\ [0.028686, 0.028950]$ & $0.028846$ \\
+0.3 & 0.6 & 5 & $0.005696\ [0.004480, 0.006913]$ & $0.015984\ [0.015910, 0.016058]$ & $0.015836$ \\
+0.3 & 0.6 & 20 & $0.002128\ [0.001722, 0.002533]$ & $0.005508\ [0.005472, 0.005544]$ & $0.005408$ \\
+0.6 & 0 & 1 & $-0.004692\ [-0.007661, -0.001723]$ & $0.066300\ [0.066034, 0.066567]$ & $0.060000$ \\
+0.6 & 0 & 5 & $0.002464\ [0.001326, 0.003602]$ & $0.029146\ [0.029015, 0.029277]$ & $0.025714$ \\
+0.6 & 0 & 20 & $0.001812\ [0.001342, 0.002282]$ & $0.009602\ [0.009552, 0.009651]$ & $0.008182$ \\
+0.6 & 0.6 & 1 & $-0.021369\ [-0.027088, -0.015649]$ & $0.115641\ [0.115115, 0.116167]$ & $0.115385$ \\
+0.6 & 0.6 & 5 & $-0.002202\ [-0.004551, 0.000146]$ & $0.064173\ [0.063701, 0.064644]$ & $0.063345$ \\
+0.6 & 0.6 & 20 & $0.000766\ [-0.000038, 0.001569]$ & $0.023372\ [0.023223, 0.023522]$ & $0.021631$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+For the four independent cells at $\phi=0.6$, define the interaction
+\begin{equation}
+ \Delta=\{P_{\mathrm{ext}}(0.6,1)-P_{\mathrm{ext}}(0,1)\}
+       -\{P_{\mathrm{ext}}(0.6,20)-P_{\mathrm{ext}}(0,20)\},
+ \label{num-interaction}
+\end{equation}
+where $P_{\mathrm{ext}}(\sigma,s)$ is extinction probability at the declared
+horizon. Positive $\Delta$ indicates a smaller noise-associated extinction
+increment at the longer stay. Corrected counts in that equation are
+$194/200$, $68/200$, $86/200$, and $47/200$, respectively. They give
+$\Delta=0.435$ (95\% normal interval $[0.320852,0.549148]$).
+Independent beta-posterior draws with one-half added to both binomial
+counts give a sensitivity interval $[0.31869,0.54693]$. This is a posterior
+sensitivity calculation, not another frequentist confidence interval.
+The analogous early-growth loss interaction is $0.036582$ per step
+($[0.0308415,0.0423226]$). The corrected calendar-time planning estimate
+is 29 populations per cell, but it does not set the primary design.
+
+The full independent rerun completed 18 of 18 cells with 400 populations
+per cell, or 7,200 trajectories. Its interaction was $0.425$
+($[0.346760,0.503240]$). All 18 of 18 extinction estimates fell inside
+the corrected pilot's score intervals. This rerun and the separate audit
+below used independent seeds and must not be treated as the same sample.
+Thresholds used 32 independent antithetic pairs per cell, with 32,768
+recorded steps and 2,048 burn-in steps. All 18 of 18 corrected-pilot
+threshold estimates matched the original values because integer
+initialization does not enter that calculation. Their intervals describe
+sampling across pairs and exclude systematic finite-time error.
+
+\subsubsection{Matching generations and planning replication}
+\label{num-esm-matched}
+% Sources: verification/vworld-check/vworld-check.md; virtualworld/matched-generations-fix1.md;
+% fix1-report.md and protocol.md dated completion addendum.
+
+At 500 steps, stays one and 20 represent approximately 166.7 and 22.7
+reference generations. Subtracting constant-host extinction removes the
+constant-host truncation difference, but leaves unequal exposure to noisy
+generations. We define reference generation time as $T_{\mathrm{gen}}=2+s$
+steps and compare at a declared number $G$ of those generations.
+This is not the realized lineage-generation count under noise.
+
+With 400 populations per cell, the independent audit gave an interaction
+of $0.4075$ at 500 steps (95\% interval $[0.3291,0.4859]$).
+Its matched-generation estimates ranged from $0.220$ to $0.298$, with
+five of five pointwise intervals above zero (Table~\ref{num-audit-matched}).
+The approximately 22.7-generation row is a slice of the calendar-time run.
+The remaining horizons share trajectories from a fresh run, so estimates
+at different horizons are correlated.
+
+\begin{table}[htbp]
+\centering
+\caption{Independent audit at matched reference generations, with 400 populations
+per cell in the four-cell comparison. Intervals are pointwise 95\% normal intervals.}
+\label{num-audit-matched}
+\begin{tabular}{rrrl}
+\toprule
+$G$ & Steps, $s=1$ & Steps, $s=20$ & Interaction [interval] \\
+\midrule
+$\simeq22.7$ & 68 & 500 & $0.238\ [0.151,0.324]$ \\
+23 & 69 & 506 & $0.220\ [0.131,0.309]$ \\
+50 & 150 & 1100 & $0.288\ [0.198,0.377]$ \\
+100 & 300 & 2200 & $0.298\ [0.213,0.382]$ \\
+167 & 501 & 3674 & $0.243\ [0.160,0.325]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The same audit examined $\ln R_0=0.2$ in four fresh cells with 400
+populations each. At 500 calendar steps, extinction counts were $6/400$
+and $223/400$ for constant and noisy hosts at stay one, and $5/400$ and
+$25/400$ at stay 20. The interaction was $0.4925$
+($[0.4360,0.5490]$). Both stays had positive long-run invasion growth
+under this setting. This comparison establishes dependence on the
+reproduction regime, without mapping a full response curve or establishing
+a monotone relation with $R_0$.
+
+The subsequent corrected matched-generation run used 400 populations per
+cell, or 1,600 trajectories, followed through $G=100$.
+The single confirmatory horizon $G=50$ was registered before running.
+The other horizons describe the time course with pointwise intervals
+(Table~\ref{num-planning}). For independent cells and equal allocation,
+the registered normal approximation was
+\begin{equation}
+ n_{80}=\left\lceil
+ \frac{(z_{0.975}+z_{0.80})^2\sum_{i=1}^{4}p_i(1-p_i)}{\Delta^2}
+ \right\rceil,
+ \label{num-power}
+\end{equation}
+where $p_i$ is the extinction probability in cell $i$, $z_q$ is the
+standard normal quantile of probability $q$, and the target is 80\% power
+at two-sided significance level $0.05$.
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected matched-generation run and model-conditional planning.
+All four cells contain 400 populations. The final column is the 10th--90th
+percentile range from beta-parameter sensitivity, not an interval for achieved power.}
+\label{num-planning}
+\begin{tabular}{rllrr}
+\toprule
+$G$ & Step horizons & Interaction [95\% interval] & $n_{80}$/cell & Range/cell \\
+\midrule
+23 & 69 / 506 & $0.3325\ [0.2446,0.4204]$ & 58 & 41--85 \\
+50 & 150 / 1100 & $0.3275\ [0.2383,0.4167]$ & 61 & 44--91 \\
+100 & 300 / 2200 & $0.3425\ [0.2571,0.4279]$ & 51 & 38--73 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The maximum estimate is 61 populations in each of four cells, or 244
+populations. It concerns marginal power at each horizon under these
+estimated probabilities. It does not establish joint power, familywise
+error control, or the sample size of a biological experiment. Observation
+error, biological blocks, and calibration uncertainty remain to be included.
+The beta-parameter calculation used 100,000 interaction draws and 10,000
+draws for planning sensitivity. All three of three interaction sensitivity
+intervals excluded zero.
+
+The first matched-run report incorrectly treated a right-censoring sentinel
+at step 301 as an extinction by the secondary endpoint of 500 steps.
+Its secondary row was withdrawn. The three of three primary matched-horizon
+rows remained valid. The affected seeded paths were subsequently completed
+through 500 steps after a horizon guard and regression check were added.
+Earlier host values and population totals matched exactly. The replacement
+secondary interaction was $0.4875$ ($[0.4073,0.5677]$), with a conditional
+planning estimate of 23 per cell. It is not used for primary planning,
+and the replay adds no independent replicates.
+
+\subsubsection{Observed host trajectories and departures}
+\label{num-esm-host-series}
+% Sources: virtualworld/q4/report.md and final audit; verification/q4-check/q4-check.md.
+
+The host-series campaign selected 120 of 1,331 eligible compilation records
+and included 71 valid \textit{Tribolium} stage records. These comprise 191
+record labels but 183 distinct abundance sequences, because eight control
+records are shared between experiments. Of the 191 labels, 127 contain
+only positive observations and 64 contain zeros. One adult record was
+excluded after input validation detected an impossible negative count.
+Zeros in valid records were retained without pseudocounts or interpolation.
+
+Each record was normalized by its arithmetic mean and replayed circularly.
+One model step equals one observation interval, with annual and subannual
+records kept in separate sampling strata. Stage means were $(2,s)$ or
+$(2,2,s)$, with $s=1,5,20$. Thus 191 records produced 1,146 cells.
+The threshold is calculated from the dominant eigenvalue of the matrix
+product over the repeated record. It is independent of starting phase.
+This construction does not estimate the long-run law of the natural
+process that produced a finite record. Biological timescales are not
+inferred from its observation interval.
+
+The independent implementation reproduced 204 of 204 cells in a stratified
+subsample and 1,146 of 1,146 cells in the full audit. Maximum absolute
+threshold disagreement was $8.01\times10^{-13}$, below the registered
+absolute criterion $10^{-4}$ (an alternative criterion allowed relative
+error below 1\%). All 144 of 144 audited branching-probability endpoints
+also agreed, with maximum error $1.68\times10^{-14}$.
+
+We compared $D$ with a second-order prediction based on first-order
+autoregressive memory and with one using all circular log autocovariances.
+The tolerance was the larger of $0.01$ and 20\% of the absolute predicted
+value. Among 762 finite-log cells, 224 of
+762 departed from the autoregressive prediction and 211 of 762 from the
+full-covariance prediction. The other 384 of 1,146 cells contain zeros
+and have no finite log variance. They cannot count as agreement with a
+log-host expansion.
+
+Longer stays reduced $D$ in 709 of 764 adjacent comparisons, with 55 of
+764 reversals and zero of 764 flat comparisons. For two stages, decreases
+occurred in 158 of 191 comparisons from stay one to five and 172 of 191
+from five to 20. For three stages, the respective counts were 188 of 191
+and 191 of 191. All 55 of 55 reversals disappeared in each of eight
+random permutations of the corresponding host record. Permutation retains
+the abundance distribution while changing temporal order.
+
+The independent primary ledger contains 271 departures
+(Table~\ref{num-departures}). It separates a need to extend the assumptions
+from a departure whose cause remains unresolved. All four of four
+positive-record reversals have the direction predicted by the existing
+spectral response. Lengthening a stay can remove a fluctuation benefit
+associated with host timing, raising a negative $D$ toward zero.
+The 51 zero-containing reversals are in larval records, including seven
+shared-control comparisons, leaving 44 distinct-sequence reversals.
+
+\begin{table}[htbp]
+\centering
+\caption{Primary scientific departure ledger. Category counts use the full
+ledger of 271 departures as denominator, rather than independent biological replicates.}
+\label{num-departures}
+\begin{tabular}{p{0.57\linewidth}rl}
+\toprule
+Departure class & Count & Classification \\
+\midrule
+Positive-record stay reversal & 4/271 & Existing results \\
+Zero-containing stay reversal & 51/271 & A13 extension \\
+Full-covariance discrepancy, phase-insensitive & 21/271 & Existing results \\
+Full-covariance discrepancy, phase-sensitive & 190/271 & Existing results \\
+Fluctuating-versus-constant treatment discrepancy & 5/271 & Existing results \\
+\midrule
+Explained by existing results & 220/271 & \\
+Requiring the hosts-with-zeros extension & 51/271 & \\
+Unresolved & 0/271 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The initial report left 94 of 211 full-covariance departures unresolved
+after a one-sided amplitude reduction to $0.1$. The independent check
+used symmetric amplitude reductions to cancel odd-order contributions.
+All 211 of 211 passed at symmetric amplitude $0.01$, and all 211 of 211
+passed the one-sided check at $0.001$ under the 5\% diagnostic tolerance.
+The remaining difference at the original amplitude is therefore compatible
+with the limits of a second-order approximation. Phase randomization
+showed sensitivity beyond covariance in 190 of 211 cells, but it does not
+uniquely separate marginal shape from higher-order temporal dependence.
+
+For fluctuating-versus-constant flour treatments, both predictors gave the
+correct direction in 36 of 36 evaluable adult contrasts. Magnitude agreement
+held in 31 of 36, with five of 36 departures explained by finite amplitude
+and effects beyond covariance. Another 36 of 72 total contrasts involved
+zero-containing larval series and were inapplicable to log-based predictions.
+Six of 36 evaluable contrasts used two fluctuating cultures against three
+controls after the invalid-record exclusion. Restricting to complete-source
+contrasts gives 25 of 30 agreements and five of 30 departures.
+
+The original departure file contains 501 overlapping entries. In addition
+to the 271 primary entries, it includes 224 autoregressive prediction
+departures, five duplicate treatment departures under that predictor, and
+one demographic validation discrepancy. That last comparison remains a
+registered failure: one of 64 simulated populations survived where the
+predicted probability was $0.000112655781$. An exact calculation gave
+probability $0.00718451$ of at least one survivor. This traces the
+discrepancy to a discrete rare-event diagnostic without changing the
+original 479-of-480 pass count. Integer simulation had also stalled on
+large populations. Its incomplete paths were not classified, and an
+amended, separately validated generating-function calculation completed
+persistence outcomes under the same branching law. No tolerance was relaxed.
+
+\subsubsection{Hosts with zeros}
+\label{num-esm-zeros}
+% Source: a13/report.md overrides the conjectural status and asymptotic commentary
+% in verification/q4-check/q4-check.md. The supplied report records completed review.
+
+The A13 extension replaces strictly positive log-host forcing with
+nonnegative host abundance. Its raw-host covariance expansion uses
+abundance covariances directly, which remain defined when hosts are absent.
+In the two-stage ring with one fluctuating transfer, for a stationary
+ergodic process $h_t\geq0$ with $\mathbb{E}h_t=1$ and
+$\mathbb{E}h_t^4<\infty$, exposed geometric mean $a>1$, and steady
+geometric mean $s\geq1$, the report proves a unique finite threshold and
+\begin{equation}
+ D=\frac{A}{s}+O(s^{-2}),\qquad
+ A=\frac{\operatorname{Var}(h_t)}{2}
+   +\sum_{\ell\geq1}(1-1/a)^{\ell-1}
+      \operatorname{Cov}(h_t,h_{t-\ell}).
+ \label{num-zero-expansion}
+\end{equation}
+Here $A$ is the leading coefficient and $\ell$ is the time lag. A negative
+$A$ gives eventual approach to zero from below and increasing $D$ at every
+fixed multiplicative increase in sufficiently long stay. A positive $A$
+gives the opposite ordering. Eventual derivative signs are proved for
+bounded hosts. Their extension to all unbounded fourth-moment laws remains
+open, and $A=0$ requires higher-order terms. These statements do not imply
+monotonicity over every finite stay.
+
+For stationary ergodic mean-one hosts, the same report proves the outage
+upper bound for a fixed-staying ring
+with one fluctuating transfer, at least one positive staying probability,
+outage probability strictly between zero and one, and a finite positive
+conditional geometric mean of host abundance on nonzero steps. It also
+confirms the alternating-outage formula and the independence result allowing
+host zeros. The bound does not generally tend to zero as one stay grows.
+Its limit is $-\ln[(1-q_0)G_+]$, where $q_0$ is outage probability and
+$G_+$ is the conditional positive-step geometric mean. The limit is zero
+for pure binary outages.
+
+Independent review is complete. Separate code and direct labelled-path
+enumeration passed 125 of 125 principal cases, and the review accepts the
+stated proofs while retaining the general derivative-sign gap. The report
+does not recount the 51 empirical reversals or extend the bound to several
+varying transfers. Thus the ledger's extension category is supported by
+subsequent theory within explicit conditions, rather than by a claim that
+every real host sequence must benefit from longer residence.
+
+\subsubsection{Design of a biological test}
+\label{num-esm-experiment}
+% Source: notes/decisive-experiment-v2.md, especially sections 6--10 and Refereed.
+
+A biological test requires independently measured stage residence and
+survival distributions, encounter and disappearance hazards, offspring
+production, initial composition, and observation weights. Constant-host
+growth alone does not identify $R_0$ without the generation kernel.
+Likewise, held-density growth measures a composite response and cannot
+identify waiting versus wasted transmission without direct encounter
+measurements. Manipulating density must not silently remove parasites
+with hosts. If removal occurs, it belongs in the model and in controls
+that receive the same handling.
+
+The reviewed design contains five kinds of arm. A constant-mean-density
+control establishes the reference. Held densities at 0.2 and 1.8 times
+the mean measure growth responses alongside direct infection and loss
+assays. A fast square wave with nominal period one-quarter of a generation
+helps assess averaged encounter effects. A period sweep around the
+measured generation kernel examines timing and regularity of residence.
+Finally, random telegraph forcing (switching between two density levels
+after random dwell times) examines a fading-memory environment. The
+proposed nominal duration was 60 days, with counts at days 30 and 60.
+These times are illustrative, pending a feasible biological system.
+
+Telegraph schedules should be implemented in complete independent mirrored
+pairs, using the same switching times with high and low phases exchanged.
+Exposure is balanced over these blocks, not assumed equal in each random
+path. Square-wave comparisons require prespecified phase blocks. Actual
+density levels, transition ramps, and integrated exposures must be recorded.
+Schedules with few realized switches should not be discarded after running,
+because conditioning on switching changes the environmental law.
+The period response must propagate uncertainty in the measured residence
+kernels. Absence of a nominal resonance reversal is not a general rejection
+of the theory or of regular stays.
+
+The earlier design's recommendation of one to six replicates was withdrawn
+after review. It counted measurement error alone and was not a power
+calculation. The 51--61 per-cell estimates above instead concern a
+particular simulated four-cell extinction interaction. They do not supply
+replication for all five kinds of experimental arm. A usable design needs
+biological and observation variation, zeros and extinction, calibration
+uncertainty, complete independent blocks, and prespecified competing
+mechanisms. Mean-log count contrasts, arithmetic mean counts, threshold
+losses, and extinction probabilities must remain separate outcomes.
+
+% Sources: notes/decisive-experiment-v2.md section 9; casestudies/leads/leads.md.
+Candidate systems in the source review include \textit{Paramecium caudatum}
+with \textit{Holospora undulata}, \textit{Pseudomonas fluorescens} SBW25
+with phage $\Phi2$, and \textit{Daphnia} with \textit{Ordospora}.
+The ciliate system has a described transmission stage and scheduled
+culling and between-patch migration, but the review does not supply
+spore survival or encounter efficiency. Phage systems permit controlled host supply, while
+manipulation-associated phage losses and evolving resistance remain
+unresolved for this design. The available water-flea experiments varied
+temperature rather than host supply at a fixed mean. These are candidate
+systems identified from literature cards and inventories, not established
+experimental implementations
+\citep{duncan2013,harrison2013,krichel2023}.
+
+The later archive check identifies fixed-mean resource treatments in
+\textit{Tribolium castaneum}. Constant 20\,g flour was compared with
+alternating 32/8\,g, 28/12\,g, or 32/32/8/8\,g schedules in the relevant
+experiments \citep{desharnais2023}. These preserve nominal mean
+flour over complete cycles, not beetle abundance. None of the 11
+archived datasets contains a parasite. They supply host trajectories for
+the simulated world, but cannot test parasite persistence. The additional
+alga--virus archive imposed dilution fluctuations only in virus-free
+cultures, and the pond spore study supplies physical-settling calibration
+without a manipulated fixed-mean host contrast
+\citep{lepennec2024,tadiri2026}.
+
+No system has been selected and no proposed biological experiment has
+been run. The reviewed design remains conditional on a workable density
+manipulation, independent calibration, an observation model, and a
+replication calculation that includes their uncertainty. Completing those
+steps would allow the experiment to distinguish protection from a steady
+stage from changes in mean transmission, parasite removal, or development.

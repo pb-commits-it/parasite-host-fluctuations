@@ -1,0 +1,11 @@
+taxon_group,interval_class,eligible,selected
+birds,annual,662,56
+birds,subannual_seasonal,1,1
+fish,annual,408,35
+fish,subannual_monthly,6,2
+fish,subannual_seasonal,7,2
+freshwater_invertebrates,annual,42,4
+freshwater_invertebrates,subannual_seasonal,2,1
+small_mammals,annual,182,16
+small_mammals,subannual_monthly,4,1
+small_mammals,subannual_seasonal,17,2

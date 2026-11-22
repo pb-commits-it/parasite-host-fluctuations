@@ -1,0 +1,10 @@
+system,parameter,value,unit,basis
+S1,tau_out,0.35,day,illustrative inherited assumption; no adsorption calibration located
+S1,tau_in,0.03,day,illustrative inherited assumption; no lysis assay located
+S2,tau_out,2,day,illustrative; free infective-form survival is not measured here
+S2,tau_in,7,day,approximate latency from Duncan 2013; not entire infected lifespan
+S3,filtering_gamma,0.00453,per model host per day; source model units,"Dallas2017.Rmd parameter listing; literature input, not fitted here"
+S3,per_spore_infectivity_u,0.003,probability per contact,Dallas2017.Rmd parameter listing; illustrative/literature model input
+S3,gamma_times_u,1.359e-05,source model composite transmission coefficient,product of source constants; not estimated from outbreak outcomes
+S3,spore_death,0.75,per day,Dallas2017.Rmd model input; differs from S4 dye assay
+S3,spore_yield,10000,per infected host,Dallas2017.Rmd model input; not measured in expData.csv

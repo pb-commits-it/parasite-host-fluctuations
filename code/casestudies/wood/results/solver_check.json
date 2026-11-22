@@ -1,0 +1,1 @@
+{"timestamp":"2026-11-15 00:01:32 CST","nll_agreement":0.0,"hessian_directional_relative_error":7.131717836325724e-11,"schur_solve_residual":3.3306690738754696e-16,"inner_gradient":6.394884621840902e-14,"pass":true,"count_sum":17259,"nhost_taxon_counts":{"1":20,"2":21,"3":44},"family_count":33,"resolved_taxa":49,"missing_terminal_codes":7}

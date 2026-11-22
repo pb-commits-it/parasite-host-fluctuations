@@ -1,0 +1,329 @@
+verify_mechanism_linked_hosts.py   started 2026-11-14 17:20:01
+numpy 2.3.3, python 3.13.5
+tolerances: TOL_ALG 1e-08, TOL_LIMIT 1e-06, TOL_FLOQ 1e-05, quoted numbers 0.6 of the last digit, simulation 4 SE (+ 5% at small noise), covariances 4 SE + 0.002
+
+====================================================================================================
+T. The tools, against known answers, before they are used
+====================================================================================================
+  PASS  T1: general coefficient, sum over lags against the closed Kronecker form, 200 random dense matrices (2 to 5 stages, 1 to 3 perturbed parts, autoregressions of dimension 1 to 4; 122 with real and 78 with complex eigenvalues): largest relative difference of any term 3.9e-15 (criterion 1e-9)
+  PASS  T2: general coefficient on rings, double precision against 40-digit arithmetic with the Perron vectors obtained differently, 60 random rings: largest relative difference of any term 4.7e-14 (criterion 1e-9)
+  PASS  T3: general coefficient against the exact loss in a periodic environment at small amplitude (two sinusoidal hosts a quarter period apart, random loadings; 30 random dense matrices and 30 random rings, 1 to 3 fluctuating parts; mean of the losses at plus and minus the amplitude): largest relative difference 8.6e-06 (in that case amplitudes half as large give 5.4e-07: what is left is the next order in the amplitude, not a difference in the coefficient). This fixes the direction of the lag and the conversion from growth per step to loss
+  PASS  T4: the loss does not depend on which transfer of the ring carries e^y: 40 random rings in random periodic environments of large amplitude, largest difference 1.8e-14
+  PASS  T5: simulator 1 against the one-stage loss by quadrature (which does not depend on memory; 1,024 pairs x 40,000 steps): sigma 1.0 stay 3 memory 0.7: 0.188441 (SE 0.000111) against 0.188554; sigma 0.3 stay 3 memory 0.7: 0.015237 (SE 0.000011) against 0.015219; sigma 1.0 stay 8 memory -0.5: 0.083672 (SE 0.000114) against 0.083806
+  PASS  T6: one host on one transfer (the project's known formula (1 + 2 theta)/(2T) - R/(1 - R)): stays (5.0, 2.0) memory 0.5: general coefficient 0.1554621849, known closed form 0.1554621849, simulated D/sigma^2 0.15524 (SE 0.00023); stays (5.0, 20.0, 3.0) memory 0.9: general coefficient 0.1633262646, known closed form 0.1633262646, simulated D/sigma^2 0.16430 (SE 0.00057)
+  PASS  T7: ring without staying, stays (1,1,1), two linked hosts, sigma = 1: growth per step at y = 1 (the sum of sigma^2/2) started from one cohort: simulator 1 -3.44e-17 (antithetic pairs cancel exactly), simulator 2 3.38e-04 (SE 3.9e-04). Started in every stage simulator 1 gives 0.00174 (SE 0.00017): the bias of a population of cohorts that never mix, which is why such a ring is started from one cohort
+  [section time 9.4 s]
+
+====================================================================================================
+V. The host models: stationary, with a valid (positive semidefinite) covariance at all lags
+====================================================================================================
+  PASS  V1: 29 autoregressions (the six named models, the 20 rotations of the note's wider family, three one-host series): largest modulus of an eigenvalue of M 0.9800 (< 1: stationary); smallest eigenvalue of the innovation covariance G - M G M^T 3.960e-02 (not negative); variances differ from one by at most 2.2e-16; residual of G = M G M^T + S 2.8e-16
+  PASS  V2: the note's closed covariances (2), (3), (4) against M^l G from my own solution of the stationary equation, lags 0 to 60, all two-host models: largest difference 4.5e-15
+  PASS  V3: covariance matrix of 41 consecutive steps of the hosts, built from the lag covariances: smallest eigenvalue over all 29 models 1.012e-02 (not negative)
+  PASS  V4: spectral density matrix (the sum over ALL lags of the note's closed covariances, 720 frequencies) with the cross-covariances multiplied by q, 13 values of q from -1 to 1 including every boundary of the note, all two-host models: smallest eigenvalue 1.010e-02 (not negative; a valid process at every lag). For comparison q = 1.3 on the main predator model gives -2.232: not a valid process, as it should not be
+  PASS  V5: the construction for q (host 1 from one copy of the autoregression; host 2 = q times its partner plus sqrt(1 - q^2) times the same host of an independent copy) has the two marginal covariances unchanged and every cross-covariance multiplied by q: largest difference 6.7e-16
+  PASS  V6: covariance of the predator with the prey l steps earlier is largest at lag 4, value 0.623988180341 (note: lag 4, 0.6239881803); at lag 0 it is -1.6e-17
+  PASS  V7: shared weather (0.25, 0.85, 0.9): correlation at lag zero 0.582920164660 (note 0.5829201647)
+  PASS  V8: covariances measured on the host paths that the simulators actually use (64 paths of 20,000 steps, lags 0 to 25, every entry) against the closed forms, criterion 4 SE + 0.002: predator and prey: largest deviation 2.3 SE; fast rotation: largest deviation 2.0 SE; shared weather: largest deviation 2.3 SE; competitors: largest deviation 0.9 SE; fast competitors: largest deviation 2.6 SE; competitors: largest deviation 3.0 SE; second simulator's generator (predator and prey): 2.5 SE; second simulator's generator (fast competitors): 2.7 SE
+  [section time 11.0 s]
+
+====================================================================================================
+A. The note's closed forms against the general coefficient (tolerance 1e-8 relative, fixed beforehand)
+====================================================================================================
+  PASS  A1: (7), the sum over modes: 300 random parameter sets x both orders of the hosts (rings of 2 to 5 stages, stays 1 to 60 with some exactly 1, the two fluctuating transfers anywhere; autoregressions of dimension 2 and 3, 150 with real and 150 with complex eigenvalues; relative sizes of either sign in 180): largest relative difference 9.6e-13 (plain relative difference, without allowance for cancelling terms, 9.6e-13); largest imaginary part of the formula's sum 7.1e-16 of its terms
+  PASS  A1b: (7) read for three fluctuating transfers and three linked hosts (the note writes it for two): 100 random sets, largest relative difference 1.2e-13
+  PASS  A2: (6), the sum over lags with the renewal sequence u from (5) (computed here by polynomial division, 6000 lags): 100 random sets, largest relative difference 9.8e-14; and the identity of the proof, w^T B_i A0^(l-1) B_j v = u(l)/T, lags 1 to 80: largest difference 3.8e-13
+  PASS  A3: (8): K = K1 + K2 + X with K1 and K2 the coefficients of each host fluctuating alone (the other transfer steady), 100 random sets: largest relative difference 3.1e-16; with the cross-covariances multiplied by a random q (through the two-copy construction, an autoregression of dimension 4) K = K1 + K2 + qX: 1.2e-14; at the boundaries q = -(K1 + K2)/X and q = -K2/X (and -K1/X) that fall in [-1, 1] (209 of them) the general coefficient equals 0 and K1 (K2): 1.0e-14
+  PASS  A4: (9), the difference between the two orders as a sum over lags of [rho21 - rho12] x [u(1->2) - u(2->1)]: 100 random sets, largest relative difference 2.9e-13. The lag convention that this needs: rho_ij(l) is the covariance of the host of transfer i with the host of transfer j taken l steps EARLIER
+  PASS  A4b: the note's sufficient conditions for no effect of order at second order: cross-covariances the same in both directions (30 random symmetric competitor models on random rings) 2.2e-16; the two directed arcs made of the same stays (30 random cases x 3 layouts, predator and prey) 3.0e-15; independent hosts with different memories (30) 2.6e-15. Equal MEAN arc times are not enough: stays (5, 10, 5), arcs of mean 10 each, predator and prey, order 0 minus order 1 = -0.063572
+  PASS  A5: (10), one host on both transfers of a two-stage ring, K_+ (same sign) and K_- (opposite signs): 240 random (a, b, memory), 160 with memory in [0, 0.98) as the note states and 80 with negative memory, which the note does not cover: largest relative difference 1.5e-14 (K_+), 1.4e-14 (K_-). The formulas also hold for negative memory
+  PASS  A6: (11): the general coefficient K_+ is negative exactly when (a - b)^2 > 2(a + b) and theta > 2ab/((a - b)^2 - 2(a + b)): 2250 random cases with memory in [0, 1), 925 of them gains, no disagreement (so 'only if' in the note can read 'if and only if'); 750 cases with negative memory: 0 gains (none: with negative memory moving together always costs)
+  PASS  A7: what is exactly true in discrete time (found here, not in the note): for relative sizes k1, k2 of either sign, K = (k1 + k2)^2/(2T) + [the manuscript's continuous-time expression evaluated at x_k = tau_k (1 - phi)/phi], 240 random cases: largest relative difference 2.0e-14. The first term is the cost of two transfers moving together within one time step and has no continuous counterpart
+  PASS  A11: consistency with one host on two transfers: the two-host formula (7) with equal memories and correlation +1 (-1) at lag zero equals K_+ (K_-) of (10) and the general coefficient of ONE host moving both transfers together (oppositely): 120 random two-stage rings, largest relative difference 4.3e-14; on rings of 3 to 5 stages against the general coefficient of one host on two transfers: 1.7e-13; and with correlation c between -1 and 1, K = (1 + c)/2 K_+ + (1 - c)/2 K_-: 1.1e-14
+  PASS  A8: (13), the derivative of K with respect to one stay, against a central difference of the general coefficient in 40-digit arithmetic: 120 random sets (the changed stage anywhere in the ring, both orders, sizes of either sign): largest relative difference 1.3e-14
+  PASS  A9: (14), (15), ring (b, a, c) with rotation hosts as b grows: K(b) = K_inf + J/b + ..., with K_inf and J fitted to the general coefficient at b = 1e9, 2e9, 4e9 in 40-digit arithmetic. 100 random (radius, angle, a, c), both orders: largest relative difference of the limit -Im A (order 1: +Im A) 5.6e-16; of J (order 1: the imaginary part reversed) 1.7e-14. Independent hosts with the same two covariance functions (30 cases): limit 0 and 1/b coefficient equal to the real part of (15), largest difference 3.2e-15. (Tolerance for extrapolated limits 1e-6.)
+  PASS  A10: stays (5, 5, p) and (p, 5, 5) have the same second-order coefficient (60 random p, three host models, both orders): largest relative difference 3.4e-13. At finite noise they need not agree; the note says so
+  [section time 4.2 s]
+
+====================================================================================================
+Q. Every quoted number and boundary that needs no random number; one example on each side of each boundary
+====================================================================================================
+  PASS  Q1a: predator and prey, stays (5,50,5), order 1: K1 (the host on transfer 0 alone): mine 0.0283342323711, note 0.02833423237
+  PASS  Q1b: the same: K2 (the host on transfer 1 alone): mine 0.0283342323711, note 0.02833423237
+  PASS  Q1c: the same: X (the two cross terms): mine -0.1514546317362, note -0.15145463174
+  PASS  Q2a: boundary in q above which the second host lowers the loss of one host alone, -K2/X: mine 0.187080659378, note 0.1870806594
+  PASS  Q2b: boundary in q above which the total loss is negative, -(K1+K2)/X: mine 0.374161318757, note 0.3741613188
+  PASS  Q2c: K at q = boundary - 0.15 = 0.2241613187568 (the note prints q = 0.2241613188; a loss): mine 0.0227181947604, note 0.02271819476
+  PASS  Q2d: K at q = boundary + 0.15 = 0.5241613187568 (the note prints q = 0.5241613188; a gain): mine -0.0227181947604, note -0.02271819476
+        (at the q exactly as printed, K = 0.0227181947539 and -0.0227181947670: the same to the ten digits that the printed q carries)
+  PASS  Q2e: sides of the added-host boundary by the general coefficient: K(q) - K1 = +0.02271819 at q = 0.03708065938 and -0.02271819 at q = 0.33708065938; at the two boundaries themselves K = 2.4e-17 and K - K1 = 1.0e-17
+  PASS  Q3a: stays (5,5,5), order 0: added-host boundary -K2/X: mine 0.950169317552, note 0.9501693176
+  PASS  Q3b: the same ring: total-gain boundary -(K1+K2)/X = 1.900339, outside [-1, 1] as the note says (K at q = 1 is +0.144426, a loss); sides of the added-host boundary: K - K1 = +0.008048 at q = 0.90, -0.007994 at q = 1
+  PASS  Q4a: stays (1,10), one host moving both transfers together: memory at which the general coefficient changes sign (a root of my coefficient, not of the note's formula); 20/79 = 0.25316455696203: mine 0.2531645569620, note 0.25316455696
+  PASS  Q4b: the same, memory 0.2 (below: a loss): mine 0.0374331550802, note 0.03743315508
+  PASS  Q4c: the same, memory 0.8 (above: a gain): mine -0.3636363636364, note -0.36363636364
+  PASS  Q4d: equal stays a = b = 4: K_+ = 0.250000000000 at memory 0.3 and 0.250000000000 at 0.9 (the note: 1/a, whatever the memory); opposite signs, stays (1,10): K_- = 0.0e+00 at memory 0 and 0.423077 at memory 0.4 (positive)
+  PASS  Q5a: predator and prey, stays (b,5,5), order 1: zeros of dK/db for b from 1 to 200: 5.8344188772 (note: one, at 5.83441888); dK/db = +0.005614 at b = 4 (a longer stay hurts) and -0.002145 at b = 8 (it helps)
+  PASS  Q5b: the same in order 0: no zero of dK/db for b from 1 to 200 (398 intervals of 0.5); the derivative is negative throughout, between -7.908e-02 and -1.054e-04
+  PASS  Q6a: predator parking, stays (5,5,p), order 0, limit of K as p grows (from the general coefficient at p = 1e9, 2e9, 4e9): mine -0.3736134864903, note -0.37361348649
+  PASS  Q6b: the same from the note's -Im f_5(0.9 e^(i pi/10)): mine -0.3736134864903, note -0.37361348649
+  PASS  Q6c: its independent-host counterpart (same two covariance functions) tends to 2.3e-26: zero, as the note says; at p = 200 it is +0.015405 against -0.352084 linked
+  PASS  Q7a: ring (b,5,5), order 0, radius 0.9, angle pi/10: coefficient J of 1/b, fitted to the general coefficient (positive: a long steady stay eventually helps): mine 4.3983975035761, note 4.39839750358
+  PASS  Q7b: the same at angle pi/2 (negative: it eventually hurts): mine -0.0177676242574, note -0.01776762426
+  PASS  Q7c: angle pi/2: the 1/b coefficient for independent hosts with the same covariance functions (the real part of (15)); positive, so linking the hosts reverses the sign: mine 0.0787901634575, note 0.07879016346
+  PASS  Q7d: angle pi/2: the limit of K as b grows: mine -0.1185458377239, note -0.11854583772
+  PASS  Q7e: angle pi/2: K at b = 20: mine -0.1213147072229, note -0.12131470722
+  PASS  Q7f: angle pi/2: K at b = 50: mine -0.1192721612414, note -0.11927216124
+  PASS  Q7g: angle pi/2: K at b = 200: mine -0.1186609886454, note -0.11866098865
+  PASS  Q8: angle at which J = 0 (radius 0.9, a = 5): zeros of the note's J between 0 and pi: 1.13321275604, 1.96858388892 (note: first boundary 1.13321275604). J fitted to the general coefficient: -1.5e-16 at that angle, +0.025038 at 0.1 below, -0.012983 at 0.1 above. In terms of K itself: K(400) - K(200) = -2.670e-05 at 0.1 below (lengthening helps) and +6.030e-05 at 0.1 above (it hurts)
+        the note's wider family (radius 0.3, 0.6, 0.9, 0.98; angle 0.1 to 0.9 pi; a = 1, 5, 50; both orders; 120 members), by formula (15) as verified in A9: J < 0, a long steady stay eventually hurts at second order, in 14: (radius 0.9, angle 0.5 pi, a = 1, order 0: J = -0.2398) (radius 0.9, angle 0.5 pi, a = 5, order 0: J = -0.0178) (radius 0.9, angle 0.7 pi, a = 1, order 0: J = -0.0236) (radius 0.98, angle 0.1 pi, a = 50, order 1: J = -0.1997) (radius 0.98, angle 0.3 pi, a = 1, order 0: J = -0.0125) (radius 0.98, angle 0.3 pi, a = 5, order 0: J = -0.2240) (radius 0.98, angle 0.3 pi, a = 50, order 0: J = -0.1245) (radius 0.98, angle 0.5 pi, a = 1, order 0: J = -0.3994) (radius 0.98, angle 0.5 pi, a = 5, order 0: J = -0.1164) (radius 0.98, angle 0.5 pi, a = 50, order 0: J = -0.0893) (radius 0.98, angle 0.7 pi, a = 1, order 0: J = -0.0789) (radius 0.98, angle 0.7 pi, a = 5, order 0: J = -0.0438) (radius 0.98, angle 0.7 pi, a = 50, order 0: J = -0.0450) (radius 0.98, angle 0.9 pi, a = 50, order 0: J = -0.0070)
+  PASS  Q9: the 18 coefficients K of the main grid, stays (5,a,5): all agree with the note to its six decimals (largest difference 4.9e-07). Mine: predator a=1 order 0: 0.233952; predator a=1 order 1: 0.591590; predator a=5 order 0: 0.144426; predator a=5 order 1: 0.465254; predator a=50 order 0: 0.208123; predator a=50 order 1: -0.094786; shared a=1 order 0: 0.036594; shared a=1 order 1: 0.328422; shared a=5 order 0: 0.195500; shared a=5 order 1: 0.332100; shared a=50 order 0: 0.091697; shared a=50 order 1: -0.018174; competitors a=1 order 0: 0.768273; competitors a=1 order 1: 0.768273; competitors a=5 order 0: 0.621334; competitors a=5 order 1: 0.621334; competitors a=50 order 0: 0.398834; competitors a=50 order 1: 0.398834
+  PASS  Q9b: competitors (0.55, 0.35, 0): correlation at lag zero -0.6696, yet the cross terms X are positive at every a of the grid, so linking them ADDS to the cost of the two alone, as the note says: a = 1: K1 + K2 = +0.475558, X = +0.292715; a = 5: K1 + K2 = +0.469851, X = +0.151483; a = 50: K1 + K2 = +0.156143, X = +0.242691
+  PASS  Q10a: exact loss with hosts sqrt(2)cos(2 pi t/20) and sqrt(2)sin(2 pi t/20) at amplitude 1, stays (5,50,5), host 1 = the cosine on transfer 0 and host 2 = the sine on transfer 1 (order 0): mine 0.1554433801419, note 0.15544338014
+  PASS  Q10b: the same with the two hosts exchanged (order 1): mine -0.1186521941836, note -0.11865219418
+        (their log penalties sum to 0.897155, so the bound of the note holds for both: 0.155443 and -0.118652)
+  PASS  Q11a: fast competitors: one host, two stages (10,5): mine 0.0358028642608, note 0.03580286426
+  PASS  Q11b: fast competitors: two linked hosts, three stages (5,5,5): mine 0.0208138061285, note 0.02081380613
+  PASS  Q11c: (17): q at which the two rings of generation time 15 have the same coefficient: mine 0.7052452572649, note 0.70524525726
+  PASS  Q11d: same-ring added-host boundary on (5,5,5): mine 0.7046482179408, note 0.70464821794
+  PASS  Q11e: sides of (17) by the general coefficient: new minus old = +0.00765826 at q = 0.55464821794 (the split raises the loss) and -0.01498906 at q = 1 (it lowers it); 1.4e-17 at the boundary
+  PASS  Q12a: competitors (0.15, 0.05, -0.8) on (5,5,5): one fluctuating host: mine 0.0490009164379, note 0.04900091644
+  PASS  Q12b: the same: both hosts: mine 0.0585323849235, note 0.05853238492
+  PASS  Q13a: predator and prey, stays (5,a,5), ORDER 0, a from 1 to 200: zeros of K: 0 (note: none); turning points of K: 3.8366530617, 125.0804853806, where K = 0.1406424413426, 0.2095702423635 (note: a minimum with K = 0.14064244134; the second turning point is a maximum that the note does not mention)
+  DIFFERS FROM THE NOTE  Q13a-location: location of that minimum: mine 3.8366530617 (a zero of dK/da in 40-digit arithmetic), note 3.83665271: they differ by 3.5e-07, in the seventh decimal. At the note's a the derivative is -2.844e-09 by my coefficient and -2.844e-09 by the note's own formula (13); at mine it is 9.4e-20; K(mine) - K(note's a) = -5.00e-16
+        the same ring in ORDER 1 does have a zero: K = 0 at a = 25.62369357 (turning points: 1.840181). The note's 'no coefficient zero' is true of order 0 only and does not say so
+  PASS  Q13b: stays (5,a,45), order 0: turning points of K for a from 1 to 200: 3.0079933755, K there -0.3221231873814 (note: minimum K = -0.32212318738)
+  DIFFERS FROM THE NOTE  Q13b-location: location of that minimum: mine 3.0079933755, note 3.00799334: they differ by 3.5e-08, in the eighth decimal. dK/da at the note's a -1.279e-09, at mine -7.3e-18
+  PASS  Q13c: stays (5,a,45), order 0: zeros of K for a from 1 to 200: 67.9595798159115 (note: 67.95957981591); K(1) = -0.179246
+        the same ring in order 1: zeros of K for a from 1 to 200: none; K falls from +0.4704 to +0.000129 at a = 200 and is zero at a = 201.234250, just outside the range the note scanned. The note does not say which order its (5,a,45) numbers are for; they are order 0
+  PASS  Q13d: stays (5,20,45), order 0: K: mine -0.0746496169533, note -0.07464961695
+  PASS  Q13e: stays (5,40,45), order 0: K: mine -0.0211009113000, note -0.02110091130
+  PASS  Q13f: stays (5,150,45), order 0: K: mine 0.0143404085412, note 0.01434040854
+  [section time 2.6 s]
+
+====================================================================================================
+S. The closed forms against products of the actual random matrices at small noise (criterion 4 SE + 5%)
+====================================================================================================
+  PASS  S1: (7) on four random host models (two with real, two with complex eigenvalues), both orders, sigma = 0.05:
+          stays (2.27, 3.40, 2.28), eigenvalues of M [-0.575  0.772], order 0: formula (7) K = +0.10313, simulated D/sigma^2 = +0.10246 (SE 0.00068)
+          stays (2.27, 3.40, 2.28), eigenvalues of M [-0.575  0.772], order 1: formula (7) K = +0.16842, simulated D/sigma^2 = +0.16783 (SE 0.00066)
+          stays (3.04, 1.64, 2.87), eigenvalues of M [0.773+0.132j 0.773-0.132j], order 0: formula (7) K = +0.66514, simulated D/sigma^2 = +0.66492 (SE 0.00024)
+          stays (3.04, 1.64, 2.87), eigenvalues of M [0.773+0.132j 0.773-0.132j], order 1: formula (7) K = +0.45996, simulated D/sigma^2 = +0.45965 (SE 0.00040)
+          stays (5.96, 6.65, 1.52), eigenvalues of M [-0.381+0.418j -0.381-0.418j], order 0: formula (7) K = -0.06809, simulated D/sigma^2 = -0.06790 (SE 0.00082)
+          stays (5.96, 6.65, 1.52), eigenvalues of M [-0.381+0.418j -0.381-0.418j], order 1: formula (7) K = +0.06173, simulated D/sigma^2 = +0.06195 (SE 0.00072)
+          stays (1.10, 6.64, 8.96), eigenvalues of M [ 0.535 -0.648], order 0: formula (7) K = +0.07158, simulated D/sigma^2 = +0.07128 (SE 0.00068)
+          stays (1.10, 6.64, 8.96), eigenvalues of M [ 0.535 -0.648], order 1: formula (7) K = +0.12153, simulated D/sigma^2 = +0.12119 (SE 0.00066)
+  PASS  S2: (8) on predator and prey, stays (5,50,5), order 1, sigma = 0.05, all on the same host paths: D/sigma^2 of the linked pair -0.09394 (SE 0.00120) against K = -0.09479; of each host alone +0.02876 (SE 0.00052) and +0.02858 (SE 0.00051) against K1 = K2 = +0.02833; linked minus the two alone -0.15129 (SE 0.00025) against X = -0.15145
+  PASS  S3: (9), order 0 minus order 1 on the same paths: +0.30256 (SE 0.00048) against +0.30291
+  PASS  S4: K(q) = K1 + K2 + qX at q = 0.5: simulated -0.01933 (SE 0.00089) against -0.01906
+  PASS  S3b: the same for shared weather (hosts of different memory), stays (5,1,5): order 0 +0.03550 (SE 0.00076) against +0.03659; order 0 minus order 1 -0.29203 (SE 0.00027) against -0.29183
+  PASS  S5: (10), one host on both transfers, sigma = 0.05 (the first two are the two sides of the boundary 0.2532 of stays (1,10)): stays (1,10), memory 0.2, together: formula +0.03743, simulated +0.03796 (SE 0.00055); stays (1,10), memory 0.8, together: formula -0.36364, simulated -0.36199 (SE 0.00151); stays (3,7), memory 0.6, opposite: formula +0.41667, simulated +0.41646 (SE 0.00027); stays (1,10), memory 0.5, opposite: formula +0.52381, simulated +0.52375 (SE 0.00023)
+  PASS  S6: long stays. Fast rotation (angle pi/2), stays (200,5,5), order 0, sigma = 0.05: -0.12012 (SE 0.00142) against K = -0.11866. The same hosts, loss at b = 200 minus loss at b = 50 at sigma = 0.01, in units of sigma^2: +6.108e-04 (SE 4.1e-06) against K(200) - K(50) = +6.112e-04 (positive: the longer steady stay hurts, at this noise). Predator and prey, stays (5,5,200), order 0, sigma = 0.05: -0.35291 (SE 0.00230) against -0.35208
+  PASS  S7: (13), both sides of the turning stay 5.834 of (b,5,5), order 1, sigma = 0.05, same paths: lengthening b from 3 to 4.5 changes D/sigma^2 by +0.01075 (SE 0.00002) against +0.01076 (it hurts); from 8 to 12 by -0.01020 (SE 0.00002) against -0.01019 (it helps)
+  PASS  S8: (17), fast competitors, three stages (5,5,5) with two hosts minus two stages (10,5) with one, sigma = 0.05, same paths: at q = 0.4 +0.01558 (SE 0.00023) against +0.01552 (the split raises the loss); at q = 1 -0.01489 (SE 0.00026) against -0.01499 (it lowers it)
+  PASS  S9: both sides of the zero of K at a = 67.96, stays (5,a,45), order 0, sigma = 0.05: a = 40 gives -0.02157 (SE 0.00085) against -0.02110 (a gain); a = 150 gives +0.01382 (SE 0.00080) against +0.01434 (a loss)
+  [section time 34.7 s]
+
+====================================================================================================
+HEAD. The headline: the order of two linked hosts changes the sign of the loss. Predator and prey, stays (5,50,5)
+====================================================================================================
+  second-order coefficients: order 0 (prey on transfer 0, predator on transfer 1, 50 steps later on average) K = +0.208123;
+  order 1 (predator on transfer 0, prey on transfer 1) K = -0.094786.  Bound of the note: D <= sigma^2.
+  (if the lag were read the other way, predator before prey, the two values would simply be exchanged: -0.094786 and +0.208123)
+  simulator 1: 256 antithetic pairs x 40,000 steps after 4,000; both orders on the same host paths.
+  simulator 2: 1,000 independent replicates x 20,000 steps after 3,000; other code, other generator, other root finder.
+
+   sigma |  order 0: sim 1          sim 2             sigma^2 K  |  order 1: sim 1          sim 2             sigma^2 K
+    0.05 |  +0.000519 (0.000002)          -            +0.000520  |  -0.000238 (0.000003)          -            -0.000237
+    0.10 |  +0.002075 (0.000007)  +0.002073 (0.000045)  +0.002081  |  -0.000950 (0.000011)  -0.000954 (0.000046)  -0.000948
+    0.30 |  +0.018609 (0.000064)  +0.018666 (0.000140)  +0.018731  |  -0.008294 (0.000098)  -0.008226 (0.000151)  -0.008531
+    0.50 |  +0.051082 (0.000180)          -            +0.052031  |  -0.021994 (0.000273)          -            -0.023697
+    0.70 |  +0.098520 (0.000329)          -            +0.101980  |  -0.039527 (0.000476)          -            -0.046445
+    1.00 |  +0.201030 (0.000802)  +0.200549 (0.000728)  +0.208123  |  -0.059725 (0.001110)  -0.060166 (0.000912)  -0.094786
+    1.20 |  +0.291822 (0.001189)          -            +0.299697  |  -0.060433 (0.001544)          -            -0.136492
+    1.50 |  +0.471500 (0.001738)  +0.472861 (0.001435)  +0.468277  |  -0.026755 (0.002205)  -0.025082 (0.001798)  -0.213269
+    1.75 |  +0.673223 (0.002306)          -            +0.637377  |  +0.053940 (0.002856)          -            -0.290283
+    2.00 |  +0.927776 (0.002932)          -            +0.832492  |  +0.186550 (0.003538)          -            -0.379145
+   (standard errors in brackets)
+
+  PASS  HEAD1: at sigma = 0.05 and 0.1 simulator 1 agrees with sigma^2 K in both orders (4 SE + 5%)
+  PASS  HEAD2: simulator 1 against the note's four numbers (4 combined SE): sigma 0.3 order 0: mine +0.018609 (SE 0.000064), note +0.018583 (SE 0.000139); sigma 0.3 order 1: mine -0.008294 (SE 0.000098), note -0.008295 (SE 0.000196); sigma 1.0 order 0: mine +0.201030 (SE 0.000802), note +0.200752 (SE 0.001606); sigma 1.0 order 1: mine -0.059725 (SE 0.001110), note -0.059370 (SE 0.002068)
+  PASS  HEAD3: the two simulators agree at sigma = 0.1, 0.3, 1.0, 1.5 in both orders: largest difference 0.60 combined SE
+  PASS  HEAD4: simulator 2 against the note's four numbers (4 combined SE): order 0 +0.200549 (SE 0.000728) and order 1 -0.060166 (SE 0.000912) at sigma = 1
+  PASS  HEAD5: order 0 is a loss by more than 4 SE at every sigma tried (0.05, 0.1, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.75, 2). Order 1 is a GAIN by more than 4 SE at sigma = 0.05, 0.1, 0.3, 0.5, 0.7, 1, 1.2, 1.5 (simulator 2 agrees at 0.1, 0.3 and 1.0), so the difference of sign is there from the smallest noise: it is a second-order effect, and it persists to sigma = 1.5. Order 1 is a loss by more than 4 SE at sigma = 1.75, 2; not resolved from zero at: no sigma tried
+  at sigma = 1.5, order 1: simulator 1 -0.026755 (SE 0.002205), simulator 2 -0.025082 (SE 0.001798): still a gain. The gain ends between sigma = 1.5 and 1.75 (simulator 1 only).
+  order 0 minus order 1 on the same paths: sigma 0.05: +0.00076 (SE 0.00000); sigma 0.1: +0.00302 (SE 0.00000); sigma 0.3: +0.02690 (SE 0.00004); sigma 0.5: +0.07308 (SE 0.00011); sigma 0.7: +0.13805 (SE 0.00019); sigma 1: +0.26075 (SE 0.00040); sigma 1.2: +0.35226 (SE 0.00050); sigma 1.5: +0.49826 (SE 0.00070); sigma 1.75: +0.61928 (SE 0.00089); sigma 2: +0.74123 (SE 0.00106)
+  largest gain in order 1 among the sigmas tried: -0.060433 at sigma = 1.2; second-order value there -0.136492
+  [section time 70.0 s]
+
+====================================================================================================
+GRID. The note's main grid, stays (5,a,5): loss at sigma = 0.3 and 1 (128 pairs x 40,000 steps, both orders on the same paths)
+====================================================================================================
+   predator    a=1  order 0 sigma 0.3: mine +0.021700 (SE 0.000090)  note +0.021840 (SE 0.000131)  difference -0.9 SE
+   predator    a=1  order 1 sigma 0.3: mine +0.053398 (SE 0.000048)  note +0.053453 (SE 0.000074)  difference -0.6 SE
+   predator    a=1  order 0 sigma 1.0: mine +0.303591 (SE 0.000797)  note +0.303612 (SE 0.001226)  difference -0.0 SE
+   predator    a=1  order 1 sigma 1.0: mine +0.611950 (SE 0.000445)  note +0.611780 (SE 0.000748)  difference +0.2 SE
+   predator    a=5  order 0 sigma 0.3: mine +0.013709 (SE 0.000112)  note +0.013795 (SE 0.000162)  difference -0.4 SE
+   predator    a=5  order 1 sigma 0.3: mine +0.041771 (SE 0.000062)  note +0.041830 (SE 0.000086)  difference -0.6 SE
+   predator    a=5  order 0 sigma 1.0: mine +0.219543 (SE 0.001067)  note +0.219106 (SE 0.001516)  difference +0.2 SE
+   predator    a=5  order 1 sigma 1.0: mine +0.463644 (SE 0.000704)  note +0.463261 (SE 0.000964)  difference +0.3 SE
+   predator    a=50 order 0 sigma 0.3: mine +0.018632 (SE 0.000104)  note +0.018583 (SE 0.000139)  difference +0.3 SE
+   predator    a=50 order 1 sigma 0.3: mine -0.008231 (SE 0.000152)  note -0.008295 (SE 0.000196)  difference +0.3 SE
+   predator    a=50 order 0 sigma 1.0: mine +0.201432 (SE 0.001128)  note +0.200752 (SE 0.001606)  difference +0.3 SE
+   predator    a=50 order 1 sigma 1.0: mine -0.059032 (SE 0.001485)  note -0.059370 (SE 0.002068)  difference +0.1 SE
+   shared      a=1  order 0 sigma 0.3: mine +0.004051 (SE 0.000068)  note +0.004062 (SE 0.000102)  difference -0.1 SE
+   shared      a=1  order 1 sigma 0.3: mine +0.029870 (SE 0.000057)  note +0.029879 (SE 0.000069)  difference -0.1 SE
+   shared      a=1  order 0 sigma 1.0: mine +0.116712 (SE 0.000675)  note +0.116797 (SE 0.000973)  difference -0.1 SE
+   shared      a=1  order 1 sigma 1.0: mine +0.365662 (SE 0.000577)  note +0.365292 (SE 0.000699)  difference +0.4 SE
+   shared      a=5  order 0 sigma 0.3: mine +0.017971 (SE 0.000058)  note +0.017890 (SE 0.000081)  difference +0.8 SE
+   shared      a=5  order 1 sigma 0.3: mine +0.030126 (SE 0.000047)  note +0.030045 (SE 0.000061)  difference +1.1 SE
+   shared      a=5  order 0 sigma 1.0: mine +0.230425 (SE 0.000575)  note +0.230625 (SE 0.000822)  difference -0.2 SE
+   shared      a=5  order 1 sigma 1.0: mine +0.352418 (SE 0.000506)  note +0.352493 (SE 0.000644)  difference -0.1 SE
+   shared      a=50 order 0 sigma 0.3: mine +0.008398 (SE 0.000088)  note +0.008389 (SE 0.000106)  difference +0.1 SE
+   shared      a=50 order 1 sigma 0.3: mine -0.001401 (SE 0.000102)  note -0.001440 (SE 0.000125)  difference +0.2 SE
+   shared      a=50 order 0 sigma 1.0: mine +0.110448 (SE 0.000875)  note +0.110961 (SE 0.001106)  difference -0.4 SE
+   shared      a=50 order 1 sigma 1.0: mine +0.011203 (SE 0.000989)  note +0.011708 (SE 0.001307)  difference -0.3 SE
+   competitors a=1  order 0 sigma 0.3: mine +0.069196 (SE 0.000015)  note +0.069183 (SE 0.000020)  difference +0.5 SE
+   competitors a=1  order 1 sigma 0.3: mine +0.069186 (SE 0.000015)  note +0.069163 (SE 0.000026)  difference +0.8 SE
+   competitors a=1  order 0 sigma 1.0: mine +0.773613 (SE 0.000149)  note +0.773731 (SE 0.000214)  difference -0.5 SE
+   competitors a=1  order 1 sigma 1.0: mine +0.773655 (SE 0.000161)  note +0.773516 (SE 0.000273)  difference +0.4 SE
+   competitors a=5  order 0 sigma 0.3: mine +0.055969 (SE 0.000022)  note +0.055960 (SE 0.000033)  difference +0.2 SE
+   competitors a=5  order 1 sigma 0.3: mine +0.055963 (SE 0.000021)  note +0.055941 (SE 0.000031)  difference +0.6 SE
+   competitors a=5  order 0 sigma 1.0: mine +0.624166 (SE 0.000252)  note +0.624128 (SE 0.000358)  difference +0.1 SE
+   competitors a=5  order 1 sigma 1.0: mine +0.624083 (SE 0.000255)  note +0.623943 (SE 0.000344)  difference +0.3 SE
+   competitors a=50 order 0 sigma 0.3: mine +0.035885 (SE 0.000048)  note +0.035993 (SE 0.000075)  difference -1.2 SE
+   competitors a=50 order 1 sigma 0.3: mine +0.035899 (SE 0.000050)  note +0.035996 (SE 0.000096)  difference -0.9 SE
+   competitors a=50 order 0 sigma 1.0: mine +0.403348 (SE 0.000639)  note +0.403398 (SE 0.000859)  difference -0.0 SE
+   competitors a=50 order 1 sigma 1.0: mine +0.403128 (SE 0.000628)  note +0.403564 (SE 0.001057)  difference -0.4 SE
+  PASS  GRID1: all 36 simulated losses of the main grid agree with the note's within 4 combined SE: largest difference 1.21; 0 of 36 beyond 2 and 0 beyond 3 (about 1.6 and 0.1 expected by chance)
+  PASS  GRID2: competitors are exchangeable, so the two orders have the same loss at any noise (an exact statement): order 0 minus order 1 on the same paths: a=1 sigma 0.3: +0.000010 (SE 0.000016); a=1 sigma 1.0: -0.000042 (SE 0.000169); a=5 sigma 0.3: +0.000006 (SE 0.000009); a=5 sigma 1.0: +0.000083 (SE 0.000077); a=50 sigma 0.3: -0.000014 (SE 0.000027); a=50 sigma 1.0: +0.000220 (SE 0.000263)
+  [section time 33.8 s]
+
+====================================================================================================
+QB. Both sides of the two boundaries in q; predator and prey, stays (5,50,5), order 1 (256 pairs x 40,000 steps)
+====================================================================================================
+  sigma = 0.3: q = 0.2242: +0.002402 (SE 0.000070); q = 0.5242: -0.001709 (SE 0.000082); q = 0.0371: +0.004943 (SE 0.000065); q = 0.3371: +0.000860 (SE 0.000074); q = 0.6500: -0.003445 (SE 0.000088); q = 0.8000: -0.005522 (SE 0.000095); q = 1.0000: -0.008280 (SE 0.000108); one host alone: +0.002707 (SE 0.000044)
+  sigma = 1.0: q = 0.2242: +0.060802 (SE 0.000795); q = 0.5242: +0.017038 (SE 0.000925); q = 0.0371: +0.086309 (SE 0.000726); q = 0.3371: +0.044738 (SE 0.000842); q = 0.6500: -0.002343 (SE 0.000984); q = 0.8000: -0.026213 (SE 0.001053); q = 1.0000: -0.059292 (SE 0.001109); one host alone: +0.044154 (SE 0.000463)
+  PASS  QB1: against the note (4 combined SE; largest difference 0.49): total-loss boundary q = 0.3742, sigma = 0.3: q - 0.15 gives +0.002402 (SE 0.000070) (note +0.002428, SE 0.000145), q + 0.15 gives -0.001709 (SE 0.000082) (note -0.001632, SE 0.000168); sigma = 1: +0.060802 (SE 0.000795) (note +0.061490) and +0.017038 (SE 0.000925) (note +0.018023); one host alone at sigma = 1 +0.044154 (SE 0.000463) (note +0.044585, SE 0.001025)
+  PASS  QB2: the two sides of the total-loss boundary have opposite signs by more than 4 SE at sigma = 0.3 (a loss below, a gain above). At sigma = 1 both are losses, as the note says: the gain needs q above a value between 0.52 (D = +0.0170, SE 0.0009) and 0.65 (D = -0.0023, SE 0.0010)
+  stays (5,5,5), order 0, full linkage: second-order benefit of the second host K2 + X = -0.007994 per sigma^2. Two hosts minus host 1 alone, same paths: sigma 0.1: -0.000071 (SE 0.000006); sigma 0.3: -0.000084 (SE 0.000045); sigma 1.0: +0.046888 (SE 0.000449). The note says this small benefit 'can disappear at finite noise'
+  PASS  QB3: added-host boundary q = 0.1871, two hosts minus one host alone on the same paths, sigma = 0.3: at q - 0.15 +0.002237 (SE 0.000048) (note +0.002206, SE 0.000108), at q + 0.15 -0.001847 (SE 0.000052) (note -0.001820, SE 0.000115). At sigma = 1: +0.042155 (SE 0.000521) and +0.000584 (SE 0.000582) (the note calls the second unresolved)
+  [section time 25.5 s]
+
+====================================================================================================
+CH. One host on both transfers of a two-stage ring (256 pairs x 40,000 steps)
+====================================================================================================
+  PASS  CH1: stays (1,10), sigma = 1: memory 0.2, together: K = +0.037433; D at sigma = 1 mine +0.127067 (SE 0.000438), note +0.126540 (SE 0.000836); memory 0.8, together: K = -0.363636; D at sigma = 1 mine -0.167348 (SE 0.001099), note -0.166741 (SE 0.002028); memory 0, opposite: K = +0.000000; D at sigma = 1 mine +0.116244 (SE 0.000449), note +0.116266 (SE 0.000945). So in discrete time one host moving two unequal stages together is a loss at memory 0.2 and a gain at memory 0.8, at sigma = 1 as at second order
+  PASS  CH2: two hosts without memory and with correlation -1 (the two-host model at its limit) on stays (1,10), sigma = 1: +0.116515 (SE 0.000425); the note's one-host value with opposite signs is +0.116266 (SE 0.000945)
+  PASS  CH3: (12), equal stays a = b = 4, one host on both transfers: the loss solves E log(s + (1 - s) e^(D/2) h) = 0 whatever the memory: sigma 1.0 memory 0: simulated +0.298245 (SE 0.000273), (12) gives +0.298359; sigma 1.0 memory 0.8: simulated +0.299096 (SE 0.000676), (12) gives +0.298359; sigma 0.3 memory 0.8: simulated +0.022910 (SE 0.000062), (12) gives +0.022966. Exact in 60 random periodic environments of large amplitude (the time average in place of E): largest difference 3.2e-15
+  [section time 12.2 s]
+
+====================================================================================================
+G15. Fixed generation time 15: one host on two stages (10,5) against two linked hosts on three stages (5,5,5); fast competitors
+====================================================================================================
+  sigma = 0.3: old ring +0.003350 (SE 0.000017); new ring, linked +0.002350 (SE 0.000033); new minus old -0.001000 (SE 0.000020); new ring at q = 0.5546 +0.004275 (SE 0.000030); new ring, host 2 held steady +0.003358 (SE 0.000017); linked minus host 2 steady -0.001008 (SE 0.000020)
+  sigma = 0.5: old ring +0.009890 (SE 0.000051); new ring, linked +0.008780 (SE 0.000104); new minus old -0.001110 (SE 0.000062); new ring at q = 0.5546 +0.013406 (SE 0.000083); new ring, host 2 held steady +0.009935 (SE 0.000052); linked minus host 2 steady -0.001155 (SE 0.000061)
+  sigma = 0.7: old ring +0.021314 (SE 0.000098); new ring, linked +0.023879 (SE 0.000196); new minus old +0.002565 (SE 0.000116); new ring at q = 0.5546 +0.031503 (SE 0.000169); new ring, host 2 held steady +0.021464 (SE 0.000099); linked minus host 2 steady +0.002415 (SE 0.000114)
+  sigma = 1.0: old ring +0.051545 (SE 0.000190); new ring, linked +0.074443 (SE 0.000358); new minus old +0.022898 (SE 0.000207); new ring at q = 0.5546 +0.086355 (SE 0.000303); new ring, host 2 held steady +0.052232 (SE 0.000193); linked minus host 2 steady +0.022210 (SE 0.000202)
+  independent repeat of new minus old: sigma 0.3: -0.001002 (SE 0.000024); my two runs pooled -0.001001 (SE 0.000016), -1.9 combined SE from the note; sigma 1.0: +0.022552 (SE 0.000207); my two runs pooled +0.022725 (SE 0.000146), -2.5 combined SE from the note
+  second simulator (2,000 independent replicates x 20,000 steps, hosts from their two modes), sigma = 0.3: old ring +0.003329 (SE 0.000050); new ring +0.002341 (SE 0.000036); new minus old -0.000988 (SE 0.000051); differences from simulator 1: -0.4, -0.2, +0.2 combined SE
+  second simulator (2,000 independent replicates x 20,000 steps, hosts from their two modes), sigma = 1.0: old ring +0.051793 (SE 0.000195); new ring +0.074767 (SE 0.000215); new minus old +0.022973 (SE 0.000204); differences from simulator 1: +0.9, +0.8, +0.3 combined SE
+  new minus old at sigma = 0.3, my three independent estimates pooled: -0.001000 (SE 0.000015); note -0.000915 (SE 0.000042); difference -1.9 combined SE, that is -2.0 of the note's own standard errors
+  new minus old at sigma = 1.0, my three independent estimates pooled: +0.022810 (SE 0.000119); note +0.023835 (SE 0.000414); difference -2.4 combined SE, that is -2.5 of the note's own standard errors
+  PASS  G15d: the second simulator agrees with the first on both rings and on their difference at sigma = 0.3 and 1 (4 combined SE), and shows the same reversal of sign
+  PASS  G15a: the note's nine numbers (old and new ring and their paired difference at sigma = 0.3 and 1; q = 0.5546 at 0.3; host 2 steady at 0.3 and 1) against mine, 4 combined SE: largest difference 2.53
+  PASS  G15b: the split with a linked host lowers the loss at sigma = 0.3 (new minus old -0.001000 (SE 0.000020)) and raises it at sigma = 1 (+0.022898 (SE 0.000207)): the reversal is reproduced. At q = 0.5546, below the boundary (17), it raises the loss already at sigma = 0.3 (+0.000925 (SE 0.000022)). The sign changes between sigma = 0.5 (-0.001110, SE 0.000062) and 0.7 (+0.002565, SE 0.000116)
+  PASS  G15c: same ring, two linked hosts against one (host 2 held steady): -0.001008 (SE 0.000020) at sigma = 0.3 (the pair beats one host) and +0.022210 (SE 0.000202) at sigma = 1 (it does not)
+  [section time 82.0 s]
+
+====================================================================================================
+LAG. Lag cancellation, stays (5,a,45), predator and prey, order 0: the table, and the stay at which the loss is zero at sigma = 1
+====================================================================================================
+   a = 20.0000  sigma 0.3: K = -0.07464962  mine -0.006345 (SE 0.000098)  note -0.006376 (SE 0.000220)  difference +0.1 SE
+   a = 40.0000  sigma 0.3: K = -0.02110091  mine -0.001631 (SE 0.000091)  note -0.001664 (SE 0.000205)  difference +0.1 SE
+   a = 67.9596  sigma 0.3: K = -0.00000000  mine +0.000201 (SE 0.000089)  note +0.000165 (SE 0.000199)  difference +0.2 SE
+   a = 150.0000 sigma 0.3: K = +0.01434041  mine +0.001403 (SE 0.000086)  note +0.001364 (SE 0.000194)  difference +0.2 SE
+   a = 20.0000  sigma 1.0: K = -0.07464962  mine -0.035489 (SE 0.000980)  note -0.034732 (SE 0.002308)  difference -0.3 SE
+   a = 40.0000  sigma 1.0: K = -0.02110091  mine +0.005109 (SE 0.000938)  note +0.005803 (SE 0.002215)  difference -0.3 SE
+   a = 67.9596  sigma 1.0: K = -0.00000000  mine +0.018208 (SE 0.000928)  note +0.018837 (SE 0.002193)  difference -0.3 SE
+   a = 150.0000 sigma 1.0: K = +0.01434041  mine +0.021972 (SE 0.000934)  note +0.022487 (SE 0.002203)  difference -0.2 SE
+  PASS  LAG1: the eight losses of the note's table against mine (256 pairs x 40,000 steps after 4000): largest difference 0.30 combined SE
+  PASS  LAG2: at the zero of the coefficient, a = 67.96: the loss at sigma = 0.3 is +0.000201 (SE 0.000089) (not resolved from zero); at sigma = 1 it is +0.018208 (SE 0.000928), positive by 19.6 SE (note: +0.018837, SE 0.002193, and a repeat +0.016833, SE 0.001963). A zero of K is not a zero of the loss at sigma = 1
+   growth per generation at y = 0 and sigma = 1 (positive means the loss D is negative), 256 pairs x 60,000 steps:
+   a = 20: +0.03421 (SE 0.00081); a = 24: +0.02074 (SE 0.00080); a = 28: +0.01106 (SE 0.00079); a = 32: +0.00390 (SE 0.00078); a = 36: -0.00152 (SE 0.00078); a = 40: -0.00570 (SE 0.00078); a = 44: -0.00897 (SE 0.00077); a = 47.57: -0.01131 (SE 0.00077); a = 52: -0.01363 (SE 0.00077)
+  PASS  LAG3: stay a at which the loss is zero at sigma = 1 (growth at y = 0 fitted by a parabola in a at five stays around the crossing, all on the same paths; two independent runs of 256 pairs x 100,000 steps): 35.189 (SE 0.515) and 34.980 (SE 0.478); together 35.077 (SE 0.350). Note: 35.48395 (SE 0.88695). The second-order zero is 67.96
+  PASS  LAG4: my own bracket by sign at 4 SE: the loss is negative at a = 20, 24, 28, 32 and positive at a = 40, 44, 47.57, 52, so the zero lies between 32 and 40 (the note's bracket: 20 < a < 47.57)
+  [section time 18.3 s]
+
+====================================================================================================
+PARK. Parking: a long stay in the predator, and a long steady stay with a fast rotation
+====================================================================================================
+   stays (5,5,1) linked      sigma 1: K = +0.415335  mine +0.422759 (SE 0.000689)  note +0.423240 (SE 0.001101)  difference -0.4 SE
+   stays (5,5,1) independent sigma 1: K = +0.412771  mine +0.426915 (SE 0.000499)  note +0.427510 (SE 0.000820)  difference -0.6 SE
+   stays (5,5,10) linked      sigma 1: K = -0.048350  mine +0.068055 (SE 0.001184)  note +0.068791 (SE 0.001983)  difference -0.3 SE
+   stays (5,5,10) independent sigma 1: K = +0.204956  mine +0.253895 (SE 0.000721)  note +0.255105 (SE 0.001165)  difference -0.9 SE
+   stays (5,5,50) linked      sigma 1: K = -0.292265  mine -0.200053 (SE 0.001622)  note -0.199422 (SE 0.002736)  difference -0.2 SE
+   stays (5,5,50) independent sigma 1: K = +0.056668  mine +0.095648 (SE 0.000974)  note +0.097589 (SE 0.001432)  difference -1.1 SE
+   stays (5,5,200) linked      sigma 1: K = -0.352084  mine -0.321900 (SE 0.001966)  note -0.320755 (SE 0.003369)  difference -0.3 SE
+   stays (5,5,200) independent sigma 1: K = +0.015405  mine +0.030678 (SE 0.001128)  note +0.033122 (SE 0.001587)  difference -1.3 SE
+   an independent repeat with three times the burn-in: +0.422158 (SE 0.000769); +0.426741 (SE 0.000622); +0.067240 (SE 0.001315); +0.253982 (SE 0.000845); -0.201245 (SE 0.001803); +0.096411 (SE 0.001081); -0.323419 (SE 0.002189); +0.031794 (SE 0.001222)
+  PASS  PARK1: predator parking, order 0, sigma = 1, linked and independent hosts (128 pairs x 40,000 steps after 4000): the note's eight losses against mine, largest difference 1.26 combined SE; against an independent repeat of mine 0.81; my two runs against each other 0.67; my two runs pooled against the note: -0.6, -0.7, -0.5, -0.9, -0.4, -1.0, -0.5, -1.1 combined SE
+  PASS  PARK2: each lengthening of the predator stay lowers the linked loss by more than 4 SE; at p = 10 the loss is still positive at sigma = 1 (+0.068055 (SE 0.001184)) though K is negative (-0.0484); at p = 50 and 200 it is negative
+   fast rotation (radius 0.9, angle pi/2), stays (b,5,5), order 0: loss at the longer steady stay minus loss at the
+   shorter, same host paths; positive means the longer stay hurts.  K(5)-K(1) = +0.088231, K(50)-K(20) = +0.002043, K(200)-K(50) = +0.000611
+   sigma 0.02 : b 1 to 5: +3.522e-05 (SE 6.7e-08) [sigma^2 dK = +3.529e-05]; b 20 to 50: +8.028e-07 (SE 3.0e-09) [sigma^2 dK = +8.170e-07]; b 50 to 200: +2.340e-07 (SE 1.7e-09) [sigma^2 dK = +2.445e-07]
+   sigma 0.05 : b 1 to 5: +2.198e-04 (SE 3.7e-07) [sigma^2 dK = +2.206e-04]; b 20 to 50: +4.682e-06 (SE 1.4e-08) [sigma^2 dK = +5.106e-06]; b 50 to 200: +1.202e-06 (SE 8.6e-09) [sigma^2 dK = +1.528e-06]
+   sigma 0.08 : b 1 to 5: +5.599e-04 (SE 1.1e-06) [sigma^2 dK = +5.647e-04]; b 20 to 50: +1.026e-05 (SE 4.2e-08) [sigma^2 dK = +1.307e-05]; b 50 to 200: +1.740e-06 (SE 2.6e-08) [sigma^2 dK = +3.912e-06]
+   sigma 0.1  : b 1 to 5: +8.752e-04 (SE 1.7e-06) [sigma^2 dK = +8.823e-04]; b 20 to 50: +1.382e-05 (SE 5.8e-08) [sigma^2 dK = +2.043e-05]; b 50 to 200: +9.494e-07 (SE 3.5e-08) [sigma^2 dK = +6.112e-06]
+   sigma 0.12 : b 1 to 5: +1.258e-03 (SE 2.1e-06) [sigma^2 dK = +1.271e-03]; b 20 to 50: +1.559e-05 (SE 7.5e-08) [sigma^2 dK = +2.941e-05]; b 50 to 200: -2.041e-06 (SE 5.5e-08) [sigma^2 dK = +8.801e-06]
+   sigma 0.15 : b 1 to 5: +1.938e-03 (SE 3.7e-06) [sigma^2 dK = +1.985e-03]; b 20 to 50: +1.235e-05 (SE 1.4e-07) [sigma^2 dK = +4.596e-05]; b 50 to 200: -1.247e-05 (SE 1.2e-07) [sigma^2 dK = +1.375e-05]
+   sigma 0.2  : b 1 to 5: +3.420e-03 (SE 5.8e-06) [sigma^2 dK = +3.529e-03]; b 20 to 50: -2.436e-05 (SE 4.1e-07) [sigma^2 dK = +8.170e-05]; b 50 to 200: -5.937e-05 (SE 3.7e-07) [sigma^2 dK = +2.445e-05]
+   sigma 0.3  : b 1 to 5: +7.334e-03 (SE 1.3e-05) [sigma^2 dK = +7.941e-03]; b 20 to 50: -3.480e-04 (SE 2.3e-06) [sigma^2 dK = +1.838e-04]; b 50 to 200: -3.718e-04 (SE 2.2e-06) [sigma^2 dK = +5.501e-05]
+   sigma 1    : b 1 to 5: +3.641e-02 (SE 6.3e-05) [sigma^2 dK = +8.823e-02]; b 20 to 50: -5.216e-02 (SE 2.4e-04) [sigma^2 dK = +2.043e-03]; b 50 to 200: -5.758e-02 (SE 4.0e-04) [sigma^2 dK = +6.112e-04]
+  PASS  PARK3: the note's nine paired differences (sigma = 0.05, 0.3, 1) against mine, 4 combined SE: largest difference 0.71 (sigma 1, b 20 to 50: mine -5.2159e-02 (SE 2.4e-04), note -5.2457e-02 (SE 3.4e-04))
+  PASS  PARK4: the short extension (b from 1 to 5) hurts at every sigma tried. The long one (b from 50 to 200) hurts by more than 4 SE at sigma = 0.02, 0.05, 0.08, 0.1 and helps by more than 4 SE at sigma = 0.12, 0.15, 0.2, 0.3, 1: the second-order harm of a long steady stay is real but holds only below a noise between 0.1 and 0.12. For b from 20 to 50: hurts at 0.02, 0.05, 0.08, 0.1, 0.12, 0.15, helps at 0.2, 0.3, 1
+   at sigma = 0.05 the long difference is 79% of its second-order value: the next term is already 21% of it; it is why the small-noise check S6 of this difference uses sigma = 0.01
+  [section time 26.6 s]
+
+====================================================================================================
+B. Statements said to hold at any noise: the bound D <= sum of sigma_e^2 / 2 with linked hosts, and D >= 0 without memory
+====================================================================================================
+  PASS  B1: exact, no random numbers: 3,000 random rings (2 to 5 stages, stays 1 to 12, a quarter of the stays exactly 1) in random periodic environments (period 2 to 24, 1 to n fluctuating transfers sharing one or two common factors, log-amplitude 0.3 to 2), multipliers of mean one: growth per step at y = the sum of the log penalties is never below 3.7e-06 (the bound says it is not negative). In the 300 of them solved for D, the largest D/bound is 0.682928 and D is negative in 76
+  PASS  B2: no staying at all (every stay 1), 120 random periodic environments: when the period and the number of stages have no common factor the loss EQUALS the bound (largest difference 8.4e-12); when they have one, cohorts see different parts of the cycle and the loss is below it, never above (D/bound goes down to -9.08: a cohort that always meets the favourable part of the cycle gains)
+  PASS  B2b: exact, aimed at near-equality with staying: 400 rings with every transfer moved by ONE slow periodic host (period 60 to 400 steps) with relative sizes that sum to zero, log-amplitude 0.5 to 2: growth at y = the bound is never below 7.5e-07; in the 80 solved for D the largest D/bound is 0.999961 (the bound is approached, not passed)
+  PASS  B3: search with Gaussian hosts at sigma = 1: 1248 random cases (52 random stable vector autoregressions of dimension 2 to 4, 26 with real and 26 with complex eigenvalues, innovations of any rank, so the hosts range from loosely to rigidly linked; rings of 2 to 4 stages, half of them with every stay between 1 and about 1.5, where the bound is nearly attained; 1 to n fluctuating transfers with relative sizes of either sign). Growth at y = the bound: negative by more than 4 SE in 0 cases (0 flagged at first, rerun ten times longer); most adverse +66.1 SE; within 4 SE of zero in 0 (the near-tight ones); smallest (growth per generation)/bound 0.0155
+  PASS  B3b: the same search aimed at near-equality: 576 cases with slow hosts (one host of memory 0.9 to 0.995, or a slow rotation of radius 0.97 to 0.995 and angle 0.02 to 0.1), every transfer fluctuating, relative sizes that sum to zero in two thirds of them, half with stays near 1; 48 pairs x 20,000 steps: growth at y = the bound negative by more than 4 SE in 0; most adverse +46.7 SE; within 4 SE of zero in 0; smallest (growth per generation)/bound 0.00253
+  PASS  B3c: aimed cases at other noise levels: sigma = 0.5: 144 cases, 0 below zero by 4 SE, most adverse +65.4 SE, smallest (growth per generation)/bound 0.00529; sigma = 2: 144 cases, 0 below zero by 4 SE, most adverse +67.7 SE, smallest (growth per generation)/bound 0.00691
+  PASS  B4: hosts without memory (matrices independent in time) but correlated in any way within a step, sigma = 1, 240 random cases: growth at y = 0 is positive by more than 4 SE in 0 (the note: the loss cannot be negative); largest -5.8 SE
+  [section time 101.1 s]
+
+====================================================================================================
+CT. One host on two transfers: discrete time against the manuscript's continuous-time statement
+====================================================================================================
+  The manuscript's example: stays of 60 and 10 days, the host forgets at rate 1/100 per day; continuous-time values per sigma^2:
+    together -0.469925, opposite +0.921053, one transfer alone +0.112782  (manuscript: a gain of 0.47, a cost of 0.92, a cost of 0.11)
+  General discrete coefficient with a time step of 1/m day (stays 60m and 10m steps, memory exp(-1/(100m)) per step):
+      m     together      (x m: error)   opposite      (x m: error)   one transfer  (x m: error)
+       1   -0.44116734  (+0.02876)   +0.92068799  (-0.00036)   +0.11988016  (+0.00710)
+       2   -0.45554621  (+0.02876)   +0.92087058  (-0.00036)   +0.11633109  (+0.00710)
+       4   -0.46273555  (+0.02876)   +0.92096167  (-0.00036)   +0.11455653  (+0.00710)
+       8   -0.46633019  (+0.02876)   +0.92100717  (-0.00036)   +0.11366925  (+0.00710)
+      16   -0.46812750  (+0.02876)   +0.92102990  (-0.00036)   +0.11322560  (+0.00710)
+      32   -0.46902616  (+0.02876)   +0.92104127  (-0.00036)   +0.11300378  (+0.00710)
+      64   -0.46947548  (+0.02876)   +0.92104695  (-0.00036)   +0.11289287  (+0.00710)
+     128   -0.46970015  (+0.02876)   +0.92104979  (-0.00036)   +0.11283741  (+0.00710)
+     256   -0.46981248  (+0.02876)   +0.92105121  (-0.00036)   +0.11280968  (+0.00710)
+     512   -0.46986865  (+0.02876)   +0.92105192  (-0.00036)   +0.11279582  (+0.00710)
+    1024   -0.46989673  (+0.02876)   +0.92105228  (-0.00036)   +0.11278889  (+0.00710)
+  with a time step of 5 days (stays 12 and 2 steps, memory 0.9512): together -0.326126, opposite +0.919208, one transfer +0.148270
+  with a time step of 10 days (stays 6 and 1 steps, memory 0.9048): together -0.182300, opposite +0.917308, one transfer +0.183752
+  PASS  CT1: the error of the discrete coefficient halves each time the step is halved (ratios between 2.0000 and 2.0000 for m from 64 to 1024, all three arrangements): convergence of first order in the time step
+  PASS  CT2: limit of the general discrete coefficient as the step shrinks (stays growing, the host's correlation time fixed in units of the stays; fitted at m = 4096, 8192, 16384 in 40-digit arithmetic) against the manuscript's continuous-time expression: 100 random (stays, forgetting rate, relative sizes k1, k2 of either sign), largest relative difference 3.8e-14. The discrete formulas tend to the continuous one
+  PASS  CT3: in discrete time, moving together is NOT a gain 'unless the stages are left at equal rates'. It is a loss at every memory when (a - b)^2 <= 2(a + b): stays (2,3), (1,4), (5,9), (10,16), (3,7) at memories 0 to 0.999 give K > 0 in all 30 cases. Otherwise it is a gain only above a memory: (1,10): gain only above memory 0.253165 (K = +0.01778 just below, -0.05193 above); (5,50): gain only above memory 0.207039 (K = +0.00425 just below, -0.01793 above); (60,10): gain only above memory 0.337079 (K = +0.00390 just below, -0.00873 above); (2,12): gain only above memory 0.400000 (K = +0.01681 just below, -0.02651 above)
+  [section time 0.2 s]
+
+====================================================================================================
+SUMMARY: 119 checks: 117 pass, 0 fail, 2 differ from the note's printed digits.  Wall time 152.4 s
+  DIFFERS FROM THE NOTE  Q13a-location: location of that minimum: mine 3.8366530617 (a zero of dK/da in 40-digit arithmetic), note 3.83665271: they differ by 3.5e-07, in the seventh decimal. At the note's a the derivative is -2.844e-09 by my coefficient and -2.844e-09 by the note's own formula (13); at mine it is 9.4e-20; K(mine) - K(note
+  DIFFERS FROM THE NOTE  Q13b-location: location of that minimum: mine 3.0079933755, note 3.00799334: they differ by 3.5e-08, in the eighth decimal. dK/da at the note's a -1.279e-09, at mine -7.3e-18
+finished 2026-11-14 17:22:33

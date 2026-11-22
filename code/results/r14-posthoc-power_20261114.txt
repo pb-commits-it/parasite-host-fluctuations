@@ -1,0 +1,33 @@
+cutoff check by enumeration of the 720 orderings: rho <= -29/35 in 21 (p = 0.0292); the first version's rho <= -0.829 kept 12 (p = 0.0167); the next attainable value, S >= 62, has 37 (p = 0.0514, above 0.05)
+read from the R14 output: sigma {'BLAN': np.float64(0.399), 'HARV': np.float64(0.989), 'ORNL': np.float64(0.505), 'SCBI': np.float64(0.564), 'SERC': np.float64(0.571), 'TREE': np.float64(0.482)}
+                          prevalence {'BLAN': np.float64(0.1861), 'HARV': np.float64(0.2291), 'ORNL': np.float64(0.0618), 'SCBI': np.float64(0.1481), 'SERC': np.float64(0.2523), 'TREE': np.float64(0.2275)}; Spearman rho recomputed +0.4857 (report: +0.4857)
+
+A. The loss D of ln R0 that the theory gives each site (exact, discrete Borrelia cycle, no memory)
+   relative size 1.00: BLAN 0.0256  HARV 0.1837  ORNL 0.0419  SCBI 0.0531  SERC 0.0544  TREE 0.0380   (HARV exceeds the next site by 0.129; range among the other five 0.029)
+   relative size 0.50: BLAN 0.0062  HARV 0.0403  ORNL 0.0099  SCBI 0.0124  SERC 0.0128  TREE 0.0090   (HARV exceeds the next site by 0.028; range among the other five 0.007)
+   relative size 0.25: BLAN 0.0015  HARV 0.0095  ORNL 0.0025  SCBI 0.0030  SERC 0.0031  TREE 0.0022   (HARV exceeds the next site by 0.006; range among the other five 0.002)
+
+B. What a rank correlation across these six sites could have shown
+   scenario                                  mean rho   P(rho >= +0.4857)   P(rho <= -29/35)   ratio of the upper tails, scenario / no effect
+   other differences sd 0.10; no effect of host variability    +0.002            0.179              0.027             1.00
+   other differences sd 0.10; theory, relative size 0.25       -0.018            0.166              0.030             0.93
+   other differences sd 0.10; theory, relative size 0.5        -0.082            0.132              0.039             0.74
+   other differences sd 0.10; theory, relative size 1.0        -0.338            0.032              0.097             0.18
+   other differences sd 0.17; no effect of host variability    +0.000            0.177              0.029             1.00
+   other differences sd 0.17; theory, relative size 0.25       -0.011            0.171              0.030             0.96
+   other differences sd 0.17; theory, relative size 0.5        -0.050            0.150              0.035             0.84
+   other differences sd 0.17; theory, relative size 1.0        -0.224            0.070              0.068             0.39
+   other differences sd 0.30; no effect of host variability    -0.000            0.177              0.029             1.00
+   other differences sd 0.30; theory, relative size 0.25       -0.006            0.174              0.030             0.99
+   other differences sd 0.30; theory, relative size 0.5        -0.028            0.162              0.033             0.92
+   other differences sd 0.30; theory, relative size 1.0        -0.131            0.109              0.049             0.62
+   (m, the mean ln R0, came out between 0.4 and 0.6 in every scenario; published ln R0 for this parasite is 0.17 to 0.56)
+
+C. T2 with the sampling error of yearly prevalence allowed for
+   site   years   sd ln prevalence   sampling sd   corrected sd   sd ln mouse index   prevalence varies less (raw / corrected)
+   BLAN     6      0.666 (report 0.666)    0.415        0.522          0.247            no / no
+   HARV    10      0.571 (report 0.571)    0.329        0.467          1.018            yes / yes
+   ORNL     4      0.486 (report 0.486)    0.818        0.000          0.129            no / yes
+   SCBI    10      0.359 (report 0.359)    0.324        0.156          0.609            yes / yes
+   SERC     9      0.321 (report 0.321)    0.237        0.216          0.538            yes / yes
+   TREE    10      0.330 (report 0.330)    0.170        0.283          0.359            yes / yes

@@ -1,0 +1,32 @@
+[PASS] T1 closed form = the general formula summed over lags (400 random rings): largest relative difference 1.00e-12 at (3, array([ 10.226, 194.303,  84.747]), 0.0, 0.9446, 0.1357)
+[PASS] T2 exact loss in a bounded two-state environment = delta^2 C: eight comparisons each way
+      stays (4.0, 6.0), d 0.5, memory 0.8, delta 0.1: contact 1.4507e-04 +- 1.1e-06 (formula 1.4375e-04) ok; gain-only 2.0234e-04 +- 2.3e-06 (formula 2.0000e-04) ok; ratio simulated 0.717, formula 0.719
+      stays (4.0, 6.0), d 0.5, memory 0.8, delta 0.2: contact 5.8046e-04 +- 2.4e-06 (formula 5.7500e-04) ok; gain-only 8.0617e-04 +- 4.7e-06 (formula 8.0000e-04) ok; ratio simulated 0.720, formula 0.719
+      stays (3.0, 40.0), d 0.3, memory 0.9, delta 0.1: contact 3.6133e-05 +- 2.3e-07 (formula 3.5958e-05) ok; gain-only 1.4347e-05 +- 7.5e-07 (formula 1.4225e-05) ok; ratio simulated 2.518, formula 2.528
+      stays (3.0, 40.0), d 0.3, memory 0.9, delta 0.2: contact 1.4573e-04 +- 4.7e-07 (formula 1.4383e-04) ok; gain-only 5.5913e-05 +- 1.5e-06 (formula 5.6899e-05) ok; ratio simulated 2.606, formula 2.528
+      stays (5.0, 2.0, 8.0), d 0.7, memory 0.5, delta 0.1: contact 5.3929e-05 +- 6.0e-07 (formula 5.3246e-05) ok; gain-only 6.3481e-05 +- 8.6e-07 (formula 6.2526e-05) ok; ratio simulated 0.850, formula 0.852
+      stays (5.0, 2.0, 8.0), d 0.7, memory 0.5, delta 0.2: contact 2.1451e-04 +- 1.2e-06 (formula 2.1299e-04) ok; gain-only 2.5191e-04 +- 1.7e-06 (formula 2.5010e-04) ok; ratio simulated 0.852, formula 0.852
+      stays (2.0, 100.0), d 0.9, memory 0.99, delta 0.1: contact 9.8055e-06 +- 4.2e-07 (formula 1.0369e-05) ok; gain-only 1.7008e-06 +- 4.7e-07 (formula 2.3286e-06) ok; ratio simulated 5.765, formula 4.453
+      stays (2.0, 100.0), d 0.9, memory 0.99, delta 0.2: contact 4.0799e-05 +- 8.3e-07 (formula 4.1475e-05) ok; gain-only 8.5270e-06 +- 9.2e-07 (formula 9.3145e-06) ok; ratio simulated 4.785, formula 4.453
+[PASS] T3 the contact-limited loss is positive for 0 < d <= 1 (20,000 random rings): non-positive in 0; smallest Gamma/(d sigma^2) = 1.376e-06
+      reported: the contact-limited loss EXCEEDS the gain-only loss in 7211 of 20,000 (36.1%); largest ratio 145.6 at stays [  1.67 819.2  976.14   1.07], waiting stage 3, memory 0.4251, d 0.43 (contact 0.1003, gain-only 0.0007, units of sigma^2)
+[PASS] T4 with a very long steady stage the loss tends to d (1 - d) q_j, not to zero: largest difference 7.02e-07
+[PASS] T5 the floor is the curvature of the success probability of a wait in a frozen host: largest relative difference 0.0006
+      Loss per generation in units of sigma^2; waiting stage of stay 3; host memory in the columns.
+      rows: stay in a steady stage elsewhere; each cell: gain-only / contact-limited with half dying waiting (d = 0.5) / with a tenth dying waiting (d = 0.1)
+      steady stay      memory 0            memory 0.5          memory 0.9          memory 0.99
+             1     0.1250/0.0312/0.0013   0.2321/0.0938/0.0152   0.2981/0.1322/0.0238   0.3111/0.1398/0.0254
+             3     0.0833/0.0208/0.0008   0.1833/0.0958/0.0198   0.2976/0.1815/0.0415   0.3296/0.2055/0.0476
+            10     0.0385/0.0096/0.0004   0.0921/0.0812/0.0219   0.1797/0.1980/0.0569   0.2119/0.2409/0.0698
+            30     0.0152/0.0038/0.0002   0.0373/0.0703/0.0223   0.0786/0.1941/0.0636   0.0956/0.2451/0.0806
+           100     0.0049/0.0012/0.0000   0.0121/0.0651/0.0225   0.0262/0.1899/0.0663   0.0323/0.2439/0.0852
+          1000     0.0005/0.0001/0.0000   0.0012/0.0628/0.0225   0.0027/0.1878/0.0674   0.0034/0.2428/0.0871
+      floor d (1 - d) q_j:  0.0000/0.0000/0.0000   0.0000/0.0625/0.0225   0.0000/0.1875/0.0675   0.0000/0.2426/0.0874
+ALL CHECKS PASSED
+
+--- added 11:43, 14 November: T6 (continuous time), run alone with --t6-only after T1 to T5 had passed; first run of T6 ---
+c 1.0, mu 0.5 (d = 0.333), a2 1.2, correlation time 0.50: contact 1.3117e-03 +- 4.3e-06 (conjecture 1.3002e-03) ok; gain-only 2.1543e-03 +- 1.3e-05 (formula 2.1277e-03) ok; ratio simulated 0.609, predicted 0.611
+c 1.0, mu 0.1 (d = 0.091), a2 0.2, correlation time 2.50: contact 2.0851e-04 +- 3.0e-07 (conjecture 2.0675e-04) ok; gain-only 3.7368e-04 +- 3.3e-06 (formula 3.7905e-04) ok; ratio simulated 0.558, predicted 0.545
+c 0.3, mu 1.0 (d = 0.769), a2 0.05, correlation time 10.00: contact 1.9470e-04 +- 7.1e-07 (conjecture 1.9370e-04) ok; gain-only 3.6838e-05 +- 9.2e-07 (formula 3.5973e-05) ok; ratio simulated 5.285, predicted 5.385
+c 1.0, mu 1.0 (d = 0.500), a2 1.0, correlation time 0.10: contact 7.6457e-04 +- 6.6e-06 (conjecture 7.6923e-04) ok; gain-only 7.5817e-04 +- 1.3e-05 (formula 7.6923e-04) ok; ratio simulated 1.008, predicted 1.000
+T6 PASS

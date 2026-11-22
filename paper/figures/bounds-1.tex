@@ -1,0 +1,100 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+\IfFileExists{figures/data/bounds-1.csv}{%
+  \def\boundsonecsv{figures/data/bounds-1.csv}%
+}{%
+  \def\boundsonecsv{data/bounds-1.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{groupplot}[
+  group style={
+    group size=1 by 2,
+    vertical sep=13mm,
+  },
+  width=78mm,
+  height=57mm,
+  scale only axis=false,
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+  clip=true,
+]
+
+\nextgroupplot[
+  ymode=log,
+  xmin=0.15,
+  xmax=2.08,
+  xtick={0.2, 0.6, 1.0, 1.4, 1.8, 2.0},
+  ymin=0.0005,
+  ymax=3.5,
+  ytick={0.001, 0.01, 0.1, 1},
+  xlabel={Log-host standard deviation $\sigma$},
+  ylabel={Threshold loss $D$},
+  legend style={
+    at={(0.5,1.04)},
+    anchor=south,
+    legend columns=2,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    row sep=0.3pt,
+  },
+]
+\addplot[solid, line width=1.15pt, black, domain=0.2:2.0, samples=60] {0.5*x*x};
+\addlegendentry{bound $\sigma^2/2$}
+\addplot[dashed, line width=0.75pt, black, mark=triangle*, mark options={solid, line width=0.6pt, scale=0.75}, unbounded coords=discard] table[col sep=comma, x=sigma, y=d_phi075] {\boundsonecsv};
+\addlegendentry{$D$, $\phi=0.75$}
+\addplot[dashdotted, line width=0.7pt, darkgray, mark=triangle, mark options={solid, line width=0.6pt, scale=0.75}, unbounded coords=discard] table[col sep=comma, x=sigma, y=g0_phi075] {\boundsonecsv};
+\addlegendentry{$\Gamma_0$, $\phi=0.75$}
+\addplot[solid, line width=0.75pt, black, mark=*, mark options={solid, line width=0.6pt, scale=0.65}, unbounded coords=discard] table[col sep=comma, x=sigma, y=d_phi0] {\boundsonecsv};
+\addlegendentry{$D$, $\phi=0$}
+\addplot[dotted, line width=0.8pt, darkgray, mark=o, mark options={solid, line width=0.6pt, scale=0.65}, unbounded coords=discard] table[col sep=comma, x=sigma, y=g0_phi0] {\boundsonecsv};
+\addlegendentry{$\Gamma_0$, $\phi=0$}
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.03,0.95) {(a)};
+
+\nextgroupplot[
+  xmin=0.5,
+  xmax=11.5,
+  xtick={1,2,3,4,5,6,7,8,9,10,11},
+  xticklabels={1a,1b,2a-e,2a-f,2a-v,2b,3a,3b,5,6,7},
+  xticklabel style={rotate=35, anchor=east, font=\sffamily\fontsize{8.5}{10}\selectfont},
+  ymin=0,
+  ymax=1.28,
+  ytick={0, 0.25, 0.50, 0.75, 1.00, 1.25},
+  yticklabels={$0$, $0.25$, $0.50$, $0.75$, $1.00$, $1.25$},
+  scaled y ticks=false,
+  xlabel={Illustrative parameterization (Section 9)},
+  ylabel={Threshold loss $D$},
+  legend columns=3,
+  legend style={
+    at={(0.54,0.98)},
+    anchor=north,
+    draw=none,
+    fill=none,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+    cells={anchor=west},
+    column sep=1.5mm,
+  },
+]
+\addplot[dotted, line width=0.75pt, black, mark=x, mark options={solid, line width=0.75pt, scale=0.95}, unbounded coords=discard] table[col sep=comma, x=case_idx, y=h4_bound] {\boundsonecsv};
+\addlegendentry{bound}
+\addplot[solid, line width=0.75pt, black, mark=*, mark options={solid, line width=0.6pt, scale=0.65}, unbounded coords=discard] table[col sep=comma, x=case_idx, y=h4_d] {\boundsonecsv};
+\addlegendentry{$D$}
+\addplot[dashed, line width=0.7pt, darkgray, mark=square, mark options={solid, line width=0.6pt, scale=0.65}, unbounded coords=discard] table[col sep=comma, x=case_idx, y=h4_g0] {\boundsonecsv};
+\addlegendentry{$\Gamma_0$}
+\node[anchor=north west, font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (rel axis cs:0.03,0.96) {(b)};
+
+\end{groupplot}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

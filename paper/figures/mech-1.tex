@@ -1,0 +1,27 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+\pgfplotsset{every axis/.append style={width=80mm,height=62mm,
+font=\sffamily\fontsize{9}{11}\selectfont,tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+label style={font=\sffamily\fontsize{9}{11}\selectfont},
+line width=0.5pt,axis line style={line width=0.4pt},
+legend style={font=\sffamily\fontsize{8.5}{10}\selectfont,draw=none,fill=white},
+legend cell align=left,grid=major,grid style={line width=0.4pt,black!20},
+mark size=1.6pt}}
+\IfFileExists{figures/data/mech-1.csv}{\def\mechdata{figures/data/}}{\def\mechdata{data/}}
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}
+\begin{axis}[xmode=log,xlabel={Mean steady stay (steps)},ylabel={Quadratic coefficient $K_c$},
+xmin=1,xmax=1000,legend pos=north east]
+\addplot[black,solid,thick] table[x=stay,y=d01,col sep=comma]{\mechdata mech-1.csv};\addlegendentry{$d=0.1$}
+\addplot[black,dashed,thick] table[x=stay,y=d05,col sep=comma]{\mechdata mech-1.csv};\addlegendentry{$d=0.5$}
+\addplot[black,dashdotted,thick] table[x=stay,y=gain,col sep=comma]{\mechdata mech-1.csv};\addlegendentry{Gain-only}
+\addplot[black,dotted] table[x=stay,y=limit01,col sep=comma]{\mechdata mech-1.csv};
+\addplot[black,dotted] table[x=stay,y=limit05,col sep=comma]{\mechdata mech-1.csv};
+\addplot[black,dotted] table[x=stay,y=limitgain,col sep=comma]{\mechdata mech-1.csv};
+\end{axis}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

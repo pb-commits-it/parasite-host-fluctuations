@@ -1,0 +1,5 @@
+[ok] E1 one stage: a sinusoidal transfer leaves R0 unchanged: 10 random cases at eps = 0.3: largest |ln R0* - ln G0| = 3.1e-12
+[ok] E2 two to four stages: ln R0* - ln G0 = (eps^2/2) Re[g/(1 - g)] to second order: 30 random cases: largest |ratio - 1| = 0.0008 at eps = 0.05 and 0.0031 at eps = 0.1
+[ok] E3 the sign follows Re[g/(1 - g)]: losses for two to four stages, a gain for eight stages at the matching period: 30 random cases of two to four stages: all losses, sign agrees in every case: True; eight stages: Re[g/(1 - g)] = +0.0737, ln R0* - ln G0 = +9.213e-05, ratio 0.9999
+
+ALL CHECKS PASSED

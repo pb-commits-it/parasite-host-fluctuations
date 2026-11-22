@@ -1,0 +1,7 @@
+[PASS] B1 the second-order coefficient is at most 1/2: 200,000 rings, largest value 0.500000000
+[PASS] B2 lower bounds on growth: 400 rings, violations 0; smallest margin -2.5 standard errors (seed 1060, 1 stages, lognormal, sigma up to 0.93, phi -0.30: r = -0.87896 +- 0.00025, bound -0.87834)
+[PASS] B3 upper bound without memory: 105 rings, violations 0
+      realised loss as a fraction of the largest loss the bounds allow: median 0.53, largest 1.001
+      (with memory, growth exceeded ln lambda by more than 3 standard errors in 2 of 295 rings; Proposition 21(b) does not apply to them)
+
+ALL CHECKS PASSED

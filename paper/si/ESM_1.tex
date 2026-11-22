@@ -1,0 +1,72 @@
+%% Online Resource 1: standalone document assembled from fragments.
+\documentclass[11pt]{article}
+\usepackage[margin=25mm]{geometry}
+% Packages from main.tex, with the standalone article's longtable and natbib.
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[title]{appendix}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\pgfplotsset{compat=1.18}
+\usepackage{longtable}
+\usepackage[numbers]{natbib}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+% Tectonic's bundled hyperref leaves a zero-based remote page value behind.
+% Scope each external link so the next link does not reuse it as a page input.
+\makeatletter
+\let\ESM@hyper@linkfile\hyper@linkfile
+\renewcommand*{\hyper@linkfile}[3]{%
+  \begingroup\ESM@hyper@linkfile{#1}{#2}{#3}\endgroup}
+\makeatother
+
+% Environments from main.tex; article uses the corresponding amsthm styles
+% in place of sn-jnl's thmstyleone, thmstyletwo and thmstylethree.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+% Operator shorthand macros from main.tex.
+\providecommand{\E}{\mathbb{E}}
+\providecommand{\Var}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\spr}{\operatorname{spr}}
+\providecommand{\dd}{\,\mathrm{d}}
+\providecommand{\ee}{\mathrm{e}}
+% Import labels after defining macros used in main-text captions.
+% Keep the ESM's own bibliography numbering rather than importing citations.
+\externaldocument[][nocite]{../main}[main.pdf]
+\begin{document}
+\begin{center}
+{\Large\bfseries Online Resource 1}\\[4pt]
+{\large Do several hosts stabilise a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles}\\[6pt]
+\emph{Journal of Mathematical Biology}\\[6pt]
+[Author name] \quad [Affiliation, city, country] \quad [e-mail]
+\end{center}
+
+\tableofcontents
+
+\IfFileExists{si/ESM_1-from-main.tex}{\input{si/ESM_1-from-main}}{\IfFileExists{ESM_1-from-main.tex}{\input{ESM_1-from-main}}{}}
+\IfFileExists{si/esm-computed.tex}{\input{si/esm-computed}}{\IfFileExists{esm-computed.tex}{\input{esm-computed}}{}}
+\IfFileExists{si/esm-casestudies.tex}{\input{si/esm-casestudies}}{\IfFileExists{esm-casestudies.tex}{\input{esm-casestudies}}{}}
+\IfFileExists{si/esm-simworld.tex}{\input{si/esm-simworld}}{\IfFileExists{esm-simworld.tex}{\input{esm-simworld}}{}}
+
+\bibliographystyle{plainnat}
+\IfFileExists{../refs.bib}{\bibliography{../refs}}{\IfFileExists{refs.bib}{\bibliography{refs}}{}}
+\end{document}

@@ -1,0 +1,1018 @@
+\section{Proofs for the mechanism extensions}\label{app:mech}
+We use the mean-rate baseline throughout unless another is named. The matrix \(\mathbf A_0\) is primitive and at threshold in local threshold calculations, with Perron vectors normalized by \(\mathbf w^{\mathsf T}\mathbf v=1\). Write \(\mathbf Q=\mathbf I-\mathbf v\mathbf w^{\mathsf T}\) and \(\mathbf T_\perp=\mathbf A_0\mathbf Q\). A birth contribution is a specified labeled edge, even when it shares a matrix entry with staying or another route. The birth frequency is \(b=\mathbf w^{\mathsf T}\mathbf B_{\rm birth}\mathbf v>0\). In a ring with one birth per circuit, \(b=1/\mathcal T\). In a network we use \(\Delta\) for the common restoring log birth multiplier, as in Section~\ref{sec:model}. This normalization is required in every network formula below.
+
+\subsection{The perturbation calculation and bounded forcing}\label{app:mech-general}
+\begin{lemma}[Ordered covariance coefficient]\label{lem:mech-general}
+Let the first-order perturbation of the threshold matrix be \(\sigma\sum_i\xi_i(t)\mathbf E_i\), with centered stationary drivers, \(\rho_{ij}(\ell)=\mathbb E[\xi_i(t)\xi_j(t-\ell)]\), and a valid second-order growth expansion. Assume the direct second-order matrix term has mean zero. Set \(c_i=\mathbf w^{\mathsf T}\mathbf E_i\mathbf v\). Then
+\begin{equation}\label{eq:mech-general}
+ K=\frac1b\sum_{i,j}\left\{\frac{c_ic_j\rho_{ij}(0)}2-
+ \sum_{m\geq0}\rho_{ij}(m+1)\mathbf w^{\mathsf T}\mathbf E_i
+ \mathbf T_\perp^m\mathbf Q\mathbf E_j\mathbf v\right\}.
+\end{equation}
+It is the coefficient of the restoring multiplier \(\Delta\), and of \(D\) under the one-birth ring convention.
+\end{lemma}
+\begin{proof}
+Normalize population by \(\mathbf w^{\mathsf T}\mathbf x_t=1\). Differentiating at zero noise gives
+\[
+ \mathbf u_{t+1}=\mathbf T_\perp\mathbf u_t+
+ \sum_i\xi_i(t)\mathbf Q\mathbf E_i\mathbf v,
+ \qquad
+ \mathbf u_t=\sum_{m\geq0,j}\mathbf T_\perp^m\mathbf Q\mathbf E_j\mathbf v\,
+ \xi_j(t-1-m).
+\]
+Primitivity makes the powers on the transverse subspace decay geometrically. In the logarithm of the one-step normalization the quadratic terms are
+\[
+ \sum_i\xi_i(t)\mathbf w^{\mathsf T}\mathbf E_i\mathbf u_t
+ -\frac12\left(\sum_ic_i\xi_i(t)\right)^2.
+\]
+The direct second-order matrix term contributes zero in expectation. Taking expectations of the displayed terms gives minus the numerator of \eqref{eq:mech-general}. A birth tilt \(y\) has deterministic derivative \(\partial_y\log\lambda=b\), so solving for zero growth divides the loss by \(b\). The geometric decay justifies the covariance sum. The assumed growth expansion, rather than primitivity alone, justifies passing the derivatives through the infinite-time limit. This is the usual normalized-population calculation \citep{tuljapurkar1982a,tuljapurkar1990} with signed perturbation matrices and labeled births retained.
+\end{proof}
+
+\begin{lemma}[Bounded additive remainder]\label{lem:mech-bounded}
+Let \(\mathbf A_\sigma(t)=\mathbf A_0+\sigma\xi_t\mathbf E\), with fixed primitive nonnegative \(\mathbf A_0\), fixed \(\mathbf E\) supported on its positive entries, and bounded stationary ergodic centered unit-variance \(\xi\). For sufficiently small \(|\sigma|\), suppose all changed positive entries retain a uniform positivity margin. The growth loss is \(\sigma^2C+O(|\sigma|^3)\). If the whole driver law is invariant under \(\xi\mapsto-\xi\), the remainder is \(O(\sigma^4)\). No uniformity in changing stays or loss of primitivity is asserted.
+\end{lemma}
+\begin{proof}
+For a mean Perron root \(\lambda\), first divide the matrices by \(\lambda\), putting \(\mathbf M=\mathbf A_0/\lambda\) and \(\mathbf B=\mathbf E/\lambda\). The normalized first derivative obeys
+\[
+ \mathbf z_{t+1}=\mathbf M\mathbf z_t+\xi_t\mathbf Q\mathbf B\mathbf v,
+ \qquad \mathbf z_t=\sum_{m\geq0}\mathbf M^m\mathbf Q\mathbf B\mathbf v\,\xi_{t-1-m}.
+\]
+On \(\mathbf w^{\mathsf T}\mathbf z=0\), the spectral radius of \(\mathbf M\) is less than one. An equivalent adapted norm makes its operator norm less than one. The normalized map is smooth in state and \(\sigma\) near \(\mathbf v\), with normalization bounded away from zero. Bounded forcing and a sufficiently small noise interval make its derivative a uniform contraction in that neighborhood. Starting the recursion in the remote past therefore gives a unique bounded stationary normalized solution there. Primitivity and uniformly comparable positive entries in fixed-length blocks identify its exponent with the top exponent for positive initial populations.
+
+Differentiating this recursion up to order four gives a stable linear recursion for each highest derivative, forced by bounded products of lower derivatives and the bounded driver. Induction and geometric contraction bound all four derivatives uniformly over paths. Taylor expansion of the one-step logarithm can therefore be averaged with a bounded remainder. Its linear expectation vanishes, and its quadratic expectation is the coefficient in Lemma~\ref{lem:mech-general} before division by \(b\). This proves the cubic remainder. Whole-process sign symmetry makes the averaged exponent even in \(\sigma\), eliminating the cubic term and giving the fourth-order remainder. Marginal symmetry does not imply this invariance. Ergodicity identifies the expectation with the time-averaged exponent; temporal mixing is not needed for these uniform derivative bounds. This is the bounded-forcing argument supplied in the contact referee report, separate from the Gaussian theorem of Section~\ref{sec:ring}.
+
+The referee's scalar counterexample shows why the symmetry restriction is needed. Take independent \(\xi=-1/2,2\) with probabilities \(4/5,1/5\). Its first three moments are zero, one, and \(3/2\). For \(A_\sigma=1+0.2\sigma\xi\), expansion of the exact expected logarithm gives
+\[
+ -\mathbb E\log A_\sigma=0.02\sigma^2-0.004\sigma^3+O(\sigma^4).
+\]
+The same multiplier is a valid local scalar contact model with \(s=g=1/2,c=0.3,\mu=0.2\), since the combined perturbation is \((g-c)\sigma\xi=0.2\sigma\xi\). Thus a nonzero cubic term occurs within the admissible contact class.
+\end{proof}
+
+\subsection{Contact limitation}\label{app:mech-contact}
+\begin{proof}[Proof of Proposition~\ref{prop:mech-contact}]
+We first retain a general mean Perron root \(\lambda\), so the result also gives the coefficient of \(\mathcal T(\log\lambda-r)\). Write
+\[
+ \widetilde{\mathbf B}=\frac{g_j\mathbf e_{j+1}\mathbf e_j^{\mathsf T}-c\mathbf e_j\mathbf e_j^{\mathsf T}}{\lambda},
+ \quad d=1-\frac{c}{\lambda-s_j},\quad
+ \tau_k=\frac1{1-s_k/\lambda},\quad \mathcal T=\sum_k\tau_k.
+\]
+The left eigenvector equation gives \(g_jw_{j+1}=(\lambda-s_j)w_j\). Consequently
+\[
+ \mathbf w^{\mathsf T}\widetilde{\mathbf B}=d\frac{\lambda-s_j}{\lambda}w_j\mathbf e_j^{\mathsf T},
+ \qquad \widetilde{\mathbf B}\mathbf v=\frac{v_j}{\lambda}(g_j\mathbf e_{j+1}-c\mathbf e_j).
+\]
+With \(\mathbf W=\operatorname{diag}(w_k)\), the reference transition matrix is \(\mathbf P=\mathbf W(\mathbf A_0/\lambda)\mathbf W^{-1}\). It stays in stage \(k\) with probability \(1-1/\tau_k\), advances with probability \(1/\tau_k\), and has stationary law \(\varpi_k=v_kw_k=\tau_k/\mathcal T\). Equal cycle flux proves the last identity. Hence \(\mathbf w^{\mathsf T}\widetilde{\mathbf B}\mathbf v=d/\mathcal T\), and direct substitution gives
+\begin{equation}\label{eq:mech-contact-contraction}
+ \mathbf w^{\mathsf T}\widetilde{\mathbf B}\mathbf M^m\mathbf Q\widetilde{\mathbf B}\mathbf v
+ =\frac{d}{\mathcal T\tau_j}\{P^m_{j\leftarrow j+1}-\varpi_j
+ -(1-d)(P^m_{j\leftarrow j}-\varpi_j)\}.
+\end{equation}
+Start immediately after the marked crossing \(j\to j+1\). Its next return time is the sum of independent geometric reference stays, each supported on \(1,2,\ldots\). Their transforms are \(q_k\), so the return transform is \(R=\prod_kq_k\). Put
+\[
+ F=\sum_{m\geq0}\phi^mP^m_{j\leftarrow j+1},\qquad
+ H=\sum_{m\geq0}\phi^mP^m_{j\leftarrow j}.
+\]
+The probability of the next marked use at lag \(m+1\), including later returns, is \(P^m_{j\leftarrow j+1}/\tau_j\). The renewal sum and first-step conditioning give
+\[
+ \frac{\phi F}{\tau_j}=\frac R{1-R},\qquad
+ H=1+\phi(1-1/\tau_j)H+\frac{\phi F}{\tau_j},\qquad
+ H=\frac{1+\phi F/\tau_j}{1-\phi(1-1/\tau_j)}.
+\]
+For nonzero \(\phi\), using \(1-\phi(1-1/\tau_j)=\phi/(\tau_jq_j)\) and subtracting the stationary terms yields
+\[
+ \sum_{m\geq0}\phi^{m+1}
+ \{P^m_{j\leftarrow j+1}-\varpi_j-(1-d)(P^m_{j\leftarrow j}-\varpi_j)\}
+ =\tau_j\left\{\frac{R-(1-d)q_j}{1-R}-\frac{d\theta}{\mathcal T}\right\}.
+\]
+Absolute convergence follows by comparison with \(|\phi|^m\), also for negative memory. At \(\phi=0\) the sum is zero directly. Lemma~\ref{lem:mech-general} therefore gives the per-step cost coefficient
+\[
+ C=\frac{d^2}{2\mathcal T^2}-\frac d{\mathcal T}
+ \left\{\frac{R-(1-d)q_j}{1-R}-\frac{d\theta}{\mathcal T}\right\}.
+\]
+Multiplication by \(\mathcal T\) proves \eqref{eq:mech-contact-coefficient}. At threshold the birth frequency is \(1/\mathcal T\), so this is also the coefficient of \(D\). Lemma~\ref{lem:mech-bounded} supplies the stated remainder locally, including after a small birth tilt.
+
+For positive memory, \(\prod_k(1+\tau_k/\theta)\geq1+\mathcal T/\theta\), so \(R/(1-R)\leq\theta/\mathcal T\) and \(K_g\geq1/(2\mathcal T)>0\). Also \(0\leq R\leq q_j<1\), giving \((q_j-R)/(1-R)\geq0\). This proves positivity for \(d>0\); zero memory follows directly. If \(d=0\), \(\mathbf w^{\mathsf T}\widetilde{\mathbf B}=0\), so \(\mathbf w^{\mathsf T}\mathbf A(t)=\lambda\mathbf w^{\mathsf T}\) for every admissible host history. Positivity of \(\mathbf w\) identifies the population exponent as \(\log\lambda\). At the mean threshold the loss is therefore zero at all amplitudes. Finally, lengthening a different stay sends \(\mathcal T\) to infinity and \(R\) to zero, proving \eqref{eq:mech-contact-limit}. This is a coefficient limit, taken after the small-noise expansion.
+\end{proof}
+
+\begin{proof}[Independent resolvent calculation of the contact coefficient]
+At threshold set \(\mathcal R=(\mathbf I-\phi\mathbf A_0)^{-1}\). Closing the serial ring gives
+\[
+ \mathcal R_{jj}=\frac1{(1-\phi s_j)(1-R)},\qquad
+ \phi g_j\mathcal R_{j,j+1}=\frac R{1-R}.
+\]
+The first identity sums repeated stays in \(j\) and complete circuits. The second sums the first crossing back from \(j+1\) to \(j\) and all subsequent circuits. The Perron projection in Lemma~\ref{lem:mech-general} subtracts its stationary contribution. With \(A_\phi=(1+\phi)/[2(1-\phi)]\), this gives
+\[
+ K_c=\frac{d^2A_\phi}{\mathcal T}
+ -d\frac{R-\phi c/(1-\phi s_j)}{1-R}.
+\]
+Since \(c=(1-d)(1-s_j)\), the second numerator is \(R-(1-d)q_j\). Rearrangement recovers \(d^2K_g+d(1-d)(q_j-R)/(1-R)\). The scalar ring keeps stay and transfer as separate contributions to its one entry and gives \(K_c=d^2/(2\tau_j)\) directly by expanding its logarithm.
+\end{proof}
+
+\begin{lemma}[Contact signs, comparisons, and the local stay derivative]\label{lem:mech-contact-consequences}
+Under Proposition~\ref{prop:mech-contact}, put \(L_j=(q_j-R)/(1-R)\). For \(n>1\), \(\phi<0\), and \(0<d\leq1\), \(L_j<0\). If \(K_g>0\), \(K_c>0\) exactly when \(d>-L_j/(K_g-L_j)\). If \(K_g\leq0\), \(K_c<0\) for \(0<d<1\), and \(K_c=K_g\) at \(d=1\). For \(d<1\),
+\begin{equation}\label{eq:mech-contact-comparison}
+ K_c>K_g\ \Longleftrightarrow\
+ \frac{R+dq_j}{1-R}>(1+d)\frac{1+2\theta}{2\mathcal T}.
+\end{equation}
+For positive memory, lengthen a different steady stay \(b\), keeping the others fixed. Set \(S_0=\sum_{k\ne\mathrm{park}}\tau_k\), \(U=\theta\prod_{k\ne\mathrm{park}}q_k\), and \(\alpha_c=(1-d)q_j\). Then
+\begin{equation}\label{eq:mech-contact-derivative}
+ K_c'(b)=-\frac{d^2(\theta+1/2)}{(b+S_0)^2}
+ +\frac{dU(1-\alpha_c)}{(b+\theta-U)^2}.
+\end{equation}
+These are coefficient comparisons, independently reproduced.
+\end{lemma}
+\begin{proof}
+For negative \(\phi\), each \(q_k<0\) and \(|R|<|q_j|\), so \(q_j-R<0\). The contact coefficient is \(d[L_j+d(K_g-L_j)]\). Inspecting this affine bracket proves all sign statements, including equality at the boundary. Subtracting \(K_g\) gives
+\[
+ K_c-K_g=(1-d)\left\{\frac{R+dq_j}{1-R}
+ -(1+d)\frac{1+2\theta}{2\mathcal T}\right\},
+\]
+which proves \eqref{eq:mech-contact-comparison}. To differentiate, substitute \(\mathcal T=b+S_0\) and \(R=U/(b+\theta)\) into \eqref{eq:mech-contact-coefficient}, collect its rational terms, and apply the quotient rule. This gives \eqref{eq:mech-contact-derivative}. Its leading sign at large \(b\), for \(d>0\), is the sign of \(U(1-\alpha_c)-d(\theta+1/2)\), unless this number vanishes. At zero memory the derivative is \(-d^2/[2(b+S_0)^2]\). For gain-only transmission, \(U<\theta<\theta+1/2\), so it is eventually negative. For contact limitation either sign is possible. The nonnegative limit satisfies \(d(1-d)q_j\leq1/4\), since \(d(1-d)\leq1/4\) and \(q_j\leq1\).
+\end{proof}
+
+\begin{proof}[Eventual success and the finite-memory factor]
+At threshold put \(p=1-d=c/(\mu+c)\). For a frozen host the probability of transferring before death is \(f(h)=ph/(ph+1-p)\). Direct differentiation gives \(f(1)=p\), \(f'(1)=p(1-p)\), and \(f''(1)=-2p^2(1-p)\). Thus
+\[
+ \mathbb Ef(h)=p[1-p(1-p)\sigma^2]+O(|\sigma|^3)
+\]
+for a bounded centered small-noise family. The rational function is strictly concave when \(0<p<1\). Its lognormal frozen-host expectation has a fourth-order remainder under the usual smoothness and moment conditions, but that unbounded host is not a valid discrete contact probability.
+
+To obtain finite memory, start an individual independently in the stationary environment and put \(s=1-\mu-c\). Its eventual success probability is
+\[
+ \mathbb E\sum_{k\geq0}c(1+\sigma\xi_k)\prod_{r<k}(s-c\sigma\xi_r).
+\]
+The encounter--previous-stay pairs contribute
+\(-c^2\sum_{k\geq1}s^{k-1}\sum_{r<k}\phi^{k-r}
+=-c^2\phi/[(1-s)(1-s\phi)]\).
+Pairs of previous staying perturbations contribute
+\(c^3\sum_{k\geq2}s^{k-2}\sum_{0\leq r<u<k}\phi^{u-r}
+=c^3\phi/[(1-s)^2(1-s\phi)]\).
+Both equalities follow by first summing over the positive separation of the pair and then over its possible location. Dividing their sum by the baseline success \(p=c/(1-s)\) gives the negative relative coefficient \(-d(1-d)q_j\), with \(q_j=(1-s)\phi/(1-s\phi)\). This derives the finite-memory factor in the long-reservoir limit. The starting distribution used here is externally specified; away from threshold the analogous success must be discounted by reproductive value.
+\end{proof}
+
+\begin{lemma}[Continuous-time contact coefficient]\label{lem:mech-contact-ct}
+Let \(\mathbf A_0\) be an irreducible Metzler ring with diagonals \(-a_k\), transfers \(g_k>0\), and mean growth rate \(r_0\). Put \(\tau_k=(r_0+a_k)^{-1}\), \(\mathcal T=\sum_k\tau_k\), and \(d=1-c\tau_j\). Let \(h(t)=1+\sigma\xi(t)\geq0\) be stationary ergodic and locally integrable, with centered unit-variance driver and covariance \(\exp(-u/\theta)\), \(\theta>0\). Under a justified perturbation expansion,
+\begin{equation}\label{eq:mech-contact-ct}
+ K_{c,\mathrm{ct}}=\frac{d^2\theta}{\mathcal T}
+ -d\frac{R-(1-d)q_j}{1-R},\qquad
+ q_k=\frac{\theta}{\theta+\tau_k},\quad R=\prod_kq_k.
+\end{equation}
+This is a coefficient of per-generation growth loss, and of \(D\) at threshold. Bounded forcing gives a local cubic remainder, or fourth order under whole-process sign symmetry. No remainder is asserted here for arbitrary unbounded hosts. The coefficient has an independent reproduction.
+\end{lemma}
+\begin{proof}
+Set \(\mathbf L=\mathbf A_0-r_0\mathbf I\) and \(\mathbf E=g_j\mathbf e_{j+1}\mathbf e_j^{\mathsf T}-c\mathbf e_j\mathbf e_j^{\mathsf T}\). Normalized population has instantaneous log growth \(r_0+\sigma\xi(t)\mathbf w^{\mathsf T}\mathbf E\mathbf y(t)\). Its first variation is
+\[
+ \mathbf z'=\mathbf L\mathbf z+\xi(t)\mathbf Q\mathbf E\mathbf v,
+ \qquad \mathbf z(t)=\int_0^\infty\exp(\mathbf L u)\mathbf Q\mathbf E\mathbf v\,\xi(t-u)\,\mathrm du.
+\]
+There is no discrete logarithmic variance term. The cost per time has coefficient
+\[
+ C_{\mathrm{ct}}=-\int_0^\infty\rho(u)\mathbf w^{\mathsf T}\mathbf E
+ \exp(\mathbf L u)\mathbf Q\mathbf E\mathbf v\,\mathrm du.
+\]
+The reference generator \(\mathbf W\mathbf L\mathbf W^{-1}\) advances at rate \(1/\tau_k\), with stationary law \(\varpi_k=\tau_k/\mathcal T\). The contraction in the integral is
+\[
+ \frac d{\mathcal T\tau_j}
+ \{P_{j\leftarrow j+1}(u)-(1-d)P_{j\leftarrow j}(u)-d\varpi_j\}.
+\]
+Let \(F,H\) be the integrals of the first two transition probabilities against \(\exp(-u/\theta)\). Exponential reference stays have Laplace transforms \(q_k\), and the renewal and first-wait equations give
+\[
+ F/\tau_j=R/(1-R),\qquad
+ H=\frac{1+F/\tau_j}{\theta^{-1}+\tau_j^{-1}}=
+ \frac{\tau_jq_j}{1-R},\qquad
+ \int_0^\infty\exp(-u/\theta)\varpi_j\,\mathrm du=\frac{\theta\tau_j}{\mathcal T}.
+\]
+Substitution and multiplication by \(\mathcal T\) give \eqref{eq:mech-contact-ct}. For bounded forcing, exponential contraction of the transverse flow gives the same uniform differentiation argument as Lemma~\ref{lem:mech-bounded}. This is an ordinary random differential equation with colored forcing, not a white-noise stochastic differential equation.
+
+For \(n\geq2\), \(\prod_k(1+\tau_k/\theta)>1+\mathcal T/\theta\), so the gain-only coefficient \(K_{g,\mathrm{ct}}>0\). Also \(L_j>0\), proving positivity for \(0<d\leq1\). As \(\theta\downarrow0\), \(K_{g,\mathrm{ct}}\sim\theta/\mathcal T\) and \(L_j\sim\theta/\tau_j\), giving
+\[
+ \frac{K_{c,\mathrm{ct}}}{K_{g,\mathrm{ct}}}\longrightarrow
+ d^2+d(1-d)\frac{\mathcal T}{\tau_j}.
+\]
+For two stages the non-Perron subspace is one-dimensional. The two contractions are therefore proportional for every lag, and direct substitution gives this ratio at every \(\theta\). At threshold, \(\tau_j=1/(c+\mu)\), \(\tau_2=1/a_2\), it equals \(d(1+c/a_2)\), exceeding one exactly when \(\mu>a_2\), for positive \(c,\mu\). The same proportionality applies to other covariances whenever the denominator is nonzero. A scalar continuous-time equation averages its additive rate exactly, so both coefficients vanish and their ratio is undefined when \(n=1\).
+\end{proof}
+
+\subsection{Sheltered kernels, renewal times, and mortality}\label{app:mech-renewal}
+\begin{lemma}[Complete sheltered kernels]\label{lem:mech-kernel}
+Finite serial sheltered segments with constant \(0\leq s_k<1\), positive transfers, unchanged exposed dynamics, and equal kernels have the same top exponent and threshold. With one fluctuating transfer and all other rates fixed, permuting steady stages or moving that transfer preserves the loss. These statements were proved and refereed.
+\end{lemma}
+\begin{proof}
+One sheltered stage contributes \(g_ks_k^{\ell-1}\) at lag \(\ell\geq1\), which is \(g_k/(1-s_k)\) times the probability mass of a geometric stay. A serial segment convolves these contributions. Its generating function is
+\[
+ \widehat K(z)=\prod_{k\in\mathrm{segment}}\frac{g_kz}{1-s_kz}.
+\]
+Its mass is \(\prod_kg_k/(1-s_k)\), and its normalized timing law is the sum of independent physical geometric stays, which coincide with the reference stays at the mean threshold. Eliminating the segment gives output \(\sum_{\ell\geq1}K(\ell)\,\mathrm{input}(t-\ell)\), plus a startup term bounded by a polynomial times a decaying geometric factor. Matched histories give identical exposed trajectories. For arbitrary initial contents it is insufficient to discard that term, since feedback propagates it.
+
+Instead, a positive-transfer serial segment is controllable from its entrance and observable at its exit: successive powers of its lower bidiagonal state matrix applied to the entrance vector, and the analogous reversed output rows, have nonzero triangular diagonals given by products of the positive transfers. Thus these controllability and observability matrices have full rank. Equal kernels give equal rational transfer functions and equivalent minimal realizations, related by a constant invertible coordinate change. Applied only to the sheltered coordinates, this conjugates the whole time-dependent system and preserves its exposed inputs and outputs. Equivalent finite-dimensional norms give equal top exponents. The kernel mass also preserves the mean-rate reproduction threshold, so \(D\) agrees.
+
+For one fluctuating transfer, the renewal flow has the form \(u(t)=h(t)\sum_\ell K(\ell)u(t-\ell)\), with the full-cycle transform the product of all the steady stage factors. Scalar factors commute. Permutation or placement therefore leaves the renewal operator unchanged, proving the stated invariance. Merely splitting a mean stay does not preserve its kernel: a geometric mean \(b\) has variance \(b(b-1)\), while two geometric means \(b/2\) sum to variance \(b^2/2-b\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-renewal}]
+Visits to the marked event are renewals of the stationary reference lineage. Their frequency is \(c=1/\mathcal T\). Let \(u_\ell\) be the conditional probability of a visit at lag \(\ell\), given a visit at zero. The contraction in Lemma~\ref{lem:mech-general} is \(c(u_\ell-c)\), and
+\[
+ \sum_{\ell\geq1}u_\ell\phi^\ell=\frac R{1-R},\qquad
+ \sum_{\ell\geq1}\phi^\ell=\theta.
+\]
+The marked transfer is the sole counted birth, so its frequency is \(b=c=1/\mathcal T\). Dividing the per-step cost \(c^2/2-c\sum_{\ell\geq1}\phi^\ell(u_\ell-c)\) by \(b\) yields \eqref{eq:mech-renewal} as the coefficient of \(\Delta\). In a ring under the stated convention, \(\Delta=D\). Since \(0\leq R<1\), rearranging its strict negative sign gives the stated gain condition. For serial geometric stays, the product inequality used in the contact proof gives \(R/(1-R)\leq\theta/\mathcal T\), hence \(K\geq1/(2\mathcal T)>0\). At \(\phi=0\) the return sum vanishes directly.
+
+For \(0<\phi<1\), \(x\mapsto\phi^x\) is strictly convex. A mean-preserving spread in convex order therefore raises \(R\), while \(\mathrm d[R/(1-R)]/\mathrm dR=(1-R)^{-2}>0\). This proves the fixed-mean ordering. For an equal-substage chain,
+\(R=R_{\rm rest}(1+b/(m\theta))^{-m}\).
+The derivative of \(m\log(1+c/m)\), \(c>0\), is \(\log(1+x)-x/(1+x)>0\), where \(x=c/m\). Thus the chain transform falls with \(m\), and the coefficient rises strictly. No-death timing keeps \(\mathcal T\) fixed. All comparisons stay within the primitive family.
+
+The bimodal counterexample in the text has return transform
+\[
+ R=\frac{\phi}{2-\phi}(0.99\phi+0.01\phi^{101}),\qquad \mathcal T=4.
+\]
+Substitution of \(\phi=0.99\) gives \(K=-2.09236743618\). The age-dependent stay is realized by a finite chain that exits after one step with probability 0.99 and otherwise completes the remaining 100 positions. The geometric exposed stay supplies a self-loop, so the mean matrix is primitive. The negative coefficient therefore implies a gain for sufficiently small nonzero noise in the stated local family.
+
+Equal mean and variance alone cannot replace convex order. The referee compared sheltered laws \(\{1,3\}\) with probabilities \(\{1/2,1/2\}\), and \(\{1,2,4\}\) with probabilities \(\{1/3,1/2,1/6\}\). Both have mean two and variance one. At \(\phi=0.4\), their transforms are respectively \(0.232\) and \(0.2176\). Multiplying by the transform of a geometric exposed stay of mean three and substituting in \eqref{eq:mech-renewal} gives different coefficients, \(0.18929385\) and \(0.19213994\).
+
+For a fixed delay beside a geometric stay \(a>1\), \(R=\theta\phi^b/(\theta+a)\to0\). Both terms in \eqref{eq:mech-renewal} tend to zero. Comparison with the scalar coefficient \(1/(2a)\) gives precisely
+\[
+ \frac{1+2\theta}{2(a+b)}-\frac R{1-R}<\frac1{2a}.
+\]
+Dropping the nonpositive return term proves the sufficient condition \(b>2a\theta\). It is a coefficient condition, not a finite-noise threshold.
+\end{proof}
+
+\begin{proof}[Slow-memory limit and the continuous renewal criterion]
+For a fixed primitive finite reference model, put \(\delta=1-\phi\). Finite second moment gives
+\[
+ R=1-\mathcal T\delta+\tfrac12\mathbb E[L(L-1)]\delta^2+o(\delta^2).
+\]
+Therefore
+\[
+ \frac R{1-R}=\frac1{\mathcal T\delta}
+ +\frac{\mathbb E[L(L-1)]}{2\mathcal T^2}-1+o(1),\qquad
+ \frac{1+2\theta}{2\mathcal T}=\frac1{\mathcal T\delta}-\frac1{2\mathcal T}.
+\]
+Subtracting gives \(K\to[1-\operatorname{Var}(L)/\mathcal T^2]/2\). Equality does not decide higher-order effects. For a geometric stay \(a\) plus a fixed delay \(b\), \(\operatorname{Var}(L)=a(a-1)\). Taking \(\phi\uparrow1\) first and then \(b\to\infty\) gives \(K\to1/2\), whereas taking \(b\to\infty\) first at fixed memory gives zero. Thus the two limits do not commute. Since \(L\geq1\), \(R\leq\phi\). Combining this with the strict gain condition implies \(\mathcal T>(1+\phi)/(2\phi)\) when \(\phi>0\), a necessary condition only.
+
+In the corresponding continuous-time single-event renewal calculation, with exponentially decaying covariance \(\exp(-\alpha u)\), \(\alpha>0\), no instantaneous logarithmic term occurs. Integrating the renewal density and subtracting its stationary frequency gives
+\begin{equation}\label{eq:mech-renewal-ct}
+ K_{\mathrm{ct}}=\frac1{\alpha\mathcal T}-\frac R{1-R},\qquad
+ R=\mathbb E\exp(-\alpha L),\qquad
+ K_{\mathrm{ct}}<0\ \Longleftrightarrow\ R>\frac1{1+\alpha\mathcal T}.
+\end{equation}
+The calculation assumes a regenerative event, the stated covariance, and a justified continuous-time local expansion. For a sum of exponential stays, \(\prod_k(1+\alpha\tau_k)\geq1+\alpha\mathcal T\), excluding a gain. A mixture of short and long routes need not satisfy that product inequality. This is the single-derivation renewal interpretation of the relapse models checked against \citet{white2016}, not a theorem for arbitrary continuous-time networks. In that check, the approximately 18\% seasonal increase uses inferred gamma dormancy with eleven phases and 95\% seasonal concentration; it is not an empirical estimate of buffering.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-fixed}]
+Expand each fixed stay into daily positions. Each cohort traverses the same cyclic permutation and encounters the noisy transfer once every \(n\) steps. For a divisor \(R\) on one reproductive transfer, its per-step logarithmic growth is
+\[
+ r(R)=\frac{\log R_0-\log R+\mathbb E\log h}{n}.
+\]
+Indeed, the mean deterministic factors multiply to \(R_0/R\) each circuit, while the cycle-shift ergodic theorem makes the average of \(\log h\) along every occupied residue class equal to its unconditional expectation. There are finitely many residue classes, so their sum has the same exponent. Setting \(r(R_0^*)=0\) proves \(D=-\mathbb E\log h\). For a centered mean-one lognormal multiplier this is \(\sigma^2/2\).
+
+The cycle-shift hypothesis is essential. For a two-position cycle let \(\xi_t=(-1)^{t+U}|Z_t|\), with independent standard normals \(Z_t\) and a uniformly random phase \(U\). This process is stationary and one-step ergodic, with standard normal one-time marginals, but its two-step shift retains the phase. The favorable cohort always samples the positive half-normal values, so \(D=\sigma^2/2-\sigma\sqrt{2/\pi}\). Thus normal marginals and one-step ergodicity alone do not prove the equality.
+\end{proof}
+
+\begin{lemma}[Mortality during a steady stay]\label{lem:mech-mortality}
+Assume one unit-sensitivity fluctuating transfer with noise amplitude $\sigma\geq0$, independent environments across time, a primitive remaining cycle of mean reference duration $a$, and the local expansion. In the added stay, let independent survival per step be $\exp(-\mu)$ with hazard $\mu>0$. For a fixed delay $b$, the continuous relaxation of the second-order persistence margin is maximized at $b^*=\max\{0,\sigma/\sqrt{2\mu}-a\}$. For integer delays, one additional step helps exactly when $\mu<\sigma^2/[2(a+b)(a+b+1)]$. These are second-order statements.
+\end{lemma}
+\begin{proof}
+Fixed-delay mortality multiplies the complete kernel by \(\exp(-\mu b)\), without changing its timing. Rescaling births removes this mass from \(D\), but not from the mean \(R_0\). The margin is therefore
+\[
+ N_2(b)=C-\mu b-\frac{\sigma^2}{2(a+b)},\quad
+ N_2'(b)=-\mu+\frac{\sigma^2}{2(a+b)^2},\quad
+ N_2''(b)=-\frac{\sigma^2}{(a+b)^3}\leq0.
+\]
+For \(\sigma>0\), strict concavity gives the continuous optimum from the stationary point and endpoint; at \(\sigma=0\), \(N_2'(b)=-\mu<0\) gives \(b^*=0\). Subtracting \(N_2(b)\) from \(N_2(b+1)\) proves the integer inequality. No positive integer delay helps when \(\mu\geq\sigma^2/[2a(a+1)]\).
+
+For completeness, a geometric stay before mortality has mean \(b\geq1\). Set \(\varepsilon=\exp(\mu)-1\). Summing its killed geometric probabilities gives survival \(1/(1+b\varepsilon)\), while the survival-weighted reference mean is \(b(1+\varepsilon)/(1+b\varepsilon)\). Hence
+\[
+ N_2(b)=C-\log(1+b\varepsilon)
+ -\frac{\sigma^2}{2\{a+b(1+\varepsilon)/(1+b\varepsilon)\}}.
+\]
+Put \(c=a\varepsilon+1+\varepsilon\). Differentiation, followed by multiplication by the positive denominators, shows that an interior stationary point solves
+\[
+ 2\varepsilon c^2b^2+\{4\varepsilon ac-\sigma^2(1+\varepsilon)\varepsilon\}b
+ +2\varepsilon a^2-\sigma^2(1+\varepsilon)=0.
+\]
+Admissible roots need not exist. All roots with \(b\geq1\), the endpoint \(b=1\), and the separate model without the stage must be compared. With memory the same derivative reasoning requires the full return transform, and choosing the largest stationary root alone is not justified.
+\end{proof}
+
+\subsection{Further results for Section~\ref{sec:mech}}
+
+\subsubsection{Temperature and the general edge bound}\label{app:mech-temperature}
+Write an exposed stage as \(s_k(T)=1-q_k(T)\), \(g_k(T)=b_kp_k(T)q_k(T)\), where \(q_k\) is the probability of leaving and \(p_k\) the probability of successful completion among leavers. Define \(\pi_k=(\log p_k)'\) and \(\chi_k=(\log q_k)'\) at \(\overline T\).
+
+Let \(R_{0,i}\) use constant temperature \(\overline T\), and \(R_{0,ii}\) use arithmetic-mean rates. Exactly,
+\begin{equation}\label{eq:mech-thermal-baselines}
+ \log R_0^*-\log R_{0,i}=J-D,\qquad J=\log R_{0,ii}-\log R_{0,i}.
+\end{equation}
+
+\begin{proposition}[Thermal clocks and local signs]\label{prop:mech-thermal}
+In a finite ring, if \(g_k(t)=\beta_kq_k(t)\) for constants \(0<\beta_k<\infty\), jointly stationary ergodic clocks \(0<q_k(t)\leq1\), and nonzero nonnegative initial population, then \(R_0^*=R_{0,i}=R_{0,ii}=\prod_k\beta_k\). Thus \(J=D=0\).
+
+For the local comparison, assume a primitive geometric ring, smooth interior thermal responses, the moments and differentiability needed for the mean-rate and growth expansions, and \(T_t=\overline T+\sigma_T\xi_t\) with centered stationary unit-variance Gaussian AR(1) driver, \(-1<\phi<1\). With exactly one exposed stage,
+\begin{equation}\label{eq:mech-thermal-sign}
+ D_2=\sigma_T^2\pi(\pi K_g+\chi X),\qquad X=\frac{q_j^{\rm ret}-R}{1-R},
+ \qquad q_j^{\rm ret}=\frac{\theta}{\theta+\tau_j}.
+\end{equation}
+For \(\pi\ne0\), \(0<\phi<1\), and at least one other stage, \(X>0\), and a quadratic gain occurs exactly when \(\pi\chi<0\) and \(|\chi/\pi|>K_g/X\). At \(\pi=0\) this coefficient is zero. At \(X=0\) it cannot be negative. With any number of exposed stages, a quadratic gain against constant mean temperature occurs exactly when
+\begin{equation}\label{eq:mech-thermal-curvature}
+ \sum_k\left(\frac{p_k''}{p_k}+2\pi_k\chi_k\right)>\frac{2D_2}{\sigma_T^2},
+\end{equation}
+using the full cross-stage coefficient in Appendix~\ref{app:mech-temperature}.
+\end{proposition}
+
+\begin{proof}[Conservation in Proposition~\ref{prop:mech-thermal}]
+The ratio of mean transfer to mean exit is \(\beta_k\mathbb E q_k/\mathbb E q_k=\beta_k\), also at constant temperature. Thus both mean reproduction numbers equal \(\prod_k\beta_k\). Divide one transfer by \(R\), denote the modified constants by \(\beta_k'\), and write \(\exp(c)=\prod_k\beta_k'\). Choose \(w_1=1\) and \(w_{k+1}=w_k\exp(c/n)/\beta_k'\). The product condition closes the cycle. For every time,
+\[
+ (\mathbf w^{\mathsf T}\mathbf A(t))_k
+ =w_k[1+\{\exp(c/n)-1\}q_k(t)].
+\]
+At \(c=0\), \(\mathbf w^{\mathsf T}\mathbf x_t\) is conserved, and its positive weights imply zero growth. If \(c>0\), its next value is at least its current value multiplied by \(1+\{\exp(c/n)-1\}\min_kq_k(t)>1\). The log of this bounded positive factor has strictly positive expectation, so ergodicity gives positive growth. For \(c<0\), the same minimum gives an upper factor strictly below one, bounded below by \(\exp(c/n)>0\), and hence negative growth. Therefore the unique zero is \(R=\prod_k\beta_k\). This proves the exact conservation and baseline identity.
+\end{proof}
+
+\begin{lemma}[Thermal cross-stage coefficient]\label{lem:mech-thermal-full}
+Under the local assumptions of Proposition~\ref{prop:mech-thermal}, put \(\rho_k=\theta/(\theta+\tau_k)\), \(R=\prod_k\rho_k\), and let \(R_{k\to j}\) be the product of the factors after transfer \(k\) through transfer \(j\), taking a full circuit when \(j=k\). Then
+\begin{align}
+ \frac{D_2}{\sigma_T^2}
+ &=\sum_j\pi_j^2K_g+\sum_{j<k}\pi_j\pi_kK_{jk}
+ +\sum_k\pi_k\chi_kX_k-\sum_{j\ne k}\pi_j\chi_kY_{jk},\label{eq:mech-thermal-full}\\
+ K_{jk}&=\frac{1+2\theta}{\mathcal T}-\frac{R_{k\to j}+R_{j\to k}}{1-R},\quad
+ X_k=\frac{\rho_k-R}{1-R},\quad
+ Y_{jk}=\frac{R_{k\to j}(1-\rho_k)}{1-R}.\nonumber
+\end{align}
+At zero memory the coefficient is \((\sum_k\pi_k)^2/(2\mathcal T)\). The derivation was refereed.
+\end{lemma}
+\begin{proof}
+At threshold \(g_kw_{k+1}=q_kw_k\), with exit probability \(q_k\), and \(v_kw_k=1/(q_k\mathcal T)\). Split the column derivative into completion and clock parts,
+\[
+ \mathbf B_k^p=g_k\mathbf e_{k+1}\mathbf e_k^{\mathsf T},\qquad
+ \mathbf B_k^c=q_k\{-\mathbf e_k+(g_k/q_k)\mathbf e_{k+1}\}\mathbf e_k^{\mathsf T},
+ \qquad \mathbf A'=
+ \sum_k(\pi_k\mathbf B_k^p+\chi_k\mathbf B_k^c).
+\]
+Direct multiplication gives \(\mathbf w^{\mathsf T}\mathbf B_k^c=0\) and \(\mathbf w^{\mathsf T}\mathbf B_k^p\mathbf v=1/\mathcal T\). Every contraction with a clock on the left therefore vanishes. For the reference chain,
+\[
+ \mathbf w^{\mathsf T}\mathbf B_j^p\mathbf A_0^m\mathbf B_k^p\mathbf v
+ =\frac{q_j}{\mathcal T}P^m_{j\leftarrow k+1},\qquad
+ \mathbf w^{\mathsf T}\mathbf B_j^p\mathbf A_0^m\mathbf B_k^c\mathbf v
+ =\frac{q_j}{\mathcal T}(P^m_{j\leftarrow k+1}-P^m_{j\leftarrow k}).
+\]
+Multiplying by \(\phi^{m+1}\) and summing, the first transition produces \(R_{k\to j}/(1-R)\). The second has an additional first-wait factor \(\rho_k\) if \(j\ne k\); if \(j=k\), its first-use transform is \(\rho_k\) rather than the full circuit \(R\). Subtracting the Perron projection in the completion--completion terms supplies \(\theta/\mathcal T\), and the instantaneous term supplies \(1/(2\mathcal T)\) per ordered pair. The clock terms have zero Perron projection. Collecting diagonal and off-diagonal pairs yields \eqref{eq:mech-thermal-full}. At \(\phi=0\), every return factor vanishes and the remaining square is the one stated. Smoothness and the assumed moment and growth expansions justify replacing centered thermal rates by their first derivatives here; mean normalization removes their mean quadratic term. No finite-amplitude remainder estimate follows from this algebra.
+\end{proof}
+
+\begin{proof}[Thermal signs, curvature, and the two baselines]
+With one exposed stage, \eqref{eq:mech-thermal-full} reduces to \(\pi^2K_g+\pi\chi X\). For a serial geometric ring with positive memory, \(K_g>0\), and with another stage \(R<\rho_j\), so \(X>0\). When \(\pi\ne0\), dividing by \(\pi^2X\) proves the sign criterion. At \(\pi=0\) the coefficient is zero. If there is no memory or no other stage, \(X=0\), leaving a nonnegative square. Cross-stage completion--clock terms explain why a stage with \(\pi_k=0\) cannot individually be declared sheltered.
+
+The identity \eqref{eq:mech-thermal-baselines} follows by adding and subtracting \(\log R_{0,ii}\). For centered unit-variance temperature perturbations with the required expectation expansion,
+\[
+ J_2=\frac{\sigma_T^2}{2}\sum_k
+ \left\{\frac{(p_kq_k)''}{p_kq_k}-\frac{q_k''}{q_k}\right\}
+ =\frac{\sigma_T^2}{2}\sum_k\left(\frac{p_k''}{p_k}+2\pi_k\chi_k\right).
+\]
+Subtracting \(D_2\) proves \eqref{eq:mech-thermal-curvature}. In the small-step limit \(q_k\) is proportional to \(\nu_k+\mu_k\) and \(p_kq_k\) to \(\nu_k\). The difference of relative curvatures becomes
+\((1-p_k)(\nu_k''/\nu_k-\mu_k''/\mu_k)\), as stated in the thermal note. A zero quadratic coefficient does not establish a nonzero fourth-order term or a finite-amplitude sign.
+\end{proof}
+
+\begin{proposition}[Bound including staying contributions]\label{prop:mech-edge-bound}
+Let ring rates be jointly stationary ergodic and nonnegative, with finite means \(\overline s_k<1\), \(\overline g_k>0\), and integrable logarithms on positive-mean contributions. Use a positive initial population or the top exponent, and assume the restoring threshold exists. Put \(\tau_k=(1-\overline s_k)^{-1}\), \(\ell_k^g=-\mathbb E\log(g_k/\overline g_k)\), and \(\ell_k^s=-\mathbb E\log(s_k/\overline s_k)\). Then
+\begin{equation}\label{eq:mech-edge-bound}
+ D\leq\sum_k\ell_k^g+\sum_k(\tau_k-1)\ell_k^s.
+\end{equation}
+Omit mean-zero staying edges. Without log integrability the corresponding infinite bound is uninformative.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-edge-bound}]
+Take a reference chain independent of the environment, staying in stage \(k\) with probability \(\overline s_k\) and advancing with probability \(1-\overline s_k\). Its stationary law is \(\varpi_k=\tau_k/\mathcal T\). Label stay and transfer separately, including for a scalar ring. For a length-\(t\) path \(\omega\), write its reference probability as \(Q(\omega)\). Total population is exactly
+\[
+ X_t=\sum_\omega Q(\omega)\frac{x_{i_0}(0)}{\varpi_{i_0}}
+ \prod_{u<t}\zeta_u(\omega),
+\]
+where a stay contributes \(s_k(u)/\overline s_k\), and an advance contributes
+\(\{\overline g_k/(1-\overline s_k)\}\{g_k(u)/\overline g_k\}\).
+There are no staying paths when \(\overline s_k=0\). Jensen's inequality, applied separately for each environment, gives
+\begin{align*}
+ \log X_t\geq{}&\sum_k\varpi_k\log\{x_k(0)/\varpi_k\}\\
+ &+\sum_{u<t,k}\varpi_k\left[\overline s_k\log\frac{s_k(u)}{\overline s_k}
+ +(1-\overline s_k)\left\{\log\frac{\overline g_k}{1-\overline s_k}
+ +\log\frac{g_k(u)}{\overline g_k}\right\}\right].
+\end{align*}
+Divide by \(t\), use the edgewise ergodic theorem and integrable logarithms, and note \(\varpi_k(1-\overline s_k)=1/\mathcal T\) and \(\varpi_k\overline s_k=(\tau_k-1)/\mathcal T\). Then
+\[
+ r\geq\frac{\log R_0-\sum_k\ell_k^g-\sum_k(\tau_k-1)\ell_k^s}{\mathcal T}.
+\]
+Dividing a transfer by \(R\) subtracts \(\log R\) in the numerator without changing the gaps. Substitute the existing zero-growth divisor \(R_0^*\). This proves the bound directly, without inferring existence of a root from monotonicity. Full initial support makes the startup logarithm finite; the top-exponent convention gives the same inequality.
+
+For the small-step interpretation, let \(s=\exp(-r\delta)\). Then
+\(\ell^s=\delta\mathbb E r+\log\mathbb E\exp(-r\delta)
+=\delta^2\operatorname{Var}(r)/2+O(\delta^3)\)
+under the required moments, while \(\tau-1=1/(\delta\mathbb E r)+O(1)\). Their product is
+\(\delta\operatorname{Var}(r)/(2\mathbb E r)+O(\delta^2)\), a per-cycle term that vanishes with the time step.
+\end{proof}
+
+\begin{lemma}[Visit-weighted bound and independent environments]\label{lem:mech-network-bound}
+For a finite primitive mean-threshold network with positive labeled mean contributions \(a_e\), jointly stationary ergodic mean-one multipliers \(h_e\), finite edge log moments, full initial support, and an existing restoring birth threshold,
+\begin{equation}\label{eq:mech-network-bound}
+ \Delta\leq\frac{\sum_ec_e\ell_e}{b},\qquad
+ c_e=w_{i_e}a_ev_{j_e},\quad \ell_e=-\mathbb E\log h_e.
+\end{equation}
+If the whole environmental matrices are independent across time and have finite means, then \(\Delta\geq0\) at the same baseline. The bound proof was read independently; it is the labeled-edge argument of Section~\ref{sec:bounds} specialized to these models.
+\end{lemma}
+\begin{proof}
+The reference probability of edge \(e:j\to i\) is \(a_ew_i/w_j\), and the stationary vertex law is \(w_jv_j\). Thus its stationary edge frequency is \(c_e\). Express population as an average over this environment-independent reference path law. Jensen's inequality gives a mean log contribution \(c_e\log h_e(t)\) per edge, plus the telescoping reproductive-value terms. A common log birth multiplier \(y\) contributes \(by\). After the startup term vanishes and time averages converge,
+\(r(y)\geq by-\sum_ec_e\ell_e\).
+Substitution at \(y=\Delta\) proves \eqref{eq:mech-network-bound}. In the ring every transfer and the one birth has frequency \(1/\mathcal T\). Its staying edge has frequency \((\tau_k-1)/\mathcal T\), recovering Proposition~\ref{prop:mech-edge-bound}. Parallel entrances have expected visits per birth \(w_j\), the optional common entrance has one, and the bypassed entrance has \(\alpha\).
+
+For independent matrices, \(\mathbb E\mathbf x_t=(\mathbb E\mathbf A)^t\mathbf x_0\). For each \(\varepsilon>0\), a finite-dimensional matrix-power bound gives
+\(\mathbb E\|\mathbf x_t\|_1\leq C_\varepsilon\exp\{t(\log\lambda+\varepsilon)\}\).
+Markov's inequality makes the probabilities of
+\(\|\mathbf x_t\|_1>\exp\{t(\log\lambda+2\varepsilon)\}\)
+summable. The Borel--Cantelli lemma therefore gives \(r\leq\log\lambda\) almost surely. Every negative birth tilt has a mean model below threshold, so it cannot restore zero growth. This proves \(\Delta\geq0\), allowing arbitrary dependence between entries within a time step.
+\end{proof}
+
+\subsubsection{Curved encounters and routes}\label{app:mech-routes}
+Curved encounters change mean transmission even when mean host abundance is held fixed. Let \(F(H)\) be the encounter function, \(\eta=\overline HF'(\overline H)/F(\overline H)\) its elasticity, and \(\chi=\overline H^2F''(\overline H)/F(\overline H)\) its relative curvature.
+
+\begin{proposition}[Curved encounters]\label{prop:mech-curvature}
+For a primitive mean-threshold ring with one gain-only transfer, let \(H=\overline H\exp(\sigma\xi-\sigma^2/2)\) with centered stationary Gaussian AR(1) driver of unit variance, \(|\phi|<1\). Assume \(0<\mathbb EF(H)<\infty\) for small \(\sigma\), \(\mathbb EF(H)=F(\overline H)[1+\chi\sigma^2/2+o(\sigma^2)]\), and a valid growth expansion for the normalized rate with first variation \(\eta\xi\). Then
+\begin{equation}\label{eq:mech-curvature}
+ D_{ii,2}=\eta^2K_g\sigma^2,\qquad
+ (\log R_0^*-\log R_{0,i})_2=(\chi/2-\eta^2K_g)\sigma^2.
+\end{equation}
+The second expression is positive exactly when \(\chi>2\eta^2K_g\).
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-curvature}]
+The stipulated expectation expansion gives
+\(\log\{\mathbb EF(H)/F(\overline H)\}=\chi\sigma^2/2+o(\sigma^2)\).
+The first-order relative perturbation of \(F(H)/\mathbb EF(H)\) is \(\eta\sigma\xi\). Lemma~\ref{lem:mech-general} therefore gives \(D_{ii,2}=\eta^2K_g\sigma^2\). Against constant mean host abundance, subtract this loss from the mean-rate log reproduction change to obtain \eqref{eq:mech-curvature}. The sign condition follows by division by \(\sigma^2>0\).
+
+The encounter examples follow by differentiation. Writing \(x=\overline H/H_{1/2}\), type II has \(\eta=1/(1+x)\), \(\chi=-2x/(1+x)^2\), precluding a benefit when \(K_g\geq0\). Type III has \(\eta=2/(1+x^2)\), \(\chi=2(1-3x^2)/(1+x^2)^2\), so its benefit condition is \(x^2<(1-4K_g)/3\). A power \(H^a\) gives \(\eta=a\), \(\chi=a(a-1)\), hence \(a[(1-2K_g)a-1]>0\). The inverse case is \(a=-1\), yielding \(K_g<1\). Normalizing a lognormal power to mean one produces \(\exp(a\sigma\xi-a^2\sigma^2/2)\), whose log gap is \(a^2\sigma^2/2\). No other response is assumed lognormal, and its actual logarithmic gap remains the relevant bound.
+\end{proof}
+
+\begin{proof}[Parallel alternatives and the newcomer inequality]
+In the parallel model of Proposition~\ref{prop:mech-routes}, put \(p_j=1/\tau_j\). The central exit to host \(j\) is \(p_0w_j\) at the mean threshold, and its reproductive return is \(p_j\). The reference time between central departures has mean \(\mathcal T=\tau_0+\sum_jw_j\tau_j\). Entrance \(j\) has elasticity \(w_j/\mathcal T\), while all returns together have elasticity \(1/\mathcal T\). With no lag covariance, Lemma~\ref{lem:mech-general} immediately gives \eqref{eq:mech-parallel}.
+
+For completeness the memory formulas in the source note are as follows. Define \(f_a(z)=z/[a-(a-1)z]\), \(q_j=f_{\tau_j}(\phi)\), \(R=q_0\sum_jw_jq_j\), and \(u_j=w_j\kappa_j\). For common memory,
+\begin{equation}\label{eq:mech-parallel-memory}
+ K_\parallel=\frac{(1+2\theta)V}{2\mathcal T}
+ -\frac{q_0}{1-R}\sum_ju_jq_j\sum_iC_{ij}u_i.
+\end{equation}
+A path from an entrance through host \(j\) and the central stage has transform \(q_jq_0\); any number of additional circuits contributes \(1/(1-R)\). Its entrance-pair contraction is therefore \(w_iw_jq_0q_j/[\mathcal T(1-R)]\). Inserting this in the general coefficient, including its stationary subtraction, proves \eqref{eq:mech-parallel-memory}.
+
+For componentwise causal autoregressions with different memories, the lag covariance is \(\rho_{ij}(\ell)=\phi_i^\ell C_{ij}\), and a valid model requires the innovation covariance \([C_{ij}(1-\phi_i\phi_j)]\) to be positive semidefinite. The memory belongs to the later host \(i\). Summation gives
+\begin{equation}\label{eq:mech-parallel-different}
+ K_\parallel=\sum_{i,j}C_{ij}w_iw_j\kappa_i\kappa_j
+ \left\{\frac{1+\phi_i}{2(1-\phi_i)\mathcal T}
+ -\frac{f_{\tau_0}(\phi_i)f_{\tau_j}(\phi_i)}
+ {1-f_{\tau_0}(\phi_i)\sum_lw_lf_{\tau_l}(\phi_i)}\right\}.
+\end{equation}
+Arbitrary memories and contemporaneous correlations do not by themselves specify an admissible driver.
+
+For a newcomer, the new variance coefficient and mean return time are
+\[
+ V_{\rm new}=(1-f)^2V+2f(1-f)C+f^2U,\qquad
+ \mathcal T_{\rm new}=\mathcal T+f\delta\tau.
+\]
+The comparison \(V_{\rm new}/\mathcal T_{\rm new}<V/\mathcal T\), multiplied by the positive denominators and divided by \(f>0\), is exactly \eqref{eq:mech-newcomer}. This also covers \(V-2C+U=0\) without dividing by that variance. With memory, compare \eqref{eq:mech-parallel-memory} or \eqref{eq:mech-parallel-different} instead. For independent equal-variance alternatives, \(V=\sum_jw_j^2\kappa_j^2\). For independent obligatory transfers on a fixed ring, the cross terms of \eqref{eq:mech-general} vanish, giving \(D_2=\sum_j\sigma_j^2K_g(\tau,\phi_j)\). At fixed \(\mathcal T\), no memory, and equal variances, the serial coefficient is \(n/(2\mathcal T)\). These are quadratic identities, not additivity of finite-noise roots.
+\end{proof}
+
+\begin{proof}[Optional host, bypass, and exact yield comparison]
+For the optional host, mean reproductive yield is \(Y=1-f+fq\). Calibrating returns by \(1/Y\) makes the reproductive share of the optional route \(\alpha=fq/Y\). Between two noisy entrances, the reference lineage takes the direct cycle with probability \(1-\alpha\) or adds a geometric stay \(\tau_p\) with probability \(\alpha\). Its mean and transform are precisely those in Proposition~\ref{prop:mech-routes}. The renewal proof gives \(K_{\rm opt}\). At zero memory, \(fq>0\) increases the mean and strictly lowers \(1/(2\mathcal T)\).
+
+For a bypass, the surviving noisy-route share is \(\alpha=(1-f)/Y\), with mean \(\mathcal T=\tau_0+\alpha\tau_1\) and circuit transform \(R=q_0(1-\alpha+\alpha q_1)\). The noisy entrance has elasticity \(\alpha/\mathcal T\). Its return path may include any number of direct reproductive returns; the geometric denominator is \(1-R\), and the noisy return numerator is \(\alpha q_0q_1\). Lemma~\ref{lem:mech-general}, divided by birth frequency \(1/\mathcal T\), gives \eqref{eq:mech-bypass}. At zero memory it becomes \(\alpha^2/[2(\tau_0+\alpha\tau_1)]\). Its derivative in \(\alpha>0\) is
+\(\alpha(2\tau_0+\alpha\tau_1)/[2(\tau_0+\alpha\tau_1)^2]>0\), so increasing an equal-yield bypass lowers this coefficient. At complete bypass the reproductive subsystem is constant and the loss is exactly zero.
+
+In either model, restoring the uncompensated mean yield changes deterministic log reproduction by \(\log Y\). Subtracting the respective restoring losses gives exactly
+\(\log Y+\Delta_{\rm base}-\Delta_{\rm route}\).
+Increasing \(q\) at fixed other rates raises every actual matrix entry or leaves it unchanged, so the effective reproduction comparison is monotone in \(q\). These exact margin and monotonicity statements do not require the primitive local expansion. Perfect survival alone does not ensure a positive margin for every environmental spectrum.
+\end{proof}
+
+\begin{proof}[Negative memory and the alternating examples]
+For equal geometric stays \(a>1\), put \(q=\phi/[a-(a-1)\phi]\) in \(K_g=(1+2\theta)/(4a)-q^2/(1-q^2)\). Combining denominators gives \eqref{eq:mech-negative-memory}. Its denominator is positive for \(|\phi|<1\), so its numerator gives the strict sign boundary.
+
+The period-two example can be verified without an expansion. With stays \((2,2)\), birth tilt \(\exp(y)\), and noisy transfer out of stage zero, set
+\[
+ \mathbf A_h(y)=\begin{pmatrix}1/2&\exp(y)/2\\h/2&1/2\end{pmatrix}.
+\]
+For \(h_+=1.6,h_-=0.4\), the full-period product has trace \((1+\exp(y))/2\) and determinant \(\{1-2\exp(y)+0.64\exp(2y)\}/16\). Setting one eigenvalue to one gives
+\(9-10\exp(y)+0.64\exp(2y)=0\). The smaller root makes the other eigenvalue less than one, so it is the zero-growth root, \(y=-0.0420311\) to the displayed precision.
+
+For the contact example use stays \((5,2)\), \(d=0.1\), and the critical similarity coordinates
+\[
+ \mathbf A_h(y)=\begin{pmatrix}0.8-0.18(h-1)&\exp(y)/2\\0.2h&1/2\end{pmatrix}.
+\]
+The same unit-spectral-radius calculation for \(\mathbf A_{0.4}(y)\mathbf A_{1.6}(y)\) gives \(y=-0.00487832\). Both matrices satisfy the contact constraints.
+
+For the optional-route example, a matrix that specifies the reported periodic calculation is
+\[
+ \mathbf A_h(y)=\begin{pmatrix}
+ 1/2&(1-f)\exp(y)/2&q\exp(y)/8\\
+ h/2&1/2&0\\0&f/2&7/8
+ \end{pmatrix}.
+\]
+With \(f=1/2,q=1\), mean reproduction is already one. The unit-spectral-radius root of its period-two product gives the optional loss. Subtracting it from the base root above gives \(-0.0229201\), the stated adverse margin. These decimal values are numerical roots of fully specified finite products. A uniform random starting phase makes the periodic environment stationary ergodic; it does not turn it into an AR(1) process.
+\end{proof}
+
+\begin{remark}[Scalar finite-noise route benchmarks]\label{rem:mech-scalar-routes}
+The newcomer boundaries quoted in the text use the scalar multiplier
+\(s+(1-s)\exp(y)[(1-f)h_1+fh_2]\), with \(s=3/4\), independent mean-one lognormal hosts, and log standard deviations \(\sigma\) and \(3\sigma\). The exact loss is the zero of the expected logarithm. Equating this loss to the old scalar loss gives boundaries approximately 0.14610 at \(\sigma=0.3\) and 0.00693919 at \(\sigma=1\). These quadrature results were reproduced independently; they are not values of the unequal-stay network formula. The corresponding scalar bypass benchmark is \(s+(1-s)\exp(y)[(1-f)h+fq]\), with \(s=f=1/2\), giving yield boundaries approximately 0.96680 and 0.68770. Their defining equations use the full rate law, not only elasticity and curvature.
+\end{remark}
+
+\subsubsection{Common drivers and linked hosts}\label{app:mech-common}
+\begin{lemma}[One driver on several transfers]\label{lem:mech-common}
+In a primitive mean-threshold ring with a common stationary Gaussian AR(1) driver, \(|\phi|<1\), signed transfer sensitivities \(\kappa_j\), and the local expansion, let \(F_{j\to i}(\phi)\) be the directed first-use transform, a full circuit \(R\) when \(i=j\). Then
+\begin{equation}\label{eq:mech-common-general}
+ K=\frac{1+2\theta}{2\mathcal T}\left(\sum_j\kappa_j\right)^2
+ -\frac{\sum_{i,j}\kappa_i\kappa_jF_{j\to i}(\phi)}{1-R}.
+\end{equation}
+For two equal stays \(a>1\), opposite unit sensitivities give
+\(K_{+-}=(2\phi/a)/[1-\phi(1-2/a)]\), while same-sign sensitivities give \(K_{++}=1/a\). The formulas were reproduced independently.
+\end{lemma}
+\begin{proof}
+Each perturbed transfer has elasticity \(\kappa_j/\mathcal T\). Conditional on a use of transfer \(j\), the transform of the first use of \(i\) is \(F_{j\to i}\); all later uses add full circuits, giving \(F_{j\to i}/(1-R)\). Insert these ordered-pair contractions in Lemma~\ref{lem:mech-general}. The instantaneous covariance contributes \((\sum_j\kappa_j)^2/(2\mathcal T)\), and the stationary subtraction contributes \(\theta(\sum_j\kappa_j)^2/\mathcal T\). This proves \eqref{eq:mech-common-general}. Substitution of equal first-passage factors gives the two equal-stay reductions. At zero memory the coefficient is \((\sum_j\kappa_j)^2/(2\mathcal T)\). Opposite sensitivities therefore cancel at this order only.
+\end{proof}
+
+\begin{proof}[The two-stage coefficient and its continuous-time limit]
+For stays \(a,b\), write \(q_a=\theta/(\theta+a)\), \(q_b=\theta/(\theta+b)\), and \(R=q_aq_b\). Same-sign unit sensitivities give
+\(4U-(2R+q_a+q_b)/(1-R)\), and opposite signs give \((q_a+q_b-2R)/(1-R)\), where \(U=(1+2\theta)/[2(a+b)]\). Combining denominators yields \eqref{eq:mech-common} and
+\begin{equation}\label{eq:mech-opposite}
+ K_- =\frac{\theta(a+b)}{ab+\theta(a+b)}.
+\end{equation}
+For nonnegative memory, the denominator of \(K_+\) is positive. Its numerator is negative exactly under the two conditions stated after \eqref{eq:mech-common}. At \((a,b)=(1,10)\), solving for \(\phi\) gives \(\phi>20/79\). If \(a=b\), direct cancellation gives \(K_+=1/a\). The expressions also extend to negative memory in the primitive domain by the nonsingular \(\phi\) formulation; there \(K_+\) is not negative.
+
+For general sensitivities, put \(x_1=a/\theta\), \(x_2=b/\theta\). Algebra in \eqref{eq:mech-common-general} gives
+\begin{align}
+ K&=\frac{(\kappa_1+\kappa_2)^2}{2(a+b)}+C(x_1,x_2),\label{eq:mech-reconcile}\\
+ C(x_1,x_2)&=\frac{(\kappa_1+\kappa_2)^2x_1x_2-\kappa_1\kappa_2(x_1+x_2)^2}
+ {(x_1+x_2)(x_1+x_2+x_1x_2)}.\nonumber
+\end{align}
+The identity is understood by continuity at zero memory. Let the physical stays be \(A,B\), the step be \(\delta\), and memory \(\phi=\exp(-\alpha\delta)\). With \(a=A/\delta,b=B/\delta\), the first term tends to zero and \(x_1\to\alpha A,x_2\to\alpha B\). The remaining \(C\) is the continuous-time coefficient. It follows as well by using exponential first-passage transforms \(1/(1+x_k)\) in the continuous ordered covariance integral, with no instantaneous term. For \(\kappa_1=\kappa_2=\kappa\ne0\), its numerator is \(-\kappa^2(x_1-x_2)^2\), strictly negative for unequal leaving rates. For opposite sensitivities it is \(\kappa^2(x_1+x_2)/(x_1+x_2+x_1x_2)\). The continuous formula retains the source's one-derivation status; the discrete identity and shrinking-step comparison were reproduced independently. At physical stays 60 and ten days and memory 100 days, the same-sign continuous coefficient is approximately \(-0.469925\), versus \(-0.441167\) for one-day steps.
+\end{proof}
+
+\begin{lemma}[Finite-noise common-driver identities]\label{lem:mech-common-exact}
+For two equal stays and the same positive mean-one multiplier on both transfers at each step, stationary ergodic with integrable logarithm, the exact loss satisfies
+\begin{equation}\label{eq:mech-common-scalar}
+ \mathbb E\log\{s+(1-s)\exp(D/2)h\}=0.
+\end{equation}
+For two nonconstant opposite lognormal transfers in a primitive obligatory ring with independent environments across steps, \(D>0\) at nonzero noise. The scalar identity was reproduced independently. The strictness argument has one written derivation, read independently with its stationary-average qualification.
+\end{lemma}
+\begin{proof}
+For equal stays, a constant diagonal similarity distributes the birth tilt equally between the two transfers. Every matrix then shares the positive vector with equal coordinates, with scalar multiplier \(s+(1-s)\exp(D/2)h_t\). A positive initial population is bounded above and below by multiples of this vector, so its exponent equals the ergodic average of the scalar logarithm. This proves \eqref{eq:mech-common-scalar}, independently of temporal memory.
+
+For opposite lognormal transfers, condition on the positive normalized population before the current independent environment. At the mean threshold its reproductive-value multiplier has conditional mean one. Its random part is a positive combination of \(\exp(\sigma Z-\sigma^2/2)\) and \(\exp(-\sigma Z-\sigma^2/2)\). For positive coefficients and \(\sigma\ne0\), this function is nonconstant. Strict conditional Jensen gives a strictly negative expected log multiplier for each interior composition. Primitivity, positive rates on the fixed support, and the independent lognormal moment conditions give a stationary projective composition with positive coordinates; the exponent is the stationary average of these conditional log multipliers. That expectation is strictly negative. Continuity and monotonicity of growth in the restoring birth tilt then give a strictly positive root. Averaging only a finite-time conditional inequality without this stationary representation would not establish strictness of the limiting exponent.
+\end{proof}
+
+\begin{proof}[Reciprocal raw rates against the mean-host baseline]
+For the separate scalar-rank example with stays \((2,2)\), raw reciprocal responses yield
+\(\mathbf A_t=\tfrac12\begin{pmatrix}1&H_t^{-1}\\H_t&1\end{pmatrix}\)
+after a fixed mean-host normalization. Set
+\(\mathbf u_t=(H_t^{-1/2},H_t^{1/2})^{\mathsf T}\) and
+\(\mathbf v_t=(H_t^{1/2},H_t^{-1/2})^{\mathsf T}\).
+Then \(\mathbf A_t=\mathbf u_t\mathbf v_t^{\mathsf T}/2\). The successive inner products divided by two equal
+\(\cosh\{(\log H_t-\log H_{t-1})/2\}\).
+Endpoint vectors have sublinear logarithmic size for the stationary Gaussian AR host. Hence
+\begin{equation}\label{eq:mech-reciprocal}
+ r=\mathbb E\log\cosh\{\sigma(\xi_t-\xi_{t-1})/2\}
+ =\mathbb E\log\cosh\{\sigma\sqrt{(1-\phi)/2}\,Z\}>0
+\end{equation}
+for nonzero \(\sigma\), \(|\phi|<1\), and standard normal \(Z\). This is growth at the constant-mean-host threshold, not \(D\) against mean rates. Arithmetic normalization of the two rates changes their product, and their use at different times prevents pathwise reciprocal cancellation.
+\end{proof}
+
+\begin{lemma}[Covariance constructions for linked hosts]\label{lem:mech-var}
+Let \(\boldsymbol\xi_{t+1}=\mathbf M\boldsymbol\xi_t+\boldsymbol\eta_t\), with stable \(\mathbf M\), independent centered Gaussian innovations of covariance \(\mathbf S\), and stationary covariance \(\mathbf G\), standardized to unit diagonal. Then
+\begin{equation}\label{eq:mech-var}
+ \mathbf G=\sum_{j\geq0}\mathbf M^j\mathbf S(\mathbf M^{\mathsf T})^j,
+ \qquad \boldsymbol\Gamma(\ell)=\mathbf M^\ell\mathbf G,
+ \qquad \boldsymbol\Gamma(-\ell)=\boldsymbol\Gamma(\ell)^{\mathsf T}.
+\end{equation}
+The three covariance families below, and their admissible cross-covariance interpolation, were reproduced independently.
+\end{lemma}
+\begin{proof}
+Iteration into the past expresses the stationary state as the square-integrable sum of independently propagated innovations. Cross terms vanish, giving the first identity. Iterating \(\ell\) steps forward leaves \(\mathbf M^\ell\boldsymbol\xi_t\) plus innovations independent of \(\boldsymbol\xi_t\), giving the second. The third follows by stationarity and transposition. Stability supplies a summable Gaussian filter, mixing, and finite log moments for the lognormal multipliers.
+
+For a rotation \(\mathbf M=r\mathbf R(\omega)\), with top-right rotation entry \(-\sin\omega\), and \(\mathbf S=(1-r^2)\mathbf I\), the covariance is \(\mathbf G=\mathbf I\) and
+\[
+ \boldsymbol\Gamma(\ell)=r^\ell
+ \begin{pmatrix}\cos(\ell\omega)&-\sin(\ell\omega)\\
+ \sin(\ell\omega)&\cos(\ell\omega)\end{pmatrix}.
+\]
+For \(\mathbf M=\operatorname{diag}(\phi_1,\phi_2)\) and innovation correlation \(\gamma\), the off-diagonal stationary covariance solves
+\(G_{12}=\phi_1\phi_2G_{12}+\gamma\sqrt{(1-\phi_1^2)(1-\phi_2^2)}\).
+Thus \(G_{12}=\gamma\sqrt{(1-\phi_1^2)(1-\phi_2^2)}/(1-\phi_1\phi_2)\), and the lag law is \(\operatorname{diag}(\phi_1^\ell,\phi_2^\ell)\mathbf G\).
+
+For symmetric competition \(\mathbf M=\begin{pmatrix}a&-c\\-c&a\end{pmatrix}\) and innovation covariance proportional to \(\begin{pmatrix}1&d\\d&1\end{pmatrix}\), the sum and difference modes have eigenvalues \(\lambda_+=a-c\), \(\lambda_-=a+c\). Their variances are proportional to \(v_\pm=(1\pm d)/(1-\lambda_\pm^2)\). After normalizing both marginal variances to one, \(w_\pm=v_\pm/(v_++v_-)\) gives
+\[
+ \boldsymbol\Gamma(\ell)=w_+\lambda_+^\ell
+ \begin{pmatrix}1&1\\1&1\end{pmatrix}
+ +w_-\lambda_-^\ell\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+\]
+Finally take independent copies \(\boldsymbol\xi,\boldsymbol\zeta\) of any such standardized process, and observe \(\xi_1\) together with \(q\xi_2+\sqrt{1-q^2}\zeta_2\), \(-1\leq q\leq1\). The marginal covariance functions are unchanged, and every cross-covariance is multiplied by \(q\). This is a valid finite-dimensional Gaussian linear extension, generally requiring a latent state larger than two. It need not itself be a two-dimensional autoregression.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-linked}]
+Use the threshold ring in column-stochastic similarity coordinates, where \(w_k=1\), \(v_k=\tau_k/\mathcal T\), and a unit transfer perturbation satisfies \(\mathbf B_j\mathbf v=\mathbf e_{j+1}/\mathcal T\). The first-use generating function from transfer \(j\) to \(i\) is the product \(F_{j\to i}(z)\) of the geometric factors \(f_{\tau_k}(z)\) along that directed arc. A full return has transform \(R(z)=\prod_kf_{\tau_k}(z)\). Renewals give
+\begin{equation}\label{eq:mech-linked-renewal}
+ \sum_{\ell\geq1}u_{j\to i}(\ell)z^\ell=\frac{F_{j\to i}(z)}{1-R(z)}.
+\end{equation}
+Direct multiplication gives
+\[
+ \mathbf w^{\mathsf T}\mathbf B_i\mathbf A_0^{\ell-1}\mathbf B_j\mathbf v
+ =\frac{u_{j\to i}(\ell)}{\mathcal T},\qquad
+ \mathbf w^{\mathsf T}\mathbf B_i\mathbf T_\perp^{\ell-1}\mathbf Q\mathbf B_j\mathbf v
+ =\frac1{\mathcal T}\left(u_{j\to i}(\ell)-\frac1{\mathcal T}\right).
+\]
+Substitution into Lemma~\ref{lem:mech-general}, dividing by \(b=1/\mathcal T\), proves \eqref{eq:mech-linked}. If the covariance has modes \(\boldsymbol\Gamma(\ell)=\sum_n\mathbf H_nz_n^\ell\), summing the geometric series yields the useful closed form
+\begin{equation}\label{eq:mech-linked-modes}
+ K=\sum_{n,i,j}\kappa_i\kappa_j(\mathbf H_n)_{ij}
+ \left\{\frac{1+z_n}{2\mathcal T(1-z_n)}
+ -\frac{F_{j\to i}(z_n)}{1-R(z_n)}\right\}.
+\end{equation}
+Conjugate modes give a real sum. Repeated eigenvalues can instead be handled by evaluating the rational functions at \(\mathbf M\) and multiplying by \(\mathbf G\), so diagonalizability is not required.
+
+The Gaussian expansion is used at a fixed finite primitive ring. To pass to the threshold root, allow the birth tilt in a small fixed interval: Perron vectors and matrices then remain in a compact set with positive contraction margins, while the fixed stable Gaussian filter has summable covariance and bounded moment constants. The same local derivative estimates remain bounded there. Since \(\partial_y\log\lambda=1/\mathcal T>0\), bracketing the root at order \(\sigma^2\) and expanding \(\log\lambda(y)\) yields the local threshold coefficient, and the fourth-order remainder where the stated Gaussian remainder theorem applies. No uniform interval in noise is asserted as stays diverge.
+
+Separating the diagonal terms from the two cross terms proves \(K=K_1+K_2+X\). Subtraction gives the gain and added-host inequalities, as well as the condition \(X<-\max(K_1,K_2)\) for beating both one-host controls. Under the interpolation of Lemma~\ref{lem:mech-var}, \(K(q)=K_1+K_2+qX\), so boundaries occur at \(-(K_1+K_2)/X\) and \(-K_2/X\) when these lie in the admissible interval.
+
+Under a swap, self terms are unchanged because a single transfer's return distribution is the full circuit, independent of its placement. Equal-time cross terms also cancel. Subtracting the two remaining directed contractions proves \eqref{eq:mech-order}. Equal directed covariance functions or equal directed return distributions make it zero. Equal mean arc times alone do not imply equal distributions. For exchangeable host processes, relabeling preserves the full matrix law and hence loss at every amplitude; this stronger assertion is not inferred merely from a zero quadratic difference.
+\end{proof}
+
+\begin{lemma}[Linked-host stay derivative and long-stay limit]\label{lem:mech-linked-stay}
+Under the hypotheses of Proposition~\ref{prop:mech-linked}, the derivative of the bracket in \eqref{eq:mech-linked-modes} when one stay \(b\) changes is
+\begin{equation}\label{eq:mech-linked-derivative}
+ -\frac{1+z}{2\mathcal T^2(1-z)}-
+ \frac{F'(1-R)+FR'}{(1-R)^2},\qquad
+ R'=R L_b,\quad L_b=-\frac{1-z}{b-(b-1)z}.
+\end{equation}
+Here \(F'=FL_b\) if that arc contains the changed stage and zero otherwise. For the rotation family, ring \((b,a,5)\), order 0 as in the main text, set \(z=r\exp(i\omega)\), \(\theta_z=z/(1-z)\), \(A=f_a(z)\), and \(B=f_5(z)\). Then
+\begin{align}
+ K(b)&=-\operatorname{Im}A+J_*/b+O(b^{-2}),\label{eq:mech-linked-asymptote}\\
+ J_*&=\operatorname{Re}\left\{\frac{1+z}{1-z}-2AB\theta_z\right\}
+ -\operatorname{Im}\{(A^2-1)B\theta_z\}.\nonumber
+\end{align}
+For \(J_*\ne0\), eventual harm from lengthening is equivalent to \(J_*<0\). These coefficient results were reproduced independently.
+\end{lemma}
+\begin{proof}
+The logarithmic derivative of \(f_b(z)=z/[b-(b-1)z]\) is \(L_b\). Differentiating each product and using \(\mathcal T'=1\) gives \eqref{eq:mech-linked-derivative} by the quotient rule. For the rotation, the short directed arc has transform \(A\), the long arc \(B\theta_z/b+O(b^{-2})\), and the full return \(AB\theta_z/b+O(b^{-2})\). Insert these into \eqref{eq:mech-linked-modes} and expand \(1/(1-R)=1+R+O(b^{-2})\). The equal diagonal covariances contribute the real part in \(J_*\), while the oppositely signed directed cross-covariances contribute its imaginary part and the constant limit. This yields \eqref{eq:mech-linked-asymptote}. The expressions are rational in \(b\), so termwise differentiation gives \(K'(b)=-J_*/b^2+O(b^{-3})\). At \(J_*=0\) the next term is required. Reversing host order reverses the imaginary contributions only.
+
+For the main predator stay family the limit is \(-\operatorname{Im}f_5(0.9\exp(i\pi/10))=-0.37361349\), while independent hosts have zero limit. For \(r=0.9,a=5,\omega=\pi/2\), \(J_*=-0.01776762\), compared with independent coefficient \(+0.07879016\). The independent verification found two angle zeros, approximately 1.13321 and 1.96858, so a claim of only one boundary would be incorrect. At the faster rotation, the finite-noise comparison of stays 50 and 200 changes sign between tested amplitudes 0.10 and 0.12. Thus the asymptote is an iterated coefficient limit, not a uniform finite-noise stay theorem.
+\end{proof}
+
+\subsubsection{Dispersal}\label{app:mech-spatial}
+\begin{proof}[Whole-system reproduction convention]
+Let \(\mathbf K_j\) be the movement matrix of stage \(j\). The post-movement census gives staying blocks \(\mathbf S_j=s_j\mathbf K_j\) and incoming blocks \(\mathbf F_j=\mathbf K_j\mathbf G_{j-1}\), where \(\mathbf G_{j-1}\) holds patch-specific transfer means. At a mean threshold, block elimination gives
+\(\mathbf x_j=(\mathbf I-\mathbf S_j)^{-1}\mathbf F_j\mathbf x_{j-1}\).
+Define \(\mathbf E_j=(\mathbf I-\mathbf S_j)^{-1}\mathbf F_j\). Going around the ring therefore gives
+\[
+ R_0=\operatorname{spr}(\mathbf E_0\mathbf E_{n-1}\cdots\mathbf E_1).
+\]
+Here \(\operatorname{spr}\) denotes spectral radius. Positivity and monotonicity of the resolvents show that the mean growth factor is above one exactly when this whole-cycle reproduction number is above one, for a viable recurrent cycle. A common tilt \(\exp(y)\) on one complete set of transfer copies multiplies this \(R_0\) by \(\exp(y)\). With uncalibrated means the loss is \(D=\log R_0+y_*\), where \(r(y_*)=0\); after calibration it is \(y_*\). Spatial heterogeneity is included in this matrix, not averaged over isolated-patch reproduction numbers.
+\end{proof}
+
+Dispersal changes host histories encountered by descendants. Movement follows demographic updating and precedes census. One stage moves among \(P\geq2\) identical island patches, including its departure patch. Its movement matrix is \((1-m)\mathbf I+m(1-\ell)\mathbf1\mathbf1^{\mathsf T}/P\), where \(m\) is the movement fraction and \(\ell\) transit mortality.
+
+\begin{proposition}[Spatial coefficient]\label{prop:mech-dispersal}
+Assume a primitive whole-system mean matrix at threshold, fixed \(0<m\leq1\), \(a=1-m\ell>0\), and one noisy transfer with jointly stationary centered Gaussian log-host drivers satisfying \(\mathbb E[\xi_p(t)\xi_q(t-k)]=\phi^{|k|}[(1-\rho_s)\mathbf1_{\{p=q\}}+\rho_s]\) for every integer lag \(k\), common memory \(0\leq\phi<1\), unit marginal variance, and \(-1/(P-1)\leq\rho_s\leq1\). Put \(b=1-m\), \(u_d=as_d\) for the mobile stage and \(u_j=s_j\) otherwise, \(t_j=(1-u_j)^{-1}\), and \(\mathcal T=\sum_jt_j\). Define
+\begin{align}
+ q&=\rho_s+(1-\rho_s)/P,&
+ R_a&=\prod_j\frac{\phi(1-u_j)}{1-\phi u_j},\label{eq:mech-spatial-return}\\
+ R_b&=R_a\frac ba\frac{1-\phi as_d}{1-\phi bs_d},&
+ S&=\frac{1+\phi}{2(1-\phi)\mathcal T}-\frac{R_a}{1-R_a},\quad H=\frac{R_b}{1-R_b}.\nonumber
+\end{align}
+Under the fixed-model perturbation expansion,
+\begin{equation}\label{eq:mech-dispersal}
+ D_2=\sigma^2F,\qquad F=qS-(1-q)H.
+\end{equation}
+A quadratic gain occurs exactly when \(qS<(1-q)H\). At \(\phi=0\), \(F=q/(2\mathcal T)\), and at complete mixing \(m=1\), \(F=qS\). The limit \(m\downarrow0\) is not uniform in noise.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:mech-dispersal}]
+The island movement operator has eigenvalue \(a=1-m\ell\) on the uniform spatial mode and \(b=1-m\) on each transverse mode. Let \(\mathbf A_a,\mathbf A_b\) be the corresponding mean stage matrices, whose mobile rows are multiplied by \(a,b\). Calibrate transfers so the Perron root of \(\mathbf A_a\) is one. Let \(\mathbf v,\mathbf w\) be its Perron vectors, \(\mathbf w^{\mathsf T}\mathbf v=1\), and write \(\mathbf B_a,\mathbf B_b\) for the noisy transfer on those modes. Put \(c=\mathbf w^{\mathsf T}\mathbf B_a\mathbf v\).
+
+The patch covariance matrix has eigenvalue \(Pq\) on the uniform mode and \(1-\rho_s\) on the other \(P-1\) modes. Full-system right Perron blocks are \(\mathbf v/P\), with left blocks \(\mathbf w\). In the ordered-pair formula, the instantaneous term sees only the Perron projection. The lag terms split into the uniform contraction and \(P-1\) identical transverse contractions. Substitution gives
+\begin{align*}
+ C&=qC_a-(1-q)J_b,\\
+ C_a&=c^2/2-\phi\mathbf w^{\mathsf T}\mathbf B_a
+ (\mathbf I-\phi\mathbf A_a\mathbf Q)^{-1}\mathbf Q\mathbf B_a\mathbf v,\\
+ J_b&=\phi\mathbf w^{\mathsf T}\mathbf B_a
+ (\mathbf I-\phi\mathbf A_b)^{-1}\mathbf B_b\mathbf v.
+\end{align*}
+The left factor of the transverse contraction is \(\mathbf B_a\), not \(\mathbf B_b\). Returning from the noisy transfer's destination to its source requires traversing every other stage. Summing the geometric waiting factors gives
+\[
+ \frac{\phi\mathbf w^{\mathsf T}\mathbf B_a(\mathbf I-\phi\mathbf A_a)^{-1}
+ \mathbf B_a\mathbf v}{c}=\frac{R_a}{1-R_a},\qquad
+ J_b/c=\frac{R_b}{1-R_b}.
+\]
+Replacing the mobile row by its transverse multiplier gives exactly
+\(R_b/R_a=(b/a)(1-\phi as_d)/(1-\phi bs_d)\).
+The stationary part of the first contraction is \(c^2\phi/(1-\phi)\). Subtracting it gives
+\(C_a/c=c/2+c\phi/(1-\phi)-R_a/(1-R_a)\).
+The uniform-mode characteristic equation is the ring equation with effective staying \(u_j\). Differentiating its transfer tilt gives \(c=1/\mathcal T\), so \(C_a/c=S\) and \(J_b/c=H\). Dividing the total cost by birth elasticity \(c\) proves \(F=qS-(1-q)H\).
+
+For a fixed positive coupling and primitive support, a small closed birth-tilt interval preserves a positive transverse gap and contraction margins. The fixed Gaussian forcing has summable covariance and uniform moment bounds there. As in the linked-host proof, the threshold root follows by bracketing at \(y=O(\sigma^2)\), expanding \(\log\lambda(y)=cy+O(y^2)\), and using the local cost expansion. This gives \(D=\sigma^2F+O(\sigma^4)\) within that fixed Gaussian domain. No uniform bound follows as \(m\downarrow0\), \(\phi\uparrow1\), or a stay diverges. At disconnected \(m=0\) the expansion about a simple whole-system Perron mode is not available. Independent host drivers have zero cross terms, so their \(\sigma_k^2F_k\) contributions add on the same spatial mean system.
+\end{proof}
+
+\begin{proof}[Spatial sign boundaries and movement location]
+At \(\phi=0\), \(R_a=R_b=0\), giving \(F=q/(2\mathcal T)\). At \(m=1\), \(b=0\), so \(H=0\). Relative to the uniform-mode single ring, the removed coefficient is
+\[
+ S-F=(1-q)(S+H)=(1-\rho_s)(1-1/P)(S+H).
+\]
+For \(S+H>0\), solving \(qS=(1-q)H\) gives
+\[
+ \rho_* =\frac{PH/(S+H)-1}{P-1}.
+\]
+A root outside the admissible covariance range is not an interior boundary. For conservative movement, \(R_a,S\) are independent of \(m\). Write \(x=qS/(1-q+qS)\). Solving \(R_b=x\) gives
+\[
+ m_*=1-\frac{x}{R_a(1-\phi s_d)+x\phi s_d},
+\]
+when the denominator and an admissible interior crossing exist. These are algebraic coefficient boundaries, not unique finite-noise crossings.
+
+For conservative movement the position factor is
+\(f=(1-m)(1-\phi s_d)/[1-\phi(1-m)s_d]\).
+Its derivative in \(s_d\) is \(-(1-m)\phi m/[1-\phi(1-m)s_d]^2\). Thus for positive memory, moving the longer-staying stage decreases \(R_b\), decreases \(H\), and removes less loss at second order. For equal stays the coefficient is independent of which stage moves. No corresponding all-noise ordering follows.
+\end{proof}
+
+\begin{lemma}[Long steady stays with movement]\label{lem:mech-spatial-stay}
+In the conservative island family, keep the other stays, host law, and movement fixed while one steady stay \(L\) grows, recalibrating each mean model to threshold. Put \(U=\prod_{j\ne\mathrm{long}}\theta/(\theta+\tau_j)\), \(\theta=\phi/(1-\phi)>0\), and \(f=(1-m)(1-\phi s_d)/[1-\phi(1-m)s_d]\), using the limit \(s_d=1\) if the long stage itself moves. Then
+\begin{equation}\label{eq:mech-spatial-long}
+ F(L)=K_\infty/L+O(L^{-2}),\qquad
+ K_\infty=q(1+2\theta)/2-\theta U\{q+(1-q)f\}.
+\end{equation}
+For nonzero \(K_\infty\), a sufficiently long stay lowers the coefficient exactly when \(K_\infty>0\). The asymptote was reproduced independently.
+\end{lemma}
+\begin{proof}
+The generation time is \(L\) plus a constant, \(R_a=\theta U/L+O(L^{-2})\), and \(R_b=f\theta U/L+O(L^{-2})\). Substitution in \(F=qS-(1-q)H\) gives \eqref{eq:mech-spatial-long}. Differentiation of the rational expressions gives \(F'(L)=-K_\infty/L^2+O(L^{-3})\). At zero \(K_\infty\), the next term is needed. With transit loss in the lengthened mobile stage, \(u_d\to a<1\), so its effective stay remains finite and this asymptote does not apply.
+
+At fixed total generation time and \(n\) independent equally noisy hosts, the same calculation and vanishing cross terms give \(D_{n,2}=n\sigma^2F_n\). Two specified host counts have the same quadratic loss exactly when \(n_2F_{n_2}=n_1F_{n_1}\). Without memory, \(nF_n=qn/(2\mathcal T)\), increasing with \(n\); with memory the individual \(F_n\) can be negative, so independence supplies additivity without positivity.
+\end{proof}
+
+\begin{proof}[Exact synchrony and the two-patch mixing identity]
+For synchronous hosts and common patch demography, summing each stage over patches commutes with every conservative movement matrix, because its columns sum to one. The stage totals therefore obey the original ring path by path. Positive totals determine the population norm, proving equality of exponent and loss at every amplitude. With constant column sum \(a<1\), the same argument gives the ring whose mobile row is multiplied by \(a\). Open boundaries with unequal column sums are excluded from this identity.
+
+For complete mixing of two patches, no staying, and one noisy transfer, the effective multiplier is \((h_1+h_2)/2\). Factoring two exponentials gives
+\[
+ \log\frac{h_1+h_2}{2}=\frac{\sigma(\xi_1+\xi_2)}2-\frac{\sigma^2}2
+ +\log\cosh\frac{\sigma(\xi_1-\xi_2)}2.
+\]
+The Gaussian difference has variance \(2(1-\rho_s)\). Mixing under the complete-cycle shift makes every cohort's log average equal to this expectation, and hence
+\begin{equation}\label{eq:mech-spatial-cosh}
+ D=\frac{\sigma^2}2-\mathbb E\log\cosh\left\{\sigma\sqrt{(1-\rho_s)/2}\,Z\right\}.
+\end{equation}
+The removed amount is strictly positive away from synchrony and nonzero noise, but is not a constant fraction of \(\sigma^2/2\). For example, at \(\sigma=1,\rho_s=0\), its loss is approximately 0.29049, rather than the variance-replacement value 0.25. The identity was checked independently by quadrature and single-cohort simulation.
+\end{proof}
+
+\begin{proof}[Spatial logarithmic-gap bound]
+Resolve demographic and movement contributions into labeled edges, and form \(\mathbf A_G\) by replacing each multiplier \(h_e\) with \(\exp(\mathbb E\log h_e)\) before adding parallel contributions. Choose a recurrent irreducible block of \(\mathbf A_G\), with Perron root \(\lambda_G\) and normalized positive vectors. Use reference edge probabilities
+\(p(e\mid j)=(A_G)_e w_i/(\lambda_Gw_j)\), and stationary vertex law \(w_jv_j\). Jensen's inequality on the path sum gives the average of
+\(\log\{a_eh_e(t)/p(e\mid j)\}\).
+The edgewise ergodic theorem replaces \(\log(a_eh_e)\) by \(\log(A_G)_e\), and stationary averages cancel the \(w_j/w_i\) ratios. The remainder is \(\log\lambda_G\). Initial positive weights contribute only a vanishing startup term. Maximizing over recurrent blocks proves
+\(r\geq\log\operatorname{spr}(\mathbf A_G)\).
+This argument needs stationary ergodicity and finite edge logarithms, but no spatial or temporal independence.
+
+If every patch copy of host transfer \(k\) has the same penalty \(\ell_k\), each complete-cycle operator acquires exactly one factor \(\exp(-\ell_k)\). For a common transfer tilt \(y\),
+\[
+ R_0(\mathbf A_G(y))=\exp\left(y-\sum_k\ell_k\right)R_0(\mathbf A_0).
+\]
+At \(y=\sum_k\ell_k-\log R_0(\mathbf A_0)\), the geometric-edge model is critical and the stochastic exponent is nonnegative. Equivalently, for larger \(y\) that bound is strictly positive in a viable recurrent cycle, so a zero-growth root cannot lie above this value. Therefore \(D\leq\sum_k\ell_k\), equal to \(\sum_k\sigma_k^2/2\) for the mean-one lognormal transfers. With patch-dependent penalties, compare entrywise with the model using each host's worst penalty to obtain \(D\leq\sum_k\max_p\{-\mathbb E\log h_{k,p}\}\). The maximum is of the negative expected log, not the expected log. Transit mortality and unequal mean patch quality already occur in both matrices. If there is no recurrent complete cycle, there is no finite restoring threshold to bound.
+\end{proof}
+
+\begin{lemma}[Open downwind boundaries]\label{lem:mech-open}
+For identical patches, one mobile stage, and deterministic movement, a constant mobile-row retention \(k\) changes mean reproduction by the factor \(k(1-s_d)/(1-ks_d)\). Conservative-circle transit loss has \(k=1-m\ell\). An open downwind line has \(k=1-m\), independent of the finite number of patches. For the stationary Gaussian AR forcing of the dispersal model, the open-line exponent equals the maximum of the diagonal patch-block exponents. The diagonal-exponent argument is the source note's derivation, not an independently checked general cocycle theorem.
+\end{lemma}
+\begin{proof}
+In the uniform mode, eliminate the mobile stage's staying: its incoming factor \(g/(1-s_d)\) becomes \(kg/(1-ks_d)\), giving the stated reproduction ratio. On an open downwind line, order coordinates by departure patch. The whole matrix is block triangular. Each diagonal block retains only the nonemigrating fraction \(1-m\) of its mobile row; downstream transfers cannot return. Applying the same within-stage elimination to the diagonal blocks gives the ratio with \(k=1-m\). At \(m=1\), no recurrent cycle remains. To handle this endpoint separately, put \(s_* = \max(\{s_k:k\ne d\}\cup\{0\})\). A path has only finitely many downwind hops and cannot complete a circuit inside a patch. If \(s_*=0\), the full finite-system products are eventually zero and every diagonal-block exponent is \(-\infty\). If \(s_*>0\), only the fixed stays can be repeated indefinitely. Their fastest path has exponent \(\log s_*\); the finitely many transfer factors, whose Gaussian log multipliers grow sublinearly, and the polynomial number of path partitions do not change that exponent. Thus the maximum-diagonal-exponent assertion also holds at \(m=1\). The concentration argument below is for \(0\leq m<1\).
+
+To establish the stochastic exponent, expand paths according to their downwind hops. There are at most \(P-1\) hops, and only polynomially many possible interval partitions in a horizon \(t\). Between hops each path uses a diagonal-block product. For Gaussian AR forcing, a diagonal product's log norm is Lipschitz in its forcing interval with squared constant bounded by a fixed multiple of its length: changing all affected entries at one time by factors between \(\exp(-\varepsilon)\) and \(\exp(\varepsilon)\) changes the product norm by at most those factors. The stationary Gaussian covariance has bounded operator norm on intervals. Gaussian concentration therefore gives exponential tails for deviations of a fixed positive fraction of interval length. Stationarity and integrable ergodic log growth identify each long-interval mean rate with its diagonal exponent. Union bounds over the polynomially many intervals show that all long-interval errors are sublinear in \(t\), almost surely. Intervals shorter than a sufficiently large multiple of \(\log t\) contribute only sublinear amounts, as do the finitely many hops, because Gaussian extreme log multipliers grow sublinearly. The polynomial number of path partitions adds no exponential factor. Thus the full exponent is at most the largest diagonal exponent. Keeping one diagonal path proves the reverse inequality. Identical stationary patch marginals have identical diagonal exponents even if their paths are asynchronous. Downstream transients therefore do not establish asymptotic rescue on this finite open line.
+\end{proof}
+
+\subsubsection{Hosts that can be absent}\label{app:mech-outage}
+% Added 2026-11-15 (memfold3). Sources: a13/a13_proof.md, including
+% dated corrections; a13/report.md; verification/a13-check/a13-check.md.
+We prove Propositions~\ref{prop:mech-outage} and~\ref{prop:mech-outage-bound} using nonnegative matrices rather than logarithms of host abundance. All stationary processes are realized on their two-sided natural extensions. No mixing assumption is imposed.
+
+\begin{proof}[Threshold existence and independent outages]
+Write \(y=\log c\) and \(\mathbf\Pi_T=\mathbf A_{T-1}(\mathrm e^y)\cdots\mathbf A_0(\mathrm e^y)\). The entry-sum matrix norm has integrable positive logarithm because \(\mathbb E h=1\). The staying path gives \(\|\mathbf\Pi_T\|\geq p^T\), with \(p>0\). The subadditive ergodic theorem therefore gives a finite deterministic exponent \(r(y)\), also the limit of \(T^{-1}\mathbb E\log\|\mathbf\Pi_T\|\). For every positive initial vector, comparison with its smallest and largest entries gives the same exponent.
+
+Each product's entry sum is a polynomial in \(\mathrm e^y\) with nonnegative coefficients. Its logarithm is convex and nondecreasing in \(y\), and these properties pass to the finite limit \(r\). Thus \(r\) is continuous. A diagonal similarity splits \(c\) equally between the transfers, bounding column sums by \(\max(p,q)+\sqrt c(bh+\varepsilon)\). Dominated convergence and the staying paths give \(r(y)\to\log\max(p,q)<0\) as \(y\to-\infty\). Keeping only returns to stage one in each two-step block gives
+\begin{equation}\label{eq:mech-outage-existence}
+ r(y)\geq\tfrac12\mathbb E\log(p^2+\varepsilon\mathrm e^y b h).
+\end{equation}
+This follows by taking expectations of finite-product logarithms, so ergodicity of the two-step shift is unnecessary. Since \(\mathbb E h=1\), some \(\eta>0\) has \(\mathbb P(h\geq\eta)>0\), and the lower bound tends to infinity. Continuity gives a root. Two roots of a convex nondecreasing function would force it to equal zero on the entire interval to their left, contradicting its negative limit. The root is unique.
+
+Under temporal independence, conditional expectation gives \(\mathbb E\mathbf x_T=\overline{\mathbf A}(c)^T\mathbf x_0\) for a fixed positive initial vector. Markov's inequality and Borel--Cantelli imply \(r(y)\leq\log\rho(\overline{\mathbf A}(c))\). This is the nonnegative-matrix argument of Proposition~\ref{prop:bounds-iid}, which also permits an integrable initial vector adapted to the host past. Here \(\rho(\overline{\mathbf A}(c))<1\) for \(c<1\), excluding \(D<0\). The stronger hypothesis \(\mathbb E[h_t\mid\text{full host past}]=1\) suffices as well. Zero pair correlations alone do not suffice, and strict positivity of \(D\) is not claimed.
+\end{proof}
+
+\begin{proof}[Period-two outages]
+Put \(g=\varepsilon c\). Direct multiplication gives
+\begin{equation}\label{eq:mech-outage-product}
+ \mathbf A(0)\mathbf A(2)=
+ \begin{pmatrix}p^2+2gb&g(p+q)\\2qb&q^2\end{pmatrix},\qquad
+ \det(\mathbf I-\mathbf A(0)\mathbf A(2))
+ =(1-p^2)(1-q^2)-2gb(1+pq).
+\end{equation}
+The determinant vanishes at \(c=(1-p^2)(1-q^2)/[2b\varepsilon(1+pq)]\). At this value the first diagonal entry is
+\(1-q(p+q)(1-p^2)/(1+pq)\leq1\), and the second is \(q^2<1\). Since the first is positive, the other eigenvalue, the trace minus one, lies strictly between \(-1\) and \(1\). Thus one is the Perron root, also at \(q=0\), where the other eigenvalue is zero. Substituting \(p=1-1/a\) and \(q=1-1/s\) gives \eqref{eq:mech-outage-alt}. Its numerator is one less than its denominator, proving negativity. Differentiation gives the displayed positive derivative, and expansion gives \(D=-1/[2(2a-1)s]+O(s^{-2})\).
+\end{proof}
+
+\begin{proof}[Fourth-moment expansion and fixed-factor ordering]
+Fix \(a\) and the host law. Put \(H=(\mathbb E h^4)^{1/4}\). The covariance series in \eqref{eq:mech-outage-long} converges absolutely because each covariance has modulus at most \(\operatorname{Var}(h)\) and \(p<1\). When the variance is zero, \(h=1\) almost surely and \(D=A=0\).
+
+For \(0<\varepsilon\leq b/2\), \(1/2\leq c\leq2\), write \(x_{1,t}=(\varepsilon c/b)v_t x_{2,t}\). Then
+\begin{equation}\label{eq:mech-outage-ratio}
+ v_{t+1}=F_{h_t}(v_t)=\frac{pv_t+b}{1+\varepsilon(ch_tv_t-1)},\qquad
+ \frac{x_{2,t+1}}{x_{2,t}}=1+\varepsilon(ch_tv_t-1).
+\end{equation}
+The interval \([0,b/(b-\varepsilon)]\subset[0,2]\) is invariant. For \(v>0\),
+\begin{equation}\label{eq:mech-outage-contraction}
+ \left|\frac{\mathrm d\log F_h(v)}{\mathrm d\log v}\right|
+ =\frac{|p(1-\varepsilon)-\varepsilon cbh|v}
+ {(pv+b)(1-\varepsilon+\varepsilon chv)}\leq1.
+\end{equation}
+On any \(h\in[\eta,M]\subset(0,\infty)\), its supremum over \(v>0\) is strictly below one. Such an interval has positive probability. Visits to it occur infinitely often in either time direction by ergodicity, and one visit makes the image's log-ratio diameter finite. Nonexpansion between visits proves convergence and uniqueness of stationary pullbacks. Moreover,
+\(v_{t+1}\geq b/(1-\varepsilon+2\varepsilon ch_t)\), so \(\log^-v\) is integrable. The bound \(v\leq2\) compares the second component with total population, and the integrable stationary multiplier gives
+\(r=\mathbb E\log[1+\varepsilon(chv-1)]\).
+
+Set \(d_t=v_t-1\), \(W_t=ch_tv_t-1\), and
+\begin{equation}\label{eq:mech-outage-estimates}
+ \begin{gathered}
+ u_t=-\sum_{\ell\geq1}p^{\ell-1}(ch_{t-\ell}-1),\qquad
+ e_t=d_t-\varepsilon u_t,\\
+ d_{t+1}=pd_t-\varepsilon v_{t+1}W_t,\qquad
+ e_{t+1}=pe_t-\varepsilon[(v_{t+1}-1)W_t+ch_td_t],\\
+ \|W\|_4\leq4H+1,\quad \|d\|_4\leq L\varepsilon,\quad
+ \|e\|_2\leq N\varepsilon^2,\qquad
+ L=\frac{2(4H+1)}b,\quad N=\frac{L(6H+1)}b.
+ \end{gathered}
+\end{equation}
+The identities follow directly from \eqref{eq:mech-outage-ratio}. Minkowski and H\"older give the bounds from
+\(b\|d\|_4\leq2\varepsilon(4H+1)\) and
+\(b\|e\|_2\leq L(6H+1)\varepsilon^2\), without independence between times.
+For \(x\geq-\varepsilon\) and \(\varepsilon\leq1/2\),
+\begin{equation}\label{eq:mech-outage-taylor}
+ |\log(1+x)-x+x^2/2|\leq\frac{|x|^3}{3(1-\varepsilon)^3}.
+\end{equation}
+Apply this to \(x=\varepsilon W\), replace \(d\) by \(\varepsilon u\) in the linear term, and replace \(W\) by \(ch-1\) in the quadratic term. The respective errors in \(r/\varepsilon\) are bounded by
+\(2HN\varepsilon^2\), \(HL(6H+2)\varepsilon^2\), and \(\tfrac83(4H+1)^3\varepsilon^2\). Consequently,
+\begin{equation}\label{eq:mech-outage-rate}
+ \begin{gathered}
+ \left|\frac r\varepsilon-(c-1)+\varepsilon B(c)\right|
+ \leq R_g\varepsilon^2,\\
+ B(c)=c^2S-c/b+(c^2\mathbb E h^2-2c+1)/2,\qquad
+ S=\sum_{\ell\geq1}p^{\ell-1}\mathbb E(h_th_{t-\ell}),\\
+ R_g=2HN+HL(6H+2)+\tfrac83(4H+1)^3.
+ \end{gathered}
+\end{equation}
+Here \(S\leq H^2/b\) and \(B(1)=A\). The following constants bound \(|B|\) and \(|B'|\) on \([1/2,2]\) and make the root remainder explicit:
+\begin{equation}\label{eq:mech-outage-constants}
+ \begin{gathered}
+ B_0=4H^2/b+2/b+2H^2+3,\quad J=4H^2/b+2H^2+1/b+1,\\
+ K_0=B_0+R_g,\quad C=JK_0+R_g+2K_0^2,\quad
+ \varepsilon_0=\min\{b/2,[4(B_0+R_g+1)]^{-1}\}.
+ \end{gathered}
+\end{equation}
+For \(0<\varepsilon\leq\varepsilon_0\), \eqref{eq:mech-outage-rate} gives opposite growth signs at \(c=1/2,2\), locating the unique root between them. At the root,
+\(|c-1|\leq K_0\varepsilon\) and
+\(|c-1-A\varepsilon|\leq(JK_0+R_g)\varepsilon^2\).
+Using \(|\log c-(c-1)|\leq2(c-1)^2\) gives
+\begin{equation}\label{eq:mech-outage-remainder}
+ |D-A\varepsilon|\leq C\varepsilon^2.
+\end{equation}
+This proves the expansion with no inverse or log moment. For fixed \(\kappa>1\), subtract the bounds at \(s\) and \(\kappa s\). The difference has sign \(-\operatorname{sign}A\) whenever
+\begin{equation}\label{eq:mech-outage-grid}
+ s^{-1}\leq\varepsilon_0,\qquad
+ s^{-1}<\frac{|A|(1-1/\kappa)}{C(1+1/\kappa^2)}.
+\end{equation}
+Also \(D\) eventually has sign \(A\) when \(A\ne0\). These value bounds do not justify differentiating the remainder.
+\end{proof}
+
+\begin{proof}[Derivative control for bounded hosts]
+Suppose \(0\leq h\leq M\) almost surely. Since \(\mathbb E h=1\), \(M\geq1\). Set \(R=b/(256M^2)\), \(K=8M/b\), and allow complex \(|\varepsilon|\leq R\), \(|D|\leq1/4\). With \(z=v-1\),
+\begin{equation}\label{eq:mech-outage-complex}
+ z_{t+1}=\frac{pz_t-\varepsilon W_t}{1+\varepsilon W_t},
+ \qquad W_t=\mathrm e^D h_t(1+z_t)-1.
+\end{equation}
+The ball \(|z|\leq K|\varepsilon|\) is invariant: \(KR\leq1/8\), \(|W|\leq4M\), and
+\((pK+4M)/(1-4MR)\leq K\) because \(bK=8M\geq4M(1+KR)\).
+The derivative in \(z\) has modulus at most
+\begin{equation}\label{eq:mech-outage-complex-bound}
+ \frac{p+R(p+2bM)}{(1-4MR)^2}
+ \leq\frac{1-61b/64}{1-b/8}<1.
+\end{equation}
+Uniform contraction gives a bounded holomorphic stationary solution. Let
+\(f(\varepsilon,D)=\mathbb E\log(1+\varepsilon W)/\varepsilon\), with removable value \(f(0,D)=\mathrm e^D-1\). The linear error is at most \(2MK|\varepsilon|\), and the logarithm remainder is at most \(9M^2|\varepsilon|\). Therefore
+\begin{equation}\label{eq:mech-outage-rouche}
+ |f-(\mathrm e^D-1)|\leq\frac{25M^2}{b}|\varepsilon|
+ \leq\frac{25}{256}<\frac32-\mathrm e^{1/4}
+ \leq|\mathrm e^D-1|\quad (|D|=1/4).
+\end{equation}
+Rouch\'e's theorem gives one simple zero, holomorphic in \(\varepsilon\). On the positive real axis it is the unique threshold already proved. Since \(|D|<1/4\), Cauchy's bound gives \(|[\varepsilon^n]D|\leq R^{-n}/4\). Its linear coefficient is \(A\) by \eqref{eq:mech-outage-rate}. Summing the series tail and its derivative for \(0<\varepsilon\leq R/2\) yields
+\begin{equation}\label{eq:mech-outage-derivative}
+ |D-A\varepsilon|\leq\frac{\varepsilon^2}{2R^2},\qquad
+ |D_\varepsilon-A|\leq\frac{2\varepsilon}{R^2},\qquad
+ |s^2D_s+A|\leq\frac{2}{sR^2}.
+\end{equation}
+The interval in \eqref{eq:mech-outage-sign} makes the derivative error less than \(|A|/2\). Integrating from \(D(0)=0\) in the variable \(\varepsilon\) also gives the value sign. No direction is asserted when \(A=0\), or over all finite stays for a general host law.
+\end{proof}
+
+\begin{proposition}[Outage bound]\label{prop:mech-outage-bound}
+Consider a ring with \(k\geq1\) stages, fixed finite mean stays \(\tau_j\geq1\), and one fluctuating transfer \(h_t\geq0\), stationary ergodic with \(\mathbb E h_t=1\). All other transfers are positive and fixed. Put \(p_j=1-1/\tau_j\). If \(p_{\max}=\max_jp_j>0\), \(q_0=\mathbb P(h_t=0)\in(0,1)\), and \(G_+=\exp\{\mathbb E[\log h_t\mid h_t>0]\}>0\), the unique finite threshold satisfies
+\begin{equation}\label{eq:mech-outage-bound}
+ D\leq D_{\mathrm{sup}}=\log\frac{\prod_{j=1}^k\tau_j(\lambda_*-p_j)}{G_+},
+ \qquad \lambda_*=p_{\max}^{-q_0/(1-q_0)}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}[The bound for one fluctuating transfer]
+For a trial tilt \(y\), relabel the ring so the fluctuating transfer is \(k\to1\). Positive diagonal scaling makes all other transfers one:
+\begin{equation}\label{eq:mech-outage-ring}
+ \mathbf A(h)=\mathbf C+z h\mathbf e_1\mathbf e_k^{\mathsf T},\qquad
+ z=\frac{\mathrm e^y}{\prod_j\tau_j},
+\end{equation}
+where \(\mathbf C\) has diagonal \(p_1,\ldots,p_k\) and ones immediately below it, and \(\mathbf e_j\) is the \(j\)th coordinate vector. The Krylov matrix
+\(\mathbf K=[\mathbf e_1,\mathbf C\mathbf e_1,\ldots,\mathbf C^{k-1}\mathbf e_1]\) is upper triangular with unit diagonal. Further,
+\(\mathbf K^{-1}\mathbf e_1=\mathbf e_1\) and
+\(\mathbf e_k^{\mathsf T}\mathbf K=\mathbf e_k^{\mathsf T}\).
+By Cayley--Hamilton, \(\mathbf K^{-1}\mathbf C\mathbf K\) is the companion matrix determined by \(\prod_j(\lambda-p_j)\). Thus permuting the stays produces a simultaneous similarity for every \(h\), preserving product exponents by equivalence of norms. We may place \(p_1=p_{\max}\). The similarity need not preserve the positive cone.
+
+Define \(\mathcal C=\{\mathbf x\geq0:(\mathbf C-p_{\max}\mathbf I)\mathbf x\geq0\}\).
+It contains \(\mathbf e_1\), since \((\mathbf C-p_{\max}\mathbf I)\mathbf e_1=\mathbf e_2\) for \(k\geq2\), and zero for \(k=1\). For \(\mathbf x\in\mathcal C\),
+\begin{equation}\label{eq:mech-outage-cone}
+ (\mathbf C-p_{\max}\mathbf I)\mathbf A(h)\mathbf x
+ =\mathbf C(\mathbf C-p_{\max}\mathbf I)\mathbf x
+ +zh(\mathbf e_k^{\mathsf T}\mathbf x)(\mathbf C-p_{\max}\mathbf I)\mathbf e_1\geq0.
+\end{equation}
+Hence every \(\mathbf A(h)\) preserves \(\mathcal C\), on which \(\mathbf C\mathbf x\geq p_{\max}\mathbf x\). If a finite history has \(n_0\) zeros and \(\mathbf Q\) is the ordered product of its remaining matrices, induction gives
+\begin{equation}\label{eq:mech-outage-delete}
+ \mathbf\Pi_T\mathbf e_1\geq p_{\max}^{n_0}\mathbf Q\mathbf e_1.
+\end{equation}
+This uses a cone inequality, not the false assertion \(\mathbf C\geq p_{\max}\mathbf I\) on the whole orthant.
+
+Let \(\mathbf A_+=\mathbf A(G_+)\) have Perron root \(\lambda\) and positive left and right vectors \(\mathbf w,\mathbf v\), normalized by \(\mathbf w^{\mathsf T}\mathbf v=1\). The stationary reference lineage has stage probabilities \(w_jv_j\) and host-transfer frequency \(\nu=w_1zG_+v_k/\lambda\). Expanding its labeled paths and applying Jensen, for every deterministic positive sequence \(H_1,\ldots,H_m\), gives
+\begin{equation}\label{eq:mech-outage-jensen}
+ \log(\mathbf w^{\mathsf T}\mathbf A(H_m)\cdots\mathbf A(H_1)\mathbf v)
+ \geq m\log\lambda+\nu\sum_{i=1}^m\log(H_i/G_+).
+\end{equation}
+For \(k=1\), staying and transfer are two labeled self-edges, with weights \(p_1\) and \(zG_+\). This retains the stated frequency even though both contributions occupy one matrix entry.
+
+After \(k-1\) positive steps, the product applied to \(\mathbf e_1\) dominates \(\mathbf C^{k-1}\mathbf e_1>0\): its \(j\)th entry is at least \(p_{\max}^{k-j}\). It therefore dominates a positive multiple of \(\mathbf v\). Discard this finite prefix and apply \eqref{eq:mech-outage-jensen} to the remaining positive steps in \eqref{eq:mech-outage-delete}. Since \(G_+>0\) and \(\mathbb E h=1\), \(\mathbf1_{\{h>0\}}|\log h|\) is integrable. Ergodicity in the original time gives
+\(n_0/T\to q_0\) and
+\(T^{-1}\sum_{t<T,h_t>0}\log(h_t/G_+)\to0\), so
+\begin{equation}\label{eq:mech-outage-growth-bound}
+ r(y)\geq q_0\log p_{\max}+(1-q_0)\log\lambda.
+\end{equation}
+No independence or ergodicity of the selected positive subsequence is needed.
+
+The characteristic equation is
+\(\prod_j(\lambda-p_j)=\mathrm e^yG_+/\prod_j\tau_j\).
+At \(y=D_{\mathrm{sup}}\), \(\lambda=\lambda_*\) makes the right side of \eqref{eq:mech-outage-growth-bound} zero. Finite growth, convexity, and monotonicity follow as in the two-stage existence proof. Splitting \(\mathrm e^y\) equally among all \(k\) transfers gives \(r(y)\to\log p_{\max}<0\) as \(y\to-\infty\), while \eqref{eq:mech-outage-growth-bound} tends to infinity as \(y\to\infty\). The unique finite root therefore obeys \eqref{eq:mech-outage-bound}. No fourth moment or outage-length moment is required.
+
+For rational \(q_0=m/(m+n)\), proportional blocks of \(m\) zeros followed by \(n\) steps at \(1/(1-q_0)\) approach the bound as both lengths grow. Indeed, \(\|\mathbf C^m\|\leq K_1m^{k-1}p_{\max}^m\) and \(\|\mathbf A_+^n\|\leq K_2\lambda^n\) give an upper growth bound tending to \eqref{eq:mech-outage-growth-bound}. Bracketing at fixed tilts on either side of \(D_{\mathrm{sup}}\) proves threshold convergence. This sharpness statement concerns pure binary outages.
+
+Finally, with one mean stay \(s\to\infty\) and all other stays, \(q_0\), and \(G_+\) fixed, \(p_{\max}=1-1/s\) eventually. Expanding \(\lambda_*\) gives
+\begin{equation}\label{eq:mech-outage-bound-limit}
+ \lambda_*=1+\frac{q_0}{(1-q_0)s}+O(s^{-2}),\qquad
+ D_{\mathrm{sup}}\longrightarrow-\log[(1-q_0)G_+]\geq0.
+\end{equation}
+The slow-stage factor tends to \(1/(1-q_0)\) and every other factor tends to one. Strict Jensen shows that the limit is zero exactly when \(h\) is constant conditional on \(h>0\). A variable positive host can leave a positive bound even when the actual two-stage loss tends to zero under fourth moments.
+\end{proof}
+
+\subsection{Combined models and qualifications}\label{app:mech-r16}
+\begin{proof}[Bounded-host admissibility in R16]
+A nonnegative mean-one host bounded above by \(U\) satisfies \(h(U-h)\geq0\), hence \(\mathbb E h^2\leq U\) and \(\operatorname{Var}(h)\leq U-1\). In the fine-step contact model, \(\mu=c=0.125\), so positive staying requires \(0.875-0.125h>0\), or \(h<7\). Thus variance must be below six. If two independent alternatives have equal shares, their joint high--high state has positive probability, giving the same restriction. With lower level 0.05, \((h-0.05)(7-h)>0\) in the interior improves the variance bound to \((1-0.05)(7-1)=5.70\). The requested variance at \(\sigma=1.4\) is \(\exp(1.96)-1\simeq6.0993\), so those cells are impossible at this step.
+
+At the coarse one-step wait the mean staying is zero, and nonnegative staying would require \(h\leq1\) with mean one, forcing zero variance. A chain of four positive-integer geometric stays has mean at least four, so it cannot represent the coarse mean 2.3. These constraints account for 80 coarse contact cells, 16 additional short-chain cells, and 32 fine high-variance contact cells, totaling 128 excluded cells. They are constraints at the two tested steps, not impossibility at every discrete step. This proof and the counts were checked independently.
+\end{proof}
+
+\begin{proof}[Why the R16 host is not a standardized small-noise family]
+For a two-state host with fixed lower level \(l<1\), mean one, and variance \(v\), solving its two moment equations gives upper level \(u=1+v/(1-l)\) and lower-state probability \(p=v/[(1-l)^2+v]\). Its log gap is
+\[
+ \ell=-p\log l-(1-p)\log\{1+v/(1-l)\}
+ =\frac{-\log l-(1-l)}{(1-l)^2}\,v+O(v^2).
+\]
+At \(l=0.05\), \(v=\exp(\sigma^2)-1\sim\sigma^2\), this gives
+\(\ell/(\sigma^2/2)\to2[-\log(0.05)-0.95]/0.95^2\simeq4.5335\), the independent check's value. The low event remains a finite jump while its probability tends to zero. Thus the reported \(\sigma^2\)-scaled tangent comparison is not the asymptotic coefficient of this fixed-lower-level family. This is why its finite-noise discrepancy cannot be assigned solely to truncating the usual Gaussian expansion.
+\end{proof}
+
+\begin{proof}[Conditional branching endpoint used in R16]
+Fix an environmental history and assign a future extinction probability \(z_i\) to an individual of each destination type. A route with Poisson offspring mean \(\mu\) has conditional generating function \(\exp\{\mu(z_{\rm move}-1)\}\), where \(z_{\rm move}\) averages extinction over its movement destinations, including loss. A continuation with one individual has generating function \(z_{\rm move}\). Sum these generating functions over mutually exclusive parental outcomes using their probabilities. This gives the exact one-step conditional generating function. Starting with terminal value zero and composing backward proves by induction the extinction probability of each initial type. Conditional independence of initial individuals then gives \(\prod_i z_i^{N_i}\). A Bernoulli draw with this probability samples the branching-process extinction endpoint without capping a growing population.
+
+The R16 count of 28 concordant orderings among 31 resolved comparisons is numerical, not a consequence of this identity. All three apparent reversals involved one cell whose estimated loss \(0.9317\pm0.0283\) was below the independent estimate \(0.9744\pm0.0122\). Its chosen tilt \(\widehat D+0.02\) was therefore below the tighter threshold estimate, and all 128 trials became extinct. The independent check audited the endpoint recursion but did not resimulate all extinction cells. This calibration issue prevents treating those three reversals as a demonstrated failure of the ordering at matched growth margin.
+\end{proof}
+
+\begin{remark}[What temporal independence excludes]\label{rem:mech-third-order}
+The independent-environment proof uses independence of whole matrices across time, not only zero pair covariances. The contact referee supplied the following counterexample, also relevant to interpreting the local mechanism coefficients. Let
+\[
+ \mathbf A_0=\tfrac12\begin{pmatrix}1&1\\1&1\end{pmatrix},\qquad
+ \mathbf B=\tfrac12\begin{pmatrix}3&-1\\-1&-1\end{pmatrix},\qquad
+ \mathbf A_t=\mathbf A_0+\sigma\xi_t\mathbf B,\quad |\sigma|<1/3.
+\]
+Concatenate independent blocks \((X,Y,XY)\) of fair independent signs and randomize the origin over the three phases. The driver is stationary ergodic, with all distinct-time pairs independent but \(\mathbb E(\xi_t\xi_{t-1}\xi_{t-2})=1/3\). It has positive growth \(r=\sigma^3/3+O(\sigma^4)\) for sufficiently small positive \(\sigma\), despite a zero quadratic coefficient.
+\end{remark}
+\begin{proof}
+Use coordinates \(\mathbf v=(1/2,1/2)^{\mathsf T}\) and \(\mathbf u=(1/2,-1/2)^{\mathsf T}\), writing normalized population as \(\mathbf v+z_t\mathbf u\). Direct multiplication gives
+\[
+ z_{t+1}=\frac{\sigma\xi_t(1+z_t)}{1+\sigma\xi_tz_t},
+ \qquad \log(\text{normalization})=\log(1+\sigma\xi_tz_t).
+\]
+The bounded contraction argument applies near zero. Expanding the recursion gives
+\(z_t=\sigma\xi_{t-1}+\sigma^2\xi_{t-1}\xi_{t-2}+O(\sigma^3)\).
+The log normalization therefore has expectation
+\(\sigma^2\mathbb E(\xi_t\xi_{t-1})+
+\sigma^3\mathbb E(\xi_t\xi_{t-1}\xi_{t-2})+O(\sigma^4)\).
+The pair term vanishes and the triple expectation is \(1/3\), since one of the three phases places the three variables in the same block and the other two give zero. This proves the claim. It does not contradict the independent-matrix lower bound in Lemma~\ref{lem:mech-network-bound}.
+\end{proof}

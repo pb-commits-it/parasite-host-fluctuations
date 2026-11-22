@@ -1,0 +1,182 @@
+R11: Dobson's model with a predator and its prey as the two hosts (checks/r11_dobson_trophic.py)
+started 2026-11-14 10:07:40 (clock); seed 20261114; draws 20000; 6 processes
+
+[PASS] H0a-i Rosenzweig-MacArthur boundary: 1,000 sets at K 1% above and 1% below the boundary, exceptions 0, smallest |Re z| 1.99e-04; isocline peak by maximisation against (K' - C50)/2: largest error 1.7e-08 of K'
+[PASS] H0a-ii the condition away from the boundary: 959 sets with K from the grid (41 more had no positive equilibrium): 864 predicted unstable, 95 predicted stable, exceptions 0
+[PASS] H0b prey without regulation (K = infinity): 1,000 sets, stable 0, smallest largest real part 1.87e-02
+[PASS] R0 formula against the Jacobian at the parasite-free equilibrium: 1925 sets (492 with R0 > 1, 1433 with R0 < 1; 75 of 2,000 draws had no positive parasite-free equilibrium, 0 within 1e-6 of R0 = 1), exceptions 0
+[PASS] R0 formula of the direct cycle against its Jacobian: 1925 sets with beta_H drawn log-uniformly in [1e-3, 10] (703 with R0 > 1, 1222 with R0 < 1), exceptions 0
+[PASS] M the two codings of the model agree: 500 random parameter sets and states, largest difference 1.0e-15 of the size of the terms
+      (these checks took 1 s)
+
+Draws: 20000 sets (4000 with K = infinity); a and e redrawn 7599 times for e a > d.
+  no positive parasite-free equilibrium (C0 >= K'): 795
+  positive parasite-free equilibrium but R0 <= 1:   14377
+  kept (positive parasite-free equilibrium, R0 > 1): 4828  (K finite 3789, K = infinity 1039)
+  R0 of the kept sets: median 8.58, 10th to 90th percentile 1.47 to 193
+
+Sweep: 4828 of 4828 kept sets processed in 483 s of wall-clock on 6 processes (2878 s of processor time, 2782 s of it integrating; slowest set 6.0 s; 746 sets reached the step limit).
+  parasite-free equilibrium stable to disturbances of predator and prey alone: 377/4828 = 0.078 +- 0.004 of the kept sets (K finite 377/3789 = 0.099 +- 0.005)
+
+Integration from the parasite-free equilibrium with the parasite added:
+  all kept sets: settled on a positive equilibrium 1091/4828 = 0.226 +- 0.006; did not settle 3737
+  K finite: settled on a positive equilibrium 1091/3789 = 0.288 +- 0.007; did not settle 2698
+  K = infinity: settled on a positive equilibrium 0/1039 = 0.000 (95% upper bound about 0.003); did not settle 1039
+  of the 1091 settled equilibria, linearly stable by the eigenvalues: 1091
+  parasite-free equilibrium stable: settled 371/377 = 0.984 +- 0.006
+  parasite-free equilibrium unstable: settled 720/4451 = 0.162 +- 0.006
+  the 3737 that did not settle, by what the trajectory was doing when it stopped (K finite / K = infinity):
+      1815  (1747 / 68)  prey falls below 1e-30 of its reference value (predator-prey swing of extreme size; stopped there)
+       968  (0 / 968)  prey rises above 1e10 of its reference value (escapes the predator; stopped there)
+       742  (742 / 0)  cycle with all five variables present, same extremes over the last two stretches (step limit)
+       208  (205 / 3)  a parasite stage falls below 1e-30 of its reference value with predator and prey still present
+         4  (4 / 0)  parasite declining at the step limit (not yet below 1e-30)
+    of the 742 cycling or oscillating with all five present: lowest density reached by any variable in the last stretch, as a power of ten of its reference value: median -7.3, quartiles -15.5 and -3.4; every variable stays above 1e-6 of its reference in 313
+    integration time reached, sets that did not settle: median 5.52; sets that settled: median 72.9 (largest 4.1e+04)
+
+Newton from 20 random starts in the 3737 sets that did not settle:
+  at least one positive equilibrium found in 3482 (0 with more than one); none found in 255
+  sets with a linearly stable one among them: 42  (of which the trajectory was still closing in on it at the step limit: 0)
+    what those trajectories were doing: prey collapses: 32; parasite lost: 10
+    K finite: found in 2672 of 2698; with a stable one 42
+    K = infinity: found in 810 of 1039; with a stable one 0
+
+S (supplementary, not in the protocol): roots of the one-equation reduction on a grid, 4828 sets
+  sets with at least one positive equilibrium by the scan: 4599 (1 with more than one)
+    K finite: number of equilibria per set -> number of sets: 1: 3788, 3: 1
+    K = infinity: number of equilibria per set -> number of sets: 0: 229, 1: 810
+  sets where the protocol's method found no equilibrium and the scan found one: 26
+  sets where the protocol's method found some but not all of the scan's: 1
+  sets where the protocol's method found an equilibrium that the scan did not: 0
+
+Sets with an endemic equilibrium by the protocol's method: 4573 of 4828 (K finite 3763, K = infinity 810).  Where a set has several, the one with the smallest C* + I* is used.
+  finite-difference and analytic Jacobians disagree on the sign of the largest real part in 0 of them; smallest |largest real part| / largest modulus: 1.9e-07
+[PASS] J finite-difference Jacobian against the analytic one: 200 endemic equilibria, largest relative difference of a scaled entry 2.9e-10, of the largest real part 2.8e-10 (relative to the largest modulus)
+
+H1 (open).  Sets with both a positive parasite-free and a positive endemic equilibrium.
+  'parasite-free stable' = stable to disturbances of predator and prey alone (all kept sets have R0 > 1).
+  all: n = 4573
+    endemic equilibrium stable:        1133/4573 = 0.248 +- 0.006
+    parasite-free equilibrium stable:  377/4573 = 0.082 +- 0.004
+    difference (endemic - parasite-free) +0.165 +- 0.006 (paired standard error)
+    parasite-free stable   -> endemic stable 376, endemic unstable 1
+    parasite-free unstable -> endemic stable 757, endemic unstable 3439
+  K finite: n = 3763
+    endemic equilibrium stable:        1133/3763 = 0.301 +- 0.007
+    parasite-free equilibrium stable:  377/3763 = 0.100 +- 0.005
+    difference (endemic - parasite-free) +0.201 +- 0.007 (paired standard error)
+    parasite-free stable   -> endemic stable 376, endemic unstable 1
+    parasite-free unstable -> endemic stable 757, endemic unstable 2629
+  K = infinity: n = 810
+    endemic equilibrium stable:        0/810 = 0.000 (95% upper bound about 0.004)
+    parasite-free equilibrium stable:  0/810 = 0.000 (95% upper bound about 0.004)
+    difference (endemic - parasite-free) +0.000 +- 0.000 (paired standard error)
+    parasite-free stable   -> endemic stable 0, endemic unstable 0
+    parasite-free unstable -> endemic stable 0, endemic unstable 810
+  Supplementary: the same with the scan's equilibria (smallest C* + I* where a set has several):
+  all, scan: n = 4599
+    endemic equilibrium stable:        1132/4599 = 0.246 +- 0.006
+    parasite-free equilibrium stable:  377/4599 = 0.082 +- 0.004
+    difference (endemic - parasite-free) +0.164 +- 0.005 (paired standard error)
+    parasite-free stable   -> endemic stable 376, endemic unstable 1
+    parasite-free unstable -> endemic stable 756, endemic unstable 3466
+  K finite, scan: n = 3789
+    endemic equilibrium stable:        1132/3789 = 0.299 +- 0.007
+    parasite-free equilibrium stable:  377/3789 = 0.099 +- 0.005
+    difference (endemic - parasite-free) +0.199 +- 0.006 (paired standard error)
+    parasite-free stable   -> endemic stable 376, endemic unstable 1
+    parasite-free unstable -> endemic stable 756, endemic unstable 2656
+  K = infinity, scan: n = 810
+    endemic equilibrium stable:        0/810 = 0.000 (95% upper bound about 0.004)
+    parasite-free equilibrium stable:  0/810 = 0.000 (95% upper bound about 0.004)
+    difference (endemic - parasite-free) +0.000 +- 0.000 (paired standard error)
+    parasite-free stable   -> endemic stable 0, endemic unstable 0
+    parasite-free unstable -> endemic stable 0, endemic unstable 810
+  Kept sets with no endemic equilibrium found by the protocol's method (outside H1): 255  (K finite 26, K = infinity 229); none by the scan: 229  (K finite 0, K = infinity 229)
+
+H3 (open).  Sets with finite K: stability against where the prey is held, x = (C* + I*)/K.
+    x > 1/2:  stable 766/817 = 0.938 +- 0.008
+    x <= 1/2: stable 367/2946 = 0.125 +- 0.006
+      0.00 < x <= 0.05: stable 12/1804 = 0.007 +- 0.002
+      0.05 < x <= 0.10: stable 17/391 = 0.043 +- 0.010
+      0.10 < x <= 0.20: stable 43/328 = 0.131 +- 0.019
+      0.20 < x <= 0.30: stable 64/165 = 0.388 +- 0.038
+      0.30 < x <= 0.40: stable 118/141 = 0.837 +- 0.031
+      0.40 < x <= 0.50: stable 113/117 = 0.966 +- 0.017
+      0.50 < x <= 0.60: stable 133/138 = 0.964 +- 0.016
+      0.60 < x <= 0.70: stable 138/144 = 0.958 +- 0.017
+      0.70 < x <= 0.80: stable 184/194 = 0.948 +- 0.016
+      0.80 < x <= 1.00: stable 311/341 = 0.912 +- 0.015
+    among sets with the parasite-free equilibrium stable: x > 1/2 stable 198/199 = 0.995 +- 0.005; x <= 1/2 stable 178/178 = 1.000 (95% lower bound about 0.983)
+    among sets with the parasite-free equilibrium unstable: x > 1/2 stable 568/618 = 0.919 +- 0.011; x <= 1/2 stable 189/2768 = 0.068 +- 0.005
+    supplementary split (not in the protocol), C* + I* > K'/2 (peak of the prey's net production, K' = K(1 - d_C/f)):
+      above: stable 973/1031 = 0.944 +- 0.007;  below: stable 160/2732 = 0.059 +- 0.004
+    supplementary split (not in the protocol), C* + I* > (K' - C50)/2 (peak of the prey isocline, as in H0):
+      above: stable 1118/1176 = 0.951 +- 0.006;  below: stable 15/2587 = 0.006 +- 0.001
+
+H2 (open).  sigma and beta divided by c (free-living stage c times longer), equilibrium otherwise unchanged.
+[PASS] H2 pre-check: the equilibrium with W multiplied by c satisfies the equations: 2000 sets x 8 values of c, largest relative residual 9.9e-15, above 1e-9 in 0
+      (finite-difference and analytic Jacobians disagree on the sign in 0 of 16000 cases)
+  K finite: 1644 sets
+    stable share by c: c=0.01: 0.313, c=0.1: 0.312, c=0.3: 0.310, c=1: 0.305, c=3: 0.296, c=10: 0.284, c=100: 0.252, c=10000: 0.168
+      1129  unstable at every c
+       275  stable at every c
+       238  stable when short, unstable when long
+         2  stable, unstable, stable (an island of instability)
+    non-monotonic (two or more changes of stability along c): 2/1644 = 0.001 +- 0.001
+    stability restored by a longer stage somewhere along c (unstable, then stable at a larger c): 2/1644 = 0.001 +- 0.001
+    of the 1230 sets unstable at some c below 1e4, stable at c = 1e4: 2/1230 = 0.002 +- 0.001
+    of the 1369 sets unstable at some c, unstable at c = 1e4: 1367/1369 = 0.999 +- 0.001
+  K = infinity: 356 sets
+    stable share by c: c=0.01: 0.000, c=0.1: 0.000, c=0.3: 0.000, c=1: 0.000, c=3: 0.000, c=10: 0.000, c=100: 0.000, c=10000: 0.000
+       356  unstable at every c
+    non-monotonic (two or more changes of stability along c): 0/356 = 0.000 (95% upper bound about 0.008)
+    stability restored by a longer stage somewhere along c (unstable, then stable at a larger c): 0/356 = 0.000 (95% upper bound about 0.008)
+    of the 356 sets unstable at some c below 1e4, stable at c = 1e4: 0/356 = 0.000 (95% upper bound about 0.008)
+    of the 356 sets unstable at some c, unstable at c = 1e4: 356/356 = 1.000 (95% lower bound about 0.992)
+
+T (check).  Twelve integrations of the nonlinear model, one on each side of six boundaries found in H2
+  (the first three sets with finite K and the first three with K = infinity that have a change of stability
+  between neighbouring values of c; if one kind has fewer than three, the other kind fills the places).
+      set 1 (K finite), c = 10: leading eigenvalue -0.03538+0.6619i, time 169.6, disturbance 1.00e-04 -> 3.90e-07, predicted to shrink: as predicted
+      set 1 (K finite), c = 100: leading eigenvalue +0.005743+0.324i, time 1045, disturbance 2.44e-04 -> 5.59e-02, predicted to grow: as predicted
+      set 156 (K finite), c = 100: leading eigenvalue -0.09455+0.4171i, time 63.46, disturbance 1.00e-04 -> 3.60e-07, predicted to shrink: as predicted
+      set 156 (K finite), c = 10000: leading eigenvalue +0.01128+0.05198i, time 532.1, disturbance 3.90e-04 -> 9.40e-02, predicted to grow: as predicted
+      set 278 (K finite), c = 100: leading eigenvalue -0.006899+0.287i, time 869.7, disturbance 2.72e-04 -> 1.27e-06, predicted to shrink: as predicted
+      set 278 (K finite), c = 10000: leading eigenvalue +0.005986+0.02831i, time 1002, disturbance 6.21e-04 -> 1.33e-01, predicted to grow: as predicted
+      set 304 (K finite), c = 100: leading eigenvalue -0.02319+0.3058i, time 258.7, disturbance 1.45e-04 -> 7.31e-07, predicted to shrink: as predicted
+      set 304 (K finite), c = 10000: leading eigenvalue +0.02983+0.007891i, time 201.2, disturbance 1.72e-04 -> 1.10e-02, predicted to grow: as predicted
+      set 333 (K finite), c = 100: leading eigenvalue -0.3218+0.6681i, time 18.65, disturbance 1.00e-04 -> 3.56e-07, predicted to shrink: as predicted
+      set 333 (K finite), c = 10000: leading eigenvalue +0.005143+0.07514i, time 1167, disturbance 8.61e-04 -> 1.99e-01, predicted to grow: as predicted
+      set 344 (K finite), c = 10: leading eigenvalue -0.1087+0.9177i, time 55.21, disturbance 1.00e-04 -> 3.92e-07, predicted to shrink: as predicted
+      set 344 (K finite), c = 100: leading eigenvalue +0.2444+1.155i, time 24.55, disturbance 2.42e-04 -> 4.84e-02, predicted to grow: as predicted
+[PASS] T nonlinear integrations either side of a boundary: 12 of 12 as predicted (236 sets with a boundary available, 0 of them with K = infinity; 4 more skipped because following them would take over 3,000 oscillations)
+
+H4 (open).  The trophic cycle against a direct cycle matched for R0 and for the mean time round the cycle.
+  4573 sets with an endemic equilibrium:
+      2622  no match: the time can be matched at some prey densities, R0 at none of them
+      1679  no match: the direct cycle cannot be made as long as the trophic one at any prey density
+       272  matched
+  matched sets with more than one matching direct cycle (the one with the smallest prey density used): 11
+  largest mismatch of R0 or of the time among matched sets 5.9e-13; largest relative residual of a direct equilibrium 2.5e-16
+  R0: median 2.84 in matched sets, 9.09 in the others; share of the trophic cycle's time spent in the prey: median 0.055 in matched sets, 0.071 in the others
+  all matched: n = 272
+    trophic cycle stable: 85/272 = 0.312 +- 0.028
+    direct cycle stable:  138/272 = 0.507 +- 0.030
+    difference (trophic - direct) -0.195 +- 0.034 (paired standard error)
+    both stable 64; trophic stable, direct unstable 21; trophic unstable, direct stable 74; both unstable 113
+  K finite: n = 263
+    trophic cycle stable: 85/263 = 0.323 +- 0.029
+    direct cycle stable:  138/263 = 0.525 +- 0.031
+    difference (trophic - direct) -0.202 +- 0.035 (paired standard error)
+    both stable 64; trophic stable, direct unstable 21; trophic unstable, direct stable 74; both unstable 104
+  K = infinity: n = 9
+    trophic cycle stable: 0/9 = 0.000 (95% upper bound about 0.333)
+    direct cycle stable:  0/9 = 0.000 (95% upper bound about 0.333)
+    difference (trophic - direct) +0.000 +- 0.000 (paired standard error)
+    both stable 0; trophic stable, direct unstable 0; trophic unstable, direct stable 0; both unstable 9
+  For comparison, trophic cycle stable among the sets that could not be matched: 1048/4301 = 0.244 +- 0.007
+      (H4 took 1 s)
+
+finished 2026-11-14 10:15:48 (clock); 488 s of wall-clock in all
+ALL CHECKS PASSED (H0, R0, J, H2 pre-check, T).  H1 to H4 are open: they are reported above as counts, not as pass or fail.

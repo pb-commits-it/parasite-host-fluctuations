@@ -1,0 +1,535 @@
+{
+  "figures": {
+    "bounds-1": {
+      "name": "bounds-1",
+      "target_mm": 84,
+      "old_width_mm": 73.7764183892144,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nBZIVMZ+CMMI8                         Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+CMSY6                         Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMR6                          Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+NimbusSanL-Bold               Type 1C           WinAnsi          yes yes yes      9  0\nAKHCZK+NimbusSanL-Regu               Type 1C           WinAnsi          yes yes yes     10  0\nVDVGTR+CMMI9                         Type 1C           Builtin          yes yes yes     11  0\nCAFSZL+CMMI7                         Type 1C           Builtin          yes yes yes     12  0\nDDIEWW+CMR5                          Type 1C           Builtin          yes yes yes     13  0\nFKPJSN+CMR7                          Type 1C           Builtin          yes yes yes     14  0\n",
+      "old_min_stroke_bp": 0.4483200013637543,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=sigma,y=d_phi075",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=sigma,y=g0_phi075",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=sigma,y=d_phi0",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=sigma,y=g0_phi0",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=case_idx,y=h4_bound",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=case_idx,y=h4_d",
+          "file": "data/bounds-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=case_idx,y=h4_g0",
+          "file": "data/bounds-1.csv"
+        }
+      ],
+      "analytic_plots": [
+        {
+          "formula": "0.5*x*x",
+          "domain": [
+            "0.2:2.0"
+          ],
+          "samples": [
+            "60"
+          ]
+        }
+      ]
+    },
+    "dyn-1": {
+      "name": "dyn-1",
+      "target_mm": 84,
+      "old_width_mm": 76.5386690351698,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+CMSY8                         Type 1C           Builtin          yes yes yes      5  0\nBZIVMZ+CMR8                          Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+CMMI8                         Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+NimbusSanL-Bold               Type 1C           WinAnsi          yes yes yes      8  0\nYEUUOC+NimbusSanL-Regu               Type 1C           WinAnsi          yes yes yes      9  0\nAKHCZK+CMMI7                         Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+CMSY5                         Type 1C           Builtin          yes yes yes     11  0\nCAFSZL+CMR5                          Type 1C           Builtin          yes yes yes     12  0\nDDIEWW+CMMI9                         Type 1C           Builtin          yes yes yes     13  0\nFKPJSN+CMR9                          Type 1C           Builtin          yes yes yes     14  0\nPVTTLK+CMMI6                         Type 1C           Builtin          yes yes yes     15  0\nJAGKKY+CMSY6                         Type 1C           Builtin          yes yes yes     16  0\nNOMARO+CMR6                          Type 1C           Builtin          yes yes yes     17  0\n",
+      "old_min_stroke_bp": 0.4483200013637543,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=a_L,y=F",
+          "file": "data/dyn-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=a_L,y=re_max",
+          "file": "data/dyn-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=ode_stable_a,y=ode_stable_re",
+          "file": "data/dyn-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=ode_unstable_a,y=ode_unstable_re",
+          "file": "data/dyn-1.csv"
+        }
+      ],
+      "analytic_plots": [
+        {
+          "formula": "0",
+          "domain": [
+            "0.008:4.0"
+          ],
+          "samples": [
+            "2"
+          ]
+        },
+        {
+          "formula": "0",
+          "domain": [
+            "0.008:4.0"
+          ],
+          "samples": [
+            "2"
+          ]
+        }
+      ]
+    },
+    "dyn-2": {
+      "name": "dyn-2",
+      "target_mm": 84,
+      "old_width_mm": 73.98103014628093,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+NimbusSanL-Regu               Type 1C           Custom           yes yes yes      5  0\nBZIVMZ+CMMI7                         Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+CMR7                          Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMSY7                         Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+CMR8                          Type 1C           Builtin          yes yes yes      9  0\n",
+      "old_min_stroke_bp": 0.4483200013637543,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=idx,y=pct",
+          "file": "data/dyn-2.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "exact-1": {
+      "name": "exact-1",
+      "target_mm": 84,
+      "old_width_mm": 85.34047351413302,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      5  0\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMSY6                         Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+CMR6                          Type 1C           Builtin          yes yes yes      9  0\nBZIVMZ+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     10  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     12  0\nVDVGTR+CMR9                          Type 1C           Builtin          yes yes yes     13  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=tau,y=D2,colsep=comma",
+          "file": "data/exact-1.csv"
+        },
+        {
+          "options": "x=tau,y=Q2,colsep=comma",
+          "file": "data/exact-1-curves.csv"
+        },
+        {
+          "options": "x=tau,y=R6p2,colsep=comma",
+          "file": "data/exact-1-long.csv"
+        },
+        {
+          "options": "x=tau,y=D1,colsep=comma",
+          "file": "data/exact-1.csv"
+        },
+        {
+          "options": "x=tau,y=Q1,colsep=comma",
+          "file": "data/exact-1-curves.csv"
+        },
+        {
+          "options": "x=tau,y=R6p1,colsep=comma",
+          "file": "data/exact-1-long.csv"
+        },
+        {
+          "options": "x=tau,y=D025,colsep=comma",
+          "file": "data/exact-1.csv"
+        },
+        {
+          "options": "x=tau,y=Q025,colsep=comma",
+          "file": "data/exact-1-curves.csv"
+        },
+        {
+          "options": "x=tau,y=R6p025,colsep=comma",
+          "file": "data/exact-1-long.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "exact-2": {
+      "name": "exact-2",
+      "target_mm": 84,
+      "old_width_mm": 86.28591537475586,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      5  0\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMSY6                         Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+CMR6                          Type 1C           Builtin          yes yes yes      9  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+CMR9                          Type 1C           Builtin          yes yes yes     11  0\nBZIVMZ+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     12  0\nCAFSZL+CMSY9                         Type 1C           Builtin          yes yes yes     14  0\nDDIEWW+CMMI8                         Type 1C           Builtin          yes yes yes     15  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=L,y=p025,colsep=comma",
+          "file": "data/exact-2-curves.csv"
+        },
+        {
+          "options": "x=L,y=p1,colsep=comma",
+          "file": "data/exact-2-curves.csv"
+        },
+        {
+          "options": "x=L,y=p10,colsep=comma",
+          "file": "data/exact-2-curves.csv"
+        },
+        {
+          "options": "x=L,y=p025,colsep=comma",
+          "file": "data/exact-2.csv"
+        },
+        {
+          "options": "x=L,y=p1,colsep=comma",
+          "file": "data/exact-2.csv"
+        },
+        {
+          "options": "x=L,y=p10,colsep=comma",
+          "file": "data/exact-2.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "exact-3": {
+      "name": "exact-3",
+      "target_mm": 84,
+      "old_width_mm": 87.46066602071126,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nBZIVMZ+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nIXFAWU+CMSY6                         Type 1C           Builtin          yes yes yes      6  0\nTQTHRL+CMR6                          Type 1C           Builtin          yes yes yes      7  0\nIHAIZV+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0\nYEUUOC+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nAKHCZK+CMR9                          Type 1C           Builtin          yes yes yes     11  0\nVDVGTR+CMMI8                         Type 1C           Builtin          yes yes yes     12  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=s,y=g,colsep=comma",
+          "file": "data/exact-3-p025.csv"
+        },
+        {
+          "options": "x=s,y=g,colsep=comma",
+          "file": "data/exact-3-p1.csv"
+        },
+        {
+          "options": "x=s,y=g,colsep=comma",
+          "file": "data/exact-3-p10.csv"
+        },
+        {
+          "options": "x=s,y=g,colsep=comma",
+          "file": "data/exact-3-p100.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "example-1": {
+      "old_width_mm": 84,
+      "target_mm": 84,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=idx,y=rel_phi0",
+          "file": "data/example-1a.csv"
+        },
+        {
+          "options": "colsep=comma,x=idx,y=rel_phi08",
+          "file": "data/example-1a.csv"
+        },
+        {
+          "options": "colsep=comma,x=M,y=rel_indep",
+          "file": "data/example-1b.csv"
+        },
+        {
+          "options": "colsep=comma,x=M,y=rel_sync",
+          "file": "data/example-1b.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "intro-1": {
+      "name": "intro-1",
+      "target_mm": 84,
+      "old_width_mm": 81.75625,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+NimbusSanL-Regu               Type 1C           Custom           yes yes yes      5  0\nBZIVMZ+CMR8                          Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+CMMI8                         Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMR6                          Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+CMMI6                         Type 1C           Builtin          yes yes yes      9  0\nAKHCZK+CMSY8                         Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+CMSY6                         Type 1C           Builtin          yes yes yes     11  0\n",
+      "old_min_stroke_bp": 0.09908004850149155,
+      "table_bindings": [],
+      "analytic_plots": []
+    },
+    "intro-2": {
+      "name": "intro-2",
+      "target_mm": 84,
+      "old_width_mm": 82.80047459072537,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nBZIVMZ+NimbusSanL-Regu               Type 1C           WinAnsi          yes yes yes      6  0\nIXFAWU+CMMI9                         Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+CMR9                          Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+NimbusSanL-Bold               Type 1C           WinAnsi          yes yes yes      9  0\nAKHCZK+CMMI8                         Type 1C           Builtin          yes yes yes     10  0\n",
+      "old_min_stroke_bp": 0.49814000725746155,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=t,y=mean_ref",
+          "file": "data/intro-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=t,y=h_phi0",
+          "file": "data/intro-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=t,y=mean_ref",
+          "file": "data/intro-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=t,y=h_phi09",
+          "file": "data/intro-2.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "mech-1": {
+      "name": "mech-1",
+      "target_mm": 84,
+      "old_width_mm": 84.51144358317056,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nTQTHRL+CMR6                          Type 1C           Builtin          yes yes yes      6  0\nYEUUOC+CMMI8                         Type 1C           Builtin          yes yes yes      7  0\nIHAIZV+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+CMMI6                         Type 1C           Builtin          yes yes yes     11  0\nBZIVMZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     12  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=stay,y=d01,colsep=comma",
+          "file": "data/mech-1.csv"
+        },
+        {
+          "options": "x=stay,y=d05,colsep=comma",
+          "file": "data/mech-1.csv"
+        },
+        {
+          "options": "x=stay,y=gain,colsep=comma",
+          "file": "data/mech-1.csv"
+        },
+        {
+          "options": "x=stay,y=limit01,colsep=comma",
+          "file": "data/mech-1.csv"
+        },
+        {
+          "options": "x=stay,y=limit05,colsep=comma",
+          "file": "data/mech-1.csv"
+        },
+        {
+          "options": "x=stay,y=limitgain,colsep=comma",
+          "file": "data/mech-1.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "mech-2": {
+      "name": "mech-2",
+      "target_mm": 174,
+      "old_width_mm": 157.7692782084147,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nTQTHRL+CMMI8                         Type 1C           Builtin          yes yes yes      6  0\nYEUUOC+CMSY8                         Type 1C           Builtin          yes yes yes      7  0\nIHAIZV+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nBZIVMZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     11  0\nVDVGTR+CMSY6                         Type 1C           Builtin          yes yes yes     13  0\nCAFSZL+CMR6                          Type 1C           Builtin          yes yes yes     14  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=sigma,y=D,yerror=SE,colsep=comma",
+          "file": "data/mech-2.csv"
+        },
+        {
+          "options": "x=sigma,y=quadratic,colsep=comma",
+          "file": "data/mech-2-curve.csv"
+        },
+        {
+          "options": "x=sigma,y=D,yerror=SE,colsep=comma",
+          "file": "data/mech-2.csv"
+        },
+        {
+          "options": "x=sigma,y=quadratic,colsep=comma",
+          "file": "data/mech-2-curve.csv"
+        }
+      ],
+      "analytic_plots": [
+        {
+          "formula": "0",
+          "domain": [
+            "0:2"
+          ],
+          "samples": []
+        },
+        {
+          "formula": "0",
+          "domain": [
+            "0:1.45"
+          ],
+          "samples": []
+        }
+      ]
+    },
+    "mech-3": {
+      "name": "mech-3",
+      "target_mm": 84,
+      "old_width_mm": 84.70547243754068,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nTQTHRL+CMMI8                         Type 1C           Builtin          yes yes yes      6  0\nYEUUOC+CMSY8                         Type 1C           Builtin          yes yes yes      7  0\nIHAIZV+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nBZIVMZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     11  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=sigma,y=D0,yerror=SE0,colsep=comma",
+          "file": "data/mech-3.csv"
+        },
+        {
+          "options": "x=sigma,y=D1,yerror=SE1,colsep=comma",
+          "file": "data/mech-3.csv"
+        },
+        {
+          "options": "x=sigma,y=Q0,colsep=comma",
+          "file": "data/mech-3-curve.csv"
+        },
+        {
+          "options": "x=sigma,y=Q1,colsep=comma",
+          "file": "data/mech-3-curve.csv"
+        }
+      ],
+      "analytic_plots": [
+        {
+          "formula": "0",
+          "domain": [
+            "0:2"
+          ],
+          "samples": []
+        }
+      ]
+    },
+    "mech-4": {
+      "name": "mech-4",
+      "target_mm": 84,
+      "old_width_mm": 84.52555770874022,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIXFAWU+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nTQTHRL+CMMI8                         Type 1C           Builtin          yes yes yes      6  0\nIHAIZV+LMRoman9-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      7  0\nYEUUOC+CMMI9                         Type 1C           Builtin          yes yes yes      9  0\nBZIVMZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     10  0\n",
+      "old_min_stroke_bp": 0.1992499977350235,
+      "table_bindings": [
+        {
+          "options": "x=stay,y=geometric,colsep=comma",
+          "file": "data/mech-4.csv"
+        },
+        {
+          "options": "x=stay,y=chain,colsep=comma",
+          "file": "data/mech-4.csv"
+        },
+        {
+          "options": "x=stay,y=fixed,colsep=comma",
+          "file": "data/mech-4.csv"
+        },
+        {
+          "options": "x=stay,y=baseline,colsep=comma",
+          "file": "data/mech-4.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "num-1": {
+      "old_width_mm": 84,
+      "target_mm": 84,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=stay,y=p0,yerrorminusexpr=\\thisrow{p0}-\\thisrow{low0},yerrorplusexpr=\\thisrow{high0}-\\thisrow{p0}",
+          "file": "data/num-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=stay,y=p03,yerrorminusexpr=\\thisrow{p03}-\\thisrow{low03},yerrorplusexpr=\\thisrow{high03}-\\thisrow{p03}",
+          "file": "data/num-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=stay,y=p06,yerrorminusexpr=\\thisrow{p06}-\\thisrow{low06},yerrorplusexpr=\\thisrow{high06}-\\thisrow{p06}",
+          "file": "data/num-1.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "ring-1": {
+      "name": "ring-1",
+      "target_mm": 84,
+      "old_width_mm": 76.13297136094835,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nBZIVMZ+CMMI8                         Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+NimbusSanL-Bold               Type 1C           WinAnsi          yes yes yes      7  0\nTQTHRL+CMR7                          Type 1C           Builtin          yes yes yes      8  0\nYEUUOC+CMMI7                         Type 1C           Builtin          yes yes yes      9  0\nAKHCZK+CMR5                          Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+NimbusSanL-Regu               Type 1C           WinAnsi          yes yes yes     11  0\nCAFSZL+CMR9                          Type 1C           Builtin          yes yes yes     12  0\nDDIEWW+CMMI9                         Type 1C           Builtin          yes yes yes     13  0\nFKPJSN+CMR6                          Type 1C           Builtin          yes yes yes     14  0\n",
+      "old_min_stroke_bp": 0.4483200013637543,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=b,y=one_stage",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=low_band",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=g_phi0",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=one_stage",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=low_band",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=up_phi05",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=g_phi05",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=one_stage",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=low_band",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=up_phi09",
+          "file": "data/ring-1.csv"
+        },
+        {
+          "options": "colsep=comma,x=b,y=g_phi09",
+          "file": "data/ring-1.csv"
+        }
+      ],
+      "analytic_plots": []
+    },
+    "ring-2": {
+      "name": "ring-2",
+      "target_mm": 84,
+      "old_width_mm": 76.80325236850314,
+      "old_fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nIHAIZV+CMR8                          Type 1C           Builtin          yes yes yes      5  0\nBZIVMZ+CMSY8                         Type 1C           Builtin          yes yes yes      6  0\nIXFAWU+CMMI8                         Type 1C           Builtin          yes yes yes      7  0\nTQTHRL+NimbusSanL-Regu               Type 1C           WinAnsi          yes yes yes      8  0\nYEUUOC+CMR9                          Type 1C           Builtin          yes yes yes      9  0\nAKHCZK+CMMI9                         Type 1C           Builtin          yes yes yes     10  0\nVDVGTR+CMR7                          Type 1C           Builtin          yes yes yes     11  0\nCAFSZL+CMSY7                         Type 1C           Builtin          yes yes yes     12  0\nDDIEWW+CMMI7                         Type 1C           Builtin          yes yes yes     13  0\n",
+      "old_min_stroke_bp": 0.4483200013637543,
+      "table_bindings": [
+        {
+          "options": "colsep=comma,x=period,y=zero",
+          "file": "data/ring-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=period,y=k_8x15",
+          "file": "data/ring-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=period,y=k_4x3",
+          "file": "data/ring-2.csv"
+        },
+        {
+          "options": "colsep=comma,x=period,y=k_1x12",
+          "file": "data/ring-2.csv"
+        }
+      ],
+      "analytic_plots": []
+    }
+  },
+  "data_sha256": {
+    "data/bounds-1.csv": "52a3bf0ea352822d3dd5211a8bbd00fd7c011345a4e12a8a2f04816cfd6c0036",
+    "data/dyn-1.csv": "f7fb06408cd0674d24c3edeb8736ffa739bf3106aff6fdbfdd6c58e656f41f02",
+    "data/dyn-2.csv": "8775055b959e2dcec08e66b865e25f9b0aadee5acc9d336252b84fb24fa74cbf",
+    "data/exact-1-curves.csv": "567fec25ffa8a322ed11400c81e6f648337d40f7d33e3c76ee92d5c4173627be",
+    "data/exact-1-long.csv": "6347fcff2cbdae217e02edeb22d62811e21f385d8c13ab8d9c954f7e64ebeda3",
+    "data/exact-1.csv": "88666823aad62a856ab7da81a5ef5f8c6af6eb84b31d1703c2869c170529e2c0",
+    "data/exact-2-curves.csv": "5bdb9b1c9f3e19a75f0277942275217b4165d475a6f248005b2400ef36362f9a",
+    "data/exact-2.csv": "deadf594af27f1afbedc584f35eefa7226fa8eb899323c3873d23d881b97f422",
+    "data/exact-3-p025.csv": "dd93b07b0e9239af40bbfdc8f54af6a9a5e349290395d7cdf30479e4442eac8a",
+    "data/exact-3-p1.csv": "533e8dc8a41a2c629a910eb05a2630280dc96fb7aafa4c775dcf42a9e29cf202",
+    "data/exact-3-p10.csv": "6467f50dcc382bd25c42d7f5b918279fd85c10b0f7e83855bb9454b823bf867c",
+    "data/exact-3-p100.csv": "5d7785b2dfb75e4675223597c4da8ec47ee0b538070ab0ba1c245881e93855e8",
+    "data/example-1a.csv": "983a6142d98ca4dfe44e87b1359c4680b50d19d3470048c4bfc4dadea3108a3b",
+    "data/example-1b.csv": "04b4a86b76443f5f1aa9eba41e6b58ffdf70e7aae1b6a0e3cc5ad6c740467491",
+    "data/intro-2.csv": "50318e1a69ed376787c8ac46619e99e993fe0cf65eb4eabc4479c7bf52494c2a",
+    "data/mech-1.csv": "0acc1c7649748bcd55e9142515abe88f693ea51049d2b0adcf92bb6dbab0a303",
+    "data/mech-2-curve.csv": "eb37f288c0e3027a3b29112cb4c3550fafba522a45a6f1b88e838335fa83714f",
+    "data/mech-2.csv": "6bcc8e85808dc9736ade02261af8db894378353a1348f0f63b05f7c96751d68f",
+    "data/mech-3-curve.csv": "2a88894c1f4eea6ad65f0d5789ecf7b489e75af385be6cc9deb8df07a49d904f",
+    "data/mech-3.csv": "2c606f82cf2966226a372883fe2ffc3a1fa48526941933dd0ca386db455d9c98",
+    "data/mech-4.csv": "ec481d07668e58771ac824472d6a569ae3cc3f55cf05c5b9f28801b2332d20b5",
+    "data/num-1.csv": "cba2cf748ca8d7abdc2d898a61566cab087d5e42ecbcdce093db44bf0cee78e9",
+    "data/ring-1.csv": "05ea2f23e37c84bd173cc3878194ab23e15e7af76be8db76bffd0af24a6e27aa",
+    "data/ring-2.csv": "61c4768863bd93a2aae0c71ad8d37d63afc9653efc4de7160be2bea62be3ee79"
+  }
+}

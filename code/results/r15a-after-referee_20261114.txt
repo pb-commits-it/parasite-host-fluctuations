@@ -1,0 +1,86 @@
+R15a after referee report 14.  Claims and tolerances: the docstring of checks/r15a_after_referee.py.
+started 2026-11-14 12:54:10 (system clock).  ± is one standard error.  G = second-order loss per unit variance.
+
+[PASS] AR1 the referee's counterexample (geometric 2; then day 1 with probability 0.99, else day 101), phi = 0.99: closed form -2.09236743618; referee -2.09236743618; my 102-state matrix, resolvent -2.09236743618, lag sum -2.09236743618; dominant eigenvalue 1.000000000000, generation time 4.0000000000
+[PASS] AR2 G < 0 exactly when R > (1 + 2 theta)/(1 + 2 theta + 2 T): 5,000 random (T, R, phi): 0 disagreements of sign
+[PASS] AR3 serial chains of geometric sub-stages and fixed steps never meet the gain condition (phi >= 0): 20,000 random chains: largest R - theta/(theta + T) = 2.2e-16; largest R - threshold = -1.06e-06 (negative: never met); largest (1/(2T) - G) relative to the size of the two terms of G = 1.1e-14
+AR4 (reported) the same example at other memories: G changes sign at phi = 0.80378; G at phi = 0.5, 0.9, 0.99, 0.999: +0.1774, -0.3150, -2.0924, -2.5956; slow-host limit (1 - Var L/T^2)/2 = -2.6562 (Var L = 101, T = 4)
+[PASS] AR5 dormancy mixture: closed form with R = E[phi^L] = two-state matrix formula: 60 parameter sets, largest difference relative to the size of the two terms 3.0e-14
+AR5 (reported) dormancy of mean 100 steps reached by a fraction f of the leavers of a geometric stage of mean a.  Second order.
+      a = 2: fractions f that give a gain (smallest to largest), by phi:
+        phi = 0.2    : 4.303e-02 to 0.9320
+        phi = 0.5    : 1.047e-02 to 0.9645
+        phi = 0.8    : 2.674e-03 to 0.9723
+        phi = 0.9    : 1.244e-03 to 0.9738
+        phi = 0.95   : 6.428e-04 to 0.9744
+        phi = 0.99   : 2.062e-04 to 0.9748
+        phi = 0.999  : 1.128e-04 to 0.9749
+        phi = 0.9999 : 1.036e-04 to 0.9749
+        limit of the smallest f as phi -> 1 (hand: smaller root of 20000 f^2 - (19900 - 200a) f + a = 0): 1.0257e-04; numerically at phi = 0.999999: 1.0260e-04
+      a = 2: memories phi that give a gain, by f (the upper end is the end of the grid, phi = 0.9999999):
+        f = 0.0001 : none
+        f = 0.0002 : phi from 0.9906 to 0.9999999
+        f = 0.001  : phi from 0.9196 to 0.9999999
+        f = 0.01   : phi from 0.5115 to 0.9999999
+        f = 0.05   : phi from 0.1781 to 0.9999999
+        f = 0.2    : phi from 0.0606 to 0.9999999
+        f = 0.5    : phi from 0.0404 to 0.9999999
+        f = 0.9    : phi from 0.1292 to 0.9999999
+        smallest memory at which some f gives a gain (f on a grid of 0.01): phi = 0.0404, at f = 0.49
+      a = 4: fractions f that give a gain (smallest to largest), by phi:
+        phi = 0.2    : 9.304e-02 to 0.8620
+        phi = 0.5    : 2.164e-02 to 0.9334
+        phi = 0.8    : 5.476e-03 to 0.9495
+        phi = 0.9    : 2.543e-03 to 0.9525
+        phi = 0.95   : 1.313e-03 to 0.9537
+        phi = 0.99   : 4.211e-04 to 0.9546
+        phi = 0.999  : 2.304e-04 to 0.9548
+        phi = 0.9999 : 2.116e-04 to 0.9548
+        limit of the smallest f as phi -> 1 (hand: smaller root of 20000 f^2 - (19900 - 200a) f + a = 0): 2.0947e-04; numerically at phi = 0.999999: 2.0950e-04
+      a = 4: memories phi that give a gain, by f (the upper end is the end of the grid, phi = 0.9999999):
+        f = 0.0001 : none
+        f = 0.0002 : none
+        f = 0.001  : phi from 0.9637 to 0.9999999
+        f = 0.01   : phi from 0.6838 to 0.9999999
+        f = 0.05   : phi from 0.3075 to 0.9999999
+        f = 0.2    : phi from 0.1171 to 0.9999999
+        f = 0.5    : phi from 0.0809 to 0.9999999
+        f = 0.9    : phi from 0.2886 to 0.9999999
+        smallest memory at which some f gives a gain (f on a grid of 0.01): phi = 0.0807, at f = 0.48
+[PASS] AR5 the smallest f as phi -> 1 is the root of the quadratic: a = 2 and a = 4, within 1%
+[PASS] AR7 the referee's counterexample: a stage whose completion probability is constant but whose clock responds: clock of stage 1 frozen: closed form +0.008540788, matrix +0.008540788, referee +0.008540788; clock responding: closed form -0.018043202, matrix -0.018043202, referee -0.018043202
+[PASS] AR8 the endpoint of Proposition D: two fixed steps and a stay of 6 as a chain of m, phi = 0: matrix formula for m = 1, 2, 3: 0.062500, 0.062500, 0.062500 (1/16 = 0.0625); for m = 6 the expression gives 0.062500 but the ring is not primitive (second eigenvalue modulus 1.000000000000); the true coefficient there is 1/2
+[PASS] AR9 fixed delay with death, second order, no memory: the rule for whole steps; and a geometric case with no positive root: 2,000 random (a, sigma, mu): 0 disagreements between the integer maximum and the rule mu < sigma^2/(2(a+b)(a+b+1)); (3.2, 0.4, 0.09): roots of the quadratic -1.658, -2.883, margin decreasing from b = 1: True
+
+AR6 dormancy mixture, a = 2, dormancy 100 steps, phi = 0.9, sigma = 0.3: unexpanded loss on each side of the second-order boundary
+      second-order boundary: gain for f between 0.00124 and 0.9738
+      f = 0.0005: second order +0.01309;  stage-wise simulator -0.05159 ± 0.00034;  explicit matrices -0.05040 ± 0.00088 (-1.3 combined se);  second order predicts a loss: NOT as predicted
+      f = 0.005: second order -0.05299;  stage-wise simulator -0.08632 ± 0.00037;  explicit matrices -0.08415 ± 0.00088 (-2.3 combined se);  second order predicts a gain: as predicted
+[PASS] AR6 the two code paths agree (amendment 2): 3.5 combined standard errors; RESULT: the sign at f = 0.0005 is not the one second order predicts; at sigma = 0.3 the second-order boundary f = 0.00124 is not where the loss changes sign
+AR6b the same model at phi = 0.5, sigma = 0.3
+      second-order boundary: gain for f between 0.01047 and 0.9645
+      f = 0.003: second order +0.01390;  stage-wise simulator +0.00723 ± 0.00011;  explicit matrices +0.00723 ± 0.00033 (-0.0 combined se);  second order predicts a loss: as predicted
+      f = 0.03: second order -0.01602;  stage-wise simulator -0.01333 ± 0.00013;  explicit matrices -0.01317 ± 0.00030 (-0.5 combined se);  second order predicts a gain: as predicted
+[PASS] AR6b the two code paths agree: 3.5 combined standard errors; both signs as second order predicts
+AR6c (reported) phi = 0.9 at smaller noise, sigma = 0.1 (second-order boundary f = 0.00124 as in AR6)
+      f = 0.0005: second order +0.00145;  stage-wise simulator -0.00143 ± 0.00010;  second order predicts a loss: NOT as predicted
+      f = 0.005: second order -0.00589;  stage-wise simulator -0.00872 ± 0.00010;  second order predicts a gain: as predicted
+AR6d (reported) phi = 0.9, sigma = 0.3, smaller fractions; with no dormancy at all (f = 0) the exact one-stage loss is +0.02262
+      f = 2e-05: second order +0.02211;  stage-wise simulator -0.02343 ± 0.00033;  second order predicts a loss: NOT as predicted
+      f = 0.0001: second order +0.02058;  stage-wise simulator -0.03462 ± 0.00033;  second order predicts a loss: NOT as predicted
+AR6e (reported, amendment 4) phi = 0.9, f = 0.0005 at still smaller noise: D, D/sigma^2 beside the second-order coefficient, and (D - second order)/sigma^4
+      sigma = 0.3  : D = -0.051588 ± 0.000337;  D/sigma^2 = -0.5732 ± 0.0037 (second order +0.14548);  (D - second order)/sigma^4 = -8.0  [gain]
+      sigma = 0.1  : D = -0.001435 ± 0.000096;  D/sigma^2 = -0.1435 ± 0.0096 (second order +0.14548);  (D - second order)/sigma^4 = -28.9  [gain]
+      sigma = 0.05 : D = +0.000226 ± 0.000023;  D/sigma^2 = +0.0903 ± 0.0092 (second order +0.14548);  (D - second order)/sigma^4 = -22.1  [second-order sign recovered]
+      sigma = 0.03 : D = +0.000106 ± 0.000013;  D/sigma^2 = +0.1177 ± 0.0145 (second order +0.14548);  (D - second order)/sigma^4 = -30.8  [second-order sign recovered]
+
+AR10 geometric stage of 4 steps and a fixed delay b, phi = 0.9: my unexpanded loss against the referee's
+      sigma = 1.0, b =  72: mine 0.20771 ± 0.00082; referee 0.208386 ± 0.000416 (-0.7 combined se) [reproduced];  second order 0.12465;  one stage alone (exact) 0.14918: the delay hurts;  relaxation 1918 steps, run 400000 after 15348; halves differ by +1.6 se
+      sigma = 1.0, b = 120: mine 0.18904 ± 0.00091; referee 0.186582 ± 0.000393 (+2.5 combined se) [reproduced];  second order 0.07661;  one stage alone (exact) 0.14918: the delay hurts;  relaxation 8163 steps, run 400000 after 65305; halves differ by +0.2 se
+      sigma = 1.0, b = 200: mine 0.17326 ± 0.00055; referee 0.173432 ± 0.001046 (-0.1 combined se) [reproduced];  second order 0.04657;  one stage alone (exact) 0.14918: the delay hurts;  relaxation 36036 steps, run 1081080 after 288288; halves differ by -0.6 se
+      sigma = 0.3, b =  72: mine 0.01324 ± 0.00023; referee 0.012953 ± 0.000137 (+1.1 combined se) [reproduced];  second order 0.01122;  one stage alone (exact) 0.01148: the delay hurts;  relaxation 1918 steps, run 400000 after 15348; halves differ by -0.2 se
+      sigma = 0.3, b = 120: mine 0.00986 ± 0.00021; referee 0.009485 ± 0.000338 (+0.9 combined se) [reproduced];  second order 0.00689;  one stage alone (exact) 0.01148: the delay helps;  relaxation 8163 steps, run 400000 after 65305; halves differ by -0.1 se
+[PASS] AR10 the referee's five unexpanded values are reproduced: 4 combined standard errors each
+
+process time of the simulations 68 s; wall time 26 s; finished 2026-11-14 12:54:36
+ALL CHECKS PASSED

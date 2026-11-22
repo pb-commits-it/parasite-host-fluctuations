@@ -1,0 +1,1 @@
+[{"scope":"primary","stratum":"taxon_subgroup:small_mammals","test":"T1","old":"supports","new":"not decided"},{"scope":"weather","stratum":"weather_adjusted:taxon_subgroup:small_mammals","test":"T1","old":"supports","new":"not decided"},{"scope":"weather","stratum":"weather_paired:taxon_subgroup:small_mammals","test":"T1","old":"supports","new":"not decided"}]

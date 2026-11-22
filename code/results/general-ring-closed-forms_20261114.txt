@@ -1,0 +1,12 @@
+[ok] F1 transfer: closed form = matrix formula: 25304 stage contributions in 4,000 random rings (1-12 stages, some stages without staying); largest relative difference 1.6e-10; negative (a gain) in 0
+[ok] F2 survival: closed form = matrix formula: 22107 stage contributions in 4,000 random rings (1-12 stages, some stages without staying); largest relative difference 2.5e-08; negative (a gain) in 19220
+[ok] F3 lineage form = matrix formula, any primitive matrix: 1500 random matrices of size 2-8, phi from -0.9 to 0.97; largest relative difference 1.5e-12
+[ok] F4 one stage: cost = q^2/2 for every phi: 2,000 cases x 4 autocorrelations; largest relative difference 3.3e-12
+[ok] F5 position does not matter: 2,000 random rings; largest relative spread across stages 0.0e+00
+[ok] F6 same n and generation time: equal ring costs most, all-but-one-without-staying least: 50000 random rings, exceptions: 0
+[ok] F7 positive autocorrelation never lowers the cost of fluctuating transfer: 100000 random rings: smallest relative excess over the uncorrelated cost for 2 or more stages 2.02e-03; largest |excess| for one stage 5.5e-11
+[ok] F8 limits of the closed form: 300 random rings: phi -> 0 against 1/(2T^2), largest relative difference 2.0e-30; phi -> 1 against (1-CV^2)/(2T), 7.1e-14
+[ok] F9 equal ring: general closed form = C_n; two stages cost more than one exactly when phi > (s+g)/(3s+g): 20000 cases; largest relative difference 4.0e-13; threshold exceptions 0
+[ok] F10 periodic environment against exact growth rates: 600 random rings, period 2 to 39, amplitude 0.01: median |exact/predicted - 1| = 1.2e-05; error ratio on halving the amplitude: median 16.00, between 14 and 18 in 94% of 537 cases; exact growth above the constant environment in 99 of 600
+
+ALL CHECKS PASSED

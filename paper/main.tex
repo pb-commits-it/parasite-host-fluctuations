@@ -1,0 +1,129 @@
+%% Master file for Journal of Mathematical Biology submission
+%% Template: Springer Nature LaTeX Authoring Template v3.1 (December 2024)
+%% Reference style: sn-basic (Springer Nature Basic author-year via natbib)
+\documentclass[pdflatex,sn-basic]{sn-jnl}
+
+%%%% Packages (SPEC.md section 5 and Springer Nature template defaults)
+%%%% Note: sn-jnl.cls already loads geometry, amsthm, appendix ([title]),
+%%%% hyperref, wrapfig, rotating, threeparttable, and natbib ([authoryear]).
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[title]{appendix}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\pgfplotsset{compat=1.18}
+
+%%%% Theorem-like environments (using sn-jnl.cls predefined styles)
+%%%% Note: proof environment is predefined by sn-jnl.cls (spiproof with open-square QED).
+\theoremstyle{thmstyleone}% bold head, italic body; shared counter [theorem]
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{thmstyletwo}% italic head, roman body
+\newtheorem{remark}{Remark}
+
+\theoremstyle{thmstylethree}% bold head, roman body
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+%%%% Upright operator shorthand macros (SPEC.md section 2; defined via \providecommand
+%%%% so section files using either \operatorname{...} or these shorthands compile cleanly)
+%% \E   : expectation operator \mathbb{E}
+%% \Var : variance operator \operatorname{Var}
+%% \Cov : covariance operator \operatorname{Cov}
+%% \spr : spectral radius \operatorname{spr}
+%% \dd  : upright differential \,d for integrals
+%% \ee  : upright Euler constant e
+\providecommand{\E}{\mathbb{E}}
+\providecommand{\Var}{\operatorname{Var}}
+\providecommand{\Cov}{\operatorname{Cov}}
+\providecommand{\spr}{\operatorname{spr}}
+\providecommand{\dd}{\,\mathrm{d}}
+\providecommand{\ee}{\mathrm{e}}
+
+\raggedbottom
+
+\begin{document}
+
+\title[Do several hosts stabilise a parasite?]{Do several hosts stabilise a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles}
+
+%% Placeholders per SPEC.md section 2 (no real person's name or contact details)
+%% Note: sn-jnl.cls's \orcid{} macro calls \includegraphics{Orcidlogo.eps} which is
+%% No ORCID or contact e-mail for the preprint.
+\author[1]{Paul Bergeron}
+
+\affil[1]{Independent researcher}
+
+\abstract{Many parasites need two or more host species, and at least one often fluctuates strongly in abundance. It has been suggested that several hosts stabilize such parasites, because the reproduction number is an $n$th root of the transmission product or because a long-lived host stores the parasite through another host's booms and busts. We test both arguments in stage-structured models. When growth is measured per unit time, the $n$th-root effect disappears. Obligate hosts in sequence do not protect through their number, but residence times matter. With memoryless stays and wasted failed contacts, the second-order loss in log reproduction number equals the host log-abundance variance over twice the mean generation time, or more under positive memory. In an exactly solved model with a one-step exposed stage, a geometric steady stay and serially independent gamma-distributed hosts, a longer steady stay lowers the exact loss at every variance. At fixed mean total transfer, equal-share alternative hosts at one step with matched variance and memory divide that step's second-order loss by their number when independent, not when perfectly synchronous. Host memory, waiting mortality, and linked, cyclic or absent hosts can weaken or reverse these effects. Intermediate stage delays can destabilize endemic equilibria where parasites depress self-regulated hosts below peak production. Seven pre-registered open-data case studies could not isolate stage buffering, because none varied host fluctuations at fixed mean abundance. An experiment is proposed. To judge fluctuation risk, field studies should measure stage durations, waiting mortality and host covariances rather than count obligate hosts.}
+
+\keywords{complex life cycles, parasite persistence, basic reproduction number, fluctuating environments, stochastic demography}
+
+%% MSC2020 codes verified against AMS MathSciNet MSC2020:
+%% 92D30 Epidemiology; 92D25 Population dynamics (general); 92D40 Ecology;
+%% 37H15 Random dynamical systems aspects of multiplicative ergodic theory, Lyapunov exponents;
+%% 60B20 Random matrices (probabilistic aspects);
+%% 33C15 Confluent hypergeometric functions, Whittaker functions, 1F1.
+%% (Additional verified candidates for integrator: 60J80 Branching processes;
+%% 39A50 Stochastic difference equations; 34D20 Stability of solutions to ODEs.)
+\pacs[MSC Classification]{92D30, 92D25, 92D40, 37H15, 60B20, 33C15}
+
+\maketitle
+
+\input{sections/01-introduction}
+\input{sections/02-model}
+\input{sections/02b-example}
+\input{sections/03-ring}
+\input{sections/04-bounds}
+\input{sections/05-mechanisms}
+\input{sections/06-exact}
+\input{sections/07-dynamics}
+\input{sections/08-numerics-data}
+\input{sections/09-discussion}
+
+\backmatter
+
+\bmhead{Supplementary information}
+Supplementary material (Online Resource~1, \texttt{ESM\_1.pdf}) is available with this preprint and in the code repository listed under Code availability.
+
+\section*{Statements and Declarations}
+
+\bmhead{Competing interests}
+The author has no relevant financial or non-financial interests to disclose.
+
+\bmhead{Funding}
+No funding was received to assist with the preparation of this manuscript.
+
+\bmhead{Ethics approval}
+Not applicable: this theoretical and secondary-data study involved no human participants and no live animal subjects.
+
+\bmhead{Data availability}
+No new field or experimental data were collected. The Cary Institute forest-food-web dataset analysed in Section~\ref{sec:num} is publicly available on Dryad at \url{https://doi.org/10.5061/dryad.d1c8046} under a CC0~1.0 waiver \citep{ostfeld20182019}; the longer Cary Institute synthesis series is available at \url{https://doi.org/10.25390/caryinstitute.31872853.v2} under a CC~BY~4.0 licence \citep{ostfeld2026b} (see also \citealp{ostfeld2026a}, \url{https://doi.org/10.25390/caryinstitute.31915557.v1}); and the 2014--2022 Cary Institute holdout dataset is available at \url{https://doi.org/10.25390/caryinstitute.27871269.v1} under deposit metadata licence CC~BY-NC~4.0 (older embedded method notes carry a pre-publication notice, with the public deposit metadata, which give CC~BY-NC~4.0, treated as controlling in our analysis) \citep{ladeau2025}. The National Ecological Observatory Network (NEON) \texttt{RELEASE-2026} data products used in Section~\ref{sec:num} are Small mammal box trapping (\texttt{DP1.10072.001}, \url{https://doi.org/10.48443/a83h-tb34}), Tick pathogen status (\texttt{DP1.10092.001}, \url{https://doi.org/10.48443/n2yp-5a62}), and Ticks sampled using drag cloths (\texttt{DP1.10093.001}, \url{https://doi.org/10.48443/5e20-3763}), accessed 14~November 2026 \citep{neon2026a,neon2026b,neon2026c} (provisional site-months present in the downloaded bundle are not covered by the release DOIs; the DataCite records of these releases give a CC0~1.0 licence). Generated numerical results and reproduction outputs are archived at \url{https://github.com/pb-commits-it/parasite-host-fluctuations}.
+
+\bmhead{Code availability}
+All simulation, verification, Lean formalisation, and figure-generation code for this study, with the Lean coverage inventory, is archived at \url{https://github.com/pb-commits-it/parasite-host-fluctuations}.
+
+\bmhead{Author contributions}
+Paul Bergeron: conception and design of the study, direction of the analyses and verification, review and approval of the manuscript. Use of independent in mathematical derivations, numerical and formal checks, literature searches, referee rounds, and manuscript drafting is documented in Section~\ref{sec:model}.
+
+\bibliography{refs}
+
+\begin{appendices}
+\input{appendices/A-ring}
+\input{appendices/B-bounds}
+\input{appendices/C-mechanisms}
+\input{appendices/D-exact}
+\input{appendices/E-dynamics}
+\end{appendices}
+
+\end{document}

@@ -1,0 +1,253 @@
+% jmb-trim1: material relocated from main-text sections 2--7, 2026-11-15.
+% Body-only LaTeX for the Online Resource 1 writer to include in ESM_1.tex.
+% References below use the MAIN manuscript's labels; the ESM wrapper must
+% import the labels from main.aux (e.g. with xr-hyper), excluding its citation
+% definitions if the ESM has its own bibliography, or supply equivalent refs.
+% Retain refs.bib and the main preamble's math macros in that wrapper.
+% These are existing project records, not new runs or newly verified results.
+
+\section{Derivation and checking records moved from Section 2}\label{esm:from-main-methods}
+
+\subsection{Simulation settings and formal verification inventory}\label{esm:methods-checks}
+
+Simulations followed written protocols fixing tolerances beforehand (four standard errors in finite-population validations and $10^{-11}$ to $10^{-13}$ in algebraic checks). Threshold runs used step-normalized products, antithetic pairs, and common random numbers (200 populations, 200,000 steps after 2,000 burn-in steps, secant tolerance $10^{-6}$). Exact-case numerics used 40 to 65 working digits and Gauss--Legendre quadrature, while integer branching runs switched from exact binomial and Poisson draws to moment-matched normal draws at $10^9$ after generating-function checks (post-run repairs, including uncensored R13b reruns, are disclosed in Section~\ref{sec:num} and Online Resource~1). Core ring and coupled-host equations had independent dual derivations and second-party code reproductions (Cary Institute and National Ecological Observatory Network (NEON) analyses were computed once), audited across 15 sequential hostile referee rounds plus five later targeted reviews. The reconciled coverage inventory archived with the Lean sources (see Code availability) contains 82 result environments: 9 complete statements under model and textbook assumptions, 57 algebraic or analytic cores, and 16 partial results with remaining proof obligations. Four rows graded full in earlier audits (Propositions~\ref{prop:mech-fixed}, \ref{prop:dyn-k3}, \ref{prop:dyn-k4}, and~\ref{prop:dyn-k5}) were regraded to cores after an independent check of all 13 previously full rows on 22 November 2026, because their Lean statements assume a zero-growth divisor or take the linearized block responses as given. On 22 November 2026, \texttt{lake build} succeeded with Lean~\texttt{4.36.0-rc2} and Mathlib~\texttt{v4.36.0-rc2}; three additional audit-credited modules also built successfully. Compiler and linter warnings were present. Checks of all 462 distinct declarations credited by that inventory found only \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound} as foundational dependencies, with no \texttt{sorry} or \texttt{admit}; two retired historical credits were also checked. Textbook hypotheses and remaining model-specific bridges are stated separately in the inventory. Stochastic arguments outside the formal coverage rely on independently checked written proofs.
+
+
+\section{Ring and lineage details moved from the main text}\label{esm:ring-bounds-details}
+
+\subsection{Approaching the ring band edge}\label{esm:ring-band-example}
+
+Approaching the upper edge requires small $2\mathcal{T} R / [(1 + 2\theta)(1 - R)]$, for which two stays long relative to $\theta$ suffice whereas one long stay does not (illustrative stays $(10^6, 1)$ at $\phi = 0.5$ reach two-thirds of the upper edge).
+
+\subsection{Steady-stage examples and finite-horizon simulations}\label{esm:ring-steady-runs}
+
+With positive memory, a short steady stage can raise $\Gamma$ above $1/(2a)$ before longer stays send $\Gamma \to 0$ (Fig.~\ref{fig:ring-1}). For instance, $a = b = 100$ at $\phi = 0.9$ gives $0.041\sigma^2$ versus $0.005\sigma^2$, whereas $a = 2, b = 1$ at $\phi = 0.1$ gives $0.198\sigma^2$ versus $0.250\sigma^2$. Furthermore, $E$ is an infinite-horizon diffusion index, not a matrix first-passage theorem, and $b_*$ differs from finite-horizon crossings. For illustrative $a = 10$, $\theta = 9$, $L = 0.2$, $\sigma = 0.15$, $x = \ln 10$, and $6{,}000$ generations, $E$ crosses at $b_* = 18.95$, whereas the finite-horizon Brownian probability crosses at $16.93$ ($14.66$ at $\sigma = 0.10$ and $17.96$ at $\sigma = 0.20$, computed once). In the matching ring simulation (2,000 replicates, $6{,}000$ generations, computed once), tenfold-fall fractions are $0.6425 \pm 0.0107$ (no steady stage), $0.7895 \pm 0.0091$ ($b = 10$), $0.2670 \pm 0.0099$ ($b = 40$), and $0.0005 \pm 0.0005$ ($b = 160$). As $L \to 0^+$ at fixed $\theta, \sigma^2 > 0$, $b_* \to \infty$, whereas at the leading one-stage threshold $L = 1/(2a)$, $b_* = a\theta(2a - 1)/(a + \theta)$ is finite.
+
+\subsection{Periodic-response examples and AR(2) validation}\label{esm:ring-spectral-runs}
+
+Formally, a sinusoidal multiplier $1 + \epsilon\cos(\omega t)$ ($|\epsilon| < 1$, $\omega \notin \pi\mathbb{Z}$) changes growth by $-(\epsilon^2/2)K(\omega)$ to second order ($\epsilon^2$ at period two, while a cubic term can appear at period three). Narrowing the spread of circuit times around the host period makes $K(\omega) < 0$ (Fig.~\ref{fig:ring-2}, where eight stays of $1.5$ give $K = -0.0650$ at period $12$ and $-0.0003$ at period $2$). In our saved $\mathrm{AR}(2)$ check ($\sigma = 0.03$, roots $0.9\ee^{\pm 2\pi\mathrm{i}/12}$, 128 populations, $500{,}000$ steps, computed once), stays $4 \times 3$ give $\Gamma/\sigma^2 = +0.1047$ (simulated $+0.1049 \pm 0.0002$) whereas $8 \times 1.5$ give $-0.0764$ (simulated $-0.0764 \pm 0.0004$).
+
+\subsection{Continuous-time stage convention}\label{esm:ring-ct-example}
+
+Here ``one stage'' means one differential equation (a two-stage $(1,1)$ ring with one fluctuating transfer costs $\sigma^2/6$ at $\alpha = 1$), and no remainder bound is proved for this continuous-time lognormal family.
+
+\subsection{Regulated-loop example and independent checks}\label{esm:ring-reg-checks}
+
+The following checks concern Proposition~\ref{prop:ring-reg}.
+
+Equal exit rates are essential in part~(c) ($a = (1, 1, 10)$ has one-transfer threshold $\ln R_0 \approx 25.2$, not $9$). For odd $n \ge 3$ under shared exponential regulation, a simple pair crosses transversely at $s = 1 + \sec(\pi/n)$ with negative first Lyapunov coefficient by a referee-supplied rational formula, confirmed independently to $6 \times 10^{-15}$ for odd $n \le 31$ and by local integrations at $n = 3, 5$, while alternative functional forms are noted in Appendix~\ref{app:ring}.
+
+\subsection{Scope of the ring comparisons}\label{esm:ring-comparison-scope}
+
+Taking an $n$th root of $R_0$ changes neither the invasion threshold nor endemic stability. On a fixed primitive gain-only ring, independent hosts with nonnegative memory contribute positive second-order growth penalties. At one transfer, independent equal-share alternatives with matched variance and memory reduce that coefficient at fixed mean total transfer. A sufficiently long geometric steady stay sends the two-stage coefficient to zero at fixed host stay and memory, whereas a cyclic driver gives a gain only where $\operatorname{Re}g(\omega)>|g(\omega)|^2$. These are coefficient results; host feedback raises the separate stability problem in Section~\ref{sec:dyn}.
+
+\subsection{Verification record for the ring results}\label{esm:ring-verification}
+
+The reference-chain construction and Proposition~\ref{prop:ring-lineage} were proved in Appendix~\ref{app:ring} and refereed. Proposition~\ref{prop:ring-gamma} was proved there, refereed, and derived independently. Proposition~\ref{prop:ring-band} was proved and refereed, with the finite-family band algebra checked in Lean. Proposition~\ref{prop:ring-series} was proved and refereed. Proposition~\ref{prop:ring-steady} was proved and refereed, with its index algebra checked in Lean. Propositions~\ref{prop:ring-alt} and~\ref{prop:ring-spectrum} were proved and refereed. Proposition~\ref{prop:ring-ct} was proved and refereed, with its gain coefficient derived twice. Theorems~\ref{thm:ring-rem-ar1} and~\ref{thm:ring-rem-lin} and Lemma~\ref{lem:ring-rem-uniform} were proved in Appendix~\ref{app:ring} and refereed. Proposition~\ref{prop:ring-reg} was proved and refereed, with its cyclic characteristic-determinant step checked in Lean.
+
+\subsection{Range motivating the all-noise bounds}\label{esm:bounds-range}
+
+Field populations of invertebrate vectors, snails, and rodent intermediate hosts often fluctuate with log-abundance standard deviations between $0.6$ and $1.4$, where a second-order perturbation series need not remain accurate. To determine what survives outside the small-noise regime, in this section we derive growth and threshold bounds that hold at every fluctuation amplitude, establish the exact normalization of the random-environment basic reproduction number $R_0^*$ in the ring, and show how a path representation over reference lines of descent connects the all-noise bound to the second-order coefficient.
+
+\subsection{Protocol for the all-noise comparison figure}\label{esm:bounds-figure-protocol}
+
+Figure~\ref{fig:bounds-1} used 200 populations and $200{,}000$ steps after $2{,}000$ burn-in steps (computed once).
+
+\subsection{R10: all-noise simulation campaign and worked values}\label{esm:bounds-runs}
+
+Stage durations do not appear in the worst-case threshold bound $D \le \sum_{k=1}^n \ell_k$, and Proposition~\ref{prop:bounds-any}(c) shows that no sharper bound holds over all stationary ergodic environments. Nevertheless, in our 161-case simulation campaign for independent lognormal $\mathrm{AR}(1)$ hosts (Section~\ref{sec:num}, computed once), every estimate was statistically consistent with $D \le \sum_{k=1}^n \sigma_k^2/2$ (largest excess $0.6$ standard errors), and cycles with a long steady stage remained far below the bound at large $\sigma$ while exceeding the second-order value $\Gamma_0$ (Fig.~\ref{fig:bounds-1}). For stays $(1, 24)$ at $\sigma = 2.0$, simulated $D$ is $0.2699$ at $\phi = 0$ ($3.37\times$ $\Gamma_0 = 0.0800$) and $0.4060$ at $\phi = 0.75$ ($2.07\times$ $\Gamma_0 = 0.1964$), against the bound $2.0000$ (Fig.~\ref{fig:bounds-1}a, noting that $\Gamma_0 \le D$ in these cases is not an all-noise theorem).
+
+\subsection{Arithmetic- and geometric-mean examples}\label{esm:bounds-means-example}
+
+For lognormal abundance, $A_k / G_k = \exp(\sigma_k^2/2)$, which equals $1.19$ at $\sigma_k = 0.59$ and $2.6$ at $\sigma_k = 1.38$. Without stage staying in a mixing environment, $(R_0^*)^m = R_0^{\mathrm{G}}$, whereas with staying and independent matrices across time the effective circuit reproduction lies between the geometric- and arithmetic-mean-host values. This sandwich does not assert monotonicity as a stay changes. Consequently, comparisons across field sites have no predicted sign unless one specifies which mean is comparable across populations.
+
+\subsection{Threshold normalization check}\label{esm:bounds-threshold-check}
+
+Two practical consequences follow from Proposition~\ref{prop:bounds-r0star}. First, counting all $n$ transfers as births ($m = n$) divides $\ln R_0$ and $D$ equally by $n$, so taking an $n$th root never moves the invasion threshold. Second, away from $R_0 = 1$, $\Gamma_0$ uses the ordinary threshold stays $\tau_{k,0} = (1 - s_k)^{-1}$ rather than the growing population's lineage stays $\tau_k = (1 - s_k/\lambda)^{-1}$ (nor does transfer invariance of $D$ extend to the growth variance $V$). In our saved check ($s = (0.5, 0.8)$, $\sigma = (0.25, 0)$, $\phi = (0.8, 0)$, $R_0 = 4$, 400 populations, $200{,}000$ steps, computed once), $\Gamma_0 = 0.013863$ whereas $\Gamma = 0.019231$, and dividing the birth transfer by $R_0\ee^{-\Gamma_0}$ yields $\mathcal{T}_0 r = -0.000032 \pm 0.000005$ ($0.2\%$ of $\Gamma_0$), whereas using $\Gamma$ leaves $r = +0.000759$ per step (predicted $+0.000767$). In continuous time, the same formal threshold normalization matches the periodic-environment formula of \citet{bacaer2007} at a single frequency, without a proved continuous-time remainder.
+
+\subsection{A nonlognormal multiplier}\label{esm:bounds-nonlognormal}
+
+The penalty $\ell_e$ is a logarithmic gap rather than half a log variance. Only for mean-one lognormal multipliers does $\ell_e = \sigma_e^2/2$ unconditionally, whereas an independent scalar multiplier taking values $0.5$ and $50.5$ with probabilities $0.99$ and $0.01$ has exact loss $D = 0.6470$ against half log variance $0.1054$.
+
+\subsection{Lineage-variance validation and periodic counterexample}\label{esm:bounds-lineage-check}
+
+Here $V_{\mathrm{between}}$ is the within-environment variance rate among reference lineages averaged across environments, not the population growth-rate variance $V$ of Proposition~\ref{prop:ring-steady}, and it requires primitivity (on a periodic three-stage ring with no staying and one independent rewarded transfer, variance within one cohort is zero while the cross-cohort variance rate is $2/9$, as shown in Appendix~\ref{app:bounds}). Direct simulation of 500 reference lines across 160 environments confirms Eq.~\eqref{eq:bounds-lineage} within sampling error across eight primitive test models. For example, in a three-stage ring with stays $(2, 5, 3)$ and one fluctuating transfer of memory $0.7$, $C'' = +0.020230$, $J_2 = 0.050000$, and measured $V_2/2 = 0.029974 \pm 0.000251$, giving $J_2 - V_2/2 = +0.020026$, while in a two-patch model with movement $0.15$ and memory $0.9$, $C'' = -0.031649$, $J_2 = 0.125000$, and $V_2/2 = 0.159685 \pm 0.002231$, where $V_2 > 2J_2$ produces a second-order gain. Comparing two life cycles requires evaluating $J - V_{\mathrm{between}}/2$ in a common unit because $J$, $\mathcal{T}$, and $\mathbf{A}_0$ can all change together.
+
+\subsection{Lineage-identity literature and reading status}\label{esm:bounds-literature-record}
+
+\paragraph{Literature status.}
+We make no claim of priority or new mathematics for Proposition~\ref{prop:bounds-path} or Theorem~\ref{thm:bounds-lineage}, because every ingredient is in print and Eq.~\eqref{eq:bounds-lineage} is an algebraic rewriting of a published perturbation coefficient using published ideas. Specifically, the forward genealogical Markov chain and edge elasticities of $\mathbf{A}_0$ appear in \citet{bienvenu2017} (with continuous-time and backward counterparts in \citealp{demetrius1974,hermisson2002,georgii2003,baake2007,sughiyama2019}). Random-environment path representations and an explicit reference-chain Jensen bound appear in \citet{dombry2011}; \citet{kobayashi2015,kobayashi2017} give path and variational identities from which the lower bound follows (see also \citealp{bansaye2013,bansaye2019}, and fixed- or periodic-environment path formulas in \citealp{leibler2010,lambert2015,garciagarcia2019,genthon2020}). Fixed-environment cumulant expansions equating growth to chronological mean lineage fitness plus half the fitness variance among lineages appear in \citet{nozoe2017}, \citet{levien2020a}, \citet{genthon2021}, and \citet{yamauchi2022}. The random-environment second-order coefficient $C''$ itself is due to \citet{tuljapurkar1982a,tuljapurkar1990} and \citet{tuljapurkar2006}, and the independent-matrix upper bound is in \citet{cohen1979b} and \citet{tuljapurkar1990} (with quenched-versus-annealed comparisons in \citealp{rivoire2011}). Proposition~\ref{prop:bounds-path} is therefore a direct corollary of published results. In our prior-art review covering 28 works recorded as read or checked through project cards, with full readings, sectional readings, and unread supplements distinguished (including \citealp{tuljapurkar1985,rivoire2016,skanata2016,sughiyama2017,levien2020b}, published probability studies \citealp{sagitov2010,steinsaltz2011,hautphenne2016,blath2021}, and three unpublished preprints by Steinsaltz and Tuljapurkar from 2015 and 2018), Eq.~\eqref{eq:bounds-lineage} written in this environment-averaged within-environment variance form around a mean matrix, together with its total-variance equivalence to $C''$, was not found, while three supplementary files \citep{leibler2010,kobayashi2015,sughiyama2017} and four full texts \citep{arnold1994,kussell2006,sughiyama2015,wakamoto2012} were not obtained and remain open.
+
+\subsection{Scope of the all-noise and lineage conclusions}\label{esm:bounds-comparison-scope}
+
+For a parasite with a complex life cycle, these results clarify both the worst case and how life-history traits depart from it. For the fixed-staying ring under Proposition~\ref{prop:bounds-any}, the aggregate threshold loss satisfies $D\leq\sum_k\ell_k$ at every noise amplitude. With no staying, equality requires ergodicity under the cycle-length shift; under that condition the effective circuit reproduction is the geometric-mean-host value. Variable residence times, parallel host routes, and spatial structure reduce that penalty at small noise only insofar as they cause coexisting lines of descent to sample different times or host states within the same realization of the environment, a framework we apply to concrete ecological extensions in Section~\ref{sec:mech}.
+
+\subsection{Verification record for the bounds and lineage results}\label{esm:bounds-verification}
+
+Proposition~\ref{prop:bounds-any} was proved in Appendix~\ref{app:bounds} and refereed, with the two-chain algebra and finite Jensen step checked in Lean. Proposition~\ref{prop:bounds-iid} was proved there and refereed. Corollary~\ref{cor:bounds-means} was proved there, derived once, and verified in referee review. Propositions~\ref{prop:bounds-r0star} and~\ref{prop:bounds-path}, the reference-line construction, and Theorem~\ref{thm:bounds-lineage} were proved there and refereed.
+
+\section{Extension examples and numerical records}\label{esm:trim-mechanisms-dynamics}
+
+\subsection{Contact limitation: examples and continuous-time comparison}\label{esm:trim-contact}
+The coefficient and its consequences were proved and refereed. The bounded-forcing remainder has a separate derivation, given in the appendix. Without memory, contact limitation multiplies the gain-only coefficient by \(d^2\). With negative memory positivity fails, for example \(K_c=-0.11875\) at stays \((2,2)\), \(d=1/2\), and \(\phi=-0.8\).
+
+The long-stay value is a limit, not a floor. With contact stay three, \(d=0.1\), and \(\phi=0.5\), the coefficients at steady stays one and ten are 0.01518 and 0.02185, both below the limit 0.0225 (Fig.~\ref{fig:mech-1}). In continuous time the first term in \eqref{eq:mech-contact-coefficient}, when expanded as in Appendix~\ref{app:mech-contact}, uses \(\theta/\mathcal T\) instead of \((1+2\theta)/(2\mathcal T)\). The discrete no-memory factor \(d^2\) therefore does not extend to a rapidly changing continuous-time host. These results show that storage depends on what happens to individuals awaiting transmission, including mortality during unsuccessful encounters.
+
+\subsection{Return-time examples and finite-noise delays}\label{esm:trim-renewal}
+This result was proved and refereed. The transform, rather than variance alone, orders the coefficients. A mean-two geometric exposed stay followed by a stay of one step with probability 0.99 and 101 steps otherwise gives \(K=-2.09237\) at \(\phi=0.99\). Thus one obligate transfer can benefit from variability when the generation-time distribution includes rare long returns.
+
+For a geometric exposed stay \(a>1\) followed by a fixed delay \(b\), \(R=\theta\phi^b/(\theta+a)\). At fixed memory, \(K\) tends to zero as \(b\) grows. However, this does not locate a finite-noise threshold. With \(a=4\), \(\phi=0.9\), and \(\sigma=1\), the coefficient predicts improvement over no delay from \(b=72\), while simulated losses at 72, 120, and 200 remain above the no-delay loss 0.1492. A fixed delay also incurs its full survival cost if deaths occur during it (Lemma~\ref{lem:mech-mortality} in Appendix~\ref{app:mech}).
+
+\subsection{Thermal comparison and uncertainty}\label{esm:trim-thermal}
+These statements were proved and refereed. The exact conservation statement requires constant completion probabilities in every exposed stage. A clock-sensitive stage remains exposed when another stage has temperature-dependent completion. No finite-amplitude thermal remainder bound is supplied. In one illustrative response, \(\sigma_T=5\) gives \(D=0.000880\pm0.000026\) without memory and \(-0.00848\pm0.00018\) at \(\phi=0.8\), where uncertainties are one standard error.
+
+\subsection{Bound with changing staying contributions}\label{esm:trim-edge-bound}
+This bound was proved and refereed. A thermal example has loss 0.003406, exceeding its transfer-only gap 0.000138, but below the corrected bound 0.003549. Therefore a temperature-sensitive reservoir must be evaluated through both its completion and its staying rates.
+
+\subsection{Alternative and optional host examples}\label{esm:trim-routes}
+These formulas were reproduced independently. Independent alternatives enter through shares squared, whereas independent obligatory transfers add their quadratic terms on the same mean matrix. A noisy newcomer can therefore increase loss. In a scalar benchmark with an independent newcomer three times as variable, the beneficial-share boundary falls from 0.2 at second order to approximately 0.00694 at \(\sigma=1\).
+
+An optional host with \(fq>0\) reduces the no-memory coefficient at equal mean reproduction. However, under strict alternation between host levels 0.4 and 1.6, an optional stay of eight steps, used by half the exits from a \((2,2)\) cycle, reduces effective log reproduction by 0.02292 even with perfect survival.
+
+\subsection{Alternating environments and relapse}\label{esm:trim-alternation}
+At \(a=2\), strict alternation between 0.4 and 1.6 gives \(D=-0.04203\) by a full-period matrix product. These examples show why temporal independence cannot be replaced by a statement about variance alone. Relapse supplies another route to a gain, as in the seasonal model of \citet{white2016}. Its continuous-time renewal criterion and the distinction from serial stays are given in Appendix~\ref{app:mech-renewal}.
+
+\subsection{Linked-host simulations}\label{esm:trim-linked}
+The formulas and specified simulations were reproduced independently. For the rotating autoregression with radius 0.9 and angle \(\pi/10\), stays \((5,50,5)\) give \(D=0.20103\pm0.00080\) in one order and \(-0.05973\pm0.00111\) in the other at \(\sigma=1\). The verifier found gains in the second order at the tested amplitudes through 1.5 and a loss at 1.75, bracketing a sign change (Fig.~\ref{fig:mech-3}). Reversible cross-covariances or identical directed return distributions eliminate the quadratic order effect. Equal mean travel times alone do not.
+
+\subsection{Dispersal simulations}\label{esm:trim-dispersal}
+The coefficient was reproduced independently. With stays \((2,2)\), four independent patches, \(m=0.15\), and \(\phi=0.8\), the simulated loss at \(\sigma=1\) is \(-0.06171\pm0.00023\), compared with the quadratic value \(-0.31106\). Estimates remain negative at 1.2 and are positive at 1.4, bracketing where this gain ends (Fig.~\ref{fig:mech-2}). These sampled signs do not establish an interval theorem.
+
+\subsection{R16: combined mechanisms}\label{esm:trim-r16}
+The R16 numerical study combined five switches: contact limitation with half dying while waiting, a four-part steady stage, two equal independent alternative hosts, four asynchronous patches, and mortality in the steady stage. The comparison used three illustrative life cycles and two step sizes. Of 320 requested cells, 192 were admissible at those steps. All used a bounded two-state host with lower level 0.05 and variance \(\exp(\sigma^2)-1\), including cells without contact limitation. This is not a lognormal host. Holding its lower level fixed does not define the standardized small-amplitude family used to derive the quadratic coefficient.
+
+An independent implementation recomputed 17 cells and recounted every comparison. Using a four-standard-error criterion, regularizing the stay raised loss in 71 of 88 comparisons, lowered it in none, and left 17 unresolved. Alternative hosts lowered loss in 73 of 96 comparisons, raised it in two, and left 21 unresolved. Contact limitation raised loss in 32 of 48 comparisons, lowered it in 12, and left four unresolved. All 18 resolved gains involved patches. Patches alone produced a resolved gain in four of ten life-cycle--step blocks. In the short cycle at \(\sigma=1.2\) on the fine step, patches alone gave a loss, and alternatives were also needed for a gain.
+
+The edge bound held in all 192 cells. There were 28 resolved two-way interactions, including 15 conditional on incomplete backgrounds. The quadratic comparison had four wrong signs, two resolved, and size errors exceeding 30\% in 160 cells (116 resolved). These differences combine finite amplitude with the particular skewed host law. They cannot be attributed to noise amplitude alone. The run had no comparator without a long stage, so it does not establish whether regularity removes all protection. Its extinction comparisons and calibration limitation are recorded in Appendix~\ref{app:mech-r16}.
+
+\subsection{Illustrative examples from the mechanisms summary}\label{esm:trim-mechanisms-examples}
+\noindent\textit{Contact-limited transfer.} Negative at \(\phi=-0.8\)
+
+\noindent\textit{Contact, long steady stay.} Approached from below at \(d=0.1\)
+
+\noindent\textit{No waiting deaths.} \(D=0\)
+
+\noindent\textit{Renewal stay shape.} Bimodal stay: \(K=-2.09237\)
+
+\noindent\textit{Fixed delay with random stay.} At \(\sigma=1,b=200\), no benefit in tested case
+
+\noindent\textit{Every stay fixed.} \(D=\sigma^2/2\) for lognormal host
+
+\noindent\textit{Mortality during storage.} Continuous optimum \(a+b=\sigma/\sqrt{2\mu}\), if interior
+
+\noindent\textit{Thermal clocks.} \(D=J=0\) under conservation
+
+\noindent\textit{Thermal curvature.} Baseline shift can exceed fluctuation term
+
+\noindent\textit{Changing staying edges.} 0.003406 below 0.003549
+
+\noindent\textit{Curved encounter.} Inverse response: \(K_g<1\)
+
+\noindent\textit{Alternative hosts.} Elasticity-three newcomer boundary 0.2
+
+\noindent\textit{Optional host.} Alternation: advantage \(-0.02292\)
+
+\noindent\textit{Bypass.} Complete bypass: zero loss
+
+\noindent\textit{Negative memory/alternation.} Alternation: \(D=-0.04203\)
+
+\noindent\textit{One host on two transfers.} Stays \((1,10)\): \(\phi>20/79\)
+
+\noindent\textit{Linked hosts.} Order changes sign at \(\sigma=1\)
+
+\noindent\textit{Dispersal.} Gain/loss bracket \(\sigma=1.2,1.4\)
+
+\noindent\textit{Combined mechanisms.} 18 resolved gains in 192 cells
+
+
+\section{Exact-case examples and checking records moved from Section 7}\label{esm:from-main-exact}
+
+\subsection{Quadrature verification}\label{esm:exact-quadrature}
+
+Differentiating the integral representation of $U(p,b,\kappa)$ with respect to its second parameter evaluates equation~\eqref{eq:exact-r-integral} in closed special-function form (proved in Appendix~\ref{sec:exact-app}, refereed, with numerical agreement against independent quadrature at 45-digit working precision, rather than certified 45-digit error bounds; the Tricomi and series expressions are given in \citealp{roerdink1988}, equation~5.6 and Appendix~A).
+
+\subsection{Noise on staying rather than transfer}\label{esm:exact-noisy-staying}
+
+Thus even an arbitrarily small staying fraction $s > 0$ strictly recovers part of the logarithmic-gap penalty $\ell(p)$, whereas host variability always imposes a strictly positive reproductive cost. In contrast, if the transfer product $c$ is held deterministic and gamma noise instead multiplies the staying entry as $Y_t = s h_t \sim \operatorname{Gamma}(p, s/p)$, a companion random-matrix calculation (Proposition~\ref{prop:exact-R8}, proved in Appendix~\ref{sec:exact-app} and refereed, building on \citealp{letac1983}, \citealp{tourigny2007}, and \citealp{marklof2008}) yields a generalized-inverse-Gaussian invariant law and a Bessel growth rate whose threshold loss $D_{\mathrm{stay}}$ is strictly positive and diverges to $+\infty$ as $s \uparrow 1$ at fixed $p$. Because an unbounded gamma variable exceeds one with positive probability, that companion is a positive random-matrix model rather than a survival probability, and it illustrates why the transfer bound $D < \ell(p)$ relies on constant survival in the storage stage.
+
+\subsection{Saved stays and omitted endpoint row}\label{esm:exact-saved-stays}
+
+The exact loss and the second-order value can be compared at the stays used in the saved numerical study (Fig.~\ref{fig:exact-1}). The row originally printed as a stay of one was evaluated at $\tau=1.0001$ and is omitted here.
+
+\subsection{Small-staying numerical examples}\label{esm:exact-small-stays}
+
+Because the deficit $\ell(p) - D(s,p)$ decays like $1/\ln(1/s)$ rather than a power of $s$, very small retention already produces a substantial reduction in threshold loss (Fig.~\ref{fig:exact-2}). In our saved evaluations at $s = 10^{-6}$ ($L \approx 13.82$), the recovered fraction $1 - D/\ell$ equals $9.4\%$, $10.3\%$, and $17.6\%$ at illustrative host variances $0.1$, $1$, and $4$ ($p = 10$, $1$, and $1/4$), and at unit variance it remains $1.3\%$ even at $s = 10^{-48}$ (Fig.~\ref{fig:exact-2}).
+
+\subsection{Long-stay and small-noise comparisons}\label{esm:exact-long-stays}
+
+Proposition~\ref{prop:exact-R6} is a fixed-$p$ theorem rather than a uniform double limit as $p \downarrow 0$. For instance, at $p = 0.001$ (host variance $1{,}000$) and $\tau = 2$, the exact loss is $D \approx 30.84$ whereas the second-order value is $Q \approx 166.67$. Across the tabulated stays $\tau \ge 2$ in Fig.~\ref{fig:exact-1} at illustrative variance $4$ ($p = 1/4$), $Q$ overstates $D$ by at most $14\%$ relative to $D$ (a statement about those evaluated cells rather than a continuum bound, and at $\tau = 10$ the loss $D$ is already down to $6$--$8\%$ of $\ell(p)$ for variances $0.5$ to $4$). Near zero staying, by contrast, $Q$ understates $D$, reflecting non-uniformity of the small-noise expansion as $s \downarrow 0$ (proved in Appendix~\ref{sec:exact-app} and refereed).
+
+\subsection{Non-commuting normalized limits: evaluated example}\label{esm:exact-limits-example}
+
+Because the normalized limits in equation~\eqref{eq:exact-noncommute} differ by a factor of two, any fixed small staying fraction eventually agrees with $Q$ as $p \to \infty$, yet at $s = 10^{-4}$ ($\tau \approx 1.0001$) the ratio $D/Q$ is still $1.4124$ at $p = 400$ ($Q$ is $29.2\%$ below $D$) before dropping to $1.0280$ at $p = 40{,}000$.
+
+\subsection{Monotonicity proof outline and derivative limits}\label{esm:exact-proof-outline}
+
+The proof uses three steps. Proposition~\ref{prop:exact-P2} gives a strict Jensen-gap bound for a density on a lower-bounded half-line, assuming a finite mean, $\mathbb E[(1+|X-\mu|)\mathrm{e}^{X-\mu}]<\infty$, and the stated weak single-crossing condition about its mean $\mu$. Proposition~\ref{prop:exact-P3} verifies these hypotheses for $W$, separately for $0<p\leq1$ and $p>1$. Finally, the differential identities of Proposition~\ref{prop:exact-P1} show that $F=(2-s)V-(1-s)$ has a strictly positive derivative at every zero. A controlled large-$\kappa$ expansion makes $F$ negative sufficiently far out. The first-zero argument then gives $F<0$ everywhere. Propositions~\ref{prop:exact-P5}, \ref{prop:exact-P6}, and~\ref{prop:exact-P8} establish the derivative's endpoint limits, its rate at the unattained infimum, and the stated interior local minimum. The minimum is not a global one, and uniqueness outside the stated large-$p$ interval is not claimed (Fig.~\ref{fig:exact-3}).
+
+\subsection{Bounded-host counterexample checks}\label{esm:exact-counterexample-checks}
+
+The exact counterexamples were checked at 80-digit working precision by two deterministic methods: an eigenbasis Taylor recursion and a Koopman-operator quadrature.
+
+\subsection{Hosts with memory: numerical protocol and reproduction}\label{esm:exact-memory-numerics}
+
+A separate numerical study, now refereed and reproduced by a second independent reviewer, computed 112 two-stage grids for lognormal, moment-matched telegraph, gamma-refresh, and seasonally modulated lognormal hosts. The independent reproduction recomputed 123 cells across 21 curves; all agreed within four combined standard errors. The study used amplitude values $\alpha\in\{0.3,0.6,1,1.5\}$, memory settings $0,0.3,0.6,0.8,0.9,0.95,0.99$, and 30 stays from $100/99$ to $1000$. The amplitude is the log-host standard deviation for the lognormal family, while the gamma family uses $p=1/\alpha^2$ and refresh probability $1-\phi$. Telegraph hosts match the lognormal host variance and lag-one correlation, not its log variance or all higher-lag covariances. The seasonal multiplier is $1+0.5\cos(2\pi t/12)$, with one illustrative month per step. Every sampled adjacent decline in those 112 grids exceeded four paired Monte Carlo standard errors. In the three-stage subset with stays $(1,\tau,5)$, amplitudes $0.6,1.5$, and memory settings $0,0.9,0.99$, 15 of 24 grids were resolved as nonmonotone. These are finite-grid findings, without simultaneous confidence bands or guarantees between sampled stays. The open question is whether the positively persistent bounded two-state host has strictly decreasing loss at every amplitude and every interior stay. Neither the coefficient nor these grids settles it.
+
+\subsection{Exact-case Lean item list and unformalized steps}\label{esm:exact-lean}
+
+The exact-case inventory credits full statements for Propositions~\ref{prop:exact-P1}, \ref{prop:exact-P2}, \ref{prop:exact-P3}, and~\ref{prop:exact-P6} under their recorded model and textbook assumptions. Theorem~\ref{thm:exact-mono} and Proposition~\ref{prop:exact-P5} retain core coverage: the actual Kummer barrier inequality and positive scalar derivative expression are checked, while their complete derivative, parametrization and additional asymptotic conclusions are not all credited. Other exact-case rows have the core or partial scope recorded in the reconciled coverage inventory archived with the Lean sources (see Code availability). The 22 November 2026 build succeeded with warnings; all credited declarations passed the axiom check. The retired scalar identities \texttt{Barrier.T2} and \texttt{Barrier.T5} are not credited as proofs of differential or asymptotic steps.
+
+\subsection{Figure validation}\label{esm:exact-figure-checks}
+
+For Fig.~\ref{fig:exact-1}, filled circles are exact-formula roots recomputed at the six tabulated stays $2,5,10,25,100,1000$, agreeing with the archived four-decimal values within their rounding precision. For Fig.~\ref{fig:exact-2}, markers show exact-formula evaluations at $s=10^{-6},10^{-12},10^{-24},10^{-48}$, recomputed and compared with the saved rounded values.
+
+\section{Dynamic-host validation and run records}\label{esm:from-main-dynamics}
+
+\subsection{Dynamic-host blocks: validation and admissibility}\label{esm:trim-dyn-blocks}
+As introduced in Section~\ref{sec:model}, a ring of $n \ge 1$ blocks passes scalar infection pressure $u_k$ into block $k$ and scalar output $v_k = u_{k+1}$ to block $k + 1$, with no direct interaction between hosts. Relative perturbations $x_k = \delta u_k / u_k^*$ and $y_k = \delta v_k / v_k^*$ satisfy $y_k(z) = E_k(z)x_k(z)$ at complex rate $z$, written $E_k(z) = N_k(z)/D_k(z)$ with the full internal characteristic polynomial $D_k(z)$ and unreduced numerator $N_k(z)$. Table~\ref{tab:dyn-blocks} gives the five blocks (derived twice independently, checked against finite-difference Jacobians to $5.80 \times 10^{-8}$, and proved in Appendix~\ref{app:dyn}). Block V requires $a \ge \alpha$ because parasite-killed hosts leave both $N$ and $I$ (when $a < \alpha$, trajectories can leave $0 \le I \le N$).
+
+\subsection{Full polynomial: checks and cancellation example}\label{esm:trim-dyn-k1}
+Proposition~\ref{prop:dyn-k1} (proved in Appendix~\ref{app:dyn}, refereed, and checked on 400 and 360 random cycles to $7.13 \times 10^{-10}$) makes~\eqref{eq:dyn-charpoly} primary because cross-block cancellation, an unobservable mode (such as $-\rho$ at $h = 0$), or a zero numerator can omit roots from $\prod_k E_k(z) = 1$. For illustrative V parameters $a = 1$, $p = 1/2$, $\alpha = 1/2$, $\rho = 1$ and one unit-rate L block, neither $E_V(z) = (z + 1)/[(z + 1)(z + 2) + 1/2]$ nor $E_L(z) = 1/(z + 1)$ cancels internally, yet $\chi(z) = (z + 1)(z^2 + 3z + 3/2)$ has roots $-1$, $-0.633975$, and $-2.366025$, whereas $E_V(z)E_L(z) = 1$ drops $-1$.
+
+\subsection{Non-amplifying rings: checks and counterexample}\label{esm:trim-dyn-k2}
+Theorem~\ref{thm:dyn-k2} (proved in Appendix~\ref{app:dyn}, refereed, with zero exceptions in 5,000 and 6,000 random cycles) needs both hypotheses. An all-L ring has a zero eigenvalue, and following the damping V block above by two unit-rate R blocks with $\kappa = 4$ gives a positive eigenvalue $\approx 0.727244$ (computed once).
+
+\subsection{Block qualifications: validation and interpretation}\label{esm:trim-dyn-k3}
+Proposition~\ref{prop:dyn-k3} (proved in Appendix~\ref{app:dyn}, refereed, and checked on 6,000 blocks plus independent 3,200-block V and M samples) shows that a ring of L blocks, R blocks ($0 \le \kappa \le 2$), S blocks, and harmed V or M hosts with $\rho \ge 0$, containing one damper, is locally stable at that equilibrium for any host count or durations. Nonnegative $\rho$ is sufficient rather than necessary ($d = 4, q = 2, h = 1, \rho = -0.2$ damps), but an application to a particular host requires its production curve and endemic density. For logistic host production, $\rho\geq0$ is equivalent to $X^*\geq K/2$; small parasite-induced mortality alone does not establish it.
+
+\subsection{Instability island: numerical checks}\label{esm:trim-dyn-k4}
+For an illustrative V host with $a_V = 1.05$, $\alpha = 1$, $p = 0.20$, $h = 0.20$, and $\rho = -0.196$ ($1.96\%$ of logistic carrying capacity), equation~\eqref{eq:dyn-island} gives $0.0456087 < a_L < 1.9326281$, confirmed by stiff nonlinear integrations on both sides (Fig.~\ref{fig:dyn-1}; in 3,000 random below-peak V--L pairs only 27 were unstable, and an earlier $a_V < \alpha$ showcase was withdrawn because trajectories leave $I \le N$).
+
+\subsection{One slow stage: validation and restrictions}\label{esm:trim-dyn-k6}
+Parts~(i)--(ii) fail if damping blocks such as S are added, and the $1/\delta$ stay scaling requires $qd > (d - h)^2$ (Appendix~\ref{app:dyn}). For one slow L stage in a general internally Hurwitz ring, a signed static-gain condition governs stability (proved in Appendix~\ref{app:dyn}, refereed, and checked on 2,000 cycles).
+
+\subsection{Constant-number hosts: integration checks}\label{esm:trim-dyn-k8}
+For constant-number hosts, static loop damping depends only on whole-circuit $R_0$, while return speed depends on what total time is held fixed (proved in Appendix~\ref{app:dyn} and refereed; 100 integrations of 20 S/L rings converged to equilibrium, a numerical observation only).
+
+\subsection{Noise response: validation}\label{esm:trim-dyn-k9}
+Near a Hurwitz equilibrium, transfer functions also describe weak stationary forcing of infection pressure \citep[compare][]{roberts1992,marion2000} (derived twice, refereed, proof in Appendix~\ref{app:dyn}, and checked in stochastic simulations to $3.4\%$).
+
+\subsection{Imaginary-pair boundary counts and nonlinear checks}\label{esm:trim-hopf}
+At 1,800 sampled imaginary-pair boundary points of Propositions~\ref{prop:dyn-k4} and~\ref{prop:dyn-k5} (300 random sets per class, $a_V \ge \alpha$, benchmarked at $l_1 = -0.096225044865$ with imaginary-part residual at most $2.5 \times 10^{-16}$, computed once), the first Lyapunov coefficient satisfied $l_1 < 0$ at all 900 V boundaries (300 each at the long-stage island end, short-stage island end, and unregulated threshold) and, for M, at all 300 long-stage ends, 265 of 300 short-stage ends ($l_1 > 0$ in 35), and 121 of 300 unregulated thresholds ($l_1 > 0$ in 179). Because crossing speed and remaining eigenvalues were not checked across the sample, these are sign counts only, not certified Hopf bifurcations (six V runs $3\%$ inside instability matched normal-form amplitudes within $13\%$, and two long V runs settled onto positive cycles, computed once).
+
+\subsection{Lean item list for dynamic-host results}\label{esm:trim-dyn-lean}
+Under their stated model and textbook assumptions, Lean~4 checks the complete statements of Proposition~\ref{prop:dyn-k1}, Theorem~\ref{thm:dyn-k2}, and Proposition~\ref{prop:dyn-k8}. For Propositions~\ref{prop:dyn-k3}, \ref{prop:dyn-k4}, and~\ref{prop:dyn-k5}, it checks every conclusion that follows from the linearized block responses, which enter the Lean files as stated rather than being derived there from the nonlinear block equations. It checks specified components of Propositions~\ref{prop:dyn-k6}, \ref{prop:dyn-k7}, and~\ref{prop:dyn-k9}. The checked declarations use no \texttt{sorry} or nonstandard axioms. The scope and remaining gaps are recorded in the reconciled coverage inventory archived with the Lean sources (see Code availability). These dynamical results are credited to \texttt{Full3.BlockRing}, \texttt{Full3.NonAmplifying}, \texttt{Full1.BlockQualification}, \texttt{Full1.DelayStability}, \texttt{Full4.UnregulatedHost} and \texttt{Full3.ConstantHosts}, respectively, within the \texttt{Dobson} namespace (Table~\ref{tab:dyn-lean}). For Proposition~\ref{prop:dyn-k6}, the unreduced polynomial is entered explicitly, with $\mathcal{D}$ monic, $\deg\mathcal{N}\le\deg\mathcal{D}$ and $\mathcal{D}(0)>0$ supplied; its identification and these premises are not derived from the block model. The slow-root estimate assumes an existing root and suitable local Lipschitz data; branch construction, convergence of the other roots and small-rate stability remain outside coverage. For Proposition~\ref{prop:dyn-k7}, the $n\le2$ stability claim, existence and uniqueness of $\omega_c$, identification of $g_c$ with $\prod_k\sec\theta_k$, general Hurwitz equivalence, crossing direction, the general secant equality criterion, rate rescaling and small-rate asymptotics remain outside coverage. For Proposition~\ref{prop:dyn-k9}, finite feedback-response solutions and pointwise limits are checked, while spectral variance identities and uniform integral limits remain outside coverage.
+
+\subsection{Grouse models: comparisons and validation}\label{esm:trim-grouse}
+Comparing Propositions~\ref{prop:dyn-k1}, \ref{prop:dyn-k4}, and~\ref{prop:dyn-k5} with \citet{dobson1992} (read in full; field background \citealp{hudson1992}) for \emph{Trichostrongylus tenuis} in red grouse (\emph{Lagopus lagopus scoticus}) and two regimes after \citet{gaba2008} (evaluated with rates from \citealp{dobson1992}; computed once) shows why two-state V/M plus external L blocks do not predict either paper \citep[compare][]{may1978,rosa2002}. Grouse in the stability figures of \citet{dobson1992} have territorial self-regulation ($\Delta > 0$, holding $H^*/K$ between $6.8\%$ and $56.9\%$) and fecundity loss ($\delta > 0$), arrested larvae sit inside a three-state host block $(H, A_H, P)$ with response $E_{\mathrm{DH}}(z)$ (Appendix~\ref{app:dyn}; checked to $2.84 \times 10^{-9}$), varying duration alters survival, $R_0$, and $H^*$, and host uptake $-\beta WH$ depletes free-living larvae directly. Pairing $E_{\mathrm{DH}}(z)$ with a scalar L block reproduces both territorial transitions on the tested grid (losing stability between $0.75$ and $1.0$ month of free-living life, and peaking in instability near $1.0$ month of arrestment before stabilizing at $4.0$ months and above, Table~\ref{tab:dyn-grouse}), but misses restabilization at long arrestment when $\Delta = \delta = 0$ ($-0.0051$ and $-0.0162\ \mathrm{yr}^{-1}$ full vs.\ $+0.0287$ and $+0.0461\ \mathrm{yr}^{-1}$ reduced) because omitting $-\beta WH$ drops larval-uptake saturation.
+
+\subsection{R11: model, protocol, and admissible cases}\label{esm:trim-r11-protocol}
+When one host preys on the other, direct host coupling likewise breaks the scalar ring \citep{dobson1988,hadeler1989,fenton2006,rogawa2018}. Run R11 (computed once, Appendix~\ref{app:dyn}) analyzed one pre-registered, dimensionally consistent reading of equations 1.6--1.11 of \citet{dobson2020} across 20,000 log-uniform draws (every fifth with $K = \infty$), yielding 4,828 sets with a positive parasite-free predator--prey equilibrium and $R_0 > 1$ (only $377/4{,}828$, or $7.8\%$, had stable predator--prey dynamics, leaving little scope for destabilization), and 4,573 registered endemic equilibria, comprising 3,763 with self-limited prey (finite $K$) and 810 with $K = \infty$ (4,599 by a supplementary scan).
+
+\subsection{R11: stability, durations, and matched cycles}\label{esm:trim-r11-results}
+With finite-$K$ denominators separated from $K = \infty$ (Fig.~\ref{fig:dyn-2}), the endemic equilibrium was stable in $1{,}133/3{,}763$ ($30.1\% \pm 0.7\%$) versus $377/3{,}763$ ($10.0\% \pm 0.5\%$) without the parasite ($+20.1 \pm 0.7$ points, stable in 376 of those 377 and in $757/3{,}386 = 22.4\%$ of host-subsystem-unstable finite-$K$ sets, whereas pooling $K = \infty$ gives $24.8\%$ vs.\ $8.2\%$, and 42 stable equilibria were not reached from small inocula). With $K = \infty$, zero of 810 baseline endemic equilibria were stable ($95\%$ bound $0.4\%$). Across eight free-living duration factors $c \in \{0.01, 0.1, 0.3, 1, 3, 10, 100, 10^4\}$ on 2,000 sets ($1{,}644$ finite $K$, $356$ infinite $K$), finite-$K$ stability fell from $0.313$ to $0.168$ (238 lost stability, two of $1{,}644$ were non-monotone, none gained stability), and all 356 $K = \infty$ sets stayed unstable. Finite-$K$ stability occurred in $766/817$ ($93.8\% \pm 0.8\%$) sets with $(C^* + I^*)/K > 1/2$ versus $367/2{,}946$ ($12.5\% \pm 0.6\%$) at or below $1/2$ (an association shifting near $0.2$--$0.4$, not a threshold). Only $272/4{,}573$ sets ($5.9\%$, comprising $263$ finite $K$ and nine infinite $K$) matched a direct predator--parasite cycle in both $R_0$ and mean cycle time, and direct cycles were stable more often ($138/272 = 50.7\% \pm 3.0\%$ vs.\ $85/272 = 31.2\% \pm 2.8\%$, or $52.5\%$ vs.\ $32.3\%$ in finite $K$).

@@ -1,0 +1,8 @@
+study,temperature,light,source,status
+S1 Ferris,28 C constant,Not found in examined methods,https://pmc.ncbi.nlm.nih.gov/articles/PMC7287369/,Temperature verified in methods; four-day resource cycle is not a light cycle
+S2 Duncan,Daily 5/23 C white or red switching; extreme-temperature constant controls,Not verified,https://doi.org/10.1098/rspb.2013.1747,Treatment design verified; actual per-patch daily paths absent from supplied workbooks
+S3 Dallas,Inherited 20 C claim not verified in examined primary methods,Not found; low microscope light during censuses is not an incubator photoperiod,https://taddallas.github.io/papers/Dallas2018RSOS.pdf,No quantitative thermal correction
+S4 Dallas-Drake,Mean 20 C; 12/28 C pulses for 0/1/2/4 hours; filtering includes constant 12/20/28 C,12 h light / 12 h dark,https://pmc.ncbi.nlm.nih.gov/articles/PMC6093173/,Verified methods and deposited treatment labels
+S5 Clerc,Inherited 20 C claim not independently verified,Not verified,https://pubmed.ncbi.nlm.nih.gov/25761710/,Abstract and data inspected; full-text challenge/timeout; no inferred light regime
+S5 Tadiri,Constant 10/12.5/15/17.5/20 C,Culture methods: 16 h light / 8 h dark; treatment photoperiod not separately confirmed,https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/oik.10014,Temperature verified in data; culture regime in primary methods
+S7 Krichel,20 C constant versus daily varying 14-26 C; 229 daily records,Not found in examined full XML methods,https://doi.org/10.1371/journal.pbio.3002260,Temperature verified in methods and daily file; host density absent

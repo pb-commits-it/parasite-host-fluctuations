@@ -1,0 +1,9 @@
+  case                                                              C (matrix formula)   J (bound)   V_between/2 (measured)   J - V/2      difference
+[PASS] 1 ring, one fluctuating transfer, memory 0.7: C = +0.020230, J = 0.050000, V/2 = 0.029974 +- 0.000251, J - V/2 = +0.020026, difference -0.000205
+[PASS] 2 contact-limited transfer, half die waiting, memory 0.8: C = +0.014375, J = 0.054167, V/2 = 0.039517 +- 0.000382, J - V/2 = +0.014650, difference +0.000275
+[PASS] 3 two independent hosts, memories 0.5 and 0.9: C = +0.036838, J = 0.090909, V/2 = 0.054615 +- 0.000477, J - V/2 = +0.036294, difference -0.000544
+[PASS] 4 two patches, one stage disperses (m = 0.15), independent hosts, memory 0.9: C = -0.031649, J = 0.125000, V/2 = 0.159685 +- 0.002231, J - V/2 = -0.034685, difference -0.003037   <- C is negative: lineages diverge faster than the bound
+[PASS] 5 two alternative hosts in parallel, memories 0.6 and 0.6: C = +0.016963, J = 0.080645, V/2 = 0.063258 +- 0.000611, J - V/2 = +0.017387, difference +0.000424
+[PASS] 6 ring without staying, memory 0.7: J = 0.166667 (one third of 1/2: the transfer is used once in three steps); within one cohort V_between/2 = 2.39e-33: every line of descent shares one fate, and the loss is the whole bound.  Across the three cohorts, which never mix, the value is 0.0193 and the identity does not apply
+
+ALL CHECKS PASSED

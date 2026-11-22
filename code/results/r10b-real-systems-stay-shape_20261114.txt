@@ -1,0 +1,217 @@
+R10b: the table of real parasites when the long stage is not memoryless.  Protocol: protocols/R10b-real-systems-stay-shape.md
+started 2026-11-14 12:36:47 (system clock); simulation lengths divided by 1
+Inputs: the H4 parameter sets of checks/r10_loss_at_large_noise.py.  ± is one standard error.  cap = sigma^2/2, the loss with no staying.
+
+======================================================================================================================
+R1  REPRODUCTION OF R10 (H4), every stay as R10 has it
+======================================================================================================================
+      parameter set                                     this run              R10                difference / combined se   second order (R10's)
+      1a S. haematobium                                 0.0141 ± 0.0002     0.0137 ± 0.0002      +1.4  [ok]              0.0124
+      1b S. mansoni                                     0.1069 ± 0.0006     0.1068 ± 0.0004      +0.2  [ok]              0.0656
+      2a E. multilocularis, transfer out of the egg     0.4955 ± 0.0007     0.4952 ± 0.0005      +0.4  [ok]              0.4934
+      2a E. multilocularis, transfer out of the fox     0.4939 ± 0.0007     0.4955 ± 0.0005      -1.9  [ok]              0.4934
+      2a E. multilocularis, transfer out of the vole    0.4944 ± 0.0007     0.4944 ± 0.0005      +0.0  [ok]              0.4934
+      2b E. multilocularis, fox and vole                0.5040 ± 0.0007     0.5049 ± 0.0005      -1.1  [ok]              0.5023
+      3a B. burgdorferi, oak forest                     0.1072 ± 0.0002     0.1075 ± 0.0001      -1.5  [ok]              0.1043
+      3b B. burgdorferi, northern edge                  0.4056 ± 0.0004     0.4056 ± 0.0003      +0.0  [ok]              0.3937
+      5 T. tenuis in red grouse                         0.0538 ± 0.0006     0.0541 ± 0.0004      -0.4  [ok]              0.0488
+      6 P. falciparum                                   0.3291 ± 0.0009     0.3305 ± 0.0007      -1.2  [ok]              0.2725
+      7 T. circumcincta in Soay sheep                   0.0348 ± 0.0002     0.0348 ± 0.0002      -0.1  [ok]              0.0347
+[PASS] R1 the 11 parameter sets of R10's H4 are reproduced: 4 combined standard errors plus the rounding of R10's printed value
+[PASS] R2 the simulator written for this run agrees with the ring simulator: 1a 0.0138 ± 0.0002 (+1.2); 1b 0.1072 ± 0.0006 (-0.4); 2a 0.4955 ± 0.0007 (+0.0); 3a 0.1076 ± 0.0002 (-1.5); 3b 0.4050 ± 0.0005 (+0.9); 5 0.0543 ± 0.0006 (-0.6); 6 0.3297 ± 0.0009 (-0.5); 7 0.0349 ± 0.0002 (-0.2)  (new simulator; difference in combined se)
+[PASS] R3 closed form with R = E[phi^L] = matrix formula, every simulated shape: 112 shapes, largest relative difference 4.4e-13
+[PASS] R4 D <= sigma^2/2 in every case; a ring with every stay fixed gives sigma^2/2: 112 simulated cases, 0 above the bound by 3 se; row 1b with both stages fixed: 0.9555 ± 0.0023 against 0.9522
+[PASS] R5 the two halves of every run give the same growth rate at the root: 112 cases; largest |difference| 2.9 se (criterion, amendment 4: none above 4 and at most three above 3); flagged above 3 se and left out of the interpolation: none
+      cases not run because the run length is under 30 relaxation times: ('B2', '1a', 4, 'fixed') (relaxation time 50710 steps), ('B2', '1b', 4, 'fixed') (relaxation time 50710 steps), ('B4', '1a', 4) (relaxation time 33965 steps), ('B4', '1b', 4) (relaxation time 33965 steps)
+
+======================================================================================================================
+PART A: R10's OWN TIME STEP.  Fluctuating stage as in R10; the long stage a chain of m equal sub-stages with the same mean
+======================================================================================================================
+      'survives' = D below half of cap by more than 3 se; 'fails' = above by more than 3 se.  cv = coefficient of variation of the long stage.
+  1a S. haematobium (worm in people, 48 months): stays (1, 24) steps, sigma 0.589, phi 0.398; cap 0.1735; R10's D 0.0137 (D/cap 0.079)
+      m = 1 (geometric)                  cv 0.979   D = 0.0138 ± 0.0002   D/cap = 0.079   D/D_geometric =  1.00   second order 0.0124   relaxation   0.0 generations (0.1 years)   [survives]
+      m = 2                              cv 0.677   D = 0.0174 ± 0.0003   D/cap = 0.100   D/D_geometric =  1.27   second order 0.0157   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 3                              cv 0.540   D = 0.0172 ± 0.0003   D/cap = 0.099   D/D_geometric =  1.25   second order 0.0161   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 4                              cv 0.456   D = 0.0174 ± 0.0003   D/cap = 0.100   D/D_geometric =  1.26   second order 0.0161   relaxation   0.3 generations (1.1 years)   [survives]
+      m = 6                              cv 0.354   D = 0.0177 ± 0.0003   D/cap = 0.102   D/D_geometric =  1.29   second order 0.0161   relaxation   0.4 generations (1.8 years)   [survives]
+      m = 8                              cv 0.289   D = 0.0173 ± 0.0003   D/cap = 0.100   D/D_geometric =  1.26   second order 0.0161   relaxation   0.6 generations (2.7 years)   [survives]
+      m = 12                             cv 0.204   D = 0.0180 ± 0.0003   D/cap = 0.104   D/D_geometric =  1.31   second order 0.0161   relaxation   1.3 generations (5.4 years)   [survives]
+      m = 16                             cv 0.144   D = 0.0184 ± 0.0003   D/cap = 0.106   D/D_geometric =  1.34   second order 0.0161   relaxation   2.6 generations (11.0 years)   [survives]
+      m = 20                             cv 0.091   D = 0.0206 ± 0.0003   D/cap = 0.119   D/D_geometric =  1.50   second order 0.0161   relaxation   6.6 generations (27.5 years)   [survives]
+      m = 22                             cv 0.062   D = 0.0232 ± 0.0003   D/cap = 0.134   D/D_geometric =  1.69   second order 0.0161   relaxation  14.6 generations (60.7 years)   [survives]
+      m = 23                             cv 0.043   D = 0.0279 ± 0.0004   D/cap = 0.161   D/D_geometric =  2.03   second order 0.0161   relaxation  30.5 generations (127.0 years)   [survives]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.1735 ± 0.0000   D/cap = 1.000   D/D_geometric = 12.61   second order 0.0161   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.0936: between cv 0.043 and 0.000; linear interpolation cv = 0.023
+  1b S. mansoni (worm in people, 48 months): stays (1, 24) steps, sigma 1.38, phi 0.367; cap 0.9522; R10's D 0.1068 (D/cap 0.112)
+      m = 1 (geometric)                  cv 0.979   D = 0.1072 ± 0.0006   D/cap = 0.113   D/D_geometric =  1.00   second order 0.0656   relaxation   0.0 generations (0.1 years)   [survives]
+      m = 2                              cv 0.677   D = 0.1219 ± 0.0008   D/cap = 0.128   D/D_geometric =  1.14   second order 0.0808   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 3                              cv 0.540   D = 0.1255 ± 0.0008   D/cap = 0.132   D/D_geometric =  1.17   second order 0.0820   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 4                              cv 0.456   D = 0.1262 ± 0.0008   D/cap = 0.133   D/D_geometric =  1.18   second order 0.0822   relaxation   0.3 generations (1.1 years)   [survives]
+      m = 6                              cv 0.354   D = 0.1292 ± 0.0008   D/cap = 0.136   D/D_geometric =  1.20   second order 0.0823   relaxation   0.4 generations (1.8 years)   [survives]
+      m = 8                              cv 0.289   D = 0.1312 ± 0.0008   D/cap = 0.138   D/D_geometric =  1.22   second order 0.0823   relaxation   0.6 generations (2.7 years)   [survives]
+      m = 12                             cv 0.204   D = 0.1353 ± 0.0008   D/cap = 0.142   D/D_geometric =  1.26   second order 0.0823   relaxation   1.3 generations (5.4 years)   [survives]
+      m = 16                             cv 0.144   D = 0.1490 ± 0.0009   D/cap = 0.157   D/D_geometric =  1.39   second order 0.0823   relaxation   2.6 generations (11.0 years)   [survives]
+      m = 20                             cv 0.091   D = 0.1778 ± 0.0009   D/cap = 0.187   D/D_geometric =  1.66   second order 0.0823   relaxation   6.6 generations (27.5 years)   [survives]
+      m = 22                             cv 0.062   D = 0.2179 ± 0.0009   D/cap = 0.229   D/D_geometric =  2.03   second order 0.0823   relaxation  14.6 generations (60.7 years)   [survives]
+      m = 23                             cv 0.043   D = 0.2711 ± 0.0009   D/cap = 0.285   D/D_geometric =  2.53   second order 0.0823   relaxation  30.5 generations (127.0 years)   [survives]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.9522 ± 0.0000   D/cap = 1.000   D/D_geometric =  8.88   second order 0.0823   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.5297: between cv 0.043 and 0.000; linear interpolation cv = 0.026
+  6 P. falciparum (infection in people, 6 months): stays (1, 7.5) steps, sigma 1.4, phi 0.75; cap 0.9800; R10's D 0.3305 (D/cap 0.337)
+      m = 1 (geometric)                  cv 0.931   D = 0.3297 ± 0.0009   D/cap = 0.336   D/D_geometric =  1.00   second order 0.2725   relaxation   0.1 generations (0.0 years)   [survives]
+      m = 2                              cv 0.606   D = 0.4914 ± 0.0012   D/cap = 0.501   D/D_geometric =  1.49   second order 0.4662   relaxation   0.1 generations (0.1 years)   [undecided]
+      m = 4                              cv 0.342   D = 0.5944 ± 0.0012   D/cap = 0.607   D/D_geometric =  1.80   second order 0.5708   relaxation   0.5 generations (0.3 years)   [fails]
+      m = 7                              cv 0.098   D = 0.6904 ± 0.0013   D/cap = 0.704   D/D_geometric =  2.09   second order 0.6169   relaxation   7.1 generations (4.0 years)   [fails]
+        half of the protection is lost at D = 0.6548: between cv 0.342 and 0.098; linear interpolation cv = 0.188
+  3a B. burgdorferi, oak forest (tick, 10 months): stays (1, 2.273) steps, sigma 0.668, phi 0.3; cap 0.2231; R10's D 0.1075 (D/cap 0.482)
+      m = 1 (geometric)                  cv 0.748   D = 0.1076 ± 0.0002   D/cap = 0.482   D/D_geometric =  1.00   second order 0.1043   relaxation   0.4 generations (0.4 years)   [survives]
+      m = 2                              cv 0.245   D = 0.1262 ± 0.0003   D/cap = 0.566   D/D_geometric =  1.17   second order 0.1163   relaxation   2.4 generations (2.9 years)   [fails]
+        half of the protection is lost at D = 0.1653: not reached by any shape computed (largest D 0.1262)
+  3b B. burgdorferi, northern edge (tick, 10 months): stays (1, 2.273) steps, sigma 1.19, phi 0.5; cap 0.7080; R10's D 0.4056 (D/cap 0.573)
+      m = 1 (geometric)                  cv 0.748   D = 0.4050 ± 0.0005   D/cap = 0.572   D/D_geometric =  1.00   second order 0.3937   relaxation   0.4 generations (0.4 years)   [fails]
+      m = 2                              cv 0.245   D = 0.5078 ± 0.0007   D/cap = 0.717   D/D_geometric =  1.25   second order 0.4748   relaxation   2.4 generations (2.9 years)   [fails]
+        half of the protection is lost at D = 0.5565: not reached by any shape computed (largest D 0.5078)
+  2a E. multilocularis (larva in vole, 4 months; egg 2.5; fox 2): stays (1.25, 2, 1) steps, sigma 1.174, phi 0.75; cap 0.6891; R10's D 0.4952 (D/cap 0.719)
+      m = 1 (geometric)                  cv 0.707   D = 0.4955 ± 0.0007   D/cap = 0.719   D/D_geometric =  1.00   second order 0.4934   relaxation   0.5 generations (0.4 years)   [fails]
+      fixed delay                        cv 0.000   D = 0.5655 ± 0.0010   D/cap = 0.821   D/D_geometric =  1.14   second order 0.5505   relaxation   4.0 generations (2.8 years)   [fails]
+        half of the protection is lost at D = 0.5923: not reached by any shape computed (largest D 0.5655)
+
+======================================================================================================================
+PART B: A TIME STEP r TIMES FINER (host memory phi^(1/r) per fine step, same sigma, same mean stays).  B1: fluctuating stage fixed (as in R10)
+======================================================================================================================
+      'survives' = D below half of cap by more than 3 se; 'fails' = above by more than 3 se.  cv = coefficient of variation of the long stage.
+  1a S. haematobium (worm in people, 48 months): r = 8, stays (8, 192) fine steps, phi per fine step 0.8912; cap 0.1735
+      m = 1 (geometric)                  cv 0.997   D = 0.0103 ± 0.0005   D/cap = 0.060   D/D_geometric =  1.00   second order 0.0093   relaxation   0.0 generations (0.0 years)   [survives]
+      m = 2                              cv 0.703   D = 0.0147 ± 0.0005   D/cap = 0.085   D/D_geometric =  1.43   second order 0.0142   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 4                              cv 0.495   D = 0.0172 ± 0.0005   D/cap = 0.099   D/D_geometric =  1.67   second order 0.0150   relaxation   0.3 generations (1.1 years)   [survives]
+      m = 16                             cv 0.239   D = 0.0152 ± 0.0008   D/cap = 0.088   D/D_geometric =  1.48   second order 0.0151   relaxation   1.0 generations (4.0 years)   [survives]
+      m = 32                             cv 0.161   D = 0.0182 ± 0.0010   D/cap = 0.105   D/D_geometric =  1.76   second order 0.0151   relaxation   2.1 generations (8.8 years)   [survives]
+      m = 64                             cv 0.102   D = 0.0164 ± 0.0010   D/cap = 0.095   D/D_geometric =  1.59   second order 0.0151   relaxation   5.3 generations (22.0 years)   [survives]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.1735 ± 0.0000   D/cap = 1.000   D/D_geometric = 16.80   second order 0.0151   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.0919: between cv 0.102 and 0.000; linear interpolation cv = 0.053
+        a second family (amendment 3): the long stage = a fixed part + a geometric stay of mean g fine steps, same total mean
+        fixed 64 + geometric 128         cv 0.664   D = 0.0165 ± 0.0005   D/cap = 0.095   D/D_geometric =  1.59   second order 0.0151   relaxation   0.2 generations (0.7 years)   [survives]
+        fixed 128 + geometric 64         cv 0.331   D = 0.0167 ± 0.0005   D/cap = 0.096   D/D_geometric =  1.61   second order 0.0151   relaxation   0.8 generations (3.3 years)   [survives]
+        fixed 160 + geometric 32         cv 0.164   D = 0.0173 ± 0.0005   D/cap = 0.100   D/D_geometric =  1.68   second order 0.0151   relaxation   2.6 generations (10.7 years)   [survives]
+        fixed 176 + geometric 16         cv 0.081   D = 0.0202 ± 0.0006   D/cap = 0.116   D/D_geometric =  1.96   second order 0.0151   relaxation   9.2 generations (38.3 years)   [survives]
+        fixed 184 + geometric 8          cv 0.039   D = 0.0268 ± 0.0005   D/cap = 0.154   D/D_geometric =  2.59   second order 0.0151   relaxation  37.1 generations (154.4 years)   [survives]
+        fixed 188 + geometric 4          cv 0.018   not run: relaxation time 33965 steps = 170 generations = 708 years; second order 0.0151
+        half of the protection is lost at D = 0.0919: between cv 0.039 and 0.000; linear interpolation cv = 0.022
+  1b S. mansoni (worm in people, 48 months): r = 8, stays (8, 192) fine steps, phi per fine step 0.8822; cap 0.9522
+      m = 1 (geometric)                  cv 0.997   D = 0.0787 ± 0.0015   D/cap = 0.083   D/D_geometric =  1.00   second order 0.0495   relaxation   0.0 generations (0.0 years)   [survives]
+      m = 2                              cv 0.703   D = 0.1020 ± 0.0014   D/cap = 0.107   D/D_geometric =  1.30   second order 0.0724   relaxation   0.2 generations (0.9 years)   [survives]
+      m = 4                              cv 0.495   D = 0.1063 ± 0.0012   D/cap = 0.112   D/D_geometric =  1.35   second order 0.0759   relaxation   0.3 generations (1.1 years)   [survives]
+      m = 16                             cv 0.239   D = 0.1102 ± 0.0024   D/cap = 0.116   D/D_geometric =  1.40   second order 0.0761   relaxation   1.0 generations (4.0 years)   [survives]
+      m = 32                             cv 0.161   D = 0.1184 ± 0.0022   D/cap = 0.124   D/D_geometric =  1.51   second order 0.0761   relaxation   2.1 generations (8.8 years)   [survives]
+      m = 64                             cv 0.102   D = 0.1434 ± 0.0024   D/cap = 0.151   D/D_geometric =  1.82   second order 0.0761   relaxation   5.3 generations (22.0 years)   [survives]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.9522 ± 0.0000   D/cap = 1.000   D/D_geometric = 12.10   second order 0.0761   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.5154: between cv 0.102 and 0.000; linear interpolation cv = 0.055
+        a second family (amendment 3): the long stage = a fixed part + a geometric stay of mean g fine steps, same total mean
+        fixed 64 + geometric 128         cv 0.664   D = 0.1048 ± 0.0013   D/cap = 0.110   D/D_geometric =  1.33   second order 0.0761   relaxation   0.2 generations (0.7 years)   [survives]
+        fixed 128 + geometric 64         cv 0.331   D = 0.1149 ± 0.0013   D/cap = 0.121   D/D_geometric =  1.46   second order 0.0761   relaxation   0.8 generations (3.3 years)   [survives]
+        fixed 160 + geometric 32         cv 0.164   D = 0.1333 ± 0.0015   D/cap = 0.140   D/D_geometric =  1.69   second order 0.0761   relaxation   2.6 generations (10.7 years)   [survives]
+        fixed 176 + geometric 16         cv 0.081   D = 0.1670 ± 0.0015   D/cap = 0.175   D/D_geometric =  2.12   second order 0.0761   relaxation   9.2 generations (38.3 years)   [survives]
+        fixed 184 + geometric 8          cv 0.039   D = 0.2429 ± 0.0014   D/cap = 0.255   D/D_geometric =  3.09   second order 0.0761   relaxation  37.1 generations (154.4 years)   [survives]
+        fixed 188 + geometric 4          cv 0.018   not run: relaxation time 33965 steps = 170 generations = 708 years; second order 0.0761
+        half of the protection is lost at D = 0.5154: between cv 0.039 and 0.000; linear interpolation cv = 0.024
+  6 P. falciparum (infection in people, 6 months): r = 8, stays (8, 60) fine steps, phi per fine step 0.9647; cap 0.9800
+      m = 1 (geometric)                  cv 0.992   D = 0.2587 ± 0.0023   D/cap = 0.264   D/D_geometric =  1.00   second order 0.2009   relaxation   0.0 generations (0.0 years)   [survives]
+      m = 2                              cv 0.695   D = 0.4254 ± 0.0020   D/cap = 0.434   D/D_geometric =  1.64   second order 0.3993   relaxation   0.2 generations (0.1 years)   [survives]
+      m = 4                              cv 0.483   D = 0.5271 ± 0.0021   D/cap = 0.538   D/D_geometric =  2.04   second order 0.5082   relaxation   0.3 generations (0.2 years)   [fails]
+      m = 16                             cv 0.214   D = 0.6180 ± 0.0033   D/cap = 0.631   D/D_geometric =  2.39   second order 0.5941   relaxation   1.4 generations (0.8 years)   [fails]
+      m = 30                             cv 0.129   D = 0.6523 ± 0.0038   D/cap = 0.666   D/D_geometric =  2.52   second order 0.6078   relaxation   3.9 generations (2.2 years)   [fails]
+      m = 45                             cv 0.075   D = 0.6906 ± 0.0033   D/cap = 0.705   D/D_geometric =  2.67   second order 0.6130   relaxation  11.7 generations (6.6 years)   [fails]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.9800 ± 0.0000   D/cap = 1.000   D/D_geometric =  3.79   second order 0.6156   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.6194: between cv 0.214 and 0.129; linear interpolation cv = 0.211
+        a second family (amendment 3): the long stage = a fixed part + a geometric stay of mean g fine steps, same total mean
+        fixed 28 + geometric 32          cv 0.525   D = 0.5314 ± 0.0020   D/cap = 0.542   D/D_geometric =  2.05   second order 0.5186   relaxation   0.4 generations (0.2 years)   [fails]
+        fixed 44 + geometric 16          cv 0.258   D = 0.6116 ± 0.0021   D/cap = 0.624   D/D_geometric =  2.36   second order 0.5906   relaxation   1.4 generations (0.8 years)   [fails]
+        fixed 52 + geometric 8           cv 0.125   D = 0.6600 ± 0.0021   D/cap = 0.674   D/D_geometric =  2.55   second order 0.6092   relaxation   4.8 generations (2.7 years)   [fails]
+        fixed 56 + geometric 4           cv 0.058   D = 0.7108 ± 0.0023   D/cap = 0.725   D/D_geometric =  2.75   second order 0.6141   relaxation  20.4 generations (11.5 years)   [fails]
+        half of the protection is lost at D = 0.6194: between cv 0.258 and 0.125; linear interpolation cv = 0.237
+  3a B. burgdorferi, oak forest (tick, 10 months): r = 11, stays (11, 25) fine steps, phi per fine step 0.8963; cap 0.2231
+      m = 1 (geometric)                  cv 0.980   D = 0.0770 ± 0.0005   D/cap = 0.345   D/D_geometric =  1.00   second order 0.0761   relaxation   0.1 generations (0.2 years)   [survives]
+      m = 2                              cv 0.678   D = 0.0914 ± 0.0005   D/cap = 0.410   D/D_geometric =  1.19   second order 0.0898   relaxation   0.2 generations (0.2 years)   [survives]
+      m = 4                              cv 0.458   D = 0.0996 ± 0.0005   D/cap = 0.446   D/D_geometric =  1.29   second order 0.0976   relaxation   0.5 generations (0.6 years)   [survives]
+      m = 16                             cv 0.150   D = 0.1109 ± 0.0009   D/cap = 0.497   D/D_geometric =  1.44   second order 0.1038   relaxation   4.7 generations (5.6 years)   [undecided]
+      m = 20                             cv 0.100   D = 0.1173 ± 0.0009   D/cap = 0.526   D/D_geometric =  1.52   second order 0.1042   relaxation  10.5 generations (12.6 years)   [fails]
+      m = 23                             cv 0.059   D = 0.1263 ± 0.0009   D/cap = 0.566   D/D_geometric =  1.64   second order 0.1044   relaxation  30.3 generations (36.3 years)   [fails]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.2231 ± 0.0000   D/cap = 1.000   D/D_geometric =  2.90   second order 0.1045   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.1501: between cv 0.059 and 0.000; linear interpolation cv = 0.045
+        a second family (amendment 3): the long stage = a fixed part + a geometric stay of mean g fine steps, same total mean
+        fixed 9 + geometric 16           cv 0.620   D = 0.0973 ± 0.0005   D/cap = 0.436   D/D_geometric =  1.26   second order 0.0951   relaxation   0.4 generations (0.5 years)   [survives]
+        fixed 17 + geometric 8           cv 0.299   D = 0.1053 ± 0.0005   D/cap = 0.472   D/D_geometric =  1.37   second order 0.1023   relaxation   1.6 generations (1.9 years)   [survives]
+        fixed 21 + geometric 4           cv 0.139   D = 0.1137 ± 0.0005   D/cap = 0.509   D/D_geometric =  1.48   second order 0.1040   relaxation   6.2 generations (7.4 years)   [fails]
+        fixed 23 + geometric 2           cv 0.057   D = 0.1272 ± 0.0005   D/cap = 0.570   D/D_geometric =  1.65   second order 0.1044   relaxation  33.8 generations (40.5 years)   [fails]
+        half of the protection is lost at D = 0.1501: between cv 0.057 and 0.000; linear interpolation cv = 0.043
+  3b B. burgdorferi, northern edge (tick, 10 months): r = 11, stays (11, 25) fine steps, phi per fine step 0.9389; cap 0.7080
+      m = 1 (geometric)                  cv 0.980   D = 0.3067 ± 0.0012   D/cap = 0.433   D/D_geometric =  1.00   second order 0.2914   relaxation   0.1 generations (0.2 years)   [survives]
+      m = 2                              cv 0.678   D = 0.3775 ± 0.0012   D/cap = 0.533   D/D_geometric =  1.23   second order 0.3704   relaxation   0.2 generations (0.2 years)   [fails]
+      m = 4                              cv 0.458   D = 0.4266 ± 0.0011   D/cap = 0.602   D/D_geometric =  1.39   second order 0.4170   relaxation   0.5 generations (0.6 years)   [fails]
+      m = 16                             cv 0.150   D = 0.4841 ± 0.0021   D/cap = 0.684   D/D_geometric =  1.58   second order 0.4561   relaxation   4.7 generations (5.6 years)   [fails]
+      m = 20                             cv 0.100   D = 0.5029 ± 0.0021   D/cap = 0.710   D/D_geometric =  1.64   second order 0.4588   relaxation  10.5 generations (12.6 years)   [fails]
+      m = 23                             cv 0.059   D = 0.5291 ± 0.0025   D/cap = 0.747   D/D_geometric =  1.73   second order 0.4603   relaxation  30.3 generations (36.3 years)   [fails]
+      fixed delay (exact: no staying)    cv 0.000   D = 0.7080 ± 0.0000   D/cap = 1.000   D/D_geometric =  2.31   second order 0.4610   relaxation   inf generations (inf years)   [fails]
+        half of the protection is lost at D = 0.5074: between cv 0.100 and 0.059; linear interpolation cv = 0.093
+        a second family (amendment 3): the long stage = a fixed part + a geometric stay of mean g fine steps, same total mean
+        fixed 9 + geometric 16           cv 0.620   D = 0.4016 ± 0.0013   D/cap = 0.567   D/D_geometric =  1.31   second order 0.3959   relaxation   0.4 generations (0.5 years)   [fails]
+        fixed 17 + geometric 8           cv 0.299   D = 0.4577 ± 0.0012   D/cap = 0.646   D/D_geometric =  1.49   second order 0.4446   relaxation   1.6 generations (1.9 years)   [fails]
+        fixed 21 + geometric 4           cv 0.139   D = 0.4906 ± 0.0011   D/cap = 0.693   D/D_geometric =  1.60   second order 0.4572   relaxation   6.2 generations (7.4 years)   [fails]
+        fixed 23 + geometric 2           cv 0.057   D = 0.5297 ± 0.0011   D/cap = 0.748   D/D_geometric =  1.73   second order 0.4603   relaxation  33.8 generations (40.5 years)   [fails]
+        half of the protection is lost at D = 0.5074: between cv 0.139 and 0.057; linear interpolation cv = 0.103
+  2a E. multilocularis (larva in vole, 4 months; egg 2.5; fox 2): r = 8, stays (10, 16, 8) fine steps, phi per fine step 0.9647; cap 0.6891; egg geometric, fox fixed
+      m = 1 (geometric)                  cv 0.968   D = 0.4030 ± 0.0017   D/cap = 0.585   D/D_geometric =  1.00   second order 0.3976   relaxation   0.1 generations (0.1 years)   [fails]
+      m = 2                              cv 0.661   D = 0.4587 ± 0.0018   D/cap = 0.666   D/D_geometric =  1.14   second order 0.4534   relaxation   0.3 generations (0.2 years)   [fails]
+      m = 4                              cv 0.433   D = 0.4873 ± 0.0018   D/cap = 0.707   D/D_geometric =  1.21   second order 0.4854   relaxation   0.4 generations (0.3 years)   [fails]
+      m = 8                              cv 0.250   D = 0.5009 ± 0.0017   D/cap = 0.727   D/D_geometric =  1.24   second order 0.5026   relaxation   0.7 generations (0.5 years)   [fails]
+      fixed delay                        cv 0.000   D = 0.5091 ± 0.0018   D/cap = 0.739   D/D_geometric =  1.26   second order 0.5116   relaxation   1.0 generations (0.7 years)   [fails]
+        half of the protection is lost at D = 0.5461: not reached by any shape computed (largest D 0.5091)
+
+======================================================================================================================
+PART B2: WHICH STAGE'S SHAPE MATTERS MORE (fine step).  Rows: shape of the fluctuating stage.  Columns: long stage geometric, long stage fixed
+======================================================================================================================
+  1a S. haematobium (worm in people, 48 months): cap 0.1735; fluctuating stage 8 fine steps, long stage 192
+      fluctuating stage fixed (as in R10)   :  long geometric 0.0103 ± 0.0005 (D/cap 0.060; second order 0.0093)    long fixed 0.1735 ± 0.0000 (D/cap 1.000; second order 0.0151) exact
+      fluctuating stage chain of 4          :  long geometric 0.0112 ± 0.0005 (D/cap 0.064; second order 0.0090)    long fixed not run (relaxation 50710 fine steps = 254 generations = 1056 years; second order 0.0151)
+      fluctuating stage geometric           :  long geometric 0.0088 ± 0.0005 (D/cap 0.051; second order 0.0077)    long fixed 0.0266 ± 0.0005 (D/cap 0.154; second order 0.0151)
+  1b S. mansoni (worm in people, 48 months): cap 0.9522; fluctuating stage 8 fine steps, long stage 192
+      fluctuating stage fixed (as in R10)   :  long geometric 0.0787 ± 0.0015 (D/cap 0.083; second order 0.0495)    long fixed 0.9522 ± 0.0000 (D/cap 1.000; second order 0.0761) exact
+      fluctuating stage chain of 4          :  long geometric 0.0739 ± 0.0014 (D/cap 0.078; second order 0.0479)    long fixed not run (relaxation 50710 fine steps = 254 generations = 1056 years; second order 0.0761)
+      fluctuating stage geometric           :  long geometric 0.0671 ± 0.0013 (D/cap 0.070; second order 0.0409)    long fixed 0.2426 ± 0.0012 (D/cap 0.255; second order 0.0761)
+  6 P. falciparum (infection in people, 6 months): cap 0.9800; fluctuating stage 8 fine steps, long stage 60
+      fluctuating stage fixed (as in R10)   :  long geometric 0.2587 ± 0.0023 (D/cap 0.264; second order 0.2009)    long fixed 0.9800 ± 0.0000 (D/cap 1.000; second order 0.6156) exact
+      fluctuating stage chain of 4          :  long geometric 0.2544 ± 0.0024 (D/cap 0.260; second order 0.1969)    long fixed 0.7255 ± 0.0021 (D/cap 0.740; second order 0.6145)
+      fluctuating stage geometric           :  long geometric 0.2255 ± 0.0023 (D/cap 0.230; second order 0.1761)    long fixed 0.6608 ± 0.0023 (D/cap 0.674; second order 0.6092)
+  3a B. burgdorferi, oak forest (tick, 10 months): cap 0.2231; fluctuating stage 11 fine steps, long stage 25
+      fluctuating stage fixed (as in R10)   :  long geometric 0.0770 ± 0.0005 (D/cap 0.345; second order 0.0761)    long fixed 0.2231 ± 0.0000 (D/cap 1.000; second order 0.1045) exact
+      fluctuating stage chain of 4          :  long geometric 0.0731 ± 0.0005 (D/cap 0.328; second order 0.0718)    long fixed 0.1098 ± 0.0005 (D/cap 0.492; second order 0.1036)
+      fluctuating stage geometric           :  long geometric 0.0583 ± 0.0005 (D/cap 0.261; second order 0.0565)    long fixed 0.1023 ± 0.0005 (D/cap 0.459; second order 0.1003)
+  3b B. burgdorferi, northern edge (tick, 10 months): cap 0.7080; fluctuating stage 11 fine steps, long stage 25
+      fluctuating stage fixed (as in R10)   :  long geometric 0.3067 ± 0.0012 (D/cap 0.433; second order 0.2914)    long fixed 0.7080 ± 0.0000 (D/cap 1.000; second order 0.4610) exact
+      fluctuating stage chain of 4          :  long geometric 0.2926 ± 0.0013 (D/cap 0.413; second order 0.2767)    long fixed 0.4780 ± 0.0011 (D/cap 0.675; second order 0.4545)
+      fluctuating stage geometric           :  long geometric 0.2353 ± 0.0012 (D/cap 0.332; second order 0.2204)    long fixed 0.4400 ± 0.0011 (D/cap 0.621; second order 0.4302)
+  2a E. multilocularis (larva in vole, 4 months; egg 2.5; fox 2): cap 0.6891; fluctuating stage 10 fine steps, long stage 16
+      fluctuating stage fixed               :  long geometric 0.4470 ± 0.0019 (D/cap 0.649; second order 0.4483)    long fixed 0.6891 ± 0.0000 (D/cap 1.000; second order 0.5522) exact
+      fluctuating stage chain of 4          :  long geometric 0.4387 ± 0.0020 (D/cap 0.637; second order 0.4388)    long fixed 0.5568 ± 0.0017 (D/cap 0.808; second order 0.5446)
+      fluctuating stage geometric (as in B1):  long geometric 0.4030 ± 0.0017 (D/cap 0.585; second order 0.3976)    long fixed 0.5091 ± 0.0018 (D/cap 0.739; second order 0.5116)
+
+======================================================================================================================
+SUMMARY
+======================================================================================================================
+  D as a fraction of cap = sigma^2/2, by shape of the long stage (A = R10's step, B = finer step; '-' = shape does not exist at that step or was not run)
+      row    R10      A: m=1    m=2      m=4      m=16     fixed  |  B: m=1    m=2      m=4      m=16     fixed
+      1a     0.079     0.079   0.100   0.100   0.106   1.000 |    0.060   0.085   0.099   0.088   1.000 
+      1b     0.112     0.113   0.128   0.133   0.157   1.000 |    0.083   0.107   0.112   0.116   1.000 
+      6      0.337     0.336   0.501   0.607    -       -    |    0.264   0.434   0.538   0.631   1.000 
+      3a     0.482     0.482   0.566    -       -       -    |    0.345   0.410   0.446   0.497   1.000 
+      3b     0.573     0.572   0.717    -       -       -    |    0.433   0.533   0.602   0.684   1.000 
+      2a     0.719     0.719    -       -       -      0.821 |    0.585   0.666   0.707    -      0.739 
+  coefficient of variation of the long stage at which half of the protection is lost (linear interpolation between neighbouring shapes)
+      1a   A, chains: 0.023 (between 0.000 and 0.043);   B, chains: 0.053 (between 0.000 and 0.102);   B, fixed part + geometric: 0.022 (between 0.000 and 0.039)
+      1b   A, chains: 0.026 (between 0.000 and 0.043);   B, chains: 0.055 (between 0.000 and 0.102);   B, fixed part + geometric: 0.024 (between 0.000 and 0.039)
+      6    A, chains: 0.188 (between 0.098 and 0.342);   B, chains: 0.211 (between 0.129 and 0.214);   B, fixed part + geometric: 0.237 (between 0.125 and 0.258)
+      3a   A, chains: not reached;   B, chains: 0.045 (between 0.000 and 0.059);   B, fixed part + geometric: 0.043 (between 0.000 and 0.057)
+      3b   A, chains: not reached;   B, chains: 0.093 (between 0.059 and 0.100);   B, fixed part + geometric: 0.103 (between 0.057 and 0.139)
+      2a   A, chains: not reached;   B, chains: not reached
+
+136 tasks; process time 450 s; wall time 152 s; finished 2026-11-14 12:39:19
+ALL CHECKS PASSED

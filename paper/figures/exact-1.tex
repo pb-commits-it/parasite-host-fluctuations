@@ -1,0 +1,38 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}
+\begin{groupplot}[
+ group style={group size=1 by 3,vertical sep=14mm},
+ width=79mm,height=49mm,xmode=log,ymode=log,
+ xmin=1.8,xmax=1200,xtick={2,10,100,1000},
+ xticklabels={2,10,100,1000},
+ xlabel={Steady mean stay $\tau$ (steps)},ylabel={Loss $D$},
+ tick label style={font=\fontsize{8.5}{10}\selectfont},
+ label style={font=\fontsize{9}{10}\selectfont},
+ title style={font=\fontsize{9}{10}\selectfont},
+ legend style={font=\fontsize{8.5}{10}\selectfont,draw=none,fill=white},
+ every axis plot/.append style={black,line width=0.6pt},
+ grid=major,grid style={black!20,line width=0.4pt}]
+\nextgroupplot[title={(a) Host variance $0.5$},legend style={at={(0.5,1.25)},anchor=south,fill=none},xlabel={}]
+\addplot[only marks,mark=*,mark size=1.8pt] table[x=tau,y=D2,col sep=comma]{data/exact-1.csv};
+\addlegendentry{Exact formula}
+\addplot[dashed] table[x=tau,y=Q2,col sep=comma]{data/exact-1-curves.csv};
+\addlegendentry{Small-noise value}
+\addplot[solid] table[x=tau,y=R6p2,col sep=comma]{data/exact-1-long.csv};
+\addlegendentry{Long-stay expansion}
+\nextgroupplot[title={(b) Host variance $1$},xlabel={}]
+\addplot[only marks,mark=*,mark size=1.8pt] table[x=tau,y=D1,col sep=comma]{data/exact-1.csv};
+\addplot[dashed] table[x=tau,y=Q1,col sep=comma]{data/exact-1-curves.csv};
+\addplot[solid] table[x=tau,y=R6p1,col sep=comma]{data/exact-1-long.csv};
+\nextgroupplot[title={(c) Host variance $4$}]
+\addplot[only marks,mark=*,mark size=1.8pt] table[x=tau,y=D025,col sep=comma]{data/exact-1.csv};
+\addplot[dashed] table[x=tau,y=Q025,col sep=comma]{data/exact-1-curves.csv};
+\addplot[solid] table[x=tau,y=R6p025,col sep=comma]{data/exact-1-long.csv};
+\end{groupplot}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

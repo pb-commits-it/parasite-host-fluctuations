@@ -1,0 +1,73 @@
+R12b: the holdout years at the Cary Institute grids (2014 to 2022).  Started 2026-11-14 10:07:24 CST.
+A pattern check on one landscape; not a test of the predicted loss of R0.  Protocol: protocols/R12b-cary-holdout.md
+Files read: data/raw/cary_lyme/figshare_27871269_nymphal_infection_2025/allthedata_grid.csv
+            data/raw/cary_lyme/figshare_27871269_nymphal_infection_2025/NymphalInfectionData.csv
+            data/raw/cary_lyme/figshare_31872853_ecology_of_lyme_2026/Full_dataset_20260326.csv  (column PL_t only, for check C4)
+
+0. Code checks that do not touch the data
+  K1  sd of 1, 2, 3, 4: 1.290994448736 (hand 1.290994448736)   [ok]
+  K2  within-grid slope, synthetic: 0.405461168826 against least squares with dummies 0.405461168826   [ok]
+  K3  block bootstrap of the slope, exact line with gaps: slopes 0.300000000000 to 0.300000000000 in 2000 of 2000 resamples (exact 0.3)   [ok]
+  K4  sampling-variance correction, synthetic (20000 years, n = 200): sd of ln p observed 0.3251, corrected 0.3050, true 0.3013 (mean sampling variance 0.01268)   [ok]
+
+1. What was read, and checks of what the columns mean
+  allthedata_grid.csv: 54 rows, 68 columns; grids ['greenC', 'greenE', 'henryC', 'henryE', 'teaC', 'teaE']; years 2014-2022; 54 distinct grid-years
+    n (nymphs tested): 54 values, total 2017, least 5, median 32, most 113; missing 0
+    Bburgd (share infected with B. burgdorferi): missing 0, zero 0
+    PL.mnRawLyr (mean minimum number of mice alive, year before collection): missing 0, zero 0
+  NymphalInfectionData.csv: 2017 rows (one per nymph), 54 grid-years; B.burgdorferi is 0 or 1 in 2017 rows, something else in 0; rows by month of collection: 5: 450, 6: 1415, 7: 68, 8: 64, 9: 15, 10: 1, NA: 4
+  C1  n = number of rows in the file of individual nymphs: 54 of 54 grid-years agree   [ok]
+  C2  Bburgd = share of those rows with B.burgdorferi = 1: largest difference 4.95e-10 over 54 grid-years   [ok]
+  C3  PL.mnRawLyr of year t = PL.mnRawNyr of year t - 1, same grid: largest difference 0.00e+00 over 48 pairs   [ok]
+  C4  correlation of ln PL.mnRawLyr (row of year t) with ln PL_t of the long Figshare file: in year t - 1: 0.976 (54 grid-years; median ratio 1.82); in year t: -0.427 (54)   [ok]
+
+2. Counts.  A grid-year is usable if n >= 20, the prevalence is above zero and the mouse value is present and above zero.
+  grid    usable years                  n   left out: fewer than 20 nymphs (n tested)        zero prevalence   mouse value missing or zero
+  greenC  2014, 2016-2017, 2019, 2021-2022  6   2015 (19), 2018 (12), 2020 (10)              -                 -
+  greenE  2016-2017, 2019-2021          5   2014 (9), 2015 (14), 2018 (11), 2022 (10)    -                 -
+  henryC  2014-2017, 2019, 2021-2022    7   2018 (5), 2020 (12)                          -                 -
+  henryE  2014-2019, 2021-2022          8   2020 (19)                                    -                 -
+  teaC    2014-2017, 2019-2022          8   2018 (9)                                     -                 -
+  teaE    2014, 2016-2017, 2019, 2021-2022  6   2015 (17), 2018 (13), 2020 (15)              -                 -
+  grid-years: 54 in all; left out for fewer than 20 nymphs 14; for a zero prevalence 0; for the mouse value 0; usable 40
+  grids with at least 5 usable years: 6 of 6
+  nymphs tested in the usable grid-years: total 1842, least 20, median 40, most 113
+
+3. B1  sd of ln prevalence < sd of ln mice (year before), grid by grid, over the same usable years.
+        Fails if the inequality fails on more than one grid.
+  grid    years  sd ln prevalence  sd ln mice   prevalence varies less  [sd ln mice, all 9 years]
+  greenC      6             0.273       1.391   yes                     [1.194]
+  greenE      5             0.458       1.022   yes                     [1.238]
+  henryC      7             1.082       1.287   yes                     [1.208]
+  henryE      8             0.497       1.252   yes                     [1.194]
+  teaC        8             0.384       1.074   yes                     [1.115]
+  teaE        6             0.379       1.288   yes                     [1.195]
+  B1 HOLDS: the inequality fails on 0 of 6 grids (criterion: fails if more than one); grids left out 0.
+
+4. B2  slope b2 of ln prevalence in year t on ln mice in year t - 1, one intercept per grid, usable grid-years.
+    pairs by grid: greenC 6, greenE 5, henryC 7, henryE 8, teaC 8, teaE 6; total 40
+    b2 = 0.0510   (least squares with grid dummies 0.0510; K2 on the data [ok])
+    bootstrap standard error SE2 = 0.1184   (2000 of 2000 resamples have a slope; their mean 0.0386; 2.5th to 97.5th percentile -0.2031 to 0.2372; 5 blocks of two consecutive years per resample, seed 20261114)
+    first period (protocol): b1 = 0.038, standard error 0.058
+    |b2 - b1| = 0.0130;  allowed 2 sqrt(0.058^2 + SE2^2) = 0.2637;  the difference is 0.10 combined standard errors
+  B2 HOLDS: |b2 - b1| is within the allowed difference.
+    reported separately: pbar2 = 0.1871 (mean of the 40 yearly values with n >= 20; mean of all 54 values 0.1957; pooled share of all nymphs 0.1805);  1 - pbar2 = 0.8129
+    the theory's bound with two standard errors either side: -0.2369 <= b2 <= 1.0497
+    b2 is INSIDE that; it is inside [0, 0.813] itself; b2 / SE2 = 0.43; distance below 0: 0.00 SE2; distance above 1 - pbar2: 0.00 SE2
+
+5. B3  B1 again with the binomial sampling variance of ln prevalence, (1 - p)/(n p), subtracted (mean over the grid's usable years).
+  grid    years  var ln prev  sampling var  corrected var  corrected sd  sd ln mice   prevalence varies less changed from B1
+  greenC      6       0.0745        0.1144        -0.0399         0.000*      1.391   yes                    no
+  greenE      5       0.2102        0.2185        -0.0083         0.000*      1.022   yes                    no
+  henryC      7       1.1698        0.2966         0.8732         0.934       1.287   yes                    no
+  henryE      8       0.2475        0.1449         0.1026         0.320       1.252   yes                    no
+  teaC        8       0.1475        0.1038         0.0437         0.209       1.074   yes                    no
+  teaE        6       0.1439        0.1278         0.0161         0.127       1.288   yes                    no
+  * corrected variance not above zero on 2 grid(s): the sd is set to zero (reading 7).
+  B1 after the subtraction HOLDS: the inequality fails on 0 of 6 grids.  Grids on which it changed: 0.
+  B3 HOLDS: the outcome of B1 is the same with and without the sampling variance (HOLDS before, HOLDS after).
+
+Summary: B1 HOLDS (0 of 6 grids against it; 0 grid(s) left out); B2 HOLDS (b2 = 0.051, SE2 0.118; |b2 - b1| = 0.013, allowed 0.264); theory's bound [0, 0.813] within two SE2: inside; B3 HOLDS (B1 HOLDS after the subtraction, 0 grid(s) changed).
+Usable grid-years 40 of 54 (14 left out for fewer than 20 nymphs, 0 for a zero prevalence, 0 for the mouse value).
+Finished 2026-11-14 10:07:24 CST; wall time 0.0 s.
+CODE CHECKS: ALL PASSED

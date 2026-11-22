@@ -1,0 +1,17 @@
+[PASS] C1 hosts' deaths do not touch the parasites: the manuscript's closed form: 6 rings, largest relative difference 8.6e-16
+[PASS] C3 the staying term alone: 4 rings, largest relative difference 3.4e-16
+      stays (5, 2), phi 0.5: cost / (C'' sigma^2) - 1 = -0.0022 +- 0.0114 at sigma 0.075, +0.0000 +- 0.0059 at 0.15 [ok]
+      stays (5, 20), phi 0.5: cost / (C'' sigma^2) - 1 = -0.0048 +- 0.0041 at sigma 0.075, -0.0136 +- 0.0020 at 0.15 [ok]
+      stays (5, 5), phi 0.9: cost / (C'' sigma^2) - 1 = +0.0150 +- 0.0163 at sigma 0.075, -0.0087 +- 0.0078 at 0.15 [ok]
+      stays (5, 5), phi 0.0: cost / (C'' sigma^2) - 1 = -0.0108 +- 0.0057 at sigma 0.075, -0.0175 +- 0.0029 at 0.15 [ok]
+[PASS] C2 the coefficient with the hosts' deaths, against simulation: 4 rings at sigma = 0.075 and 0.15
+
+      loss per generation, in units of sigma^2 (a cycle with no staying loses 0.5)
+      stay in the steady stage 5; rows: stay in the fluctuating host; each cell: kappa = 0 / 0.5 / 1 (share of the kappa = 1 value that is the cross term)
+                      phi = 0                      phi = 0.5                    phi = 0.9                    phi = 0.99
+        stay   2:  0.071 / 0.161 / 0.286 (+0.50)   0.155 / 0.232 / 0.335 (+0.38)   0.248 / 0.270 / 0.298 (+0.12)   0.273 / 0.275 / 0.278 (+0.01)
+        stay   5:  0.050 / 0.450 / 1.250 (+0.32)   0.121 / 0.486 / 1.150 (+0.37)   0.246 / 0.366 / 0.563 (+0.29)   0.294 / 0.308 / 0.329 (+0.06)
+        stay  20:  0.020 / 2.205 / 8.000 (+0.09)   0.052 / 1.862 / 6.379 (+0.14)   0.131 / 0.696 / 1.947 (+0.23)   0.174 / 0.239 / 0.376 (+0.16)
+        stay 100:  0.005 / 12.144 / 47.619 (+0.02)   0.013 / 9.348 / 36.185 (+0.03)   0.034 / 2.561 / 9.522 (+0.07)   0.048 / 0.323 / 1.063 (+0.08)
+
+ALL CHECKS PASSED

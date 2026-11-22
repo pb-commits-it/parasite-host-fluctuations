@@ -1,0 +1,21 @@
+location,lat,lon,lcc_x_m,lcc_y_m,tile,elev_m,days,year_min,year_max,pixel_centre_distance_km,power_lat,power_lon
+BLAN_tick,39.0901,-77.97004,1801095.67,-122224.88,11572,143.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",39.09,-77.97
+BLAN_tower,39.033698,-78.041788,1796923.95,-129552.02,11571,164.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+CARY,41.783622,-73.732358,2048543.83,249355.45,11754,133.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",41.784,-73.732
+DELA_tower,32.541727,-87.803877,1107038.81,-979313.77,11027,30.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+HARV_tick,42.43625,-72.24365,2137866.46,352257.06,11934,231.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",42.436,-72.244
+HARV_tower,42.53691,-72.17265,2139639.56,364153.51,11934,354.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+KONZ_tower,39.100774,-96.563075,284157.69,-354466.76,11562,399.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+MLBS_tower,37.378314,-80.524847,1638369.71,-351203.93,11390,1165.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+ORNL_tick,35.95687,-84.27969,1355059.13,-566669.18,11208,306.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",35.957,-84.28
+ORNL_tower,35.964128,-84.282588,1354667.3,-565955.89,11208,329.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+OSBS_tower,29.689282,-81.993431,1693585.2,-1185033.33,10670,48.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+SCBI_tick,38.88786,-78.15482,1791895.31,-146934.32,11571,328.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",38.888,-78.155
+SCBI_tower,38.892925,-78.139494,1792984.24,-146085.62,11571,341.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+SERC_tick,38.88209,-76.54762,1920530.72,-111758.4,11572,3.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",38.882,-76.548
+SERC_tower,38.890131,-76.560014,1919305.89,-111223.51,11572,25.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+STEI_tower,45.50894,-89.58637,774419.38,367224.84,12106,475.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+TALL_tower,32.95047,-87.393259,1137416.55,-930341.81,11027,134.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+TREE_tick,45.49117,-89.56227,776437.42,365579.23,12106,464.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",45.491,-89.562
+TREE_tower,45.49369,-89.58571,774669.58,365626.43,12106,469.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,
+UKFS_tower,39.040431,-95.19215,397764.21,-355260.17,11563,325.0,13140,1990,2025,"not returned by endpoint; containing 1-km cell, nominal <=0.707 km",,

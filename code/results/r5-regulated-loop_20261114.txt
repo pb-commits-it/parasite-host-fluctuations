@@ -1,0 +1,6 @@
+[ok] D1 characteristic equation, one regulated transition: 2000 random unequal cycles of 1 to 8 stages; largest residual 9.9e-14
+[ok] D2 equal stages: leading eigenvalue and stability boundary: 1680 cases (1 to 32 stages, kappa from 0.07 to 12); largest difference 1.1e-14; boundary mismatches 0; kappa_c = 3: 9.000, 4: 5.000, 8: 2.884, 16: 2.364, 32: 2.167
+[ok] D3 regulation in every stage, two forms: 15 cases each; return rates at R0 = 15, tau = 2 for 1, 2, 4, 8, 32 stages: on the transfer [0.467, 0.742, 0.984, 1.149, 1.298], as a death rate [7.0, 2.873, 1.936, 1.611, 1.413]; limit ln(R0)/tau = 1.354
+[ok] D4 agreement with primary's independent functions: 48 cases; largest difference 1.1e-16
+
+ALL CHECKS PASSED

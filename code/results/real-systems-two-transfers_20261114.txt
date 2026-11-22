@@ -1,0 +1,4 @@
+B. burgdorferi, oak forest (mouse 1, tick 2.273 steps of 4.4 months): loss per generation with the second step at kappa = 0: 0.1043 (secondary 0.1043) [ok Z1]; at -0.5: 0.1112; at -1: 0.1703
+B. burgdorferi, northern edge: loss per generation with the second step at kappa = 0: 0.3937 (secondary 0.3937) [ok Z1]; at -0.5: 0.5163; at -1: 0.8357
+E. multilocularis (fox 1, egg 1.25, vole 2 steps of 2 months): loss per generation with the second step at kappa = 0: 0.4934 (secondary 0.4934) [ok Z1]; at -0.5: 0.6224; at -1: 0.9981
+ALL CHECKS PASSED

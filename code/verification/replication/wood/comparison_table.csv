@@ -1,0 +1,43 @@
+section,metric,our_estimate,report_estimate,our_ci95,report_ci95,abs_diff,rel_diff_pct,our_outcome,report_outcome,criterion,agrees
+Phase1_gate,M3_nhosts_1host_pct_decade,-1.13674010981363,-1.137,"[-11.119, 9.966]","[-11.119, 9.966]",0.00025989018636995986,0.022857536180295502,pass,pass,in_orig_95%_CI,True
+Phase1_gate,M3_nhosts_2host_pct_decade,0.1714462758258819,0.171,"[-9.681, 11.098]","[-9.681, 11.098]",0.00044627582588188663,0.2609800151356062,pass,pass,in_orig_95%_CI,True
+Phase1_gate,M3_nhosts_3plus_pct_decade,-10.913591127974822,-10.914,"[-17.218, -4.129]","[-17.218, -4.129]",0.0004088720251775868,0.003746307725651336,pass,pass,in_orig_95%_CI,True
+Phase1_gate,M3_nhosts_AICc,17072.09689002288,17072.097,,,0.00010997712161042728,6.441922255387095e-07,best,best,<=10%_rel,True
+Phase1_gate,M2_year_AICc,17073.21517861609,17073.215,,,0.0001786160901247058,1.046177243856566e-06,rank2,rank2,<=10%_rel,True
+Phase1_gate,M4_partype_AICc,17075.420782216654,17075.421,,,0.0002177833448513411,1.2754200605147076e-06,rank3,rank3,<=10%_rel,True
+Phase1_gate,M1_null_AICc,17135.664423707178,17135.664,,,0.0004237071771058254,2.4726627290650973e-06,rank4,rank4,<=10%_rel,True
+Primary_omnibus,Meta_ML_delta_AICc_M7_minus_M3,7.525257775305747,7.525,,,0.00025777530574622176,0.0034255854584215517,not decided,not decided,<=10%_rel,True
+Primary_omnibus,Meta_ML_LRT_statistic,2.115248553808186,2.115,,,0.0002485538081860028,0.011751953105721172,not decided,not decided,<=10%_rel,True
+Primary_omnibus,Meta_ML_bootstrap_p_B2000,0.7556221889055472,0.7546,,,0.0010221889055471722,0.13546102644409916,not decided,not decided,<=10%_rel,True
+Primary_omnibus,Count_GLMM_delta_AICc_M7_minus_M3_tax,4.314821625019249,4.315,,,0.00017837498075135017,0.004133835011618775,not decided,not decided,<=10%_rel,True
+Primary_omnibus,Count_GLMM_delta_AICc_M6_minus_M3_orig,4.312991029717523,4.313,,,8.970282476816749e-06,0.00020798243628139925,not decided,not decided,<=10%_rel,True
+Primary_M7_REML,n_fluc_obligate,-0.06102337882865594,-0.061,"[-0.223, 0.101]","[-0.223, 0.101]",2.3378828655939987e-05,0.03832594861629506,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_REML,storage_stage,0.0789998757848257,0.079,"[-0.173, 0.331]","[-0.173, 0.331]",1.2421517429916928e-07,0.00015723439784704973,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_REML,spreading,0.0831825352889804,0.083,"[-0.188, 0.354]","[-0.188, 0.354]",0.00018253528898039273,0.21992203491613582,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_REML,prop_active_transfers,0.08232066780772229,0.082,"[-0.250, 0.415]","[-0.250, 0.415]",0.00032066780772228853,0.39105830210035186,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_Count_GLMM,n_fluc_obligate,-0.1273181197675168,-0.127,"[-0.396, 0.141]","[-0.396, 0.141]",0.0003181197675168057,0.25048800591874465,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_Count_GLMM,storage_stage,0.21804854744346744,0.218,"[-0.201, 0.637]","[-0.201, 0.637]",4.854744346743933e-05,0.022269469480476756,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_Count_GLMM,spreading,0.21658634814954744,0.217,"[-0.232, 0.666]","[-0.232, 0.666]",0.0004136518504525566,0.19062297255878183,not decided,not decided,in_orig_95%_CI,True
+Primary_M7_Count_GLMM,prop_active_transfers,0.12639528528921234,0.126,"[-0.412, 0.665]","[-0.412, 0.665]",0.00039528528921234374,0.3137184835018601,not decided,not decided,in_orig_95%_CI,True
+Within3plus_M8_REML,n_fluc_obligate,-0.08575428553931319,-0.086,"[-0.279, 0.108]","[-0.279, 0.108]",0.00024571446068680225,0.2857144891707003,not decided,not decided,in_orig_95%_CI,True
+Within3plus_M8_REML,storage_stage,0.023188566378841646,0.023,"[-0.239, 0.285]","[-0.239, 0.285]",0.00018856637884164668,0.8198538210506378,not decided,not decided,in_orig_95%_CI,True
+Within3plus_M8_REML,spreading,0.01653818555962369,0.017,"[-0.321, 0.354]","[-0.321, 0.354]",0.0004618144403763097,2.716555531625351,not decided,not decided,in_orig_95%_CI,True
+Within3plus_M8_REML,prop_active_transfers,-0.08577334410964577,-0.086,"[-0.509, 0.337]","[-0.509, 0.337]",0.00022665589035422706,0.26355336087700826,not decided,not decided,in_orig_95%_CI,True
+Attenuation,Meta_REML_host3plus_M3,-0.17214949638455587,-0.172,,,0.0001494963845558861,0.08691650264877099,not decided,not decided,<=10%_rel,True
+Attenuation,Meta_REML_host3plus_M7,-0.12677135757667113,-0.127,,,0.00022864242332887308,0.18003340419596303,not decided,not decided,<=10%_rel,True
+Attenuation,Count_GLMM_host3plus_attenuation_pct,10.555068188817474,10.6,,,0.04493181118252565,0.4238850111559024,falsifier_not_met,falsifier_not_met,<=10%_rel,True
+Weather_W1_ersst,W1_delta_AICc_joint_minus_baseline,4.7783906656295585,4.778,,,0.00039066562955891726,0.00817634218415482,not decided,not decided,<=10%_rel,True
+Weather_W1_ersst,W1_3plus_SST_pct_per_C,-12.343882385703477,-12.3,"[-31.670, 12.449]","[-31.700, 12.500]",0.043882385703476245,0.3567673634428963,not decided,not decided,in_orig_95%_CI,True
+Weather_W1_ersst,W1_joint_host3plus,-0.2322207734679055,-0.232,"[-0.801, 0.337]",,0.00022077346790549957,0.09516097754547395,material_shift_warning,material_shift_warning,<=10%_rel,True
+Weather_W1_ersst,W1_joint_n_fluc_obligate,-0.11431335983780616,-0.114,"[-0.387, 0.159]",,0.00031335983780615695,0.2748770507071552,not decided,not decided,<=10%_rel,True
+Weather_W1_ersst,W1_joint_storage_stage,0.1722488215661557,0.172,"[-0.253, 0.597]",,0.0002488215661557158,0.14466370125332315,not decided,not decided,<=10%_rel,True
+Sensitivity_S4,S4_Meta_REML_n_fluc_obligate,-0.0689876805363634,-0.069,"[-0.239, 0.101]",,1.231946363661196e-05,0.01785429512552458,not decided,not decided,<=10%_rel,True
+Sensitivity_S4,S4_Meta_REML_storage_at_zero_active,0.8016153766159145,0.802,"[0.254, 1.349]","[0.254, 1.349]",0.000384623384085514,0.04795802794083716,secondary_Holm_p<0.05_unstable_ML,secondary_Holm_p<0.05_unstable_ML,in_orig_95%_CI,True
+Sensitivity_S4,S4_Meta_REML_storage_x_active,-1.1540609937651771,-1.154,"[-2.080, -0.228]",,6.099376517720856e-05,0.005285421592479078,not decided,not decided,<=10%_rel,True
+Sensitivity_S4,S4_Meta_ML_delta_AICc_vs_M3,9.484822234311153,9.485,,,0.00017776568884642074,0.0018741770041794492,not decided,not decided,<=10%_rel,True
+Sensitivity_S4,S4_Count_GLMM_n_fluc_obligate,-0.17444154278946433,-0.174,"[-0.467, 0.118]",,0.0004415427894643442,0.2537602238300829,not decided,not decided,<=10%_rel,True
+Sensitivity_S4,S4_Count_GLMM_storage_at_zero_active,0.3400633786620424,0.34,"[-0.179, 0.859]",,6.33786620423682e-05,0.018640782953637705,not decided,not decided,<=10%_rel,True
+Sensitivity_S2b,S2b_Meta_REML_n_fluc_obligate,-0.052307336553384765,-0.052,"[-0.208, 0.103]",,0.0003073365533847669,0.5910318334322441,not decided,not decided,<=10%_rel,True
+Sensitivity_S2b,S2b_Meta_REML_storage_stage,0.6868134393960648,0.687,"[0.010, 1.363]","[0.010, 1.364]",0.00018656060393529295,0.027155837545166366,nominal_p<0.05_Holm_ns,nominal_p<0.05_Holm_ns,in_orig_95%_CI,True
+Sensitivity_S2b,S2b_Count_GLMM_n_fluc_obligate,-0.12118990918200749,-0.121,"[-0.370, 0.127]",,0.0001899091820074944,0.15694973719627636,not decided,not decided,<=10%_rel,True
+Sensitivity_S2b,S2b_Count_GLMM_storage_stage,1.2395871272135541,1.24,"[0.177, 2.302]",,0.00041287278644586145,0.03329619245531141,nominal_p<0.05_AICc_worse,nominal_p<0.05_AICc_worse,<=10%_rel,True

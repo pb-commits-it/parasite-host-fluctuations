@@ -1,0 +1,21 @@
+check,file,pass_,value,tolerance,k_out,k_in,d,error
+inherited prefix,protocol.md,True,,,,,,
+inherited prefix,report.md,True,,,,,,
+inherited prefix,data_helpers.py,True,,,,,,
+inherited prefix,preanalysis_power.py,True,,,,,,
+inherited prefix,plot_helpers.py,True,,,,,,
+T2a raw ratio reconstruction,,True,-0.007354487698923898,1e-12,,,,
+spore exponential score equation,,True,0.05814987675340216,1e-07,,,,
+scaled versus unscaled Floquet,,True,,1e-09,1,1,1,1.942890293094024e-16
+scaled versus unscaled Floquet,,True,,1e-09,1,1,0.5,4.163336342344337e-17
+scaled versus unscaled Floquet,,True,,1e-09,1,1,0.1,7.840950111415168e-16
+scaled versus unscaled Floquet,,True,,1e-09,1,1,0,8.45632297585516e-16
+scaled versus unscaled Floquet,,True,,1e-09,4,4,1,2.3548871186385156e-15
+scaled versus unscaled Floquet,,True,,1e-09,4,4,0.5,4.163336342344337e-16
+scaled versus unscaled Floquet,,True,,1e-09,4,4,0.1,4.85722573273506e-16
+scaled versus unscaled Floquet,,True,,1e-09,4,4,0,1.0523330386437924e-16
+scaled versus unscaled Floquet,,True,,1e-09,1,16,1,1.762479051592436e-15
+scaled versus unscaled Floquet,,True,,1e-09,1,16,0.5,8.3396831107585e-16
+scaled versus unscaled Floquet,,True,,1e-09,1,16,0.1,6.418476861114186e-17
+scaled versus unscaled Floquet,,True,,1e-09,1,16,0,2.228120167752437e-16
+field missing Date reconstructed from Year/Julian,,True,258,,,,,

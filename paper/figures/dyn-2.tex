@@ -1,0 +1,57 @@
+\documentclass[border={0pt 2pt 0pt 2pt}]{standalone}
+\input{jmb-artwork.tex}
+\pgfplotsset{compat=1.18}
+
+\IfFileExists{figures/data/dyn-2.csv}{%
+  \def\dyntwocsv{figures/data/dyn-2.csv}%
+}{%
+  \def\dyntwocsv{data/dyn-2.csv}%
+}
+
+\begin{document}
+\begin{jmbfigure}{84mm}
+\begin{tikzpicture}[font=\sffamily\fontsize{8.5}{10}\selectfont]
+\begin{axis}[
+  ybar,
+  width=78mm,
+  height=62mm,
+  bar width=10.5mm,
+  ymin=0,
+  ymax=38,
+  xmin=-0.55,
+  xmax=3.55,
+  xlabel={Equilibrium / parameter subset},
+  ylabel={Locally stable equilibria (\%)},
+  xtick={0, 1, 2, 3},
+  xticklabels={
+    {Endemic\\(finite $K$)},
+    {Parasite-\\free\\(finite $K$)},
+    {Endemic\\PF unstable\\(finite $K$)},
+    {Endemic\\($K=\infty$)}
+  },
+  xticklabel style={
+    align=center,
+    font=\sffamily\fontsize{8.5}{10}\selectfont,
+  },
+  ytick={0, 10, 20, 30},
+  tick align=outside,
+  tick pos=left,
+  axis line style={line width=0.5pt},
+  tick style={line width=0.45pt, black},
+  label style={font=\sffamily\fontsize{9}{11}\selectfont},
+  tick label style={font=\sffamily\fontsize{8.5}{10}\selectfont},
+]
+\addplot[
+  fill=black!28,
+  draw=black,
+  line width=0.6pt,
+] table[col sep=comma, x=idx, y=pct] {\dyntwocsv};
+
+\node[anchor=south, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:0,30.6) {1,133/3,763};
+\node[anchor=south, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:1,10.5) {377/3,763};
+\node[anchor=south, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:2,22.9) {757/3,386};
+\node[anchor=south, font=\sffamily\fontsize{8.5}{10}\selectfont] at (axis cs:3,0.5) {0/810};
+\end{axis}
+\end{tikzpicture}
+\end{jmbfigure}
+\end{document}

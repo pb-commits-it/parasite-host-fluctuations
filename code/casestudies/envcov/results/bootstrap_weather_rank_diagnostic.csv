@@ -1,0 +1,5 @@
+period,covariates,draws,insufficient_distinct_years,fraction,interpretation
+primary,1,2000,0,0.0,Necessary year-count diagnostic; field slope estimator may still use within-year grid contrast
+primary,6,2000,0,0.0,Necessary year-count diagnostic; field slope estimator may still use within-year grid contrast
+holdout,1,2000,0,0.0,Necessary year-count diagnostic; field slope estimator may still use within-year grid contrast
+holdout,6,2000,1748,0.874,Necessary year-count diagnostic; field slope estimator may still use within-year grid contrast

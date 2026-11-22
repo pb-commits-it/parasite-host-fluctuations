@@ -1,0 +1,136 @@
+label,x,y,n,n_years,r,ci_lo,ci_hi,bootstrap
+hake,sst_mean,log1p_burden,15,15.0,-0.04342368170401465,-0.5879196659620523,0.4762086449441416,1000 independent year resamples; serial dependence unaccounted
+hake,sst_mean,sfish_density,4,4.0,0.6684487291521816,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+hake,sst_mean,host_abs_change,0,,,,,
+hake,sst_monthly_sd,log1p_burden,15,15.0,-0.5110174622677198,-0.7875647356172305,-0.08813755630919831,1000 independent year resamples; serial dependence unaccounted
+hake,sst_monthly_sd,sfish_density,4,4.0,-0.1849795370555867,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+hake,sst_monthly_sd,host_abs_change,0,,,,,
+hake,temp_na_rm,log1p_burden,14,14.0,-0.15886347774459322,-0.6471040141438685,0.3404405526403294,1000 independent year resamples; serial dependence unaccounted
+hake,temp_na_rm,sfish_density,4,4.0,0.7001554387445633,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+hake,temp_na_rm,host_abs_change,0,,,,,
+hake,ord1,log1p_burden,13,13.0,-0.13347422278093976,-0.7261622585314683,0.47657377285971775,1000 independent year resamples; serial dependence unaccounted
+hake,ord1,sfish_density,4,4.0,-0.46982035510923237,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+hake,ord1,host_abs_change,0,,,,,
+hake,ord2,log1p_burden,13,13.0,-0.22754388781767187,-0.7263687627208489,0.7126442569145797,1000 independent year resamples; serial dependence unaccounted
+hake,ord2,sfish_density,4,4.0,0.9751861888901447,0.9178131343884657,1.0,1000 independent year resamples; serial dependence unaccounted
+hake,ord2,host_abs_change,0,,,,,
+herring,sst_mean,log1p_burden,23,23.0,-0.17672622853640002,-0.5655239698738782,0.2443629568555718,1000 independent year resamples; serial dependence unaccounted
+herring,sst_mean,sfish_density,4,4.0,0.5579364872860784,0.5142940853983115,1.0,1000 independent year resamples; serial dependence unaccounted
+herring,sst_mean,host_abs_change,2,,,,,
+herring,sst_monthly_sd,log1p_burden,23,23.0,0.4261074173308479,-0.03274212429753309,0.7651105541567625,1000 independent year resamples; serial dependence unaccounted
+herring,sst_monthly_sd,sfish_density,4,4.0,0.6878587903862075,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+herring,sst_monthly_sd,host_abs_change,2,,,,,
+herring,temp_na_rm,log1p_burden,23,23.0,-0.3258740247509175,-0.7473259077848785,0.15263021950133343,1000 independent year resamples; serial dependence unaccounted
+herring,temp_na_rm,sfish_density,5,5.0,-0.26165211153547857,-1.0,0.9999999999999999,1000 independent year resamples; serial dependence unaccounted
+herring,temp_na_rm,host_abs_change,3,,,,,
+herring,ord1,log1p_burden,21,21.0,-0.09405908065520154,-0.6028196511011611,0.3398688324920316,1000 independent year resamples; serial dependence unaccounted
+herring,ord1,sfish_density,4,4.0,0.5763305276888757,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+herring,ord1,host_abs_change,3,,,,,
+herring,ord2,log1p_burden,21,21.0,-0.05498246127886777,-0.3414622933188907,0.42557454673410927,1000 independent year resamples; serial dependence unaccounted
+herring,ord2,sfish_density,4,4.0,0.6260035053557242,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+herring,ord2,host_abs_change,3,,,,,
+perch,sst_mean,log1p_burden,29,29.0,-0.0017268472774397382,-0.33825125637220343,0.27849466853231436,1000 independent year resamples; serial dependence unaccounted
+perch,sst_mean,sfish_density,8,8.0,-0.20953472934853265,-0.6682462919946867,0.5537384247425414,1000 independent year resamples; serial dependence unaccounted
+perch,sst_mean,host_abs_change,3,,,,,
+perch,sst_monthly_sd,log1p_burden,29,29.0,-0.22608472562428,-0.5361127501535552,0.04044396328122507,1000 independent year resamples; serial dependence unaccounted
+perch,sst_monthly_sd,sfish_density,8,8.0,-0.31488235695108485,-0.935776732461527,0.34909034568997566,1000 independent year resamples; serial dependence unaccounted
+perch,sst_monthly_sd,host_abs_change,3,,,,,
+perch,temp_na_rm,log1p_burden,27,27.0,0.14627705416621523,-0.24234913208587305,0.5275083710118728,1000 independent year resamples; serial dependence unaccounted
+perch,temp_na_rm,sfish_density,8,8.0,-0.48255186289474733,-0.9246480305637301,0.5509938613149843,1000 independent year resamples; serial dependence unaccounted
+perch,temp_na_rm,host_abs_change,3,,,,,
+perch,ord1,log1p_burden,27,27.0,-0.06917918169525891,-0.4700435327033985,0.2478057882935117,1000 independent year resamples; serial dependence unaccounted
+perch,ord1,sfish_density,8,8.0,0.10872588952477634,-0.9038394117673602,0.77938314416578,1000 independent year resamples; serial dependence unaccounted
+perch,ord1,host_abs_change,3,,,,,
+perch,ord2,log1p_burden,27,27.0,0.06725408394789895,-0.4004919139777633,0.4781374914224922,1000 independent year resamples; serial dependence unaccounted
+perch,ord2,sfish_density,8,8.0,-0.16602480028587532,-0.8024316210184826,0.6074952303100906,1000 independent year resamples; serial dependence unaccounted
+perch,ord2,host_abs_change,3,,,,,
+pollock,sst_mean,log1p_burden,26,26.0,-0.054779572715881415,-0.37589659380734763,0.28341549509021524,1000 independent year resamples; serial dependence unaccounted
+pollock,sst_mean,sfish_density,5,5.0,0.18270558054839128,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+pollock,sst_mean,host_abs_change,0,,,,,
+pollock,sst_monthly_sd,log1p_burden,26,26.0,-0.2228230252581258,-0.49764862323266135,0.08088914160087478,1000 independent year resamples; serial dependence unaccounted
+pollock,sst_monthly_sd,sfish_density,5,5.0,-0.34224445631676537,-1.0,0.9999999999999998,1000 independent year resamples; serial dependence unaccounted
+pollock,sst_monthly_sd,host_abs_change,0,,,,,
+pollock,temp_na_rm,log1p_burden,24,24.0,0.10062048770242801,-0.29280083612099245,0.4282223130555502,1000 independent year resamples; serial dependence unaccounted
+pollock,temp_na_rm,sfish_density,5,5.0,-0.2112062765314476,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+pollock,temp_na_rm,host_abs_change,0,,,,,
+pollock,ord1,log1p_burden,16,16.0,-0.002380588119123218,-0.4107098638050467,0.39297562629068933,1000 independent year resamples; serial dependence unaccounted
+pollock,ord1,sfish_density,5,5.0,-0.9103292731185391,-1.0,0.9999999999999998,1000 independent year resamples; serial dependence unaccounted
+pollock,ord1,host_abs_change,0,,,,,
+pollock,ord2,log1p_burden,16,16.0,0.1861716837794196,-0.7971985021394344,0.6425438712316968,1000 independent year resamples; serial dependence unaccounted
+pollock,ord2,sfish_density,5,5.0,0.9724243739087742,0.14825735397997242,1.0,1000 independent year resamples; serial dependence unaccounted
+pollock,ord2,host_abs_change,0,,,,,
+ratfish,sst_mean,log1p_burden,20,20.0,-0.24563407004667331,-0.6287842745218776,0.5383567812667467,1000 independent year resamples; serial dependence unaccounted
+ratfish,sst_mean,sfish_density,11,11.0,0.6050624321474737,0.29739541806668696,0.8940074378044062,1000 independent year resamples; serial dependence unaccounted
+ratfish,sst_mean,host_abs_change,6,6.0,0.751462443038236,-0.14698553745243922,0.9991185781250669,1000 independent year resamples; serial dependence unaccounted
+ratfish,sst_monthly_sd,log1p_burden,20,20.0,0.16993717559324084,-0.3585035951600543,0.4855878554824685,1000 independent year resamples; serial dependence unaccounted
+ratfish,sst_monthly_sd,sfish_density,11,11.0,-0.1322507123728797,-0.8752052879171897,0.46517566913049135,1000 independent year resamples; serial dependence unaccounted
+ratfish,sst_monthly_sd,host_abs_change,6,6.0,0.13554569916626658,-0.8752716180168789,0.9655212668881635,1000 independent year resamples; serial dependence unaccounted
+ratfish,temp_na_rm,log1p_burden,20,20.0,-0.39075443232004486,-0.7705269734534225,0.37862485295775516,1000 independent year resamples; serial dependence unaccounted
+ratfish,temp_na_rm,sfish_density,11,11.0,0.6239897915768265,0.20256221361426746,0.9186110482366917,1000 independent year resamples; serial dependence unaccounted
+ratfish,temp_na_rm,host_abs_change,6,6.0,0.7183041982836298,0.21036300086870946,0.9896242771168531,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord1,log1p_burden,19,19.0,0.28442080318851437,-0.1779238722292941,0.5775411813690854,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord1,sfish_density,11,11.0,-0.10290954275909199,-0.8473618571035102,0.4869560572388502,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord1,host_abs_change,6,6.0,0.06097147907372911,-0.9739712055106391,0.9816208303086642,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord2,log1p_burden,19,19.0,-0.24993558820278156,-0.5215361327596326,0.06559817723174594,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord2,sfish_density,11,11.0,0.5987550181127357,0.27115734243817646,0.8915454461816555,1000 independent year resamples; serial dependence unaccounted
+ratfish,ord2,host_abs_change,6,6.0,0.32468169140868947,-0.9698658714793779,0.9968489795552347,1000 independent year resamples; serial dependence unaccounted
+rockfish,sst_mean,log1p_burden,29,29.0,0.2216181956326657,-0.14115935523996198,0.513329842523513,1000 independent year resamples; serial dependence unaccounted
+rockfish,sst_mean,sfish_density,0,,,,,
+rockfish,sst_mean,host_abs_change,0,,,,,
+rockfish,sst_monthly_sd,log1p_burden,29,29.0,0.10949297579793747,-0.24663401769039764,0.4316189457836138,1000 independent year resamples; serial dependence unaccounted
+rockfish,sst_monthly_sd,sfish_density,0,,,,,
+rockfish,sst_monthly_sd,host_abs_change,0,,,,,
+rockfish,temp_na_rm,log1p_burden,27,27.0,0.259042252276751,-0.17739790711728312,0.6245030033133432,1000 independent year resamples; serial dependence unaccounted
+rockfish,temp_na_rm,sfish_density,0,,,,,
+rockfish,temp_na_rm,host_abs_change,0,,,,,
+rockfish,ord1,log1p_burden,29,29.0,-0.23085084272073322,-0.5406187807982363,0.25750962071315747,1000 independent year resamples; serial dependence unaccounted
+rockfish,ord1,sfish_density,0,,,,,
+rockfish,ord1,host_abs_change,0,,,,,
+rockfish,ord2,log1p_burden,29,29.0,0.05991348656696773,-0.22761539407587242,0.3313523850432126,1000 independent year resamples; serial dependence unaccounted
+rockfish,ord2,sfish_density,0,,,,,
+rockfish,ord2,host_abs_change,0,,,,,
+smelt,sst_mean,log1p_burden,19,19.0,0.10771111439344198,-0.23616863974339353,0.40580176692724496,1000 independent year resamples; serial dependence unaccounted
+smelt,sst_mean,sfish_density,4,4.0,0.6150951171179884,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+smelt,sst_mean,host_abs_change,1,,,,,
+smelt,sst_monthly_sd,log1p_burden,19,19.0,0.09843571444463958,-0.43273483508524097,0.5439357314468697,1000 independent year resamples; serial dependence unaccounted
+smelt,sst_monthly_sd,sfish_density,4,4.0,0.579009464377574,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+smelt,sst_monthly_sd,host_abs_change,1,,,,,
+smelt,temp_na_rm,log1p_burden,18,18.0,0.008519631846051172,-0.4604886632090885,0.41922702770793097,1000 independent year resamples; serial dependence unaccounted
+smelt,temp_na_rm,sfish_density,4,4.0,0.9048711540234423,-1.0,1.0,1000 independent year resamples; serial dependence unaccounted
+smelt,temp_na_rm,host_abs_change,1,,,,,
+smelt,ord1,log1p_burden,20,20.0,0.5348717862663392,-0.013715756977509085,0.7895139742970667,1000 independent year resamples; serial dependence unaccounted
+smelt,ord1,sfish_density,3,,,,,
+smelt,ord1,host_abs_change,1,,,,,
+smelt,ord2,log1p_burden,20,20.0,-0.15656582483815418,-0.5237400043344468,0.2592336913251409,1000 independent year resamples; serial dependence unaccounted
+smelt,ord2,sfish_density,3,,,,,
+smelt,ord2,host_abs_change,1,,,,,
+sole,sst_mean,log1p_burden,35,35.0,0.1384372428391715,-0.22089891983684556,0.49272587441618276,1000 independent year resamples; serial dependence unaccounted
+sole,sst_mean,sfish_density,7,7.0,-0.29208757388993706,-0.9577969510881927,0.7557686590786745,1000 independent year resamples; serial dependence unaccounted
+sole,sst_mean,host_abs_change,1,,,,,
+sole,sst_monthly_sd,log1p_burden,35,35.0,-0.06612443226251909,-0.37091654712403144,0.21354881396487144,1000 independent year resamples; serial dependence unaccounted
+sole,sst_monthly_sd,sfish_density,7,7.0,-0.7388264975056986,-0.9712761204681243,-0.014770077793560543,1000 independent year resamples; serial dependence unaccounted
+sole,sst_monthly_sd,host_abs_change,1,,,,,
+sole,temp_na_rm,log1p_burden,33,33.0,0.055584401605652846,-0.37124143605760057,0.38366711407383836,1000 independent year resamples; serial dependence unaccounted
+sole,temp_na_rm,sfish_density,7,7.0,0.0781620276890688,-0.9070849145075726,0.8670055807788096,1000 independent year resamples; serial dependence unaccounted
+sole,temp_na_rm,host_abs_change,1,,,,,
+sole,ord1,log1p_burden,26,26.0,-0.03579704579052242,-0.4738473979618667,0.42426340516530114,1000 independent year resamples; serial dependence unaccounted
+sole,ord1,sfish_density,6,6.0,-0.7589042705128146,-0.9982721804805917,0.993148034959624,1000 independent year resamples; serial dependence unaccounted
+sole,ord1,host_abs_change,1,,,,,
+sole,ord2,log1p_burden,26,26.0,0.34051045976590244,0.06483530040918213,0.5461890036312987,1000 independent year resamples; serial dependence unaccounted
+sole,ord2,sfish_density,6,6.0,-0.048793857332849806,-0.9877851711747262,0.9416875543766177,1000 independent year resamples; serial dependence unaccounted
+sole,ord2,host_abs_change,1,,,,,
+pooled_year_species_centered,sst_mean,log1p_burden,72,72.0,0.05562090599295118,-0.17118405404580808,0.27110791625970465,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,sst_monthly_sd,log1p_burden,72,72.0,-0.17491262145567885,-0.3849779143040155,0.02559603479229489,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,temp_na_rm,log1p_burden,68,68.0,0.1065214378437818,-0.1436827130977896,0.3259806444232912,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord1,log1p_burden,61,61.0,-0.022405426310983807,-0.3427223118936103,0.28559538308236393,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord2,log1p_burden,61,61.0,-0.09822914927719738,-0.3635284205529787,0.1536677357130776,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,sst_mean,sfish_density,22,22.0,0.274381709658838,-0.020977197370907336,0.5499256454457099,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,sst_monthly_sd,sfish_density,22,22.0,0.09995190117530778,-0.3791066709103824,0.5005964962533133,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,temp_na_rm,sfish_density,23,23.0,0.0718342492659472,-0.30857057742644856,0.44242436708179544,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord1,sfish_density,20,20.0,0.023446127582832092,-0.44505077205397225,0.5121077917762741,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord2,sfish_density,20,20.0,0.3662472997222218,0.004921040052577772,0.7718466608293564,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,sst_mean,host_abs_change,9,9.0,0.6668165191867561,0.2500888350200152,0.9242558209066252,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,sst_monthly_sd,host_abs_change,9,9.0,-0.08212693817488424,-0.8295663986216225,0.8255988273973095,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,temp_na_rm,host_abs_change,10,10.0,0.09486412184728524,-0.6768139526177515,0.9449546526082058,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord1,host_abs_change,10,10.0,0.11534713870120981,-0.8111017181574779,0.7538352637802628,1000 independent year resamples; serial dependence unaccounted
+pooled_year_species_centered,ord2,host_abs_change,10,10.0,0.33974769667085525,-0.2788335958060312,0.8359344361292363,1000 independent year resamples; serial dependence unaccounted
