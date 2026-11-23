@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "Please cite the accompanying bioRxiv preprint; DOI to be added."
 type: software
-title: "Do several hosts stabilise a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles"
+title: "Do several hosts stabilize a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles"
 authors:
   - family-names: Bergeron
-    given-names: Paul
+    given-names: Paul E.
     affiliation: Independent researcher
 repository-code: "https://github.com/pb-commits-it/parasite-host-fluctuations"
 license: MIT

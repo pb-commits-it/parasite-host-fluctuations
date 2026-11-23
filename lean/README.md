@@ -1,4 +1,4 @@
-# Lean formalisation
+# Lean formalization
 
 Install the version of Lean specified by lean-toolchain with elan. From this directory:
 

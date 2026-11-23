@@ -1,8 +1,8 @@
 # Public data inputs
 
 Raw observations are not distributed. Fetchers write under code/data/raw/.
-The manuscript's Data availability paragraph in the top-level README is the authority for its stated DOIs and licence qualifications.
-The following additional deposit identifiers are extracted from the shipped fetch scripts; consult each deposit for its specific licence and version.
+The manuscript's Data availability paragraph in the top-level README is the authority for its stated DOIs and license qualifications.
+The following additional deposit identifiers are extracted from the shipped fetch scripts; consult each deposit for its specific license and version.
 Scripts may request current deposit file lists. Reproducing the historical snapshot requires the versions cited in paper/refs.bib and the study protocol.
 For NEON authenticated access, the optional environment setting in this public copy is NEON_ACCESS_CREDENTIAL; never store a credential in a file.
 

@@ -148,4 +148,4 @@ Superseded runs are distinguished explicitly where the paper reports them.
 - The five-study reproduction scripts compare against internal narrative reports in some reporting modes. Use their numerical analysis modes; the internal narratives are not distributed.
 - Snapshot hashes in historical output describe the original run. Relocated and scrubbed source files have different hashes; this does not change the recorded numerical values.
 - Table tab:model-notation is a manually authored definition/unit table, with no computed claims.
-- Raw downloads remain subject to their deposit-specific licences. See ../README.md and data/README.md.
+- Raw downloads remain subject to their deposit-specific licenses. See ../README.md and data/README.md.

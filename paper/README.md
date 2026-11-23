@@ -28,4 +28,4 @@ audit directory is required. make_w2.py is an alternative ring/bounds driver.
 The strict sans-family styling criterion currently flags num-1, whose archived
 artwork uses Nimbus Sans and Computer Modern math fonts. Its data checks pass;
 this is an artwork-style qualification, not a numerical-data discrepancy.
-Publisher class/style files retain their embedded licence notices.
+Publisher class/style files retain their embedded license notices.
