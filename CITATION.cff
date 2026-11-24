@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite the accompanying bioRxiv preprint; DOI to be added."
+message: "Please cite the accompanying preprint (see preferred-citation)."
 type: software
 title: "Do several hosts stabilize a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles"
 authors:
@@ -9,3 +9,17 @@ authors:
 repository-code: "https://github.com/pb-commits-it/parasite-host-fluctuations"
 license: MIT
 date-released: 2026-11-22
+preferred-citation:
+  type: article
+  status: preprint
+  title: "Do several hosts stabilize a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles"
+  authors:
+    - family-names: Bergeron
+      given-names: Paul E.
+      affiliation: Independent researcher
+  year: 2026
+  doi: 10.5281/zenodo.24503674
+  url: "https://doi.org/10.5281/zenodo.24503674"
+  publisher:
+    name: Zenodo
+  license: CC-BY-4.0

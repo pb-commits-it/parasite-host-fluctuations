@@ -2,7 +2,7 @@
 
 Paul E. Bergeron, independent researcher.
 
-Code and generated numerical results accompanying the bioRxiv preprint. The bioRxiv DOI will be added after deposition.
+Code and generated numerical results accompanying the preprint, [doi:10.5281/zenodo.24503674](https://doi.org/10.5281/zenodo.24503674) (Zenodo).
 
 - [paper/](paper/README.md): manuscript, Online Resource 1, artwork and figure generators.
 - [lean/](lean/README.md): pinned Lean formalization, axiom probe and coverage inventory.
@@ -28,6 +28,6 @@ Additional case-study and replay deposit DOIs are listed in [code/data/README.md
 
 ## Citation and licenses
 
-Bergeron, Paul E. Do several hosts stabilize a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles. bioRxiv preprint, 2026. DOI: to be added. See [CITATION.cff](CITATION.cff).
+Bergeron, Paul E. (2026). Do several hosts stabilize a parasite? Residence times, host fluctuations and the reproduction number of complex life cycles. Preprint, Zenodo. https://doi.org/10.5281/zenodo.24503674. See [CITATION.cff](CITATION.cff).
 
 Original project code is MIT licensed ([LICENSE](LICENSE)). Manuscript text and original figures are CC BY 4.0 ([LICENSE-text](LICENSE-text)). Bundled publisher class/style files retain their embedded notices; dependency and source-data licenses are separate.
